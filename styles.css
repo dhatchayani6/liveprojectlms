@@ -1,0 +1,640 @@
+/* --- Global Styles & Colors --- */
+:root {
+    /* Define colors based on the image */
+    --blue-header: linear-gradient(180deg, #1e70d7 0%, #3a97e6 100%);
+    /* Adjusted gradient for a richer blue */
+    --background-light: #e3f2fd;
+    /* Very light blue background, used for the main content and wave fill */
+    --card-bg: #ffffff;
+    --card-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    --text-dark: #333;
+    --text-light: #fff;
+    --placeholder-color: #aaa;
+    --blue-primary: #3498db;
+    /* Main blue color */
+    --blue-dark: #2980b9;
+    --red-badge: #e74c3c;
+    /* Red color for badges */
+    --shadow-subtle: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    background-color: var(--background-light);
+    /* Main background color */
+}
+
+/* --- Header Styling --- */
+.lms-header {
+    background: var(--blue-header);
+    color: var(--text-light);
+    /* Sets a minimum height for the blue background area on desktop */
+    min-height: 220px;
+    padding-top: 50px;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+}
+
+.header-content {
+    /* Adjust padding-bottom slightly to help center the text within the larger space */
+    padding-bottom: 20px;
+}
+
+.lms-header h1 {
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    /* Responsive font size */
+    font-weight: 700;
+    margin-bottom: 5px;
+    position: relative;
+    display: inline-block;
+}
+
+/* Underline effect for 'Management System' */
+.lms-header h1::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -5px;
+    width: 65%;
+    /* Adjust width to cover only 'Management System' */
+    height: 2px;
+    background-color: var(--text-light);
+}
+
+.lms-header h2 {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    /* Responsive font size */
+    font-weight: 300;
+    margin-top: 10px;
+}
+
+/* --- Wave Effect (SVG) --- */
+.wave-container {
+    max-height: 94px;
+}
+
+/* IMPORTANT: Target the path in the SVG to set the correct fill color */
+.wave-container svg path {
+    fill: var(--background-light);
+}
+
+
+
+/* --- Main Content & Login Card --- */
+.lms-main {
+    /* Keeping the original calc for stability: */
+    /* min-height: calc(100vh - 100px); */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+    /* Push the card down visually below the wave */
+}
+
+.login-card {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+    z-index: 20;
+    margin-bottom: 50px;
+    /* Space above the fixed footer */
+}
+
+.login-card h3 {
+    color: var(--text-dark);
+    margin-bottom: 25px;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+/* --- Form Elements --- */
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: var(--text-dark);
+}
+
+.input-group input::placeholder {
+    color: var(--placeholder-color);
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    color: var(--text-light);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+
+    /* Blue Gradient Button Style from image */
+    background: linear-gradient(180deg, #5cadda 0%, #1e70d7 100%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+    border: 1px solid #1e70d7;
+}
+
+.login-btn:hover {
+    background: linear-gradient(180deg, #1e70d7 0%, #5cadda 100%);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.portal-info {
+    font-size: 0.85rem;
+    color: #999;
+    margin-top: 25px;
+}
+
+/* --- Global Footer --- */
+.lms-footer {
+    /* Use position fixed or absolute relative to the body for the bottom-of-page footer */
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    color: #aaa;
+    font-size: 0.75rem;
+    z-index: 5;
+    background-color: var(--background-light);
+    /* Match body background */
+}
+
+
+
+
+/* teacher dashboard csss */
+
+/* --- 1. Top Navigation Bar --- */
+.navbar {
+    background-color: #2563eb;
+    color: var(--card-bg);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-subtle);
+}
+
+.logo {
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.menu-button {
+    background: none;
+    border: none;
+    color: var(--card-bg);
+    cursor: pointer;
+    padding: 5px;
+}
+
+.menu-button .material-icons {
+    font-size: 28px;
+}
+
+/* --- Main Dashboard Layout --- */
+.dashboard-main {
+    display: flex;
+    justify-content: center;
+}
+
+.content-container {
+    width: 100%;
+    max-width: 64rem;
+    /* Constrain content width */
+}
+
+/* --- Profile and Tabs Container (White Background) --- */
+.profile-area {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: var(--shadow-card);
+    padding-bottom: 0;
+    /* Tabs are inside this container */
+    /* margin-bottom: 20px; */
+    height: 879px;
+
+}
+
+/* --- 2. User Profile/Info Section --- */
+.user-profile {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+.profile-pic {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+    border: 2px solid var(--blue-primary);
+}
+
+.user-details .name {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.user-details .info {
+    font-size: 0.85rem;
+    color: #000;
+    margin-top: 2px;
+}
+
+/* --- 3. Tabbed Navigation --- */
+.tabs-nav {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    margin-top: 15px;
+}
+
+.tab {
+    padding: 12px 15px;
+    text-decoration: none;
+    color: var(--text-medium);
+    font-weight: 700;
+    position: relative;
+    /* display: flex
+; */
+    align-items: center;
+    margin-right: 25px;
+    transition: color 0.2s;
+    width: 100%;
+    text-align: center;
+}
+
+
+
+.tab.active {
+    color: #2563eb;
+    background: rgba(59, 130, 246, 0.05);
+}
+
+.tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    /* Overlap the border */
+    left: 0;
+    width: 100%;
+    height: 3px;
+    border-bottom: 2px solid rgb(21, 103, 186);
+
+}
+
+.badge {
+    background-color: var(--red-badge);
+    color: var(--card-bg);
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 12px;
+    margin-left: 8px;
+    font-weight: 400;
+}
+
+/* --- 4. Assignments Overview Card --- */
+.assignments-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--card-bg);
+    margin: 20px;
+    padding: 15px 20px;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.card-icon {
+    margin-right: 15px;
+    color: var(--blue-primary);
+}
+
+.card-icon .material-icons {
+    font-size: 30px;
+}
+
+.card-content {
+    flex-grow: 1;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.card-subtitle {
+    font-size: 0.85rem;
+    color: #000;
+}
+
+.assignment-count {
+    background-color: var(--red-badge);
+    color: var(--card-bg);
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 6px 10px;
+    border-radius: 6px;
+}
+
+/* --- 5. Active Courses List --- */
+.courses-section {
+    padding: 0 20px;
+    height: 51%;
+}
+
+.courses-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.courses-header h2 {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.view-all-btn {
+    background-color: var(--blue-primary);
+    color: var(--card-bg);
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.view-all-btn:hover {
+    background-color: var(--blue-dark);
+}
+
+.course-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-radius: 6px;
+    box-shadow: rgba(255, 255, 255, 0.8) 0px 1px 0px inset, rgba(0, 0, 0, 0.1) 0px 1px 2px;
+    background: linear-gradient(rgb(249, 249, 249) 0%, rgb(232, 232, 232) 100%);
+    /* Small blue accent */
+}
+
+.course-list {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+.course-name {
+    font-weight: 500;
+    color: var(--text-dark);
+    margin-bottom: 3px;
+}
+
+.student-count {
+    font-size: 0.9rem;
+    color: #000;
+    font-weight: 300;
+}
+
+.course-time {
+    font-size: 0.9rem;
+    color: var(--text-medium);
+    font-weight: 400;
+    text-align: right;
+}
+
+/* --- 6. Bottom Action Buttons (Sticky Footer) --- */
+.spacer {
+    height: 100px;
+    /* Space to prevent main content from being hidden by the sticky footer */
+}
+
+.action-footer {
+
+    width: 100%;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: center;
+    /* Center the buttons */
+    gap: 15px;
+    /* Space between buttons */
+    z-index: 90;
+}
+
+.action-btn {
+    background-color: var(--blue-primary);
+    color: var(--card-bg);
+    border: none;
+    padding: 10px 18px;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+.action-btn .material-icons {
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+.action-btn:hover {
+    background-color: var(--blue-dark);
+}
+
+
+
+/* assignment css */
+/* --- New Styling for Pending Assignments UI --- */
+
+.assignments-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-top: 20px;
+    /* Match the padding of the course section header */
+}
+
+.assignments-header h2 {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.assignments-header .view-all-btn {
+    /* Style the blue 'View All' button with icon */
+    background-color: var(--blue-primary);
+    color: var(--card-bg);
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.assignments-header .view-all-btn .material-icons {
+    font-size: 18px;
+    margin-right: 5px;
+}
+
+.assignments-header .view-all-btn:hover {
+    background-color: var(--blue-dark);
+}
+
+.assignment-list {
+    /* Apply horizontal margin to contain the list */
+    background-color: var(--card-bg);
+    /* Use white background for the whole list container */
+    border-radius: 8px;
+    box-shadow: rgba(255, 255, 255, 0.8) 0px 1px 0px inset, rgba(0, 0, 0, 0.1) 0px 1px 2px;
+    background: linear-gradient(rgb(249, 249, 249) 0%, rgb(232, 232, 232) 100%);
+    padding: 10px;
+    /* Ensures bottom shadow looks correct */
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.assignment-details {
+    display: flex;
+    justify-content: space-between;
+}
+
+.assignment-item:last-child {
+    border-bottom: none;
+    /* No border for the last item */
+}
+
+.assignment-item:hover {
+    background-color: #f9f9f9;
+    /* Subtle hover effect */
+}
+
+
+
+.assignment-title {
+    font-size: 1rem;
+    /* font-weight: 700; */
+    /* Bold title text */
+    color: var(--text-dark);
+    margin-bottom: 5px;
+}
+
+.assignment-meta {
+    font-size: 0.9rem;
+    color: var(--text-medium);
+}
+
+.assignment-meta .meta-course {
+    margin-right: 15px;
+    color: #000;
+}
+
+.assignment-status-wrapper {
+    display: flex;
+    flex-direction: row;
+    /* align-items: flex-end; */
+    justify-content: space-between;
+    align-items: center;
+}
+
+.submitted-date {
+    font-size: 0.8rem;
+    color: #000;
+}
+
+.status-btn {
+    /* Base style for the status badge/button */
+    border: none;
+    padding: 5px 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    width: 80px;
+    /* Fixed width for alignment */
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.375rem;
+}
+
+.status-btn.pending {
+    /* Orange color for Pending status */
+    background: linear-gradient(rgb(247, 107, 28) 0%, rgb(231, 76, 60) 100%);
+    color: var(--card-bg);
+}
+
+
+/* overall assignments */
+.dropdown-toggle::after {
+    display: none !important;
+}

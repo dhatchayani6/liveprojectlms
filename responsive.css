@@ -1,0 +1,213 @@
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    /* .dashboard-main {
+        padding: 10px;
+    } */
+
+    .user-profile {
+        padding: 15px;
+    }
+
+    .user-details .name {
+        font-size: 1.1rem;
+    }
+
+    .user-details .info {
+        font-size: 0.8rem;
+    }
+
+    .tabs-nav {
+        padding: 0 10px;
+        /* flex-wrap: wrap; */
+    }
+
+    .tab {
+        margin-right: 15px;
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+
+    .assignments-card {
+        flex-wrap: wrap;
+        padding: 15px;
+        margin: 10px;
+    }
+
+    .card-content {
+        order: 1;
+        /* Keep content first */
+        margin-left: 10px;
+    }
+
+    .card-action {
+        order: 2;
+        /* Move badge to the side */
+    }
+
+    .card-icon {
+        order: 0;
+        /* Keep icon first */
+        margin-right: 0;
+    }
+
+    .courses-section {
+        padding: 0 10px;
+    }
+
+    .course-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px 15px;
+    }
+
+    .course-time {
+        margin-top: 5px;
+        text-align: left;
+    }
+
+    .action-footer {
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .action-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 10px 15px;
+        font-size: 10px;
+    }
+
+    .tab {
+        text-align: center;
+        font-size: 12px;
+    }
+
+    .assignments-header {
+        padding: 0 10px;
+    }
+
+    .assignment-list {
+        margin: 0 10px;
+    }
+
+    .assignment-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .assignment-details {
+        margin-bottom: 10px;
+    }
+
+    .assignment-meta {
+        display: flex;
+        flex-direction: column;
+        font-size: 0.85rem;
+    }
+
+    .assignment-meta .meta-course {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+
+    .assignment-status-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        /* align-items: center; */
+        width: 100%;
+    }
+
+    .submitted-date {
+        margin-bottom: 0;
+    }
+
+    .status-btn {
+        height: 30px;
+    }
+
+    .pending {
+        font-size: 14px;
+    }
+
+    .assignments-card .row>* {
+        padding-right: 0px;
+    }
+
+
+
+    .text-muted {
+        font-size: 10px;
+    }
+
+    .title {
+        font-size: 10px;
+    }
+
+    .assignment-titles {
+        font-size: small;
+    }
+
+    .no-pr {
+        padding-right: 0px !important;
+        padding-left: 0px !important;
+    }
+
+    .no-col-8 {
+        width: 74.444445% !important;
+    }
+}
+
+
+
+/* --- Responsive Adjustments (Media Query) --- */
+@media (max-width: 600px) {
+
+    .lms-header {
+        padding-top: 30px;
+        /* Reduce min-height for mobile */
+        min-height: 160px;
+        /* Adjusted slightly lower for mobile screens */
+    }
+
+    .header-content {
+        padding-bottom: 20px;
+    }
+
+    .wave-container {
+        /* Reduce wave height on small screens to save vertical space */
+        height: 6vh;
+        max-height: 50px;
+    }
+
+    .lms-main {
+        padding-top: 30px;
+    }
+
+    .login-card {
+        max-width: 90%;
+        padding: 20px;
+    }
+
+    .pending-badge {
+        width: 100% !important;
+    }
+
+    .w-25 {
+        width: 76% !important;
+    }
+}
+
+@media (max-width:530px) {
+    .assignment-status-wrapper {
+        display: flex;
+        flex-direction: column !important;
+
+    }
+
+    .tab-btn {
+        font-size: 12px;
+    }
+
+}
