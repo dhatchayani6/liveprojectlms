@@ -33,7 +33,6 @@ a {
 
 body {
     font-family: 'Roboto', sans-serif;
-    line-height: 1.6;
     background-color: var(--background-light);
     /* Main background color */
 }
@@ -86,7 +85,7 @@ body {
 
 /* --- Wave Effect (SVG) --- */
 .wave-container {
-    max-height: 94px;
+    max-height: 84px;
 }
 
 /* IMPORTANT: Target the path in the SVG to set the correct fill color */
