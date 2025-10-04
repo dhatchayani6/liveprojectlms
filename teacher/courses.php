@@ -463,7 +463,7 @@
                                     <div class="d-flex justify-content-between align-items-center">
                                         <h6>Course Topics
                                         </h6>
-                                        <button class="add-topic-btn btn btn-primary"><i class="bi bi-plus"></i>
+                                        <button class="add-topic-btn"><i class="bi bi-plus"></i>
                                             Add Topic</button>
 
                                     </div>
@@ -497,6 +497,35 @@
                                                         Topic</button>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="p-3">
+
+                                        <div class="rounded border p-4 mb-3"
+                                            style="    background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h6>Data Collection and Preprocessing
+                                                </h6>
+                                                <button class="outcomes-btn">
+                                                    <small>4 outcomes</small></button>
+                                            </div>
+                                            <small
+                                                style="--tw-text-opacity: 1; color: rgb(75 85 99 / var(--tw-text-opacity, 1));">Methods
+                                                for gathering and cleaning data for analysis</small>
+                                        </div>
+                                        <div class="rounded border p-4"
+                                            style="    background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h6>Exploratory Data Analysis
+                                                </h6>
+                                                <button class="outcomes-btn">
+                                                    <small>3 outcomes</small></button>
+                                            </div>
+                                            <small
+                                                style="--tw-text-opacity: 1; color: rgb(75 85 99 / var(--tw-text-opacity, 1));">Techniques
+                                                for initial data investigation and visualization
+
+                                            </small>
                                         </div>
                                     </div>
                                 </div>
