@@ -12,6 +12,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
     <link rel="stylesheet" href="stylesheet/courses.css">
+    <style>
+        .rounded-circle {
+            width: 20px !important;
+            height: 20px !important;
+            background: linear-gradient(#c4e0f9, #96c6f3);
+            border: 1px solid #ddd;
+            padding: 11px;
+        }
+
+        .rounded-circle i {
+            font-size: 11px !important;
+
+        }
+    </style>
 </head>
 
 <body>
@@ -460,74 +474,197 @@
                             <!-- Materials Content -->
                             <div class="tab-pane fade" id="materials" role="tabpanel" aria-labelledby="materials-tab">
                                 <div class="p-3">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <h6>Course Topics
-                                        </h6>
-                                        <button class="add-topic-btn"><i class="bi bi-plus"></i>
-                                            Add Topic</button>
 
-                                    </div>
-                                    <!-- Create New Topic Form (Hidden by default) -->
-                                    <div id="createTopicForm" class="p-2" style="display: none;">
-                                        <!-- Header -->
-                                        <div class="bg-secondary text-dark p-3 rounded-top">
-                                            <h5 class="mb-0" style="font-size: 1rem;">Create New Topic</h5>
+                                    <!-- Course Topics Section -->
+                                    <div id="courseTopicsSection">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h6>Course Topics</h6>
+                                            <button class="add-topic-btn"><i class="bi bi-plus"></i> Add Topic</button>
                                         </div>
-                                        <div class="p-3 border rounded">
-                                            <div class="row">
-                                                <!-- Topic Title -->
-                                                <div class="col-12 mb-3">
-                                                    <label for="topicTitle" class="form-label">Topic Title</label>
-                                                    <input type="text" class="form-control" id="topicTitle"
-                                                        placeholder="Enter the topic title">
-                                                </div>
 
-                                                <!-- Topic Description -->
-                                                <div class="col-12 mb-3">
-                                                    <label for="topicDescription" class="form-label">Topic
-                                                        Description</label>
-                                                    <textarea class="form-control" id="topicDescription" rows="4"
-                                                        placeholder="Enter the topic description"></textarea>
-                                                </div>
+                                        <!-- Create New Topic Form -->
+                                        <div id="createTopicForm" class="p-2" style="display: none;">
+                                            <div class="bg-secondary text-dark p-3 rounded-top">
+                                                <h5 class="mb-0" style="font-size: 1rem;">Create New Topic</h5>
                                             </div>
-                                            <div class="p-2">
-                                                <div class="d-flex justify-content-end gap-2">
-                                                    <button class="cancel-btn btn btn-secondary rounded">Cancel</button>
-                                                    <button class="create-btn btn btn-primary rounded">Create
-                                                        Topic</button>
+                                            <div class="p-3 border rounded">
+                                                <div class="row">
+                                                    <div class="col-12 mb-3">
+                                                        <label for="topicTitle" class="form-label">Topic Title</label>
+                                                        <input type="text" class="form-control" id="topicTitle"
+                                                            placeholder="Enter the topic title">
+                                                    </div>
+                                                    <div class="col-12 mb-3">
+                                                        <label for="topicDescription" class="form-label">Topic
+                                                            Description</label>
+                                                        <textarea class="form-control" id="topicDescription" rows="4"
+                                                            placeholder="Enter the topic description"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="p-2">
+                                                    <div class="d-flex justify-content-end gap-2">
+                                                        <button
+                                                            class="cancel-btn btn btn-secondary rounded">Cancel</button>
+                                                        <button class="create-btn btn btn-primary rounded">Create
+                                                            Topic</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="p-3">
 
-                                        <div class="rounded border p-4 mb-3"
-                                            style="    background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);">
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <h6>Data Collection and Preprocessing
-                                                </h6>
-                                                <button class="outcomes-btn">
-                                                    <small>4 outcomes</small></button>
+                                        <!-- Topic Cards -->
+                                        <div class="p-3">
+                                            <div class="topic-card rounded border p-4 mb-3"
+                                                style="background:linear-gradient(180deg,#f9f9f9 0%,#f0f0f0 100%); cursor:pointer;">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <h6>Data Collection and Preprocessing</h6>
+                                                    <button class="outcomes-btn"><small>4 outcomes</small></button>
+                                                </div>
+                                                <small style="color:rgb(75 85 99)">Methods for gathering and cleaning
+                                                    data for analysis</small>
                                             </div>
-                                            <small
-                                                style="--tw-text-opacity: 1; color: rgb(75 85 99 / var(--tw-text-opacity, 1));">Methods
-                                                for gathering and cleaning data for analysis</small>
-                                        </div>
-                                        <div class="rounded border p-4"
-                                            style="    background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);">
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <h6>Exploratory Data Analysis
-                                                </h6>
-                                                <button class="outcomes-btn">
-                                                    <small>3 outcomes</small></button>
-                                            </div>
-                                            <small
-                                                style="--tw-text-opacity: 1; color: rgb(75 85 99 / var(--tw-text-opacity, 1));">Techniques
-                                                for initial data investigation and visualization
 
-                                            </small>
+                                            <div class="topic-card rounded border p-4"
+                                                style="background:linear-gradient(180deg,#f9f9f9 0%,#f0f0f0 100%); cursor:pointer;">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <h6>Exploratory Data Analysis</h6>
+                                                    <button class="outcomes-btn"><small>3 outcomes</small></button>
+                                                </div>
+                                                <small style="color:rgb(75 85 99)">Techniques for initial data
+                                                    investigation and visualization</small>
+                                            </div>
                                         </div>
                                     </div>
+
+                                    <!-- Enrolled Students Section (Hidden by default) -->
+                                    <div id="enrolledStudentsSection" style="display:none;">
+                                        <div class="d-flex  align-items-center mb-3" style="gap:30%">
+                                            <button id="backToTopics" class="btn btn-sm text-primary">← Back to
+                                                Topics</button>
+                                            <h6 class="mb-0">Introduction to Data Science</h6>
+
+                                        </div>
+                                        <div class="mb-3">
+                                            <div class="p-3 rounded border bg-gray"
+                                                style="background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);">
+                                                <small class="text-muted">Overview of data science concepts and
+                                                    methodologies</small>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex  align-items-center mb-3 justify-content-between p-3">
+                                            <h6 class="mb-0">Course Outcome</h6>
+
+                                            <button id="addoutcomebtn" class="add-outcome-btn"><i
+                                                    class="bi bi-plus"></i> Add
+                                                Outcome</button>
+
+                                        </div>
+                                        <div class="card shadow-sm border rounded-3 mb-3"
+                                            style="background: linear-gradient(#f9f9f9, #f0f0f0);">
+                                            <div class="card-body p-3">
+
+                                                <!-- Title + Action Icons -->
+                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                    <h6 class="card-title mb-0 text-dark">Data Science Basics</h6>
+                                                    <div class="d-flex gap-2">
+                                                        <!-- View Material -->
+                                                        <div class="rounded-circle d-flex align-items-center justify-content-center"
+                                                            style="width: 30px; height: 30px; background: linear-gradient(#c4e0f9, #96c6f3); border:1px solid #ddd;">
+                                                            <i class="bi bi-eye text-primary"></i>
+                                                        </div>
+                                                        <!-- Notes -->
+                                                        <div class="rounded-circle d-flex align-items-center justify-content-center"
+                                                            style="width: 30px; height: 30px; background: linear-gradient(#f9c4c4, #f39696); border:1px solid #ddd;">
+                                                            <i class="bi bi-journal-text text-danger"></i>
+                                                        </div>
+                                                        <!-- Assignment -->
+                                                        <div class="rounded-circle d-flex align-items-center justify-content-center"
+                                                            style="width: 30px; height: 30px; background: linear-gradient(#c4f9c4, #96f396); border:1px solid #ddd;">
+                                                            <i class="bi bi-file-earmark-check text-success"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Description -->
+                                                <p class="card-text text-muted small mb-0">
+                                                    Overview of data science concepts and methodologies
+                                                </p>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="card shadow-sm border rounded-3 mb-3"
+                                            style="background: linear-gradient(#f9f9f9, #f0f0f0);">
+                                            <div class="card-body p-3">
+
+                                                <!-- Title + Action Icons -->
+                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                    <h6 class="card-title mb-0 text-dark">Data Science Basics</h6>
+                                                    <div class="d-flex gap-2">
+                                                        <!-- View Material -->
+                                                        <div class="rounded-circle d-flex align-items-center justify-content-center"
+                                                            style="width: 30px; height: 30px; background: linear-gradient(#c4e0f9, #96c6f3); border:1px solid #ddd;">
+                                                            <i class="bi bi-eye text-primary"></i>
+                                                        </div>
+                                                        <!-- Notes -->
+                                                        <div class="rounded-circle d-flex align-items-center justify-content-center"
+                                                            style="width: 30px; height: 30px; background: linear-gradient(#f9c4c4, #f39696); border:1px solid #ddd;">
+                                                            <i class="bi bi-journal-text text-danger"></i>
+                                                        </div>
+                                                        <!-- Assignment -->
+                                                        <div class="rounded-circle d-flex align-items-center justify-content-center"
+                                                            style="width: 30px; height: 30px; background: linear-gradient(#c4f9c4, #96f396); border:1px solid #ddd;">
+                                                            <i class="bi bi-file-earmark-check text-success"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Description -->
+                                                <p class="card-text text-muted small mb-0">
+                                                    Overview of data science concepts and methodologies
+                                                </p>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="card shadow-sm border rounded-3 mb-3"
+                                            style="background: linear-gradient(#f9f9f9, #f0f0f0);">
+                                            <div class="card-body p-3">
+
+                                                <!-- Title + Action Icons -->
+                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                    <h6 class="card-title mb-0 text-dark">Data Science Basics</h6>
+                                                    <div class="d-flex gap-2">
+                                                        <!-- View Material -->
+                                                        <div class="rounded-circle d-flex align-items-center justify-content-center"
+                                                            style="width: 30px; height: 30px; background: linear-gradient(#c4e0f9, #96c6f3); border:1px solid #ddd;">
+                                                            <i class="bi bi-eye text-primary"></i>
+                                                        </div>
+                                                        <!-- Notes -->
+                                                        <div class="rounded-circle d-flex align-items-center justify-content-center"
+                                                            style="width: 30px; height: 30px; background: linear-gradient(#f9c4c4, #f39696); border:1px solid #ddd;">
+                                                            <i class="bi bi-journal-text text-danger"></i>
+                                                        </div>
+                                                        <!-- Assignment -->
+                                                        <div class="rounded-circle d-flex align-items-center justify-content-center"
+                                                            style="width: 30px; height: 30px; background: linear-gradient(#c4f9c4, #96f396); border:1px solid #ddd;">
+                                                            <i class="bi bi-file-earmark-check text-success"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Description -->
+                                                <p class="card-text text-muted small mb-0">
+                                                    Overview of data science concepts and methodologies
+                                                </p>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
                                 </div>
                             </div>
 
@@ -900,19 +1037,27 @@
                                 </div>
                             </div>
                         </div>
-
-
-
                     </div>
                 </div>
-
-
-
             </div>
         </div>
 
     </div>
+    <script>
+        // Click on topic -> Show students section
+        document.querySelectorAll(".topic-card").forEach(card => {
+            card.addEventListener("click", () => {
+                document.getElementById("courseTopicsSection").style.display = "none";
+                document.getElementById("enrolledStudentsSection").style.display = "block";
+            });
+        });
 
+        // Back button -> Show topics again
+        document.getElementById("backToTopics").addEventListener("click", () => {
+            document.getElementById("enrolledStudentsSection").style.display = "none";
+            document.getElementById("courseTopicsSection").style.display = "block";
+        });
+    </script>
     <!-- for hiding the scroll in students tab -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
