@@ -538,132 +538,175 @@
 
                                     <!-- Enrolled Students Section (Hidden by default) -->
                                     <div id="enrolledStudentsSection" style="display:none;">
-                                        <div class="d-flex  align-items-center mb-3" style="gap:30%">
+                                        <!-- Header -->
+                                        <div class="d-flex align-items-center mb-3" style="gap:30%">
                                             <button id="backToTopics" class="btn btn-sm text-primary">← Back to
                                                 Topics</button>
                                             <h6 class="mb-0">Introduction to Data Science</h6>
-
                                         </div>
+
+                                        <!-- Overview -->
                                         <div class="mb-3">
-                                            <div class="p-3 rounded border bg-gray"
+                                            <div class="p-3 rounded border"
                                                 style="background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);">
                                                 <small class="text-muted">Overview of data science concepts and
                                                     methodologies</small>
-
                                             </div>
                                         </div>
 
-                                        <div class="d-flex  align-items-center mb-3 justify-content-between p-3">
+                                        <!-- Course Outcome Header -->
+                                        <div class="d-flex align-items-center mb-3 justify-content-between p-3">
                                             <h6 class="mb-0">Course Outcome</h6>
-
-                                            <button id="addoutcomebtn" class="add-outcome-btn"><i
-                                                    class="bi bi-plus"></i> Add
-                                                Outcome</button>
-
+                                            <button id="addOutcomeBtn" class="btn add-outcome-btn btn-sm"><i
+                                                    class="bi bi-plus"></i> Add Outcome</button>
                                         </div>
-                                        <div class="card shadow-sm border rounded-3 mb-3"
-                                            style="background: linear-gradient(#f9f9f9, #f0f0f0);">
-                                            <div class="card-body p-3">
 
-                                                <!-- Title + Action Icons -->
-                                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                                    <h6 class="card-title mb-0 text-dark">Data Science Basics</h6>
-                                                    <div class="d-flex gap-2">
-                                                        <!-- View Material -->
-                                                        <div class="rounded-circle d-flex align-items-center justify-content-center"
-                                                            style="width: 30px; height: 30px; background: linear-gradient(#c4e0f9, #96c6f3); border:1px solid #ddd;">
-                                                            <i class="bi bi-eye text-primary"></i>
-                                                        </div>
-                                                        <!-- Notes -->
-                                                        <div class="rounded-circle d-flex align-items-center justify-content-center"
-                                                            style="width: 30px; height: 30px; background: linear-gradient(#f9c4c4, #f39696); border:1px solid #ddd;">
-                                                            <i class="bi bi-journal-text text-danger"></i>
-                                                        </div>
-                                                        <!-- Assignment -->
-                                                        <div class="rounded-circle d-flex align-items-center justify-content-center"
-                                                            style="width: 30px; height: 30px; background: linear-gradient(#c4f9c4, #96f396); border:1px solid #ddd;">
-                                                            <i class="bi bi-file-earmark-check text-success"></i>
+                                        <!-- Outcome Cards -->
+                                        <div id="courseOutcomeList">
+                                            <div class="card outcome-card shadow-sm border rounded-3 mb-3"
+                                                style="background: linear-gradient(#f9f9f9, #f0f0f0); cursor:pointer;">
+                                                <div class="card-body p-3">
+                                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                                        <h6 class="card-title mb-0 text-dark">Data Science Basics</h6>
+                                                        <div class="d-flex gap-2">
+                                                            <div class="rounded-circle d-flex align-items-center justify-content-center"
+                                                                style="width: 30px; height: 30px; background: linear-gradient(#c4e0f9, #96c6f3); border:1px solid #ddd;">
+                                                                <i class="bi bi-eye text-primary"></i>
+                                                            </div>
+                                                            <div class="rounded-circle d-flex align-items-center justify-content-center"
+                                                                style="width: 30px; height: 30px; background: linear-gradient(#f9c4c4, #f39696); border:1px solid #ddd;">
+                                                                <i class="bi bi-journal-text text-danger"></i>
+                                                            </div>
+                                                            <div class="rounded-circle d-flex align-items-center justify-content-center"
+                                                                style="width: 30px; height: 30px; background: linear-gradient(#c4f9c4, #96f396); border:1px solid #ddd;">
+                                                                <i class="bi bi-file-earmark-check text-success"></i>
+                                                            </div>
                                                         </div>
                                                     </div>
+                                                    <p class="card-text text-muted small mb-0">
+                                                        Overview of data science concepts and methodologies
+                                                    </p>
                                                 </div>
+                                            </div>
 
-                                                <!-- Description -->
-                                                <p class="card-text text-muted small mb-0">
-                                                    Overview of data science concepts and methodologies
-                                                </p>
-
+                                            <div class="card outcome-card shadow-sm border rounded-3 mb-3"
+                                                style="background: linear-gradient(#f9f9f9, #f0f0f0); cursor:pointer;">
+                                                <div class="card-body p-3">
+                                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                                        <h6 class="card-title mb-0 text-dark">Data Collection Methods
+                                                        </h6>
+                                                        <div class="d-flex gap-2">
+                                                            <div class="rounded-circle d-flex align-items-center justify-content-center"
+                                                                style="width: 30px; height: 30px; background: linear-gradient(#c4e0f9, #96c6f3); border:1px solid #ddd;">
+                                                                <i class="bi bi-eye text-primary"></i>
+                                                            </div>
+                                                            <div class="rounded-circle d-flex align-items-center justify-content-center"
+                                                                style="width: 30px; height: 30px; background: linear-gradient(#f9c4c4, #f39696); border:1px solid #ddd;">
+                                                                <i class="bi bi-journal-text text-danger"></i>
+                                                            </div>
+                                                            <div class="rounded-circle d-flex align-items-center justify-content-center"
+                                                                style="width: 30px; height: 30px; background: linear-gradient(#c4f9c4, #96f396); border:1px solid #ddd;">
+                                                                <i class="bi bi-file-earmark-check text-success"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <p class="card-text text-muted small mb-0">
+                                                        Students will be able to identify and apply various data
+                                                        collection methods.
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
 
-                                        <div class="card shadow-sm border rounded-3 mb-3"
-                                            style="background: linear-gradient(#f9f9f9, #f0f0f0);">
-                                            <div class="card-body p-3">
+                                        <!-- Outcome Detail -->
+                                        <div id="outcomeDetail" style="display:none;">
+                                            <div class="d-flex align-items-center mb-3" style="gap:30%;">
+                                                <button id="backToOutcomes" class="btn btn-sm text-primary">← Back to
+                                                    Outcomes</button>
+                                                <h6 class="mb-0" id="outcomeTitle">Data Collection Methods</h6>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="p-3 rounded border bg-gray">
+                                                    <small class="text-muted" id="outcomeDescription">
+                                                        Students will be able to identify and apply various data
+                                                        collection methods.
+                                                    </small>
+                                                </div>
+                                            </div>
 
-                                                <!-- Title + Action Icons -->
-                                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                                    <h6 class="card-title mb-0 text-dark">Data Science Basics</h6>
-                                                    <div class="d-flex gap-2">
-                                                        <!-- View Material -->
-                                                        <div class="rounded-circle d-flex align-items-center justify-content-center"
-                                                            style="width: 30px; height: 30px; background: linear-gradient(#c4e0f9, #96c6f3); border:1px solid #ddd;">
-                                                            <i class="bi bi-eye text-primary"></i>
-                                                        </div>
-                                                        <!-- Notes -->
-                                                        <div class="rounded-circle d-flex align-items-center justify-content-center"
-                                                            style="width: 30px; height: 30px; background: linear-gradient(#f9c4c4, #f39696); border:1px solid #ddd;">
-                                                            <i class="bi bi-journal-text text-danger"></i>
-                                                        </div>
-                                                        <!-- Assignment -->
-                                                        <div class="rounded-circle d-flex align-items-center justify-content-center"
-                                                            style="width: 30px; height: 30px; background: linear-gradient(#c4f9c4, #96f396); border:1px solid #ddd;">
-                                                            <i class="bi bi-file-earmark-check text-success"></i>
-                                                        </div>
-                                                    </div>
+                                            <!-- Tabs -->
+                                            <ul class="nav nav-tabs bg-secondary" id="outcomeTab" role="tablist">
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link active" id="notes-tab" data-bs-toggle="tab"
+                                                        data-bs-target="#notes" type="button">Notes</button>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link" id="video-tab" data-bs-toggle="tab"
+                                                        data-bs-target="#video" type="button">Video</button>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link" id="assignment-tab" data-bs-toggle="tab"
+                                                        data-bs-target="#assignment" type="button">Assignments</button>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content border p-3">
+                                                <div class="d-flex align-items-center justify-content-end mb-2 gap-2">
+                                                    <button id="editBtn" class="btn edit-btn btn-sm">
+                                                        <i class="bi bi-pencil"></i> Edit
+                                                    </button>
+                                                    <button id="saveBtn" class="btn save-btn btn-sm"
+                                                        style="display:none;">Save</button>
+                                                    <button id="cancelBtn" class="btn outcome-cancel-btn btn-sm"
+                                                        style="display:none;">Cancel</button>
                                                 </div>
 
-                                                <!-- Description -->
-                                                <p class="card-text text-muted small mb-0">
-                                                    Overview of data science concepts and methodologies
-                                                </p>
-
-                                            </div>
-                                        </div>
-
-                                        <div class="card shadow-sm border rounded-3 mb-3"
-                                            style="background: linear-gradient(#f9f9f9, #f0f0f0);">
-                                            <div class="card-body p-3">
-
-                                                <!-- Title + Action Icons -->
-                                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                                    <h6 class="card-title mb-0 text-dark">Data Science Basics</h6>
-                                                    <div class="d-flex gap-2">
-                                                        <!-- View Material -->
-                                                        <div class="rounded-circle d-flex align-items-center justify-content-center"
-                                                            style="width: 30px; height: 30px; background: linear-gradient(#c4e0f9, #96c6f3); border:1px solid #ddd;">
-                                                            <i class="bi bi-eye text-primary"></i>
-                                                        </div>
-                                                        <!-- Notes -->
-                                                        <div class="rounded-circle d-flex align-items-center justify-content-center"
-                                                            style="width: 30px; height: 30px; background: linear-gradient(#f9c4c4, #f39696); border:1px solid #ddd;">
-                                                            <i class="bi bi-journal-text text-danger"></i>
-                                                        </div>
-                                                        <!-- Assignment -->
-                                                        <div class="rounded-circle d-flex align-items-center justify-content-center"
-                                                            style="width: 30px; height: 30px; background: linear-gradient(#c4f9c4, #96f396); border:1px solid #ddd;">
-                                                            <i class="bi bi-file-earmark-check text-success"></i>
-                                                        </div>
+                                                <!-- Notes Tab -->
+                                                <div class="tab-pane fade show active pt-2" id="notes">
+                                                    <div id="notesDisplay" class="rounded border p-3">
+                                                        Data collection methods include surveys, web scraping, APIs,
+                                                        sensors, databases, and existing datasets.
                                                     </div>
+                                                    <textarea id="notesEdit" class="form-control"
+                                                        style="display:none;">Data collection methods include surveys, web scraping, APIs, sensors, databases, and existing datasets.</textarea>
                                                 </div>
 
-                                                <!-- Description -->
-                                                <p class="card-text text-muted small mb-0">
-                                                    Overview of data science concepts and methodologies
-                                                </p>
+                                                <!-- Video Tab -->
+                                                <div class="tab-pane fade pt-2" id="video">
+                                                    <label for="video_url" class="form-label font-bold">Video
+                                                        URL</label>
+                                                    <input type="text" class="form-control" name="video_url"
+                                                        id="video_url"
+                                                        value="https://www.youtube.com/watch?v=X3paOmcrTjQ" readonly>
+                                                </div>
 
+                                                <!-- Assignment Tab -->
+                                                <div class="tab-pane fade pt-1" id="assignment">
+                                                    <div id="assignmentDisplay" class="rounded border p-3">
+                                                        <ol>
+                                                            <li>What are the primary methods for collecting data?</li>
+                                                            <li>What ethical considerations should be taken into account
+                                                                during data collection?</li>
+                                                            <li>How do you determine the appropriate data collection
+                                                                method for a given problem?</li>
+                                                        </ol>
+                                                    </div>
+                                                    <textarea id="assignmentEdit" class="form-control"
+                                                        style="display:none;">
+                                                        1. What are the primary methods for collecting data?
+                                                        2. What ethical considerations should be taken into account during data collection?
+                                                        3. How do you determine the appropriate data collection method for a given problem?
+                                                    </textarea>
+                                                </div>
                                             </div>
-                                        </div>
 
+
+
+                                        </div>
                                     </div>
+
+
+
+
 
                                 </div>
                             </div>
@@ -1041,8 +1084,128 @@
                 </div>
             </div>
         </div>
-
     </div>
+
+    <!-- material tab course outcome edit btn start -->
+
+    <script>
+        const editBtn = document.getElementById('editBtn');
+        const saveBtn = document.getElementById('saveBtn');
+        const cancelBtn = document.getElementById('cancelBtn');
+
+        editBtn.addEventListener('click', () => {
+            // Hide Edit, show Save and Cancel
+            editBtn.style.display = 'none';
+            saveBtn.style.display = 'inline-block';
+            cancelBtn.style.display = 'inline-block';
+
+            // Notes tab: hide display, show textarea
+            document.getElementById('notesDisplay').style.display = 'none';
+            document.getElementById('notesEdit').style.display = 'block';
+
+            // Assignment tab: hide display, show textarea
+            document.getElementById('assignmentDisplay').style.display = 'none';
+            document.getElementById('assignmentEdit').style.display = 'block';
+
+            // Make video URL editable
+            document.getElementById('video_url').removeAttribute('readonly');
+        });
+
+        cancelBtn.addEventListener('click', () => {
+            // Hide Save and Cancel, show Edit
+            editBtn.style.display = 'inline-block';
+            saveBtn.style.display = 'none';
+            cancelBtn.style.display = 'none';
+
+            // Revert Notes
+            document.getElementById('notesEdit').style.display = 'none';
+            document.getElementById('notesDisplay').style.display = 'block';
+
+            // Revert Assignment
+            document.getElementById('assignmentEdit').style.display = 'none';
+            document.getElementById('assignmentDisplay').style.display = 'block';
+
+            // Make video URL readonly again
+            document.getElementById('video_url').setAttribute('readonly', true);
+        });
+
+        saveBtn.addEventListener('click', () => {
+            // Save Notes
+            const notesText = document.getElementById('notesEdit').value;
+            document.getElementById('notesDisplay').innerText = notesText;
+
+            // Save Assignment
+            const assignmentText = document.getElementById('assignmentEdit').value;
+            const assignmentArray = assignmentText.split('\n').map(item => item.trim()).filter(Boolean);
+            let olContent = '';
+            assignmentArray.forEach(item => {
+                olContent += `<li>${item.replace(/^\d+\.\s*/, '')}</li>`;
+            });
+            document.getElementById('assignmentDisplay').innerHTML = `<ol>${olContent}</ol>`;
+
+            // Make video URL readonly
+            document.getElementById('video_url').setAttribute('readonly', true);
+
+            // Hide Save/Cancel, show Edit
+            editBtn.style.display = 'inline-block';
+            saveBtn.style.display = 'none';
+            cancelBtn.style.display = 'none';
+
+            // Hide textareas, show displays
+            document.getElementById('notesEdit').style.display = 'none';
+            document.getElementById('notesDisplay').style.display = 'block';
+            document.getElementById('assignmentEdit').style.display = 'none';
+            document.getElementById('assignmentDisplay').style.display = 'block';
+        });
+    </script>
+    <!-- material tab course outcome edit btn end -->
+
+    <!-- for displaying the course outcome in the materials tabs here start -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const courseTopicsSection = document.getElementById('courseTopicsSection');
+            const enrolledStudentsSection = document.getElementById('enrolledStudentsSection');
+            const courseOutcomeList = document.getElementById('courseOutcomeList');
+            const outcomeDetail = document.getElementById('outcomeDetail');
+            const outcomeTitle = document.getElementById('outcomeTitle');
+            const outcomeDescription = document.getElementById('outcomeDescription');
+            const backToTopicsBtn = document.getElementById('backToTopics');
+            const backToOutcomesBtn = document.getElementById('backToOutcomes');
+
+            // Topic click
+            document.querySelectorAll(".topic-card").forEach(card => {
+                card.addEventListener("click", () => {
+                    courseTopicsSection.style.display = "none";
+                    enrolledStudentsSection.style.display = "block";
+                });
+            });
+
+            // Back to topics
+            backToTopicsBtn.addEventListener("click", () => {
+                enrolledStudentsSection.style.display = "none";
+                courseTopicsSection.style.display = "block";
+            });
+
+            // Outcome card click
+            document.querySelectorAll('.outcome-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    courseOutcomeList.style.display = 'none';
+                    outcomeTitle.textContent = card.querySelector('h6').textContent;
+                    outcomeDescription.textContent = card.querySelector('p').textContent;
+                    outcomeDetail.style.display = 'block';
+                });
+            });
+
+            // Back to outcomes
+            backToOutcomesBtn.addEventListener('click', () => {
+                outcomeDetail.style.display = 'none';
+                courseOutcomeList.style.display = 'block';
+            });
+        });
+    </script>
+    <!-- for displaying the course outcome in the materials tabs here end -->
+
+
     <script>
         // Click on topic -> Show students section
         document.querySelectorAll(".topic-card").forEach(card => {
@@ -1058,6 +1221,7 @@
             document.getElementById("courseTopicsSection").style.display = "block";
         });
     </script>
+
     <!-- for hiding the scroll in students tab -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {

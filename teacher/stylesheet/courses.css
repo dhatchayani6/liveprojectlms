@@ -383,3 +383,48 @@ a .bi-chevron-left {
     font-weight: 500;
 
 }
+
+.edit-btn {
+    border: 0;
+    background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);
+    color: #fff;
+    padding: 4px;
+    border-radius: 3px;
+    font-weight: 500;
+    width: 76px;
+
+}
+
+.save-btn {
+    border: 0;
+    background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);
+    color: #fff;
+    padding: 4px;
+    border-radius: 3px;
+    font-weight: 500;
+    width: 76px;
+
+}
+
+.outcome-cancel-btn {
+    background: linear-gradient(rgb(248, 248, 248) 0%, rgb(232, 232, 232) 100%);
+    color: #000;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.2) 0px 1px 2px;
+    width: 75px;
+    font-weight: 500;
+}
+
+
+/* Save button hover */
+.save-btn:hover {
+    color: white !important;
+    /* optional: keep a green background on hover */
+}
+
+/* Cancel button hover */
+.outcome-cancel-btn:hover {
+    color: white !important;
+    \ 
+    /* optional: keep a red background on hover */
+}
