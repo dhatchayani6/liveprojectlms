@@ -690,12 +690,14 @@
                                                                 method for a given problem?</li>
                                                         </ol>
                                                     </div>
-                                                    <textarea id="assignmentEdit" class="form-control"
-                                                        style="display:none;">
-                                                        1. What are the primary methods for collecting data?
-                                                        2. What ethical considerations should be taken into account during data collection?
-                                                        3. How do you determine the appropriate data collection method for a given problem?
-                                                    </textarea>
+                                                    <ol id="assignmentEdit" class="mb-0" style="display:none;">
+                                                        <li>What are the primary methods for collecting data?</li>
+                                                        <li>What ethical considerations should be taken into account
+                                                            during data collection?</li>
+                                                        <li>How do you determine the appropriate data collection method
+                                                            for a given problem?</li>
+                                                    </ol>
+
                                                 </div>
                                             </div>
 
