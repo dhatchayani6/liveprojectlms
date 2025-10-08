@@ -554,13 +554,47 @@
                                             </div>
                                         </div>
 
-                                        <!-- Course Outcome Header -->
-                                        <div class="d-flex align-items-center mb-3 justify-content-between p-3">
-                                            <h6 class="mb-0">Course Outcome</h6>
-                                            <button id="addOutcomeBtn" class="btn add-outcome-btn btn-sm"><i
-                                                    class="bi bi-plus"></i> Add Outcome</button>
-                                        </div>
 
+
+                                        <!-- Course Outcome Header -->
+                                        <div class="outcome-header">
+                                            <div class="d-flex align-items-center mb-3 justify-content-between p-3">
+                                                <h6 class="mb-0">Course Outcome</h6>
+                                                <button id="addOutcomeBtn" class="btn add-outcome-btn btn-sm"><i
+                                                        class="bi bi-plus"></i> Add Outcome</button>
+                                            </div>
+                                        </div>
+                                        <!-- Create New Outcome Form -->
+                                        <div id="createOutcomeForm" class="p-2" style="display: none;">
+                                            <div class="bg-secondary text-dark p-3 rounded-top">
+                                                <h5 class="mb-0" style="font-size: 1rem;">Create New Outcome</h5>
+                                            </div>
+                                            <div class="p-3 border rounded">
+                                                <div class="row">
+                                                    <div class="col-12 mb-3">
+                                                        <label for="outcomeTitle" class="form-label">Outcome
+                                                            Title</label>
+                                                        <input type="text" class="form-control" id="outcomeTitle"
+                                                            placeholder="Enter the outcome title">
+                                                    </div>
+                                                    <div class="col-12 mb-3">
+                                                        <label for="courseoutcomeDescription" class="form-label">Outcome
+                                                            Description</label>
+                                                        <textarea class="form-control" id="courseoutcomeDescription"
+                                                            rows="4"
+                                                            placeholder="Enter the outcome description"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="p-2">
+                                                    <div class="d-flex justify-content-end gap-2">
+                                                        <button class="btn cancel-course-outcome-btny rounded"
+                                                            id="cancelOutcomeBtn">Cancel</button>
+                                                        <button class="btn create-course-outcome-btn rounded"
+                                                            id="createOutcomeBtn">Create Outcome</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <!-- Outcome Cards -->
                                         <div id="courseOutcomeList">
                                             <div class="card outcome-card shadow-sm border rounded-3 mb-3"
@@ -589,33 +623,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="card outcome-card shadow-sm border rounded-3 mb-3"
-                                                style="background: linear-gradient(#f9f9f9, #f0f0f0); cursor:pointer;">
-                                                <div class="card-body p-3">
-                                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                                        <h6 class="card-title mb-0 text-dark">Data Collection Methods
-                                                        </h6>
-                                                        <div class="d-flex gap-2">
-                                                            <div class="rounded-circle d-flex align-items-center justify-content-center"
-                                                                style="width: 30px; height: 30px; background: linear-gradient(#c4e0f9, #96c6f3); border:1px solid #ddd;">
-                                                                <i class="bi bi-eye text-primary"></i>
-                                                            </div>
-                                                            <div class="rounded-circle d-flex align-items-center justify-content-center"
-                                                                style="width: 30px; height: 30px; background: linear-gradient(#f9c4c4, #f39696); border:1px solid #ddd;">
-                                                                <i class="bi bi-journal-text text-danger"></i>
-                                                            </div>
-                                                            <div class="rounded-circle d-flex align-items-center justify-content-center"
-                                                                style="width: 30px; height: 30px; background: linear-gradient(#c4f9c4, #96f396); border:1px solid #ddd;">
-                                                                <i class="bi bi-file-earmark-check text-success"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <p class="card-text text-muted small mb-0">
-                                                        Students will be able to identify and apply various data
-                                                        collection methods.
-                                                    </p>
-                                                </div>
-                                            </div>
+
                                         </div>
 
                                         <!-- Outcome Detail -->
@@ -1191,18 +1199,33 @@
             // Outcome card click
             document.querySelectorAll('.outcome-card').forEach(card => {
                 card.addEventListener('click', () => {
+                    // Hide course outcome list
                     courseOutcomeList.style.display = 'none';
+
+                    // Hide outcome header
+                    const outcomeHeader = document.querySelector('.outcome-header');
+                    if (outcomeHeader) outcomeHeader.style.display = 'none';
+
+                    // Hide create outcome form
+                    const createOutcomeForm = document.querySelector('#createOutcomeForm');
+                    if (createOutcomeForm) createOutcomeForm.style.display = 'none';
+
+                    // Update the detail view
                     outcomeTitle.textContent = card.querySelector('h6').textContent;
                     outcomeDescription.textContent = card.querySelector('p').textContent;
                     outcomeDetail.style.display = 'block';
                 });
             });
 
+
             // Back to outcomes
             backToOutcomesBtn.addEventListener('click', () => {
+                const outcomeHeader = document.querySelector('.outcome-header');
                 outcomeDetail.style.display = 'none';
                 courseOutcomeList.style.display = 'block';
+                if (outcomeHeader) outcomeHeader.style.display = 'block'; // show header again
             });
+
         });
     </script>
     <!-- for displaying the course outcome in the materials tabs here end -->
@@ -1295,6 +1318,26 @@
         });
     </script>
 
+    <!-- add outocme hrer -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const addOutcomeBtn = document.getElementById("addOutcomeBtn");
+            const createOutcomeForm = document.getElementById("createOutcomeForm");
+            const cancelOutcomeBtn = document.getElementById("cancelOutcomeBtn");
+
+            // Show the form when "Add Outcome" is clicked
+            addOutcomeBtn.addEventListener("click", () => {
+                createOutcomeForm.style.display = "block";
+                // addOutcomeBtn.style.display = "none";
+            });
+
+            // Hide the form when "Cancel" is clicked
+            cancelOutcomeBtn.addEventListener("click", () => {
+                createOutcomeForm.style.display = "none";
+                addOutcomeBtn.style.display = "inline-block";
+            });
+        });
+    </script>
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
