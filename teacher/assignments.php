@@ -154,7 +154,11 @@
         <!-- Pending Assignments -->
         <div class="d-flex justify-content-between align-items-center p-3">
             <h6 class="mb-0 pending">Pending Assignments (8)</h6>
-            <a href="overall_assignments.php"><button class="view-all-btn btn btn-outline-secondary">
+            <a href="overall_assignments.php">
+                <button class="view-all-btn btn btn-outline-secondary" style="    background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);
+    color: white;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.2) 0px 1px 2px;">
                     <span class="material-icons align-middle">assignment</span>
                     <span class="align-middle ms-1">View All</span>
                 </button></a>

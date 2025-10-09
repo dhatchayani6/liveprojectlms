@@ -27,6 +27,11 @@
 
 }
 
+.text-gray {
+    --tw-text-opacity: 1;
+    color: rgb(75 85 99 / var(--tw-text-opacity, 1));
+}
+
 a {
     text-decoration: none;
 }
@@ -268,7 +273,7 @@ body {
     padding-bottom: 0;
     /* Tabs are inside this container */
     /* margin-bottom: 20px; */
-    height: 879px;
+    height: 791px;
 
 }
 
@@ -311,7 +316,7 @@ body {
     padding: 12px 15px;
     text-decoration: none;
     color: var(--text-medium);
-    font-weight: 700;
+    /* font-weight: 700; */
     position: relative;
     /* display: flex
 ; */
@@ -398,7 +403,7 @@ body {
 }
 
 .notification-count {
-    background-color:  rgb(238 242 255 / var(--tw-bg-opacity, 1));
+    background-color: rgb(238 242 255 / var(--tw-bg-opacity, 1));
     color: var(--card-bg);
     font-size: 1.1rem;
     font-weight: 500;
@@ -410,7 +415,7 @@ body {
 /* --- 5. Active Courses List --- */
 .courses-section {
     padding: 0 20px;
-    height: 51%;
+    height: 46%;
 }
 
 .courses-header {
@@ -499,9 +504,9 @@ body {
     background-color: var(--blue-primary);
     color: var(--card-bg);
     border: none;
-    padding: 10px 18px;
+    padding: 4px 18px;
     border-radius: 4px;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 500;
     cursor: pointer;
     display: flex;

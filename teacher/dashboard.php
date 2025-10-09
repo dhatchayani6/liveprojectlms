@@ -88,11 +88,15 @@
                 <div class="courses-section">
                     <div class="courses-header">
                         <h2>Active Courses</h2>
-                        <button class="view-all-btn">View All</button>
+                        <button class="view-all-btn" style="    background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);
+                        color: white;
+                        border: 1px solid rgba(0, 0, 0, 0.2);
+                        box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.2) 0px 1px 2px;">View
+                            All</button>
                     </div>
 
                     <div class="course-list">
-                        <a href="courses.php">
+                        <a href="courses-detail.php">
                             <div class="course-item">
                                 <div class="course-details">
                                     <div class="course-name">CS1234: Introduction to Data Science</div>
@@ -120,11 +124,17 @@
                     </div>
                 </div>
                 <div class="action-footer">
-                    <button class="action-btn grade-btn">
+                    <button class="action-btn grade-btn" style="background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);
+    color: white;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.2) 0px 1px 2px;">
                         <span class="material-icons">check_circle_outline</span>
                         Grade Assignments
                     </button>
-                    <button class="action-btn add-btn">
+                    <button class="action-btn add-btn" style="background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);
+    color: white;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.2) 0px 1px 2px;">
                         <span class="material-icons">add</span>
                         Add New Course
                     </button>
