@@ -397,6 +397,16 @@ body {
     border-radius: 6px;
 }
 
+.notification-count {
+    background-color:  rgb(238 242 255 / var(--tw-bg-opacity, 1));
+    color: var(--card-bg);
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 6px 10px;
+    border-radius: 6px;
+    color: rgb(67 56 202 / var(--tw-text-opacity, 1));
+}
+
 /* --- 5. Active Courses List --- */
 .courses-section {
     padding: 0 20px;

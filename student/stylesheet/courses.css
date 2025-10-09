@@ -1,0 +1,443 @@
+body {
+    background: repeating-linear-gradient(to right, rgba(138, 198, 242, 0.3) 0px, rgba(138, 198, 242, 0.3) 1px, rgba(164, 216, 245, 0.4) 1px, rgba(164, 216, 245, 0.4) 2px, rgba(180, 226, 247, 0.45) 2px, rgba(180, 226, 247, 0.45) 3px, rgba(164, 216, 245, 0.4) 3px, rgba(164, 216, 245, 0.4) 4px) 0% 0% / 8px 100%;
+}
+
+.header {
+    background-color: #1a73e8;
+    color: white;
+    padding: 15px 20px;
+}
+
+.container {
+    max-width: 64rem !important;
+    height: 100vh;
+}
+
+.profile-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.tab-btn {
+    border: none;
+    background: none;
+    padding: 10px 20px;
+    font-weight: 500;
+    width: 100%;
+}
+
+.tab-btn.active {
+    border-bottom: 3px solid #1a73e8;
+    color: #1a73e8;
+}
+
+.assignment-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.pending-badge {
+    background: linear-gradient(rgb(247, 107, 28) 0%, rgb(231, 76, 60) 100%);
+    color: white;
+    box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.2) 0px 1px 2px;
+    padding: 4px 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.375rem;
+    font-size: 0.8rem;
+    width: 50%;
+}
+
+.nav-tabs .nav-link {
+    font-weight: 500;
+    color: #555;
+    width: 100%;
+}
+
+.nav-tabs .nav-link.active {
+    border-color: transparent transparent #1a73e8;
+    background: rgba(255, 255, 255, 0.3);
+    color: #1a73e8;
+    font-weight: 600;
+
+}
+
+.department,
+.faculty-id {
+    font-size: 14px;
+}
+
+.assignment-titles {
+    font-size: medium;
+    font-weight: 600;
+}
+
+.logout-btn {
+    background: linear-gradient(rgb(248, 248, 248) 0%, rgb(232, 232, 232) 100%);
+    color: rgb(51, 51, 51);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(255, 255, 255, 0.8) 0px 1px 0px inset, rgba(0, 0, 0, 0.05) 0px 1px 1px;
+    height: 1.5rem;
+    font-size: smaller;
+    font-weight: 700;
+}
+
+.bg-secondary {
+    background: linear-gradient(rgb(226, 226, 226) 0%, rgb(187, 187, 187) 100%);
+    border-bottom: 1px solid rgb(153, 153, 153);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 15px;
+}
+
+a .bi-chevron-left {
+    /* background: white; */
+    border-radius: 50%;
+    padding: 2px;
+    /* color: #000; */
+    background: linear-gradient(rgb(248, 248, 248) 0%, rgb(232, 232, 232) 100%) !important;
+    color: rgb(51, 51, 51);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(255, 255, 255, 0.8) 0px 1px 0px inset, rgba(0, 0, 0, 0.05) 0px 1px 1px;
+}
+
+.bi-chevron-left::before {
+    font-weight: 600 !important;
+    font-size: 15px;
+
+}
+
+.pending a {
+    font-size: 0.875rem;
+    font-weight: 400;
+}
+
+.text-muted {
+    font-size: 0.875rem;
+    --tw-text-opacity: 1;
+    color: rgb(75 85 99 / var(--tw-text-opacity, 1));
+    line-height: 1.25rem;
+}
+
+.profile-pic {
+    margin-right: 0px !important;
+}
+
+.badge {
+    padding: 6px 10px;
+    font-weight: 700 !important;
+    margin: 0px;
+    border-radius: 7px;
+}
+
+.bg-warning {
+    --tw-bg-opacity: 1;
+    background-color: rgb(254 249 195 / var(--tw-bg-opacity, 1)) !important;
+    --tw-text-opacity: 1;
+    color: rgb(133 77 14 / var(--tw-text-opacity, 1));
+}
+
+.bg-success {
+    --tw-text-opacity: 1;
+    color: rgb(22 101 52 / var(--tw-text-opacity, 1));
+    --tw-bg-opacity: 1;
+    background-color: rgb(220 252 231 / var(--tw-bg-opacity, 1)) !important;
+}
+
+.details-ass {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.h4 {
+    font-size: 0.875rem;
+}
+
+.bg-gray {
+    --tw-bg-opacity: 1;
+    background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1));
+}
+
+.p-3 {
+    padding: 0.75rem !important;
+}
+
+.p-4 {
+    padding: 1rem !important;
+}
+
+.border-blue {
+    --tw-border-opacity: 1;
+    border-color: rgb(147 197 253 / var(--tw-border-opacity, 1));
+}
+
+.content-scroll {
+    height: 100%;
+    max-height: 748px;
+    overflow-y: scroll;
+}
+
+.details-ass .nav-tabs .nav-item {
+    flex: 1;
+    /* each li takes equal space */
+    text-align: center;
+    /* center the button text */
+}
+
+.bg-blue {
+    --tw-bg-opacity: 1;
+    background-color: rgb(219 234 254 / var(--tw-bg-opacity, 1));
+}
+
+.text-blue {
+    --tw-text-opacity: 1;
+    color: rgb(37 99 235 / var(--tw-text-opacity, 1));
+}
+
+.view-committe {
+    background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);
+    color: white;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.2) 0px 1px 2px;
+}
+
+.courses-outer .table>:not(caption)>*>* {
+    background-color: transparent;
+
+}
+
+.courses-outer thead th:nth-child(1) {
+    width: 100%;
+    text-align: left;
+}
+
+.book {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 70px;
+}
+
+.bi-book {
+    font-size: 24px;
+}
+
+.bi-book::before {
+    content: "\f194";
+    --tw-text-opacity: 1;
+    color: rgb(156 163 175 / var(--tw-text-opacity, 1));
+}
+
+.btn-optional {
+    --tw-text-opacity: 1;
+    color: rgb(75 85 99 / var(--tw-text-opacity, 1));
+    font-size: 0.75rem;
+    line-height: 1rem;
+    border-radius: 0.25rem;
+    background-color: #f0f0f0;
+    padding: 5px;
+    font-weight: 400;
+}
+
+.btn-blue {
+    --tw-text-opacity: 1;
+    color: rgb(29 78 216 / var(--tw-text-opacity, 1));
+    --tw-bg-opacity: 1;
+    background-color: rgb(219 234 254 / var(--tw-bg-opacity, 1));
+    padding: 3px;
+    border-radius: 0.25rem;
+}
+
+#students th {
+    font-weight: 400;
+}
+
+#students .table>:not(caption)>*>* {
+    padding: 4px;
+}
+
+#committeeReportBtn {
+    border: 0;
+    background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);
+    color: #fff;
+    padding: 7px;
+    border-radius: 3px;
+    font-weight: 500;
+}
+
+#settings .form-label {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity, 1));
+}
+
+#settings .form-control {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px inset;
+}
+
+.reset-btn {
+    background: linear-gradient(rgb(248, 248, 248) 0%, rgb(232, 232, 232) 100%);
+    color: #000;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.2) 0px 1px 2px;
+    padding: 7px;
+    width: 75px;
+    font-weight: 500;
+
+}
+
+.save-changes {
+    border: 0;
+    background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);
+    color: #fff;
+    padding: 7px;
+    border-radius: 3px;
+    font-weight: 500;
+}
+
+.cancel-btn {
+    background: linear-gradient(rgb(248, 248, 248) 0%, rgb(232, 232, 232) 100%);
+    color: #000;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.2) 0px 1px 2px;
+    padding: 7px;
+    width: 75px;
+    font-weight: 500;
+}
+
+.create-btn {
+    border: 0;
+    background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);
+    color: #fff;
+    padding: 7px;
+    border-radius: 3px;
+    font-weight: 500;
+}
+
+.bg-red-200 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(254 242 242 / var(--tw-bg-opacity, 1));
+}
+
+.border-red-200 {
+
+    --tw-border-opacity: 1;
+    border-color: rgb(254 202 202 / var(--tw-border-opacity, 1));
+}
+
+.text-red-setting {
+    font-size: 1rem;
+    --tw-text-opacity: 1;
+    color: rgb(153 27 27 / var(--tw-text-opacity, 1));
+}
+
+.text-red-settings {
+    --tw-text-opacity: 1;
+    color: rgb(185 28 28 / var(--tw-text-opacity, 1));
+}
+
+.archieve-btn {
+    background: linear-gradient(rgb(248, 248, 248) 0%, rgb(232, 232, 232) 100%);
+    color: #000;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.2) 0px 1px 2px;
+    padding: 7px;
+    font-weight: 500;
+    width: 133px;
+}
+
+.add-topic-btn {
+    border: 0;
+    background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);
+    color: #fff;
+    padding: 7px;
+    border-radius: 3px;
+    font-weight: 500;
+}
+
+.outcomes-btn {
+    border: 0;
+    background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);
+    color: #fff;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.add-outcome-btn {
+    border: 0;
+    background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);
+    color: #fff;
+    padding: 7px;
+    border-radius: 3px;
+    font-weight: 500;
+
+}
+
+.edit-btn {
+    border: 0;
+    background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);
+    color: #fff;
+    padding: 4px;
+    border-radius: 3px;
+    font-weight: 500;
+    width: 76px;
+
+}
+
+.save-btn {
+    border: 0;
+    background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);
+    color: #fff;
+    padding: 4px;
+    border-radius: 3px;
+    font-weight: 500;
+    width: 76px;
+
+}
+
+.outcome-cancel-btn {
+    background: linear-gradient(rgb(248, 248, 248) 0%, rgb(232, 232, 232) 100%);
+    color: #000;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.2) 0px 1px 2px;
+    width: 75px;
+    font-weight: 500;
+}
+
+.create-course-outcome-btn {
+    background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);
+    color: #fff;
+}
+
+.cancel-course-outcome-btn {
+    background: linear-gradient(rgb(248, 248, 248) 0%, rgb(232, 232, 232) 100%);
+    color: #000;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.2) 0px 1px 2px;
+    width: 75px;
+    font-weight: 500;
+}
+
+/* Save button hover */
+.save-btn:hover {
+    color: white !important;
+    /* optional: keep a green background on hover */
+}
+
+/* Cancel button hover */
+.outcome-cancel-btn:hover {
+    color: white !important;
+
+    /* optional: keep a red background on hover */
+}
