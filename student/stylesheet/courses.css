@@ -441,3 +441,42 @@ a .bi-chevron-left {
 
     /* optional: keep a red background on hover */
 }
+
+
+
+.btn-gradient-glossy {
+    position: relative;
+    background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);
+    color: white;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow:
+        rgba(255, 255, 255, 0.4) 0px 1px 0px inset,
+        rgba(0, 0, 0, 0.3) 0px 1px 3px;
+    text-shadow: rgba(0, 0, 0, 0.25) 0px -1px 0px;
+    overflow: hidden;
+    border-radius: 8px;
+    padding: 6px 25px;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Glossy highlight effect */
+.btn-gradient-glossy::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(rgba(255, 255, 255, 0.8) 0%,
+            rgba(255, 255, 255, 0.2) 49%,
+            rgba(255, 255, 255, 0) 51%,
+            rgba(255, 255, 255, 0.1) 100%);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    pointer-events: none;
+}
+
+.btn-gradient-glossy:hover {
+    color: #fff;
+}

@@ -32,13 +32,7 @@
             font-size: medium !important;
         }
 
-        .bi-file-earmark-text {
-            background: rgba(16, 185, 129, 0.15);
-            color: rgb(0, 0, 0);
-            padding: 7px;
-            border-radius: 53%;
-            font-size: medium !important;
-        }
+
 
         .bi-check2-circle {
             background: rgba(139, 92, 246, 0.15);
@@ -67,8 +61,10 @@
             <div
                 class="header d-flex justify-content-between align-items-center position-relative px-3 py-2 bg-secondary text-dark">
                 <h5 class="mb-0 assignment-titles">
-                    <a href="dashboard.php"><i class="bi bi-chevron-left rounded-circle"></i></a>Introduction
-                    to Data Science
+                    <div class="d-flex gap-2">
+                        <a href="dashboard.php"><i class="bi bi-chevron-left rounded-circle"></i></a>Introduction
+                        to Data Science
+                    </div>
                 </h5>
                 <a href="../index.php">
                     <button class="btn d-flex align-items-center logout-btn gap-2">
@@ -111,20 +107,8 @@
                             </h6>
 
                             <small class="fw-semibold mb-2">Questions:</small>
-                            <div class="p-3 bg-light rounded mb-3 mt-3" style="border: 1px solid #e3e8ef;">
-                                <ol class="ps-3 mb-0">
-                                    <li class="mb-3">Explain the key concepts covered in the recent lectures and how
-                                        they
-                                        apply to
-                                        real-world scenarios.</li>
-                                    <li class="mb-3">Analyze the provided dataset and create visualizations to support
-                                        your
-                                        findings.
-                                    </li>
-                                    <li class="mb-3">Implement the algorithm discussed in class and document your
-                                        approach.
-                                    </li>
-                                </ol>
+                            <div class="p-4 bg-light rounded mb-3 mt-3" style="border: 1px solid #e3e8ef;">
+
                             </div>
 
                             <div class="d-flex flex-column align-items-start">
@@ -136,54 +120,70 @@
                                     2023-11-15
                                 </span>
                             </div>
+
+                            <div class="d-flex flex-column align-items-start pt-3">
+                                <small class="fw-semibold mb-1">Status</small>
+                                <span class="badge rounded fs-6 btn-gradient-glossy">
+                                    <small>submitted</small>
+                                </span>
+                            </div>
                         </div>
 
 
                     </div>
-                    <div class="rounded border mt-3">
+                    <div class="rounded mt-3" style="border: 1px solid #dee2e6;">
                         <!-- Card Header -->
-                        <div class="card-header d-flex align-items-center bg-secondary p-3">
-                            <h6 class="mb-0 fw-semibold text-dark">Your Response</h6>
+                        <div class="p-3" style="background-color: #e9ecef;">
+                            <h6 class="mb-0 fw-semibold">Your Submission</h6>
                         </div>
 
                         <!-- Card Body -->
-                        <div class="card-body p-3">
-                            <!-- Answer Input -->
+                        <div class="p-3">
+                            <!-- Submitted On -->
                             <div class="mb-3">
-                                <label for="answer" class="form-label fw-semibold">Answer:</label>
-                                <textarea id="answer" class="form-control" rows="5"
-                                    placeholder="Type your answer here..."></textarea>
+                                <strong>Submitted On:</strong>
+                                <div>2023-11-16</div>
                             </div>
 
-                            <!-- File Upload -->
+                            <!-- Your Answer -->
                             <div class="mb-3">
-                                <label class="form-label fw-semibold">Upload Files:</label>
-
-                                <div id="drop-area" class="border rounded p-4 text-center"
-                                    style="border-style: dashed; position: relative;">
-                                    <div class="mb-2">
-                                        <i class="bi bi-cloud-arrow-up" style="font-size: 2rem;"></i>
-                                    </div>
-                                    <p>Drag and drop your files here<br>or<br>
-                                        <a href="#"
-                                            onclick="document.getElementById('fileInput').click(); return false;">Browse
-                                            files</a>
-                                    </p>
-                                    <input type="file" id="fileInput" style="display: none;" multiple accept="image/*">
+                                <strong>Your Answer:</strong>
+                                <div class="border rounded p-3" style="background-color: #f8f9fa;">
+                                    I have designed a normalized database schema with 5 tables that efficiently handles
+                                    the
+                                    relationships between entities while minimizing redundancy. The implementation
+                                    includes
+                                    proper primary and foreign keys, with appropriate indexing for performance
+                                    optimization.
                                 </div>
-
-                                <!-- Preview Area -->
-                                <div id="preview" class="mt-3 d-flex flex-wrap gap-2"></div>
                             </div>
 
+                            <!-- Uploaded Files -->
+                            <div class="mb-3">
+                                <strong>Uploaded Files:</strong>
+                                <ul class="list-unstyled mt-2">
+                                    <li class="border rounded p-2 mb-1 d-flex align-items-center"
+                                        style="    background: linear-gradient(rgb(249, 249, 249) 0%, rgb(240, 240, 240) 100%);">
+                                        <i class="bi bi-file-earmark-text me-2 text-primary"></i> DB_Schema.pdf
+                                    </li>
+                                    <li class="border rounded p-2 d-flex align-items-center"
+                                        style="    background: linear-gradient(rgb(249, 249, 249) 0%, rgb(240, 240, 240) 100%);">
+                                        <i class="bi bi-file-earmark-text me-2 text-primary"></i> ERD_Diagram.png
+                                    </li>
+                                </ul>
+                            </div>
 
-                            <!-- Submit Button -->
-                            <div class="text-end">
-                                <button class="btn btn-gradient-glossy">Submit Assignment</button>
-
+                            <!-- Note -->
+                            <div class="alert alert-primary text-primary mt-3 mb-0 p-3">
+                                <small>
+                                    <strong>Note:</strong> Your assignment has been submitted and is pending review. You
+                                    will receive
+                                    a notification once it has been graded.
+                                </small>
                             </div>
                         </div>
                     </div>
+
 
 
                 </div>
@@ -194,6 +194,9 @@
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
 </body>
 
 </html>

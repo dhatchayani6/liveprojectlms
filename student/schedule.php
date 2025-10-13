@@ -19,10 +19,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
     <style>
         .bi-book::before {
             color: #0d6efd !important;
-
         }
 
         .bi-book {
@@ -60,6 +60,10 @@
             --tw-text-opacity: 1;
             color: rgb(249 115 22 / var(--tw-text-opacity, 1));
             font-size: 10px;
+        }
+
+        .content-scroll {
+            max-height: 648px !important;
         }
     </style>
 </head>
@@ -114,124 +118,109 @@
 
                     <!-- View Toggle Buttons -->
                     <div class="mb-3">
-                        <button class="btn me-2" style="    background: linear-gradient(rgb(97, 176, 255) 0%, rgb(43, 127, 216) 50%, rgb(0, 99, 220) 51%, rgb(2, 82, 188) 100%);
-                    color: white;
-                    padding: 6px 12px;
-                    border-radius: 6px;
-                    border: 1px solid rgba(0, 0, 0, 0.2);
-                    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 3px, rgba(255, 255, 255, 0.3) 0px 1px 0px inset;
-                    text-shadow: rgba(0, 0, 0, 0.25) 0px -1px 0px;">Weekly View</button>
-                        <button class="btn" style="background: linear-gradient(rgb(245, 245, 245) 0%, rgb(224, 224, 224) 100%);
-                    color: rgb(51, 51, 51);
-                    padding: 6px 12px;
-                    border-radius: 6px;
-                    border: 1px solid rgba(0, 0, 0, 0.2);
-                    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px, rgba(255, 255, 255, 0.6) 0px 1px 0px inset;
-                    text-shadow: rgba(255, 255, 255, 0.8) 0px 1px 0px;">Calendar View</button>
+                        <button id="weeklyBtn" class="btn me-2  btn-gradient-glossy">
+                            Weekly View
+                        </button>
+
+                        <button id="calendarBtn" class="btn" style="background: linear-gradient(rgb(245,245,245), rgb(224,224,224)); 
+           color: #333; padding: 6px 12px; border-radius: 6px;">
+                            Calendar View
+                        </button>
                     </div>
 
 
                     <!-- Class Schedule Cards -->
                     <div class="row">
 
-                        <div class="col-lg-8 ">
-                            <div class="rounded border">
+                        <div class="col-lg-8">
+                            <!-- Weekly View -->
+                            <div id="weeklyView" class="rounded">
                                 <!-- Week Range -->
-                                <div class="bg-opacity-25 rounded p-3 mb-3 fw-semibold" style=" background: linear-gradient(rgb(255 98 0 / 37%) 0%, rgb(229 91 0 / 32%) 100%);
-    height: 50%;">
+                                <div class="bg-opacity-25 p-3 fw-semibold" style="background: linear-gradient(rgb(255 98 0 / 37%) 0%, rgb(229 91 0 / 32%) 100%);
+             border-radius:10px 10px 0 0;">
                                     November 13 - 19, 2023
                                 </div>
 
-                                <div class="p-4">
-                                    <div class="bg-light shadow p-3 mb-3 rounded">
+                                <div class="border">
+                                    <div class="p-4">
+
                                         <!-- Monday -->
-                                        <div class="mb-4">
+                                        <div class="bg-light shadow p-3 mb-3 rounded">
                                             <h6 class="fw-bold">Monday</h6>
-                                            <div class=" rounded shadow-sm p-3 mb-2" style="    background: linear-gradient(rgb(232, 244, 255) 0%, rgb(213, 232, 251) 100%);
-    border: 1px solid rgba(59, 130, 246, 0.3);
-    box-shadow: rgba(255, 255, 255, 0.8) 0px 1px 0px inset;">
+                                            <div class="rounded shadow-sm p-3 mb-2" style="background: linear-gradient(rgb(232, 244, 255), rgb(213, 232, 251));
+                   border: 1px solid rgba(59, 130, 246, 0.3);">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <div>
                                                         <strong>CS1234:</strong> Introduction to Data Science <br>
                                                         <small class="text-muted">CS-101 • Lecture</small>
                                                     </div>
-                                                    <span class="badge p-2" style="    background: linear-gradient(rgb(97, 176, 255) 0%, rgb(43, 127, 216) 50%, rgb(0, 99, 220) 51%, rgb(2, 82, 188) 100%);
-                                                color: white;
-                                                border: 1px solid rgba(0, 0, 0, 0.2);
-                                                box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px, rgba(255, 255, 255, 0.3) 0px 1px 0px inset;
-                                                text-shadow: rgba(0, 0, 0, 0.25) 0px -1px 0px;
-                                                position: relative;
-                                                overflow: hidden;">10:00 - 11:30 AM</span>
+                                                    <span class="badge p-2 bg-primary text-white btn-gradient-glossy">10:00 - 11:30
+                                                        AM</span>
                                                 </div>
                                             </div>
-                                            <div class="rounded shadow-sm p-3" style="    background: linear-gradient(rgb(232, 244, 255) 0%, rgb(213, 232, 251) 100%);
-                                            border: 1px solid rgba(59, 130, 246, 0.3);
-                                            box-shadow: rgba(255, 255, 255, 0.8) 0px 1px 0px inset;">
+
+                                            <div class="rounded shadow-sm p-3" style="background: linear-gradient(rgb(232, 244, 255), rgb(213, 232, 251));
+                   border: 1px solid rgba(59, 130, 246, 0.3);">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <div>
                                                         <strong>CS3456:</strong> Algorithms <br>
                                                         <small class="text-muted">CS-203 • Lecture</small>
                                                     </div>
-                                                    <span class="badge p-2" style="    background: linear-gradient(rgb(97, 176, 255) 0%, rgb(43, 127, 216) 50%, rgb(0, 99, 220) 51%, rgb(2, 82, 188) 100%);
-                                                    color: white;
-                                                    border: 1px solid rgba(0, 0, 0, 0.2);
-                                                    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px, rgba(255, 255, 255, 0.3) 0px 1px 0px inset;
-                                                    text-shadow: rgba(0, 0, 0, 0.25) 0px -1px 0px;
-                                                    position: relative;
-                                                    overflow: hidden;">2:00 - 3:30 PM</span>
+                                                    <span class="badge p-2 bg-primary text-white btn-gradient-glossy">2:00 - 3:30 PM</span>
                                                 </div>
                                             </div>
                                         </div>
 
-                                    </div>
-
-                                    <!-- Tuesday -->
-                                    <div class="mb-4">
-                                        <div class="p-3 shadow bg-light rounded">
+                                        <!-- Tuesday -->
+                                        <div class="bg-light shadow p-3 mb-3 rounded">
                                             <h6 class="fw-bold">Tuesday</h6>
-                                            <div class=" rounded shadow-sm p-3" style="    background: linear-gradient(rgb(232, 244, 255) 0%, rgb(213, 232, 251) 100%);
-    border: 1px solid rgba(59, 130, 246, 0.3);
-    box-shadow: rgba(255, 255, 255, 0.8) 0px 1px 0px inset;">
+                                            <div class="rounded shadow-sm p-3" style="background: linear-gradient(rgb(232, 244, 255), rgb(213, 232, 251));
+                   border: 1px solid rgba(59, 130, 246, 0.3);">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <div>
                                                         <strong>CS2345:</strong> Database Systems <br>
                                                         <small class="text-muted">CS-105 • Lecture</small>
                                                     </div>
-                                                    <span class="badge p-2" style="    background: linear-gradient(rgb(97, 176, 255) 0%, rgb(43, 127, 216) 50%, rgb(0, 99, 220) 51%, rgb(2, 82, 188) 100%);
-                                                    color: white;
-                                                    border: 1px solid rgba(0, 0, 0, 0.2);
-                                                    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px, rgba(255, 255, 255, 0.3) 0px 1px 0px inset;
-                                                    text-shadow: rgba(0, 0, 0, 0.25) 0px -1px 0px;
-                                                    position: relative;
-                                                    overflow: hidden;">1:00 - 2:30 PM</span>
+                                                    <span class="badge p-2 bg-primary text-white btn-gradient-glossy">1:00 - 2:30 PM</span>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <!-- Wednesday -->
-                                    <div class="mb-4">
-                                        <div class="bg-light shadow p-3 rounded ">
+                                        <!-- Wednesday -->
+                                        <div class="bg-light shadow p-3 rounded">
                                             <h6 class="fw-bold">Wednesday</h6>
-                                            <div class=" rounded shadow-sm p-3" style="    background: linear-gradient(rgb(232, 244, 255) 0%, rgb(213, 232, 251) 100%);
-    border: 1px solid rgba(59, 130, 246, 0.3);
-    box-shadow: rgba(255, 255, 255, 0.8) 0px 1px 0px inset;">
+                                            <div class="rounded shadow-sm p-3" style="background: linear-gradient(rgb(232, 244, 255), rgb(213, 232, 251));
+                   border: 1px solid rgba(59, 130, 246, 0.3);">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <div>
                                                         <strong>CS1234:</strong> Introduction to Data Science <br>
                                                         <small class="text-muted">CS-101 • Lecture</small>
                                                     </div>
-                                                    <span class="badge p-2" style="    background: linear-gradient(rgb(97, 176, 255) 0%, rgb(43, 127, 216) 50%, rgb(0, 99, 220) 51%, rgb(2, 82, 188) 100%);
-                                                color: white;
-                                                border: 1px solid rgba(0, 0, 0, 0.2);
-                                                box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px, rgba(255, 255, 255, 0.3) 0px 1px 0px inset;
-                                                text-shadow: rgba(0, 0, 0, 0.25) 0px -1px 0px;
-                                                position: relative;
-                                                overflow: hidden;">10:00 - 11:30 AM</span>
+                                                    <span
+                                                        class="badge p-2 bg-primary text-white  btn-gradient-glossy">10:00
+                                                        - 11:30
+                                                        AM</span>
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
+                                </div>
+                            </div>
+
+                            <!-- Calendar View -->
+                            <div id="calendarView" style="display: none;">
+                                <div style="    background: linear-gradient(rgb(255 98 0 / 37%) 0%, rgb(229 91 0 / 32%) 100%);
+                color: black; padding: 10px; border-radius: 6px 6px 0 0; font-weight: normal;">
+                                    November 13 - 19, 2023
+                                </div>
+                                <div style="background: #f8f8f8; border: 1px solid #ddd;text-align:center; 
+                border-radius: 0 0 6px 6px; padding: 50px;">
+                                    <i class="bi bi-calendar3" style="font-size: 50px; color: #f97316; background: rgba(249, 115, 22, 0.15);
+                padding: 20px; border-radius: 50%;"></i>
+                                    <h5 class="mt-4 fw-normal">Calendar View</h5>
+                                    <p class="text-muted">A more detailed calendar view will be available in the next
+                                        update.</p>
                                 </div>
                             </div>
                         </div>
@@ -239,13 +228,8 @@
                         <!-- Upcoming Events -->
                         <div class="col-lg-4">
                             <div class="bg-white shadow rounded">
-                                <div class="text-white p-2 rounded-top" style="    background: linear-gradient(rgb(97, 176, 255) 0%, rgb(43, 127, 216) 50%, rgb(0, 99, 220) 51%, rgb(2, 82, 188) 100%);
-                                    color: white;
-                                    padding: 6px 12px;
-                                    border-radius: 6px;
-                                    border: 1px solid rgba(0, 0, 0, 0.2);
-                                    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 3px, rgba(255, 255, 255, 0.3) 0px 1px 0px inset;
-                                    text-shadow: rgba(0, 0, 0, 0.25) 0px -1px 0px;">
+                                <div class="text-white p-2 rounded-to btn-gradient-glossy"
+                                    style="border-radius: 10px 10px 0px 0px;">
                                     <strong>Upcoming Events</strong>
                                 </div>
                                 <div class="p-4" style="    background: linear-gradient(rgb(249, 249, 249) 0%, rgb(232, 232, 232) 100%);
@@ -292,6 +276,31 @@
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript Toggle Logic -->
+    <script>
+        const weeklyBtn = document.getElementById('weeklyBtn');
+        const calendarBtn = document.getElementById('calendarBtn');
+        const weeklyView = document.getElementById('weeklyView');
+        const calendarView = document.getElementById('calendarView');
+
+        weeklyBtn.addEventListener('click', () => {
+            weeklyView.style.display = 'block';
+            calendarView.style.display = 'none';
+            weeklyBtn.style.background = 'linear-gradient(rgb(97, 176, 255) 0%, rgb(43, 127, 216) 50%, rgb(0, 99, 220) 51%, rgb(2, 82, 188) 100%)';
+            weeklyBtn.style.color = 'white';
+            calendarBtn.style.background = 'linear-gradient(rgb(245,245,245), rgb(224,224,224))';
+            calendarBtn.style.color = '#333';
+        });
+
+        calendarBtn.addEventListener('click', () => {
+            weeklyView.style.display = 'none';
+            calendarView.style.display = 'block';
+            calendarBtn.style.background = 'linear-gradient(rgb(97, 176, 255) 0%, rgb(43, 127, 216) 50%, rgb(0, 99, 220) 51%, rgb(2, 82, 188) 100%)';
+            calendarBtn.style.color = 'white';
+            weeklyBtn.style.background = 'linear-gradient(rgb(245,245,245), rgb(224,224,224))';
+            weeklyBtn.style.color = '#333';
+        });
+    </script>
 </body>
 
 </html>

@@ -65,8 +65,11 @@
 
         button:hover {
             background-color: lightgreen;
-            transform: scale(1.1);
+            transform: scale(1.02);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            /* smooth effect */
         }
+
 
         .fs-6 {
             font-size: 0.8rem !important;
@@ -184,15 +187,19 @@
                             style="background: linear-gradient(rgb(168, 213, 255), rgb(126, 182, 247)); border: 1px solid rgba(59, 130, 246, 0.5); box-shadow: rgba(59, 130, 246, 0.3) 0px 2px 4px, rgba(255, 255, 255, 0.6) 0px 1px 0px inset;">
                             <i class="bi bi-book "></i> Course
                         </button>
-                        <button class="menu-btn menu-assignments p-4 rounded  w-100 text-start"
-                            style="background: linear-gradient(rgb(182, 240, 200), rgb(139, 224, 166)); border: 1px solid rgba(16, 185, 129, 0.5); box-shadow: rgba(16, 185, 129, 0.3) 0px 2px 4px, rgba(255, 255, 255, 0.6) 0px 1px 0px inset;">
-                            <i class="bi bi-file-earmark-text" style="background: rgba(16, 185, 129, 0.15);
+                        <a href="assignments.php">
+                            <button class="menu-btn menu-assignments p-4 rounded  w-100 text-start"
+                                style="background: linear-gradient(rgb(182, 240, 200), rgb(139, 224, 166)); border: 1px solid rgba(16, 185, 129, 0.5); box-shadow: rgba(16, 185, 129, 0.3) 0px 2px 4px, rgba(255, 255, 255, 0.6) 0px 1px 0px inset;">
+                                <i class="bi bi-file-earmark-text" style="background: rgba(16, 185, 129, 0.15);
     color: rgb(0, 0, 0);"></i> Assignments
-                        </button>
-                        <button class="menu-btn menu-grading p-4 rounded  w-100 text-start"
-                            style="background: linear-gradient(rgb(224, 200, 249), rgb(201, 167, 242)); border: 1px solid rgba(139, 92, 246, 0.5); box-shadow: rgba(139, 92, 246, 0.3) 0px 2px 4px, rgba(255, 255, 255, 0.6) 0px 1px 0px inset;">
-                            <i class="bi bi-check2-circle"></i> Transcripts
-                        </button>
+                            </button>
+                        </a>
+                        <a href="transcripts.php">
+                            <button class="menu-btn menu-grading p-4 rounded  w-100 text-start"
+                                style="background: linear-gradient(rgb(224, 200, 249), rgb(201, 167, 242)); border: 1px solid rgba(139, 92, 246, 0.5); box-shadow: rgba(139, 92, 246, 0.3) 0px 2px 4px, rgba(255, 255, 255, 0.6) 0px 1px 0px inset;">
+                                <i class="bi bi-check2-circle"></i> Transcripts
+                            </button>
+                        </a>
                         <a href="schedule.php">
                             <button class="menu-btn menu-research p-4 rounded  w-100 text-start"
                                 style="background: linear-gradient(rgb(255, 213, 184), rgb(255, 186, 139)); border: 1px solid rgba(249, 115, 22, 0.5); box-shadow: rgba(249, 115, 22, 0.3) 0px 2px 4px, rgba(255, 255, 255, 0.6) 0px 1px 0px inset;">
