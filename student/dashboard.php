@@ -142,40 +142,46 @@
                         </a>
 
                         <!-- Midterm Exam Schedule Notification -->
-                        <div class="notification-card mb-2 rounded border p-2" style="background: linear-gradient(rgb(255, 249, 246), rgb(255, 244, 237)); 
+                        <a href="notification_schedule.php" class="text-dark">
+                            <div class="notification-card mb-2 rounded border p-2" style="background: linear-gradient(rgb(255, 249, 246), rgb(255, 244, 237)); 
             border: 1px solid rgba(251, 146, 79, 0.2); 
             box-shadow: rgba(255, 255, 255, 0.8) 0px 1px 0px inset, rgba(0, 0, 0, 0.05) 0px 1px 2px;">
-                            <div class="d-flex gap-2">
-                                <div class="p-2 rounded-circle d-flex align-items-center justify-content-center" style="background: linear-gradient(rgb(255, 230, 210), rgb(255, 210, 180)); 
+                                <div class="d-flex gap-2">
+                                    <div class="p-2 rounded-circle d-flex align-items-center justify-content-center"
+                                        style="background: linear-gradient(rgb(255, 230, 210), rgb(255, 210, 180)); 
                     box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.1) 0px 1px 2px; 
                     border: 1px solid rgba(251, 146, 79, 0.3); width: 32px; height: 32px;">
-                                    <i class="bi bi-bell text-warning"></i>
-                                </div>
-                                <div class="d-flex flex-column">
-                                    <small class="mb-0">Midterm Exam Schedule Posted</small>
-                                    <small class="text-muted fs-6">Database Systems - Faculty Allocation</small>
-                                    <small><i class="bi bi-clock"></i> Posted: 2023-11-10</small>
+                                        <i class="bi bi-bell text-warning"></i>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <small class="mb-0">Midterm Exam Schedule Posted</small>
+                                        <small class="text-muted fs-6">Database Systems - Faculty Allocation</small>
+                                        <small><i class="bi bi-clock"></i> Posted: 2023-11-10</small>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
 
                         <!-- Algorithm Evaluation Meeting Notification -->
-                        <div class="notification-card rounded border p-2" style="background: linear-gradient(rgb(246, 249, 255), rgb(237, 243, 255)); 
+                        <a href="notification_assignments.php" class="text-dark">
+                            <div class="notification-card rounded border p-2" style="background: linear-gradient(rgb(246, 249, 255), rgb(237, 243, 255)); 
             border: 1px solid rgba(79, 129, 251, 0.2); 
             box-shadow: rgba(255, 255, 255, 0.8) 0px 1px 0px inset, rgba(0, 0, 0, 0.05) 0px 1px 2px;">
-                            <div class="d-flex gap-2">
-                                <div class="p-2 rounded-circle d-flex align-items-center justify-content-center" style="background: linear-gradient(rgb(219, 231, 255), rgb(196, 215, 255)); 
+                                <div class="d-flex gap-2">
+                                    <div class="p-2 rounded-circle d-flex align-items-center justify-content-center"
+                                        style="background: linear-gradient(rgb(219, 231, 255), rgb(196, 215, 255)); 
                     box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.1) 0px 1px 2px; 
                     border: 1px solid rgba(79, 129, 251, 0.3); width: 32px; height: 32px;">
-                                    <i class="bi bi-people text-primary"></i>
-                                </div>
-                                <div class="d-flex flex-column">
-                                    <small class="mb-0">Algorithm Evaluation Meeting</small>
-                                    <small class="text-muted fs-6">Scheduled Faculty Discussion</small>
-                                    <small><i class="bi bi-clock"></i> Date: 2023-11-20</small>
+                                        <i class="bi bi-people text-primary"></i>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <small class="mb-0">Algorithm Evaluation Meeting</small>
+                                        <small class="text-muted fs-6">Scheduled Faculty Discussion</small>
+                                        <small><i class="bi bi-clock"></i> Date: 2023-11-20</small>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
 
                     </div>
                 </div>
