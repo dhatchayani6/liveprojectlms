@@ -104,7 +104,7 @@
                 <div class="user-details ps-2">
                     <div class="name">Dr. Emily Rodriguez</div>
                     <div class="info">
-                        <span class="id">Faculty ID: FAC21032305</span> &bull;
+                        <span class="id">Student ID: FAC21032305</span> &bull;
                         <span class="dept">Computer Science</span>
                     </div>
                 </div>
@@ -189,10 +189,12 @@
                 <div class="rounded border mt-3">
                     <!-- Faculty Menu -->
                     <div class="menu-section d-flex flex-column p-4 gap-2  ">
-                        <button class="menu-btn menu-courses p-4 rounded  w-100 text-start"
-                            style="background: linear-gradient(rgb(168, 213, 255), rgb(126, 182, 247)); border: 1px solid rgba(59, 130, 246, 0.5); box-shadow: rgba(59, 130, 246, 0.3) 0px 2px 4px, rgba(255, 255, 255, 0.6) 0px 1px 0px inset;">
-                            <i class="bi bi-book "></i> Course
-                        </button>
+                        <a href="courses.php">
+                            <button class="menu-btn menu-courses p-4 rounded  w-100 text-start"
+                                style="background: linear-gradient(rgb(168, 213, 255), rgb(126, 182, 247)); border: 1px solid rgba(59, 130, 246, 0.5); box-shadow: rgba(59, 130, 246, 0.3) 0px 2px 4px, rgba(255, 255, 255, 0.6) 0px 1px 0px inset;">
+                                <i class="bi bi-book "></i> Course
+                            </button>
+                        </a>
                         <a href="assignments.php">
                             <button class="menu-btn menu-assignments p-4 rounded  w-100 text-start"
                                 style="background: linear-gradient(rgb(182, 240, 200), rgb(139, 224, 166)); border: 1px solid rgba(16, 185, 129, 0.5); box-shadow: rgba(16, 185, 129, 0.3) 0px 2px 4px, rgba(255, 255, 255, 0.6) 0px 1px 0px inset;">

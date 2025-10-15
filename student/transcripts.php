@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faculty Dashboard</title>
+    <title>Student Dashboard</title>
     <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
 
     <!-- Bootstrap CSS -->
@@ -92,7 +92,7 @@
                 <div class="user-details ps-2">
                     <div class="name">Dr. Emily Rodriguez</div>
                     <div class="info">
-                        <span class="id">Faculty ID: FAC21032305</span> &bull;
+                        <span class="id">Student ID: FAC21032305</span> &bull;
                         <span class="dept">Computer Science</span>
                     </div>
                 </div>
