@@ -670,13 +670,25 @@
 
                                                 <!-- Notes Tab -->
                                                 <div class="tab-pane fade show active pt-2" id="notes">
-                                                    <div id="notesDisplay" class="rounded border p-3">
-                                                        Data collection methods include surveys, web scraping, APIs,
-                                                        sensors, databases, and existing datasets.
+                                                    <!-- Drag and drop area -->
+                                                    <div id="dropZone" class="border border-primary rounded p-5 text-center mb-3"
+                                                        style="cursor: pointer; background-color: #f8f9fa;">
+                                                        <p class="mb-0 fw-semibold">📂 Drag & Drop your PDF here or Click to Upload</p>
+                                                        <input type="file" id="fileInput" accept="application/pdf" style="display:none;">
                                                     </div>
-                                                    <textarea id="notesEdit" class="form-control"
-                                                        style="display:none;">Data collection methods include surveys, web scraping, APIs, sensors, databases, and existing datasets.</textarea>
+                                                    <div id="pdfViewerContainer" class="rounded border p-3" style="height: 600px;"> <!-- PDF will be displayed here --> <iframe id="pdfViewer" src="../pdf/LARAVEL BASICS FOM SCRATCH.pdf" width="100%" height="100%" style="border: none;"></iframe> </div>
+                                                    <!-- PDF Viewer -->
+                                                    <div id="pdfViewerContainer" class="rounded border p-3" style="height: 600px; display:none;">
+                                                        <iframe id="pdfViewer" width="100%" height="100%" style="border:none;"></iframe>
+                                                    </div>
+
+                                                    <!-- Optional textarea (hidden by default) -->
+                                                    <textarea id="notesEdit" class="form-control" style="display:none;"></textarea>
                                                 </div>
+
+
+
+
 
                                                 <!-- Video Tab -->
                                                 <div class="tab-pane fade pt-2" id="video">
@@ -1249,12 +1261,12 @@
 
     <!-- for hiding the scroll in students tab -->
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const contentScroll = document.querySelector(".content-scroll");
 
             // Bootstrap tab shown event
             document.querySelectorAll('button[data-bs-toggle="tab"]').forEach(tab => {
-                tab.addEventListener("shown.bs.tab", function (e) {
+                tab.addEventListener("shown.bs.tab", function(e) {
                     const targetId = e.target.getAttribute("data-bs-target");
 
                     if (targetId === "#students") {
@@ -1269,24 +1281,23 @@
                 });
             });
         });
-
     </script>
 
     <!-- for hiddening the committe report button in other page herer  -->
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const studentsTab = document.getElementById('students-tab');
             const settingsTab = document.getElementById('settings-tab');
             const committeeBtn = document.getElementById('committeeReportBtn');
 
             // When Students tab is clicked → Show button
-            studentsTab.addEventListener('shown.bs.tab', function () {
+            studentsTab.addEventListener('shown.bs.tab', function() {
                 committeeBtn.classList.remove('d-none');
             });
 
             // When any other tab is clicked → Hide button
             document.querySelectorAll('#myTab button').forEach(tab => {
-                tab.addEventListener('shown.bs.tab', function (e) {
+                tab.addEventListener('shown.bs.tab', function(e) {
                     if (e.target.id !== 'students-tab') {
                         committeeBtn.classList.add('d-none');
                     }
@@ -1299,19 +1310,19 @@
     </script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const addBtn = document.querySelector(".add-topic-btn");
             const formDiv = document.getElementById("createTopicForm");
             const cancelBtn = document.querySelector(".cancel-btn");
 
             // Show form on Add Topic click
-            addBtn.addEventListener("click", function () {
+            addBtn.addEventListener("click", function() {
                 formDiv.style.display = "block";
                 // addBtn.style.display = "none";  <-- removed this line
             });
 
             // Hide form on Cancel click
-            cancelBtn.addEventListener("click", function () {
+            cancelBtn.addEventListener("click", function() {
                 formDiv.style.display = "none";
                 // addBtn.style.display = "inline-block"; <-- no need to show it
             });
@@ -1320,7 +1331,7 @@
 
     <!-- add outocme hrer -->
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const addOutcomeBtn = document.getElementById("addOutcomeBtn");
             const createOutcomeForm = document.getElementById("createOutcomeForm");
             const cancelOutcomeBtn = document.getElementById("cancelOutcomeBtn");
@@ -1337,6 +1348,55 @@
                 addOutcomeBtn.style.display = "inline-block";
             });
         });
+    </script>
+
+    <script>
+        const dropZone = document.getElementById("dropZone");
+        const fileInput = document.getElementById("fileInput");
+        const pdfViewerContainer = document.getElementById("pdfViewerContainer");
+        const pdfViewer = document.getElementById("pdfViewer");
+
+        // 🖱️ Click to open file picker
+        dropZone.addEventListener("click", () => fileInput.click());
+
+        // 📂 When file selected manually
+        fileInput.addEventListener("change", handleFile);
+
+        // 🧲 Drag events
+        dropZone.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            dropZone.classList.add("bg-light", "border-success");
+        });
+
+        dropZone.addEventListener("dragleave", () => {
+            dropZone.classList.remove("bg-light", "border-success");
+        });
+
+        dropZone.addEventListener("drop", (e) => {
+            e.preventDefault();
+            dropZone.classList.remove("bg-light", "border-success");
+            const file = e.dataTransfer.files[0];
+            if (file) previewPDF(file);
+        });
+
+        // 🧾 Handle PDF file
+        function handleFile(e) {
+            const file = e.target.files[0];
+            if (file) previewPDF(file);
+        }
+
+        // 👁️ Show PDF in iframe
+        function previewPDF(file) {
+            if (file.type !== "application/pdf") {
+                alert("Please upload a valid PDF file.");
+                return;
+            }
+
+            const fileURL = URL.createObjectURL(file);
+            pdfViewer.src = fileURL;
+            pdfViewerContainer.style.display = "block";
+            dropZone.style.display = "none"; // hide upload box once PDF is loaded
+        }
     </script>
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

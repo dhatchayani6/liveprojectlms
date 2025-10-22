@@ -166,7 +166,7 @@
                             <div class="card-body ">
                                 <div class="d-flex justify-content-between">
                                     <h6 class="mb-1 fw-bold">Data Analysis Project</h6>
-                                    <button class=" btn-pending btn-sm rounded-2 "><small>Pending</small></button>
+                                    <button class=" btn-pending btn-sm rounded-2 " style="width:125px;"><small>Pending</small></button>
 
                                 </div>
                                 <div>
@@ -176,7 +176,7 @@
                                 <div class=" d-flex justify-content-between align-items-center">
                                     <small class="text-muted">Due: 2023-11-15</small>
 
-                                    <button class=" btn-submit btn-sm rounded-2"><small>Submit Now</small></button>
+                                    <button class=" btn-submit btn-sm rounded-2" style="width:125px;"><small>Submit Now</small></button>
                                 </div>
                             </div>
                         </div>
@@ -189,14 +189,14 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <h6 class="mb-1 fw-bold">Database Design</h6>
-                                    <button class=" btn-submitted btn-sm rounded-2"><small>Submitted</small></button>
+                                    <button class=" btn-submitted btn-sm rounded-2" style="width:125px;"><small>Submitted</small></button>
                                 </div>
                                 <div>
                                     <p class="mb-1 text-muted">Database Systems</p>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <small class="text-muted">Due: 2023-11-18</small>
-                                    <button class=" btn-review btn-sm rounded-2 p-1"><small>Review
+                                    <button class=" btn-review btn-sm rounded-2 p-1" style="width:125px;"><small>Review
                                             Submission</small></button>
                                 </div>
                             </div>
@@ -210,7 +210,7 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <h6 class="mb-1 fw-bold">Algorithm Implementation</h6>
-                                    <button class=" btn-graded btn-sm rounded-2 p-1"><small>Graded: A</small></button>
+                                    <button class=" btn-graded btn-sm rounded-2 p-1" style="width:125px;"><small>Graded: A</small></button>
                                 </div>
                                 <div>
                                     <p class="mb-1 text-muted">Algorithms</p>
@@ -218,7 +218,7 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <small class="text-muted">Due: 2023-11-20</small>
                                     <button class=" btn-viewfeed btn-sm  rounded-2 p-1"
-                                        style="background-color: #cda2f2; color: white;border:none !important;"><small>View
+                                        style="background-color: #cda2f2; color: white;border:none !important; width:125px;"><small>View
                                             Feedback</small></button>
                                 </div>
                             </div>
