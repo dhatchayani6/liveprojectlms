@@ -1,153 +1,256 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>Course Creator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../images/logo1.png">
+
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="../stylesheet/responsive.css">
+
+    <link rel="stylesheet" href="../stylesheet/styles.css">
+    <style>
+        .card-custom {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        .table th,
+        .table td {
+            vertical-align: middle !important;
+        }
+
+        .table thead th {
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            font-size: 0.75rem;
+        }
+
+        .table tbody td {
+            font-size: 0.85rem;
+        }
+
+        .btn-sm {
+            font-size: 0.75rem;
+            padding: 2px 10px;
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container my-4">
-        <h1 class="text-center mb-4">Course Creator</h1>
-        <!-- Course Details -->
-        <div class="mb-4">
-            <h2>Course Details</h2>
-            <div class="mb-3">
-                <label for="courseName" class="form-label">Course Name</label>
-                <input type="text" id="courseName" class="form-control" placeholder="Enter course name">
-            </div>
-            <div class="mb-3">
-                <label for="courseCode" class="form-label">Course Code</label>
-                <input type="text" id="courseCode" class="form-control" placeholder="Enter course code">
-            </div>
-        </div>
+    <div class="container-fluid students-section">
+        <div class="row">
+            <!-- didebar -->
+            <?php include('sidebar.php') ?>
+            <!-- Main Content -->
+            <div class="col-12 col-sm-10 col-md-9 col-lg-10 p-0">
+                <!-- Topbar -->
+                <?php include('topbar.php') ?>
+                <!-- Page Content -->
+                <div class="p-4 content-scroll">
+                    <!-- Add New Course Form -->
+                    <div class="card-custom shadow mt-4 p-4">
+                        <h6 class="text-center mb-4">Course Creator</h6>
+                        <!-- Course Details -->
+                        <div class="mb-4">
+                            <h6>Course Details</h6>
+                            <div class="row g-3"> <!-- g-3 adds gap between columns -->
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" id="courseName" class="form-control"
+                                            placeholder="Enter course name">
+                                        <label for="courseName">Course Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" id="courseCode" class="form-control"
+                                            placeholder="Enter course code">
+                                        <label for="courseCode">Course Code</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-        <!-- Category Selector -->
-        <div class="mb-4">
-            <h2>Course Category</h2>
-            <div id="categoryGroup" class="btn-group" role="group" aria-label="Category">
-                <button type="button" class="btn btn-outline-primary">University Core</button>
-                <button type="button" class="btn btn-outline-primary">University Elective</button>
-                <button type="button" class="btn btn-outline-primary">Program Core</button>
-                <button type="button" class="btn btn-outline-primary">Program Elective</button>
-            </div>
-        </div>
 
-        <!-- Regulation Selector -->
-        <div class="mb-4">
-            <h2>Select Regulation</h2>
-            <div class="dropdown">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="regBtn" data-bs-toggle="dropdown" aria-expanded="false">
-                    Select Regulation
-                </button>
-                <ul class="dropdown-menu" id="regMenu">
-                    <li><a class="dropdown-item" href="#" data-value="Regulation 2020">Regulation 2020</a></li>
-                    <li><a class="dropdown-item" href="#" data-value="Regulation 2019">Regulation 2019</a></li>
-                    <li><a class="dropdown-item" href="#" data-value="Regulation 2018">Regulation 2018</a></li>
-                    <li><a class="dropdown-item" href="#" data-value="Regulation 2017">Regulation 2017</a></li>
-                </ul>
-            </div>
-        </div>
+                        <!-- Category Selector -->
+                        <div class="mb-4">
+                            <h6>Course Category</h6>
+                            <div id="categoryGroup" class="btn-group" role="group" aria-label="Category">
+                                <button type="button" class="btn btn-outline-primary">University Core</button>
+                                <button type="button" class="btn btn-outline-primary">University Elective</button>
+                                <button type="button" class="btn btn-outline-primary">Program Core</button>
+                                <button type="button" class="btn btn-outline-primary">Program Elective</button>
+                            </div>
+                        </div>
 
-        <!-- Rubrics Selector -->
-        <div class="mb-4">
-            <h2>Select Exam Rubrics</h2>
-            <div class="dropdown">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="rubricBtn" data-bs-toggle="dropdown" aria-expanded="false">
-                    Select Rubric
-                </button>
-                <ul class="dropdown-menu" id="rubricMenu">
-                    <!-- Default rubric options -->
-                    <li><a class="dropdown-item" href="#" data-value="Final Exam">Final Exam</a></li>
-                    <li><a class="dropdown-item" href="#" data-value="Mid-term Exam">Mid-term Exam</a></li>
-                    <li><a class="dropdown-item" href="#" data-value="Assignments">Assignments</a></li>
-                    <li><a class="dropdown-item" href="#" data-value="Projects">Projects</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <!-- "Add New Rubric" opens modal -->
-                    <li><a class="dropdown-item" href="#" id="addNewRubric">+ Add New Rubric</a></li>
-                </ul>
-            </div>
-        </div>
+                        <!-- Regulation Selector -->
+                        <div class="mb-4">
+                            <h6>Select Regulation</h6>
+                            <div class="dropdown">
+                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="regBtn"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Select Regulation
+                                </button>
+                                <ul class="dropdown-menu" id="regMenu">
+                                    <li><a class="dropdown-item" href="#" data-value="Regulation 2020">Regulation
+                                            2020</a></li>
+                                    <li><a class="dropdown-item" href="#" data-value="Regulation 2019">Regulation
+                                            2019</a></li>
+                                    <li><a class="dropdown-item" href="#" data-value="Regulation 2018">Regulation
+                                            2018</a></li>
+                                    <li><a class="dropdown-item" href="#" data-value="Regulation 2017">Regulation
+                                            2017</a></li>
+                                </ul>
+                            </div>
+                        </div>
 
-        <!-- Rubrics Table (shown when a rubric is selected) -->
-        <div class="mb-4" id="rubricTableSection" style="display:none;">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h2 id="rubricTitle"></h2>
-                <button class="btn btn-sm btn-primary" id="saveRubricBtn">Save</button>
-            </div>
-            <div class="table-responsive">
-                <table class="table table-bordered" id="rubricTable">
-                    <thead>
-                        <tr>
-                            <th>Component</th>
-                            <th>Max Marks</th>
-                            <th>Passing Marks</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Rubric component rows are inserted here by JavaScript -->
-                    </tbody>
-                </table>
-            </div>
-            <button class="btn btn-sm btn-secondary" id="addComponentBtn">+ Add Component</button>
-        </div>
+                        <!-- Rubrics Selector -->
+                        <div class="mb-4">
+                            <h6>Select Exam Rubrics</h6>
+                            <div class="dropdown">
+                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="rubricBtn"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Select Rubric
+                                </button>
+                                <ul class="dropdown-menu" id="rubricMenu">
+                                    <!-- Default rubric options -->
+                                    <li><a class="dropdown-item" href="#" data-value="Final Exam">Final Exam</a></li>
+                                    <li><a class="dropdown-item" href="#" data-value="Mid-term Exam">Mid-term Exam</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="#" data-value="Assignments">Assignments</a></li>
+                                    <li><a class="dropdown-item" href="#" data-value="Projects">Projects</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <!-- "Add New Rubric" opens modal -->
+                                    <li><a class="dropdown-item" href="#" id="addNewRubric">+ Add New Rubric</a></li>
+                                </ul>
+                            </div>
+                        </div>
 
-        <!-- Passing Criteria Section -->
-        <div class="mb-4">
-            <h2>Passing Criteria</h2>
-            <div id="criteriaTableSection" style="display:none;">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="criteriaTable">
-                        <thead>
-                            <tr>
-                                <th>Components</th>
-                                <th>Required Marks</th>
-                                <th>Out of</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Passing criteria rows here -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <p id="criteriaNote" class="text-muted">No passing criteria defined yet.</p>
-            <p id="noComponentsNote" class="text-muted" style="display:none;">Add components to rubrics first before creating passing criteria.</p>
-            <button class="btn btn-sm btn-secondary" id="toggleCriteriaForm">+ Add Passing Criteria</button>
-            <div class="mt-3" id="criteriaForm" style="display:none;">
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                    <h3>Select Components</h3>
-                    <button class="btn btn-sm btn-outline-secondary" id="selectAllComponents">Select All</button>
-                </div>
-                <div id="componentCheckboxList" class="mb-3">
-                    <!-- Checkboxes for components inserted here -->
-                </div>
-                <div class="row mb-3">
-                    <div class="col">
-                        <label for="requiredMarks" class="form-label">Required Marks</label>
-                        <input type="number" id="requiredMarks" class="form-control" placeholder="Required marks">
+                        <!-- Rubrics Table (shown when a rubric is selected) -->
+                        <div class="mb-4" id="rubricTableSection" style="display:none;">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h6 id="rubricTitle"></h6>
+                                <button class="btn btn-sm btn-primary" id="saveRubricBtn">Save</button>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="rubricTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Component</th>
+                                            <th>Max Marks</th>
+                                            <th>Passing Marks</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Rubric component rows are inserted here by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button class="btn btn-sm btn-secondary" id="addComponentBtn">+ Add Component</button>
+                        </div>
+
+                        <!-- Passing Criteria Section -->
+                        <div class="mb-4">
+                            <h6>Passing Criteria</h6>
+                            <div id="criteriaTableSection" style="display:none;">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="criteriaTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Components</th>
+                                                <th>Required Marks</th>
+                                                <th>Out of</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Passing criteria rows here -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <p id="criteriaNote" class="text-muted">No passing criteria defined yet.</p>
+                            <p id="noComponentsNote" class="text-muted" style="display:none;">Add components to rubrics
+                                first before
+                                creating passing criteria.</p>
+                            <button class="btn btn-sm btn-secondary" id="toggleCriteriaForm">+ Add Passing
+                                Criteria</button>
+                            <div class="mt-3" id="criteriaForm" style="display:none;">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h3>Select Components</h3>
+                                    <button class="btn btn-sm btn-outline-secondary" id="selectAllComponents">Select
+                                        All</button>
+                                </div>
+                                <div id="componentCheckboxList" class="mb-3">
+                                    <!-- Checkboxes for components inserted here -->
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label for="requiredMarks" class="form-label">Required Marks</label>
+                                        <input type="number" id="requiredMarks" class="form-control"
+                                            placeholder="Required marks">
+                                    </div>
+                                    <div class="col">
+                                        <label for="maximumMarks" class="form-label">Out of (Maximum)</label>
+                                        <input type="number" id="maximumMarks" class="form-control"
+                                            placeholder="Maximum marks">
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary" id="addCriteriaBtn">Add Criteria</button>
+                            </div>
+                        </div>
+
+                        <!-- Cancel/Save Course Buttons -->
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btn-secondary me-2">Cancel</button>
+                            <button class="btn btn-primary" id="saveCourseBtn">Save Course</button>
+                        </div>
                     </div>
-                    <div class="col">
-                        <label for="maximumMarks" class="form-label">Out of (Maximum)</label>
-                        <input type="number" id="maximumMarks" class="form-control" placeholder="Maximum marks">
-                    </div>
-                </div>
-                <button class="btn btn-primary" id="addCriteriaBtn">Add Criteria</button>
-            </div>
-        </div>
 
-        <!-- Cancel/Save Course Buttons -->
-        <div class="d-flex justify-content-end">
-            <button class="btn btn-secondary me-2">Cancel</button>
-            <button class="btn btn-primary" id="saveCourseBtn">Save Course</button>
+                    <!-- "Add New Rubric" Modal -->
+                    <div class="modal" tabindex="-1" id="rubricModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Add New Rubric</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="text" class="form-control mb-2" id="newRubricName"
+                                        placeholder="Enter rubric name">
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    <button class="btn btn-primary" id="saveNewRubricBtn">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
+
 
     <!-- "Add New Rubric" Modal -->
     <div class="modal" tabindex="-1" id="rubricModal">
@@ -167,11 +270,8 @@
             </div>
         </div>
     </div>
-
-    <!-- Bootstrap JS (for dropdowns and modal) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         // JavaScript state
         let selectedCategory = '';
@@ -182,7 +282,7 @@
 
         // Category button click handling
         document.querySelectorAll('#categoryGroup .btn').forEach(btn => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function () {
                 // Toggle active class on clicked button
                 document.querySelectorAll('#categoryGroup .btn').forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
@@ -192,7 +292,7 @@
 
         // Regulation dropdown selection
         document.querySelectorAll('#regMenu .dropdown-item').forEach(item => {
-            item.addEventListener('click', function() {
+            item.addEventListener('click', function () {
                 selectedRegulation = this.getAttribute('data-value');
                 document.getElementById('regBtn').textContent = selectedRegulation;
             });
@@ -236,7 +336,7 @@
         document.querySelectorAll('#rubricMenu .dropdown-item').forEach(item => {
             const name = item.getAttribute('data-value');
             if (name) {
-                item.addEventListener('click', function(event) {
+                item.addEventListener('click', function (event) {
                     event.preventDefault();
                     selectRubric(name);
                 });
@@ -244,13 +344,13 @@
         });
 
         // Show modal to add a new rubric
-        document.getElementById('addNewRubric').addEventListener('click', function(event) {
+        document.getElementById('addNewRubric').addEventListener('click', function (event) {
             event.preventDefault();
             new bootstrap.Modal(document.getElementById('rubricModal')).show();
         });
 
         // Save new rubric from modal
-        document.getElementById('saveNewRubricBtn').addEventListener('click', function() {
+        document.getElementById('saveNewRubricBtn').addEventListener('click', function () {
             const newName = document.getElementById('newRubricName').value.trim();
             if (newName) {
                 addRubricOption(newName);
@@ -282,7 +382,7 @@
                     inputName.type = 'text';
                     inputName.className = 'form-control';
                     inputName.value = comp.name;
-                    inputName.addEventListener('input', function() {
+                    inputName.addEventListener('input', function () {
                         r.components[index].name = this.value;
                     });
                     cellName.appendChild(inputName);
@@ -292,7 +392,7 @@
                     inputMax.type = 'number';
                     inputMax.className = 'form-control';
                     inputMax.value = comp.maxMarks;
-                    inputMax.addEventListener('input', function() {
+                    inputMax.addEventListener('input', function () {
                         r.components[index].maxMarks = parseInt(this.value) || 0;
                     });
                     cellMax.appendChild(inputMax);
@@ -302,7 +402,7 @@
                     inputPass.type = 'number';
                     inputPass.className = 'form-control';
                     inputPass.value = comp.passingMarks;
-                    inputPass.addEventListener('input', function() {
+                    inputPass.addEventListener('input', function () {
                         r.components[index].passingMarks = parseInt(this.value) || 0;
                     });
                     cellPass.appendChild(inputPass);
@@ -311,7 +411,7 @@
                     const removeBtn = document.createElement('button');
                     removeBtn.className = 'btn btn-sm btn-danger';
                     removeBtn.textContent = 'Remove';
-                    removeBtn.addEventListener('click', function() {
+                    removeBtn.addEventListener('click', function () {
                         r.components.splice(index, 1);
                         renderRubricTable();
                         updateCriteriaToggle();
@@ -323,7 +423,7 @@
         }
 
         // Add a new empty component row
-        document.getElementById('addComponentBtn').addEventListener('click', function() {
+        document.getElementById('addComponentBtn').addEventListener('click', function () {
             const r = rubrics.find(r => r.name === selectedRubric);
             if (r) {
                 r.components.push({
@@ -369,7 +469,7 @@
         }
 
         // Toggle the passing-criteria form
-        document.getElementById('toggleCriteriaForm').addEventListener('click', function() {
+        document.getElementById('toggleCriteriaForm').addEventListener('click', function () {
             const form = document.getElementById('criteriaForm');
             form.style.display = (form.style.display === 'none') ? 'block' : 'none';
             if (form.style.display === 'block') {
@@ -403,12 +503,12 @@
         }
 
         // "Select All" button for checkboxes
-        document.getElementById('selectAllComponents').addEventListener('click', function() {
+        document.getElementById('selectAllComponents').addEventListener('click', function () {
             document.querySelectorAll('#componentCheckboxList .form-check-input').forEach(cb => cb.checked = true);
         });
 
         // Add a passing criterion based on selected checkboxes
-        document.getElementById('addCriteriaBtn').addEventListener('click', function() {
+        document.getElementById('addCriteriaBtn').addEventListener('click', function () {
             const checkboxes = document.querySelectorAll('#componentCheckboxList .form-check-input');
             let selected = [];
             checkboxes.forEach(cb => {
@@ -457,7 +557,7 @@
                     const removeBtn = document.createElement('button');
                     removeBtn.className = 'btn btn-sm btn-danger';
                     removeBtn.textContent = 'Remove';
-                    removeBtn.addEventListener('click', function() {
+                    removeBtn.addEventListener('click', function () {
                         passingCriteria.splice(idx, 1);
                         renderCriteria();
                     });
@@ -472,7 +572,7 @@
 
     <script>
         // Save course to FastAPI backend
-        document.getElementById('saveCourseBtn').addEventListener('click', function() {
+        document.getElementById('saveCourseBtn').addEventListener('click', function () {
             const courseName = document.getElementById('courseName').value.trim();
             const courseCode = document.getElementById('courseCode').value.trim();
 
@@ -537,18 +637,19 @@
                     "Authorization": "Bearer " + token // 👈 Important line
                 },
                 data: JSON.stringify(courseData),
-                success: function(response) {
+                success: function (response) {
                     console.log(response);
                     alert("✅ Course saved successfully!");
-                    location.reload(); 
+                    location.reload();
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     console.error("Error:", xhr.responseText);
                     alert("❌ Failed to save course.", "Error:", xhr.responseText);
                 }
             });
         });
     </script>
+
 </body>
 
 </html>
