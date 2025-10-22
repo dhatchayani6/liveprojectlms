@@ -91,6 +91,22 @@
             box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.3) 0px 1px 3px;
             text-shadow: rgba(0, 0, 0, 0.25) 0px -1px 0px;
         }
+
+        .btn-gradient-glossy {
+            position: relative;
+            background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);
+            color: white;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            box-shadow:
+                rgba(255, 255, 255, 0.4) 0px 1px 0px inset,
+                rgba(0, 0, 0, 0.3) 0px 1px 3px;
+            text-shadow: rgba(0, 0, 0, 0.25) 0px -1px 0px;
+            overflow: hidden;
+            border-radius: 8px;
+            padding: 6px 25px;
+            font-weight: 500;
+            transition: all 0.2s ease-in-out;
+        }
     </style>
 </head>
 
@@ -141,7 +157,7 @@
 
                     <div class="details-ass border rounded">
                         <!-- Tabs -->
-                        <ul class="nav nav-tabs justify-content-between"
+                        <ul class="nav nav-tabs flex-nowrap overflow-auto"
                             style="background: linear-gradient(rgb(233, 233, 233) 0%, rgb(196, 196, 196) 100%);">
                             <li class="nav-item">
                                 <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#overview"
@@ -156,6 +172,7 @@
                                     type="button">Evaluation</button>
                             </li>
                         </ul>
+
 
                         <div class="tab-content mt-3">
 
@@ -220,12 +237,17 @@
                                     </div>
 
                                     <!-- Action Buttons -->
-                                    <div class="p-3 d-flex gap-2">
-                                        <button class="section-btn" id="readingBtn">Reading</button>
-                                        <button class="section-btn" id="videoBtn">Videos</button>
-                                        <button class="section-btn" id="practiceBtn">Practice</button>
-                                        <button class="section-btn" id="assignmentBtn">Assignments</button>
+                                    <div class="p-3 d-flex flex-wrap gap-2">
+                                        <button class="section-btn flex-grow-1 flex-md-grow-0"
+                                            id="readingBtn">Reading</button>
+                                        <button class="section-btn flex-grow-1 flex-md-grow-0"
+                                            id="videoBtn">Videos</button>
+                                        <button class="section-btn flex-grow-1 flex-md-grow-0"
+                                            id="practiceBtn">Practice</button>
+                                        <button class="section-btn flex-grow-1 flex-md-grow-0"
+                                            id="assignmentBtn">Assignments</button>
                                     </div>
+
 
 
                                     <!-- Default Card List -->
@@ -258,19 +280,27 @@
                                                 Reading Material
                                             </div>
                                             <div class="p-3">
-                                                <!-- <p class="small"><strong>Chapter 1:</strong> Introduction to Data
-                                                    Analysis</p> -->
+                                                <p class="small">Data Collection Methods</p>
 
-                                                <p class="small">Data Collection Methods
-                                                </p>
-                                                <div class="ratio ratio-16x9 border rounded shadow-sm">
+                                                <!-- Desktop PDF Viewer (iframe) -->
+                                                <div
+                                                    class="ratio ratio-16x9 border rounded shadow-sm d-none d-md-block">
                                                     <iframe src="../pdf/LARAVEL BASICS FOM SCRATCH.pdf" width="100%"
                                                         height="600" style="border:none;"
                                                         title="Course PDF Viewer"></iframe>
                                                 </div>
+
+                                                <!-- Mobile PDF Viewer (embed full-width) -->
+                                                <div class="d-block d-md-none">
+                                                    <embed src="../pdf/LARAVEL BASICS FOM SCRATCH.pdf"
+                                                        type="application/pdf" width="100%" height="400"
+                                                        style="border:none;">
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
+
 
                                     <!-- Video Section -->
                                     <div class="p-3" id="videoSection" style="display:none;">
@@ -298,59 +328,170 @@
                                                 Practice Material
                                             </div>
                                             <div class="p-3">
-                                                <!-- <p class="small">Below are your practice exercises. Complete them to
-                                                    strengthen your learning.</p>
-                                                <div class="row g-3">
-                                                    <div class="col-12 col-md-6">
-                                                        <div class="border rounded shadow-sm p-3 bg-white">
-                                                            <h6 class="fw-semibold">Exercise 1: Data Cleaning</h6>
-                                                            <p class="small text-muted">Perform basic data cleaning on
-                                                                the provided dataset.</p>
+
+                                                <!-- Questions Container -->
+                                                <div id="questionsContainer">
+                                                    <!-- Question 1 -->
+                                                    <div class="mb-3">
+                                                        <label class="form-label fw-semibold">1. What is the capital of
+                                                            France?</label>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="q1"
+                                                                id="q1a" value="A">
+                                                            <label class="form-check-label" for="q1a">A. Berlin</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="q1"
+                                                                id="q1b" value="B">
+                                                            <label class="form-check-label" for="q1b">B. Madrid</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="q1"
+                                                                id="q1c" value="C">
+                                                            <label class="form-check-label" for="q1c">C. Paris</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="q1"
+                                                                id="q1d" value="D">
+                                                            <label class="form-check-label" for="q1d">D. Rome</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-12 col-md-6">
-                                                        <div class="border rounded shadow-sm p-3 bg-white">
-                                                            <h6 class="fw-semibold">Exercise 2: Data Visualization</h6>
-                                                            <p class="small text-muted">Create visualizations for a
-                                                                dataset using charts.</p>
+
+                                                    <!-- Question 2 -->
+                                                    <div class="mb-3">
+                                                        <label class="form-label fw-semibold">2. Who wrote
+                                                            'Hamlet'?</label>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="q2"
+                                                                id="q2a" value="A">
+                                                            <label class="form-check-label" for="q2a">A. Charles
+                                                                Dickens</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="q2"
+                                                                id="q2b" value="B">
+                                                            <label class="form-check-label" for="q2b">B. William
+                                                                Shakespeare</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="q2"
+                                                                id="q2c" value="C">
+                                                            <label class="form-check-label" for="q2c">C. Mark
+                                                                Twain</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="q2"
+                                                                id="q2d" value="D">
+                                                            <label class="form-check-label" for="q2d">D. Leo
+                                                                Tolstoy</label>
                                                         </div>
                                                     </div>
-                                                </div> -->
+                                                </div>
+
+                                                <!-- Submit Button -->
+                                                <div class="d-flex justify-content-end mt-3" id="submitContainer">
+                                                    <button type="submit" class="btn btn-gradient-glossy btn-sm">Submit
+                                                        Answer</button>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
+
+
+
+
 
                                     <!-- Assignment Section -->
                                     <div class="p-3" id="assignmentSection" style="display:none;">
-                                        <div class="border rounded shadow-sm overflow-hidden bg-light">
-                                            <div class="p-2 border-bottom bg-secondary text-dark">
-                                                Assignment Material
-                                            </div>
-                                            <div class="p-3">
-                                                <!-- <p class="small">Below are your assignments. Submit them before the
-                                                    deadline.</p> -->
-                                                <!-- <div class="row g-3">
-                                                    <div class="col-12 col-md-6">
-                                                        <div class="border rounded shadow-sm p-3 bg-white">
-                                                            <h6 class="fw-semibold">Assignment 1: Data Analysis Project
-                                                            </h6>
-                                                            <p class="small text-muted">Analyze the given dataset and
-                                                                submit a report.</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-6">
-                                                        <div class="border rounded shadow-sm p-3 bg-white">
-                                                            <h6 class="fw-semibold">Assignment 2: Visualization Report
-                                                            </h6>
-                                                            <p class="small text-muted">Create a report with charts and
-                                                                insights from the dataset.</p>
-                                                        </div>
-                                                    </div>
+                                        <div class="card shadow-sm border-light">
+
+                                            <!-- Card Header -->
+                                            <div
+                                                class="card-header bg-secondary text-dark d-flex justify-content-between align-items-center">
+                                                <span>Assignment Material</span>
+                                                <!-- <div class="d-flex gap-1">
+                                                    <span class="rounded-circle bg-danger"
+                                                        style="width:8px; height:8px;"></span>
+                                                    <span class="rounded-circle bg-warning"
+                                                        style="width:8px; height:8px;"></span>
+                                                    <span class="rounded-circle bg-success"
+                                                        style="width:8px; height:8px;"></span>
                                                 </div> -->
+                                            </div>
+
+                                            <!-- Card Body -->
+                                            <div class="card-body bg-light">
+                                                <h6 class="p-3">Data Collection Exercise
+                                                </h6>
+                                                <!-- Assignment Details Card -->
+                                                <div class="card border shadow-sm mb-3">
+                                                    <div class="card-header bg-light">
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <span class="small fw-medium">Assignment Details</span>
+                                                            <!-- <div class="d-flex gap-1">
+                                                                <span class="rounded-circle bg-danger"
+                                                                    style="width:8px; height:8px;"></span>
+                                                                <span class="rounded-circle bg-warning"
+                                                                    style="width:8px; height:8px;"></span>
+                                                                <span class="rounded-circle bg-success"
+                                                                    style="width:8px; height:8px;"></span>
+                                                            </div> -->
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="card-body bg-white">
+                                                        <!-- Instructions -->
+                                                        <div class="mb-3">
+                                                            <h6 class="small fw-medium">Instructions:</h6>
+                                                            <p class="small text-secondary">
+                                                                For this assignment, you will need to collect data from
+                                                                a public dataset of your choice,
+                                                                document your data collection process, and prepare a
+                                                                brief report on the dataset characteristics.
+                                                            </p>
+                                                        </div>
+
+                                                        <!-- Due Date -->
+                                                        <div class="mb-3">
+                                                            <h6 class="small fw-medium">Due Date:</h6>
+                                                            <p class="small text-secondary">2023-12-15</p>
+                                                        </div>
+
+                                                        <!-- File Upload -->
+                                                        <div class="mb-3">
+                                                            <h6 class="small fw-medium">Upload Your Solution:</h6>
+                                                            <div class="border border-2 border-dashed rounded p-4 text-center"
+                                                                style="background: rgba(0,0,0,0.02);">
+                                                                <i class="bi bi-upload"
+                                                                    style="font-size: 2rem; color: #6c757d;"></i>
+                                                                <p class="small text-secondary mb-1">Drag and drop your
+                                                                    files here</p>
+                                                                <p class="small text-muted mb-2">or</p>
+                                                                <div class="mb-3">
+
+                                                                    <div class="d-grid">
+                                                                        <label class="text-primary">
+                                                                            Browse files
+                                                                            <input type="file" accept=".pdf" hidden>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Submit Button -->
+                                                        <div class="d-flex justify-content-end">
+                                                            <button type="button"
+                                                                class="btn btn-gradient-glossy px-4 btn-sm">
+                                                                Submit Assignment
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-
 
                                 </div>
                             </div>
@@ -384,6 +525,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Plyr JS -->
     <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+
 
 
 

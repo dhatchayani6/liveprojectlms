@@ -12,6 +12,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
     <link rel="stylesheet" href="stylesheet/courses.css">
+    <!-- vidoplayer.js library -->
+    <!-- Include Plyr CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.css" />
     <style>
         .rounded-circle {
             width: 20px !important;
@@ -24,6 +27,26 @@
         .rounded-circle i {
             font-size: 11px !important;
 
+        }
+
+        #video .ratio::before {
+            padding-top: 0;
+        }
+
+        .btn-gradient-glossy {
+            position: relative;
+            background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);
+            color: white;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            box-shadow:
+                rgba(255, 255, 255, 0.4) 0px 1px 0px inset,
+                rgba(0, 0, 0, 0.3) 0px 1px 3px;
+            text-shadow: rgba(0, 0, 0, 0.25) 0px -1px 0px;
+            overflow: hidden;
+            border-radius: 8px;
+            padding: 6px 25px;
+            font-weight: 500;
+            transition: all 0.2s ease-in-out;
         }
     </style>
 </head>
@@ -653,6 +676,10 @@
                                                         data-bs-target="#video" type="button">Video</button>
                                                 </li>
                                                 <li class="nav-item" role="presentation">
+                                                    <button class="nav-link" id="practice-tab" data-bs-toggle="tab"
+                                                        data-bs-target="#practice" type="button">Practice</button>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
                                                     <button class="nav-link" id="assignment-tab" data-bs-toggle="tab"
                                                         data-bs-target="#assignment" type="button">Assignments</button>
                                                 </li>
@@ -670,55 +697,216 @@
 
                                                 <!-- Notes Tab -->
                                                 <div class="tab-pane fade show active pt-2" id="notes">
-                                                    <!-- Drag and drop area -->
-                                                    <div id="dropZone" class="border border-primary rounded p-5 text-center mb-3"
-                                                        style="cursor: pointer; background-color: #f8f9fa;">
-                                                        <p class="mb-0 fw-semibold">📂 Drag & Drop your PDF here or Click to Upload</p>
-                                                        <input type="file" id="fileInput" accept="application/pdf" style="display:none;">
-                                                    </div>
-                                                    <div id="pdfViewerContainer" class="rounded border p-3" style="height: 600px;"> <!-- PDF will be displayed here --> <iframe id="pdfViewer" src="../pdf/LARAVEL BASICS FOM SCRATCH.pdf" width="100%" height="100%" style="border: none;"></iframe> </div>
-                                                    <!-- PDF Viewer -->
-                                                    <div id="pdfViewerContainer" class="rounded border p-3" style="height: 600px; display:none;">
-                                                        <iframe id="pdfViewer" width="100%" height="100%" style="border:none;"></iframe>
+
+                                                    <!-- 📘 Static Notes Section -->
+                                                    <div class="border rounded p-3 mb-4 bg-light shadow-sm">
+                                                        <h6 class="fw-semibold mb-3">📘 Static Notes</h6>
+                                                        <div class="ratio ratio-16x9 border rounded shadow-sm">
+                                                            <iframe src="../pdf/LARAVEL BASICS FOM SCRATCH.pdf"
+                                                                width="100%" height="600" style="border:none;"
+                                                                title="Static Notes PDF Viewer"></iframe>
+                                                        </div>
                                                     </div>
 
-                                                    <!-- Optional textarea (hidden by default) -->
-                                                    <textarea id="notesEdit" class="form-control" style="display:none;"></textarea>
+                                                    <!-- 📂 Upload & Preview Notes Section -->
+                                                    <div class="border rounded p-3 bg-light shadow-sm">
+                                                        <h6 class="fw-semibold mb-3">📂 Upload & Preview Your Notes</h6>
+
+                                                        <!-- Drag & Drop Upload -->
+                                                        <div id="dropZone"
+                                                            class="border border-primary rounded p-5 text-center mb-3"
+                                                            style="cursor: pointer; background-color: #f8f9fa;">
+                                                            <p class="mb-0 fw-semibold">📄 Drag & Drop your PDF here or
+                                                                Click to Upload</p>
+                                                            <input type="file" id="fileInput" accept="application/pdf"
+                                                                style="display:none;">
+                                                        </div>
+
+                                                        <!-- PDF Preview Container -->
+                                                        <div id="pdfPreviewContainer" class="rounded border p-3"
+                                                            style="height: 600px; display:none;">
+                                                            <iframe id="pdfViewer" width="100%" height="100%"
+                                                                style="border:none;"></iframe>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
+                                                <!-- vide tab -->
+                                                <div class="tab-pane fade show  pt-2" id="video">
 
+                                                    <!-- 🎬 Static Video Section -->
+                                                    <div class="border rounded p-3 mb-4 bg-light shadow-sm">
+                                                        <h6 class="fw-semibold mb-3">📺 Static Video</h6>
+                                                        <div class="ratio ratio-16x9">
+                                                            <video id="staticVideo" playsinline controls
+                                                                controlsList="nodownload noremoteplayback"
+                                                                oncontextmenu="return false">
+                                                                <source src="../video/someone.mp4" type="video/mp4" />
+                                                                Your browser does not support the video tag.
+                                                            </video>
+                                                        </div>
+                                                    </div>
 
+                                                    <!-- 🎥 Drag & Drop Upload Section -->
+                                                    <div class="border rounded p-3 bg-light shadow-sm">
+                                                        <h6 class="fw-semibold mb-3">🎥 Upload & Preview Your Video</h6>
 
+                                                        <div id="videoDropZone"
+                                                            class="border border-primary rounded p-5 text-center mb-3"
+                                                            style="cursor: pointer; background-color: #f8f9fa;">
+                                                            <p class="mb-0 fw-semibold">📂 Drag & Drop your video here
+                                                                or Click to Upload</p>
+                                                            <input type="file" id="videoInput" accept="video/*"
+                                                                style="display:none;">
+                                                        </div>
 
-                                                <!-- Video Tab -->
-                                                <div class="tab-pane fade pt-2" id="video">
-                                                    <label for="video_url" class="form-label font-bold">Video
-                                                        URL</label>
-                                                    <input type="text" class="form-control" name="video_url"
-                                                        id="video_url"
-                                                        value="https://www.youtube.com/watch?v=X3paOmcrTjQ" readonly>
+                                                        <div id="videoPreviewContainer" class="ratio ratio-16x9"
+                                                            style="display:none;">
+                                                            <video id="uploadedVideo" playsinline controls
+                                                                controlsList="nodownload noremoteplayback"
+                                                                oncontextmenu="return false">
+                                                                <source type="video/mp4" />
+                                                            </video>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <!-- practice tab -->
+                                                <div class="tab-pane fade" id="practice">
+                                                    <div class="p-3" id="practiceSection">
+                                                        <div class="border rounded shadow-sm overflow-hidden bg-light">
+                                                            <div class="p-2 border-bottom bg-secondary text-dark">
+                                                                Practice Material
+                                                            </div>
+                                                            <div class="p-3">
+
+                                                                <!-- CO Level Selection -->
+                                                                <div class="mb-3 d-flex justify-content-end gap-3">
+                                                                    <label for="coLevel"
+                                                                        class="form-label fw-semibold mb-0">Select CO
+                                                                        Level</label>
+                                                                    <select id="coLevel" class="border rounded">
+                                                                        <option value="1">CO1</option>
+                                                                        <option value="2">CO2</option>
+                                                                        <option value="3">CO3</option>
+                                                                        <option value="4">CO4</option>
+                                                                        <option value="5">CO5</option>
+                                                                    </select>
+                                                                </div>
+
+                                                                <!-- Questions Container -->
+                                                                <div id="questionsContainer"></div>
+
+                                                                <!-- Submit Button -->
+                                                                <div class="justify-content-center mt-3"
+                                                                    id="submitContainer" style="display:none;">
+                                                                    <button type="submit"
+                                                                        class="btn btn-gradient-glossy">Submit</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                                 <!-- Assignment Tab -->
                                                 <div class="tab-pane fade pt-1" id="assignment">
                                                     <div id="assignmentDisplay" class="rounded border p-3">
-                                                        <ol>
-                                                            <li>What are the primary methods for collecting data?</li>
-                                                            <li>What ethical considerations should be taken into account
-                                                                during data collection?</li>
-                                                            <li>How do you determine the appropriate data collection
-                                                                method for a given problem?</li>
-                                                        </ol>
+                                                        <div class="border rounded shadow-sm overflow-hidden bg-light">
+                                                            <div class="p-2 border-bottom bg-secondary text-dark">
+                                                                Assignment Material
+                                                            </div>
+                                                            <div class="p-3">
+                                                                <div class="form-div">
+                                                                    <form id="assignment-approval-faculty"
+                                                                        enctype="multipart/form-data">
+                                                                        <!-- ✅ Hidden Inputs -->
+                                                                        <input type="hidden" name="c_id" value="">
+                                                                        <input type="hidden" name="launch_c_id"
+                                                                            value="1">
+
+                                                                        <!-- Title -->
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label">Title</label>
+                                                                            <input type="text" class="form-control"
+                                                                                name="title"
+                                                                                placeholder="Enter assignment title"
+                                                                                required>
+                                                                        </div>
+
+                                                                        <!-- Instructions -->
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label">Instructions
+                                                                                <small
+                                                                                    class="text-muted">(optional)</small></label>
+                                                                            <textarea class="form-control"
+                                                                                name="instruction" rows="3"
+                                                                                placeholder="Enter instructions if any"></textarea>
+                                                                        </div>
+
+                                                                        <div class="row">
+                                                                            <!-- Upload PDF -->
+                                                                            <div class="col-lg-4">
+                                                                                <div class="mb-3">
+                                                                                    <label class="form-label">Upload
+                                                                                        File (PDF only)</label>
+                                                                                    <input type="file"
+                                                                                        class="form-control" name="file"
+                                                                                        accept=".pdf" required>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <!-- Total Marks -->
+                                                                            <div class="col-lg-4">
+                                                                                <div class="mb-3">
+                                                                                    <label class="form-label">Total
+                                                                                        Marks</label>
+                                                                                    <select class="form-select"
+                                                                                        name="marks" required>
+                                                                                        <option value="" selected
+                                                                                            disabled>Select marks
+                                                                                        </option>
+                                                                                        <option value="10">10</option>
+                                                                                        <option value="20">20</option>
+                                                                                        <option value="25">25</option>
+                                                                                        <option value="50">50</option>
+                                                                                        <option value="100">100</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <!-- Due Date -->
+                                                                            <div class="col-lg-4">
+                                                                                <div class="mb-3">
+                                                                                    <label class="form-label">Due
+                                                                                        Date</label>
+                                                                                    <input type="date"
+                                                                                        class="form-control"
+                                                                                        name="due_date" required>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <!-- Submit Button -->
+                                                                        <div class="d-flex justify-content-center">
+                                                                            <button type="submit"
+                                                                                class="btn btn-gradient-glossy">Submit</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <ol id="assignmentEdit" class="mb-0" style="display:none;">
+                                                    <!-- <ol id="assignmentEdit" class="mb-0" style="display:none;">
                                                         <li>What are the primary methods for collecting data?</li>
                                                         <li>What ethical considerations should be taken into account
                                                             during data collection?</li>
                                                         <li>How do you determine the appropriate data collection method
                                                             for a given problem?</li>
-                                                    </ol>
+                                                    </ol> -->
 
                                                 </div>
+
                                             </div>
 
 
@@ -1107,7 +1295,57 @@
             </div>
         </div>
     </div>
+    <!-- quuestion -->
+    <script>
+        const questionsContainer = document.getElementById('questionsContainer');
+        const coLevelSelect = document.getElementById('coLevel');
+        const submitContainer = document.getElementById('submitContainer');
+        const totalQuestions = 10; // Number of questions
 
+        coLevelSelect.addEventListener('change', () => {
+            const coLevel = coLevelSelect.value;
+            questionsContainer.innerHTML = ''; // Clear previous questions
+            submitContainer.style.display = 'flex'; // Show submit button
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                const questionHTML = `
+        <div class="border rounded shadow-sm p-3 mb-3 bg-white">
+            <div class="d-flex justify-content-between mb-2">
+                <h6>CO Level: <span class="text-primary">CO${coLevel}</span></h6>
+                <i class="bi bi-x-circle removeQuestionBtn" style="color:red;cursor:pointer;"></i>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center question-index mb-2 gap-2">
+                <h6 class="mb-0">Q${i}</h6>
+                <input type="text" name="question_text[${coLevel}][]" class="form-control" placeholder="Enter Question ${i}" required>
+                <input type="hidden" name="co_level[${coLevel}][]" value="${coLevel}">
+            </div>
+
+            <div class="row g-2">
+                ${['A', 'B', 'C', 'D'].map(opt => `
+                <div class="col-md-6 d-flex align-items-center">
+                    <div class="form-check me-2">
+                        <input class="form-check-input" type="radio" name="correct_answer_${coLevel}_${i}" value="${opt}" required>
+                    </div>
+                    <input type="text" class="form-control" name="option_${opt.toLowerCase()}[${coLevel}][]" placeholder="Option ${opt}" required>
+                </div>
+                `).join('')}
+            </div>
+        </div>`;
+
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = questionHTML;
+                const questionElement = tempDiv.firstElementChild;
+
+                // Remove question functionality
+                questionElement.querySelector('.removeQuestionBtn').addEventListener('click', () => {
+                    questionElement.remove();
+                });
+
+                questionsContainer.appendChild(questionElement);
+            }
+        });
+    </script>
     <!-- material tab course outcome edit btn start -->
 
     <script>
@@ -1261,12 +1499,12 @@
 
     <!-- for hiding the scroll in students tab -->
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const contentScroll = document.querySelector(".content-scroll");
 
             // Bootstrap tab shown event
             document.querySelectorAll('button[data-bs-toggle="tab"]').forEach(tab => {
-                tab.addEventListener("shown.bs.tab", function(e) {
+                tab.addEventListener("shown.bs.tab", function (e) {
                     const targetId = e.target.getAttribute("data-bs-target");
 
                     if (targetId === "#students") {
@@ -1285,19 +1523,19 @@
 
     <!-- for hiddening the committe report button in other page herer  -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const studentsTab = document.getElementById('students-tab');
             const settingsTab = document.getElementById('settings-tab');
             const committeeBtn = document.getElementById('committeeReportBtn');
 
             // When Students tab is clicked → Show button
-            studentsTab.addEventListener('shown.bs.tab', function() {
+            studentsTab.addEventListener('shown.bs.tab', function () {
                 committeeBtn.classList.remove('d-none');
             });
 
             // When any other tab is clicked → Hide button
             document.querySelectorAll('#myTab button').forEach(tab => {
-                tab.addEventListener('shown.bs.tab', function(e) {
+                tab.addEventListener('shown.bs.tab', function (e) {
                     if (e.target.id !== 'students-tab') {
                         committeeBtn.classList.add('d-none');
                     }
@@ -1310,19 +1548,19 @@
     </script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const addBtn = document.querySelector(".add-topic-btn");
             const formDiv = document.getElementById("createTopicForm");
             const cancelBtn = document.querySelector(".cancel-btn");
 
             // Show form on Add Topic click
-            addBtn.addEventListener("click", function() {
+            addBtn.addEventListener("click", function () {
                 formDiv.style.display = "block";
                 // addBtn.style.display = "none";  <-- removed this line
             });
 
             // Hide form on Cancel click
-            cancelBtn.addEventListener("click", function() {
+            cancelBtn.addEventListener("click", function () {
                 formDiv.style.display = "none";
                 // addBtn.style.display = "inline-block"; <-- no need to show it
             });
@@ -1331,7 +1569,7 @@
 
     <!-- add outocme hrer -->
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const addOutcomeBtn = document.getElementById("addOutcomeBtn");
             const createOutcomeForm = document.getElementById("createOutcomeForm");
             const cancelOutcomeBtn = document.getElementById("cancelOutcomeBtn");
@@ -1349,11 +1587,11 @@
             });
         });
     </script>
-
+    <!-- notes tab -->
     <script>
         const dropZone = document.getElementById("dropZone");
         const fileInput = document.getElementById("fileInput");
-        const pdfViewerContainer = document.getElementById("pdfViewerContainer");
+        const pdfPreviewContainer = document.getElementById("pdfPreviewContainer");
         const pdfViewer = document.getElementById("pdfViewer");
 
         // 🖱️ Click to open file picker
@@ -1385,7 +1623,7 @@
             if (file) previewPDF(file);
         }
 
-        // 👁️ Show PDF in iframe
+        // 👁️ Show uploaded PDF in iframe
         function previewPDF(file) {
             if (file.type !== "application/pdf") {
                 alert("Please upload a valid PDF file.");
@@ -1394,12 +1632,78 @@
 
             const fileURL = URL.createObjectURL(file);
             pdfViewer.src = fileURL;
-            pdfViewerContainer.style.display = "block";
-            dropZone.style.display = "none"; // hide upload box once PDF is loaded
+            pdfPreviewContainer.style.display = "block";
         }
     </script>
+
+    <!-- Include Plyr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.polyfilled.js"></script>
+
+    <!-- video tab -->
+    <script>
+        // Initialize both Plyr players
+        const staticPlayer = new Plyr('#staticVideo');
+        const uploadedPlayer = new Plyr('#uploadedVideo');
+
+        const videoDropZone = document.getElementById("videoDropZone");
+        const videoInput = document.getElementById("videoInput");
+        const videoPreviewContainer = document.getElementById("videoPreviewContainer");
+
+        // Click to upload
+        videoDropZone.addEventListener("click", () => videoInput.click());
+
+        // File selected manually
+        videoInput.addEventListener("change", handleVideoFile);
+
+        // Drag and drop functionality
+        videoDropZone.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            videoDropZone.classList.add("bg-light", "border-success");
+        });
+
+        videoDropZone.addEventListener("dragleave", () => {
+            videoDropZone.classList.remove("bg-light", "border-success");
+        });
+
+        videoDropZone.addEventListener("drop", (e) => {
+            e.preventDefault();
+            videoDropZone.classList.remove("bg-light", "border-success");
+            const file = e.dataTransfer.files[0];
+            if (file) previewVideo(file);
+        });
+
+        // Handle selected video
+        function handleVideoFile(e) {
+            const file = e.target.files[0];
+            if (file) previewVideo(file);
+        }
+
+        // Preview uploaded video using Plyr
+        function previewVideo(file) {
+            if (!file.type.startsWith("video/")) {
+                alert("Please upload a valid video file.");
+                return;
+            }
+
+            const fileURL = URL.createObjectURL(file);
+
+            uploadedPlayer.source = {
+                type: 'video',
+                sources: [{ src: fileURL, type: file.type }]
+            };
+
+            // Show preview area
+            videoPreviewContainer.style.display = "block";
+            uploadedPlayer.play();
+        }
+    </script>
+
+
+
+
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>
