@@ -1,3 +1,8 @@
+<?php
+session_start();
+?>
+<?php include('auth_check.php'); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -272,6 +277,8 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="token_refresh.js"></script>
+
     <script>
         // JavaScript state
         let selectedCategory = '';
@@ -282,7 +289,7 @@
 
         // Category button click handling
         document.querySelectorAll('#categoryGroup .btn').forEach(btn => {
-            btn.addEventListener('click', function () {
+            btn.addEventListener('click', function() {
                 // Toggle active class on clicked button
                 document.querySelectorAll('#categoryGroup .btn').forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
@@ -292,7 +299,7 @@
 
         // Regulation dropdown selection
         document.querySelectorAll('#regMenu .dropdown-item').forEach(item => {
-            item.addEventListener('click', function () {
+            item.addEventListener('click', function() {
                 selectedRegulation = this.getAttribute('data-value');
                 document.getElementById('regBtn').textContent = selectedRegulation;
             });
@@ -336,7 +343,7 @@
         document.querySelectorAll('#rubricMenu .dropdown-item').forEach(item => {
             const name = item.getAttribute('data-value');
             if (name) {
-                item.addEventListener('click', function (event) {
+                item.addEventListener('click', function(event) {
                     event.preventDefault();
                     selectRubric(name);
                 });
@@ -344,13 +351,13 @@
         });
 
         // Show modal to add a new rubric
-        document.getElementById('addNewRubric').addEventListener('click', function (event) {
+        document.getElementById('addNewRubric').addEventListener('click', function(event) {
             event.preventDefault();
             new bootstrap.Modal(document.getElementById('rubricModal')).show();
         });
 
         // Save new rubric from modal
-        document.getElementById('saveNewRubricBtn').addEventListener('click', function () {
+        document.getElementById('saveNewRubricBtn').addEventListener('click', function() {
             const newName = document.getElementById('newRubricName').value.trim();
             if (newName) {
                 addRubricOption(newName);
@@ -382,7 +389,7 @@
                     inputName.type = 'text';
                     inputName.className = 'form-control';
                     inputName.value = comp.name;
-                    inputName.addEventListener('input', function () {
+                    inputName.addEventListener('input', function() {
                         r.components[index].name = this.value;
                     });
                     cellName.appendChild(inputName);
@@ -392,7 +399,7 @@
                     inputMax.type = 'number';
                     inputMax.className = 'form-control';
                     inputMax.value = comp.maxMarks;
-                    inputMax.addEventListener('input', function () {
+                    inputMax.addEventListener('input', function() {
                         r.components[index].maxMarks = parseInt(this.value) || 0;
                     });
                     cellMax.appendChild(inputMax);
@@ -402,7 +409,7 @@
                     inputPass.type = 'number';
                     inputPass.className = 'form-control';
                     inputPass.value = comp.passingMarks;
-                    inputPass.addEventListener('input', function () {
+                    inputPass.addEventListener('input', function() {
                         r.components[index].passingMarks = parseInt(this.value) || 0;
                     });
                     cellPass.appendChild(inputPass);
@@ -411,7 +418,7 @@
                     const removeBtn = document.createElement('button');
                     removeBtn.className = 'btn btn-sm btn-danger';
                     removeBtn.textContent = 'Remove';
-                    removeBtn.addEventListener('click', function () {
+                    removeBtn.addEventListener('click', function() {
                         r.components.splice(index, 1);
                         renderRubricTable();
                         updateCriteriaToggle();
@@ -423,7 +430,7 @@
         }
 
         // Add a new empty component row
-        document.getElementById('addComponentBtn').addEventListener('click', function () {
+        document.getElementById('addComponentBtn').addEventListener('click', function() {
             const r = rubrics.find(r => r.name === selectedRubric);
             if (r) {
                 r.components.push({
@@ -469,7 +476,7 @@
         }
 
         // Toggle the passing-criteria form
-        document.getElementById('toggleCriteriaForm').addEventListener('click', function () {
+        document.getElementById('toggleCriteriaForm').addEventListener('click', function() {
             const form = document.getElementById('criteriaForm');
             form.style.display = (form.style.display === 'none') ? 'block' : 'none';
             if (form.style.display === 'block') {
@@ -503,12 +510,12 @@
         }
 
         // "Select All" button for checkboxes
-        document.getElementById('selectAllComponents').addEventListener('click', function () {
+        document.getElementById('selectAllComponents').addEventListener('click', function() {
             document.querySelectorAll('#componentCheckboxList .form-check-input').forEach(cb => cb.checked = true);
         });
 
         // Add a passing criterion based on selected checkboxes
-        document.getElementById('addCriteriaBtn').addEventListener('click', function () {
+        document.getElementById('addCriteriaBtn').addEventListener('click', function() {
             const checkboxes = document.querySelectorAll('#componentCheckboxList .form-check-input');
             let selected = [];
             checkboxes.forEach(cb => {
@@ -557,7 +564,7 @@
                     const removeBtn = document.createElement('button');
                     removeBtn.className = 'btn btn-sm btn-danger';
                     removeBtn.textContent = 'Remove';
-                    removeBtn.addEventListener('click', function () {
+                    removeBtn.addEventListener('click', function() {
                         passingCriteria.splice(idx, 1);
                         renderCriteria();
                     });
@@ -572,7 +579,7 @@
 
     <script>
         // Save course to FastAPI backend
-        document.getElementById('saveCourseBtn').addEventListener('click', function () {
+        document.getElementById('saveCourseBtn').addEventListener('click', function() {
             const courseName = document.getElementById('courseName').value.trim();
             const courseCode = document.getElementById('courseCode').value.trim();
 
@@ -618,14 +625,18 @@
                 };
             }
 
-            // 🟩 Get token (adjust this part to how you store it)
-            // const token = localStorage.getItem("access_token") || sessionStorage.getItem("access_token");
-
-            const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNywiZW1haWwiOiJha0BnbWFpbC5jb20iLCJ1c2VyX3R5cGUiOiJhZG1pbiIsInJlZ19ubyI6IjIxNjE3IiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc2MTE0NTk0NywiZXhwIjoxNzYxMTQ2ODQ3LCJqdGkiOiJjMjgyNzg0Yjk4NWI0NmVkODBhMTdiY2FjYTFhNzU0ZCJ9.Mui08hF_mij1ZkZviwfw3QRmBx-sjDiX3S-gxhI8INE";
-
+            const token = getCookie("access_token");
             if (!token) {
                 alert("⚠️ Authorization token not found. Please log in first.");
+                window.location.href = "../index.php"; // redirect to login
                 return;
+            }
+
+            // Helper function to read cookies
+            function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop().split(';').shift();
             }
 
             // 🟩 AJAX call with Bearer token
@@ -637,14 +648,28 @@
                     "Authorization": "Bearer " + token // 👈 Important line
                 },
                 data: JSON.stringify(courseData),
-                success: function (response) {
+                success: function(response) {
                     console.log(response);
                     alert("✅ Course saved successfully!");
                     location.reload();
                 },
-                error: function (xhr, status, error) {
+                error: function(xhr, status, error) {
                     console.error("Error:", xhr.responseText);
-                    alert("❌ Failed to save course.", "Error:", xhr.responseText);
+
+                    let message = "❌ Failed to save course.";
+
+                    try {
+                        // Try to parse FastAPI JSON error
+                        const err = JSON.parse(xhr.responseText);
+                        if (err.message) message += "\nMessage: " + err.message;
+                        if (err.data && err.data.reason) message += "\nReason: " + err.data.reason;
+                        if (err.error_code) message += "\nCode: " + err.error_code;
+                    } catch (e) {
+                        // Fallback if response isn’t valid JSON
+                        message += "\nResponse: " + xhr.responseText;
+                    }
+
+                    alert(message);
                 }
             });
         });

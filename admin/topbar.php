@@ -60,20 +60,57 @@
 
 </div>
 
-<script>
-    document.getElementById("logoutBtn").addEventListener("click", function (e) {
-        e.preventDefault(); // stop default link
-        fetch("api/logout.php", { method: "POST" })
-            .then(res => res.json())
-            .then(data => {
-                if (data.status === 200) {
-                    window.location.href = "../"; // go to login page
-                } else {
-                    alert("Logout failed: " + data.message);
-                }
-            })
-            .catch(err => console.error(err));
-    });
-</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <!-- Bootstrap JS Bundle (includes Popper) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+        $("#logoutBtn").on("click", async function(e) {
+            e.preventDefault();
+
+            const token = getCookie("access_token");
+            if (!token) {
+                alert("⚠️ No token found. Redirecting to login...");
+                window.location.href = "../index.php";
+                return;
+            }
+
+            try {
+                const res = await fetch("http://127.0.0.1:8000/auth/logout", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + token
+                    },
+                    body: JSON.stringify({
+                        token: token,
+                        reason: "user_logout"
+                    })
+                });
+
+                const data = await res.json();
+                console.log("Logout response:", data);
+            } catch (err) {
+                console.error("Logout failed:", err);
+            }
+
+            // 🧹 Clear cookies safely
+            document.cookie = "access_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+            document.cookie = "refresh_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+
+            alert("✅ Logged out successfully!");
+            window.location.href = "../index.php";
+        });
+
+    });
+</script>

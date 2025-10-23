@@ -7,7 +7,7 @@
     <title>Learning Management System Login</title>
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="responsive.css">
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
@@ -36,15 +36,15 @@
             <form action="#" method="POST">
 
                 <div class="input-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" placeholder="Enter 's' for student or 't' for teacher"
+                    <label for="name">Email</label>
+                    <input type="text" id="name" name="name" placeholder="Enter Your Email"
                         required>
                 </div>
 
                 <div class="input-group">
                     <label for="password">Password</label>
                     <div class="password-wrapper">
-                        <input type="password" id="password" name="password" placeholder="Same as username" required>
+                        <input type="password" id="password" name="password" placeholder="Enter Password" required>
                         <span class="material-icons password-toggle">
                             visibility_off
                         </span>
@@ -61,6 +61,65 @@
             <p>&copy; 2023 SIMATS - Powered by Viana Soft</p>
         </footer>
     </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function() {
+            $("form").on("submit", function(e) {
+                e.preventDefault();
+
+                const email = $("#name").val().trim();
+                const password = $("#password").val().trim();
+
+                if (!email || !password) {
+                    alert("Please enter both username and password");
+                    return;
+                }
+
+                $.ajax({
+                    url: "http://127.0.0.1:8000/auth/login",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        email: email,
+                        password: password
+                    }),
+                    success: function(res) {
+                        console.log(res);
+
+                        const data = res.data;
+                        if (data && data.access_token) {
+                            // ✅ Set cookies (no Secure flag on localhost)
+                            setCookie("access_token", data.access_token, 15); // 15 minutes
+                            setCookie("refresh_token", data.refresh_token, 7 * 24 * 60); // 7 days
+
+                            alert("✅ Login successful!");
+                            window.location.href = "admin/courses.php";
+                        } else {
+                            alert("❌ Unexpected response. Check backend.");
+                        }
+                    },
+                    error: function(xhr) {
+                        let msg = "❌ Login failed.";
+                        try {
+                            const err = JSON.parse(xhr.responseText);
+                            msg += "\n" + (err.message || err.data?.reason || "");
+                        } catch {
+                            msg += "\n" + xhr.responseText;
+                        }
+                        alert(msg);
+                    },
+                });
+            });
+        });
+
+        // 🕒 Helper to set cookies (works on localhost)
+        function setCookie(name, value, minutes) {
+            const d = new Date();
+            d.setTime(d.getTime() + minutes * 60 * 1000);
+            document.cookie = `${name}=${value}; expires=${d.toUTCString()}; path=/; SameSite=Strict`;
+        }
+    </script>
+
 
 </body>
 

@@ -1,20 +1,5 @@
-<?php
-include "../includes/config.php";
-
-if (!isset($_SESSION["user_logged_in"]) || $_SESSION["user_logged_in"] !== true) {
-    // Not logged in → redirect to login
-    header("Location: ../index.php");
-    exit;
-}
-
-if (!isset($_SESSION["user_type"]) || $_SESSION["user_type"] !== "Admin") {
-    // Logged in but not Faculty → force logout
-    session_destroy();
-    header("Location: ../index.php");
-    exit;
-}
-
-?>
+<?php include('auth_check.php'); ?>
+<?php include "../includes/config.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -139,44 +124,33 @@ if (!isset($_SESSION["user_type"]) || $_SESSION["user_type"] !== "Admin") {
                                 <div class="col-md-6">
                                     <div class="form-floating">
                                         <select class="form-control" name="faculty_id" id="faculty_id" required>
-                                            
+
                                             <?php
-                                               
 
-                                                // Query to get faculty (assuming role = 'faculty' in login table)
-                                                $sql = "SELECT u_id, name, reg_no FROM lms_login WHERE user_type = 'Faculty'";
-                                                $result = mysqli_query($conn, $sql);
 
-                                                if (mysqli_num_rows($result) > 0) {
-                                                    echo '<option value="" selected disabled>Select Faculty</option>'; // Default option
-                                                    while ($row = mysqli_fetch_assoc($result)) {
-                                                        // ID will be the value, Name will be shown in dropdown
-                                                        echo '<option value="'.$row['u_id'].'">'.$row['name'].' / Faculty ID - '.$row['reg_no'].'</option>';
-                                                    }
-                                                } else {
-                                                    echo '<option value="">No Faculty Found</option>';
+                                            // Query to get faculty (assuming role = 'faculty' in login table)
+                                            $sql = "SELECT user_id, name, reg_no FROM users WHERE user_type = 'faculty'";
+                                            $result = mysqli_query($conn, $sql);
+
+                                            if (mysqli_num_rows($result) > 0) {
+                                                echo '<option value="" selected disabled>Select Faculty</option>'; // Default option
+                                                while ($row = mysqli_fetch_assoc($result)) {
+                                                    // ID will be the value, Name will be shown in dropdown
+                                                    echo '<option value="' . $row['user_id'] . '">' . $row['name'] . ' / Faculty ID - ' . $row['reg_no'] . '</option>';
                                                 }
+                                            } else {
+                                                echo '<option value="">No Faculty Found</option>';
+                                            }
 
-                                                mysqli_close($conn);
-                                                ?>
+                                            mysqli_close($conn);
+                                            ?>
 
                                         </select>
                                         <label for="duration">Duration</label>
                                     </div>
                                 </div>
 
-                                <!-- Course type -->
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <select class="form-select" id="course_type" name="course_type" required>
-                                            <option value="" selected disabled>Select Course Type</option>
-                                            <option value="core">Core</option>
-                                            <option value="elective">Elective</option>
-                                            <option value="certificate">Certificate</option>
-                                        </select>
-                                        <label for="course_type">Course Type</label>
-                                    </div>
-                                </div>
+
                                 <div class="col-md-6">
                                     <div class="form-floating">
                                         <input type="text" class="form-control" id="slot" name="slot" placeholder="Slot"
@@ -211,14 +185,11 @@ if (!isset($_SESSION["user_type"]) || $_SESSION["user_type"] !== "Admin") {
                                 <thead class="table-light">
                                     <tr>
                                         <th>S No</th>
-                                        <th>Course Name</th>
-                                        <th>Code</th>
+                                        <th>Course Code</th>
                                         <th>Seat Allotment</th>
-                                      
-                                        <th>Type</th>
                                         <th>Faculty Name</th>
                                         <th>Slot</th>
-                                        <!-- <th>Action</th> -->
+                                        <th>Created At</th>
                                     </tr>
                                 </thead>
                                 <tbody id="coursesTableBody">
@@ -329,7 +300,17 @@ if (!isset($_SESSION["user_type"]) || $_SESSION["user_type"] !== "Admin") {
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="token_refresh.js"></script>
+
+
     <script>
+        // Helper function to read cookies
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
         // Search in table
         $('#courseSearch').on('keyup', function() {
             let searchValue = $(this).val().toLowerCase();
@@ -338,171 +319,204 @@ if (!isset($_SESSION["user_type"]) || $_SESSION["user_type"] !== "Admin") {
             });
         });
 
-        $('#addCourseForm').on('submit', function(e) {
+        $('#addCourseForm').on('submit', async function(e) {
             e.preventDefault();
 
             const $form = $(this);
             const $btn = $form.find('button[type="submit"]');
             $btn.prop('disabled', true);
 
-            $.ajax({
-                url: 'api/launch_course.php',
-                type: 'POST',
-                data: new FormData(this),
-                contentType: false,
-                processData: false,
-                dataType: 'json',
-                headers: {
-                    'Accept': 'application/json'
-                },
-                success: function(data, textStatus, xhr) {
-                    // Success callback for 2xx responses
-                    if (data && data.status == 200) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Success',
-                            text: data.message,
-                            showConfirmButton: false,
-                            timer: 2000
-                        });
-                        $form[0].reset();
-                        loadCourses();
-                    } else {
-                        // Defensive: server returned 2xx but status isn't 200 in payload
-                        const msg = (data && data.message) ? data.message : 'Unknown response from server';
-                        Swal.fire({
-                            icon: 'warning',
-                            title: 'Warning',
-                            text: msg
-                        });
-                    }
-                },
-                error: function(xhr, textStatus, errorThrown) {
-                    // Try to extract exact message from JSON response
-                    let message = null;
+            const token = getCookie("access_token");
+            if (!token) {
+                alert("⚠️ Token missing. Please log in again.");
+                window.location.href = "../index.php";
+                return;
+            }
 
-                    // 1) If jQuery parsed JSON, it'll be in responseJSON
-                    if (xhr.responseJSON && xhr.responseJSON.message) {
-                        message = xhr.responseJSON.message;
-                    } else if (xhr.responseText) {
-                        // 2) Try to parse responseText
-                        try {
-                            const parsed = JSON.parse(xhr.responseText);
-                            if (parsed && parsed.message) message = parsed.message;
-                        } catch (err) {
-                            // not JSON or parse failed
-                        }
-                    }
+            // Collect form data
+            const course_id = $("#courseid").val();
+            const code = $("#courseCode").val();
+            const seat_allotment = parseInt($("#seatAllotment").val());
+            const faculty_id = parseInt($("#faculty_id").val());
+            const slot = $("#slot").val();
 
-                    // 3) Fallback to statusText / errorThrown
-                    if (!message) {
-                        message = (errorThrown && errorThrown !== 'error') ? errorThrown : textStatus;
-                        // also include HTTP code if available
-                        if (xhr.status) message = `(${xhr.status}) ${message}`;
-                    }
+            // Prepare JSON payload
+            const payload = {
+                course_id: parseInt(course_id),
+                code: code,
+                seat_allotment: seat_allotment,
+                faculty_id: faculty_id,
+                slot: slot
+            };
 
+            console.log("📦 Sending Launch Payload:", payload);
+
+            try {
+                const res = await fetch("http://127.0.0.1:8000/admin/launch-courses", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + token
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await res.json();
+                console.log("🎯 Launch Response:", data);
+
+                if (res.ok && data.status === "success") {
+                    Swal.fire({
+                        icon: 'success',
+                        title: '✅ Course Launched!',
+                        text: data.message,
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+
+                    // Reset form
+                    $form[0].reset();
+
+                    // Reload launch courses table
+                    loadLaunchCourses();
+                } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'Error',
-                        text: message
+                        title: '❌ Failed!',
+                        text: data.message || "Launch failed. Please try again."
                     });
-
-                    // optional: log full response for debugging
-                    console.error('AJAX Error:', {
-                        status: xhr.status,
-                        statusText: xhr.statusText,
-                        responseText: xhr.responseText
-                    });
-                },
-                complete: function() {
-                    // re-enable button
-                    $btn.prop('disabled', false);
                 }
-            });
+            } catch (err) {
+                console.error("🚨 Launch Error:", err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'An error occurred while launching the course.'
+                });
+            } finally {
+                $btn.prop('disabled', false);
+            }
         });
 
-        function loadCourses() {
-            $.ajax({
-                url: 'api/get_courses.php',
-                type: 'GET',
-                dataType: 'json',
-                success: function(courses) {
-                    let tbody = '';
-                    courses.forEach((course, index) => {
-                        tbody += `<tr>
-                    <td>${index + 1}</td>
-                    <td>${course.course_name}</td>
-                    <td>${course.course_code}</td>
-                    <td>${course.seat_allotment}</td>
-                  
-                    <td>${course.course_type}</td>
-                    <td>${course.faculty_name}</td>
-                    <td>${course.slot}</td>
 
-                   
-                </tr>`;
+        async function loadLaunchCourses() {
+            const token = getCookie("access_token");
+            if (!token) {
+                console.warn("⚠️ Token missing. Please log in again.");
+                return;
+            }
+
+            try {
+                const res = await fetch("http://127.0.0.1:8000/admin/launch-courses", {
+                    headers: {
+                        "Authorization": "Bearer " + token
+                    }
+                });
+
+                const data = await res.json();
+                console.log("📦 Launch Courses List:", data);
+
+                if (data.status === "success") {
+                    const launches = data.data.launches;
+                    let rows = "";
+
+                    launches.forEach((l, i) => {
+                        rows += `
+                    <tr>
+                        <td>${i + 1}</td>
+                        <td>${l.code}</td>
+                        <td>${l.seat_allotment}</td>
+                        <td>${l.faculty_name} (ID: ${l.faculty_regno})</td>
+                        <td>${l.slot}</td>
+                        <td>${new Date(l.created_at).toLocaleString()}</td>
+                    </tr>
+                `;
                     });
-                    $('#coursesTableBody').html(tbody);
-                },
-                error: function(xhr, status, error) {
-                    console.log('Error fetching courses:', error);
+
+                    $("#coursesTableBody").html(rows);
+                } else {
+                    console.warn("⚠️ Failed to load launch courses:", data.message);
+                    $("#coursesTableBody").html("<tr><td colspan='6'>No data available</td></tr>");
                 }
-            });
+            } catch (err) {
+                console.error("🚨 Error loading launch courses:", err);
+                $("#coursesTableBody").html("<tr><td colspan='6'>Error fetching data</td></tr>");
+            }
         }
+
+
         // <td>
         //     <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editcourse"><i class="bi bi-pencil"></i></button>
         //     <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
         // </td>
-        function loadCourseDropdowns() {
-            $.ajax({
-                url: 'api/fetch_course.php',
-                type: 'GET',
-                dataType: 'json',
-                success: function(courses) {
-                    let nameOptions = '<option value="" selected disabled>Select Course Name</option>';
-                    let codeOptions = '<option value="" selected disabled>Select Course Code</option>';
+
+        async function loadCourseDropdowns() {
+
+
+            const token = getCookie("access_token");
+
+
+            if (!token) {
+                alert("⚠️ Token missing. Please log in again.");
+                window.location.href = "../index.php";
+                return;
+            }
+
+            try {
+                const res = await fetch("http://127.0.0.1:8000/admin/courses_list", {
+                    headers: {
+                        "Authorization": "Bearer " + token
+                    }
+                });
+
+                const data = await res.json();
+                console.log("Course List Response:", data); // 🧩 Debugging log
+
+                if (data.status === "success" && data.data && data.data.courses) {
+                    const courses = data.data.courses;
+
+                    let nameOptions = '<option value="" disabled selected>Select Course Name</option>';
+                    let codeOptions = '<option value="" disabled selected>Select Course Code</option>';
 
                     courses.forEach(course => {
-                        // Course Name dropdown (value = course_name, data-code = course_code)
-                        nameOptions += `<option value="${course.course_name}" data-code="${course.course_code}" data-id="${course.c_id}">
-                                    ${course.course_name}
-                                </option>`;
-
-                        // Course Code dropdown (value = course_code, data-name = course_name)
-                        codeOptions += `<option value="${course.course_code}" data-name="${course.course_name}" data-id="${course.c_id}">
-                                    ${course.course_code}
-                                </option>`;
+                        nameOptions += `<option value="${course.course_name}" data-code="${course.course_code}" data-id="${course.course_id}">
+                    ${course.course_name}
+                </option>`;
+                        codeOptions += `<option value="${course.course_code}" data-name="${course.course_name}" data-id="${course.course_id}">
+                    ${course.course_code}
+                </option>`;
                     });
 
-                    $('#courseName').html(nameOptions);
-                    $('#courseCode').html(codeOptions);
+                    $("#courseName").html(nameOptions);
+                    $("#courseCode").html(codeOptions);
 
-                    // When selecting Course Name -> auto select Course Code
-                    $('#courseName').on('change', function() {
-                        let selectedCode = $(this).find(':selected').data('code');
-                        let selectedId = $(this).find(':selected').data('id');
-                        $('#courseCode').val(selectedCode);
-                        $('#courseid').val(selectedId);
+                    // When selecting Course Name → auto select Course Code
+                    $("#courseName").on("change", function() {
+                        const code = $(this).find(":selected").data("code");
+                        const id = $(this).find(":selected").data("id");
+                        $("#courseCode").val(code);
+                        $("#courseid").val(id);
                     });
 
-                    // When selecting Course Code -> auto select Course Name
-                    $('#courseCode').on('change', function() {
-                        let selectedName = $(this).find(':selected').data('name');
-                        let selectedId = $(this).find(':selected').data('id');
-                        $('#courseName').val(selectedName);
-                        $('#courseid').val(selectedId);
+                    // When selecting Course Code → auto select Course Name
+                    $("#courseCode").on("change", function() {
+                        const name = $(this).find(":selected").data("name");
+                        const id = $(this).find(":selected").data("id");
+                        $("#courseName").val(name);
+                        $("#courseid").val(id);
                     });
-                },
-                error: function(xhr, status, error) {
-                    console.log('Error fetching courses:', error);
+                } else {
+                    alert("❌ No courses found or failed to load.");
+                    console.error("Courses response error:", data);
                 }
-            });
+            } catch (err) {
+                console.error("⚠️ Error loading courses:", err);
+                alert("⚠️ Error fetching course list.");
+            }
         }
-
 
         // Load courses on page load
         $(document).ready(function() {
-            loadCourses();
+            loadLaunchCourses();
             loadCourseDropdowns();
         });
     </script>

@@ -25,7 +25,7 @@
         <div class="collapse ps-4 mt-1" id="coursesMenu">
             <ul class="list-styled mb-0">
                 <li class="mb-1">
-                    <a href="add_courses.php" class="text-decoration-none d-block">Add Course</a>
+                    <a href="courses.php" class="text-decoration-none d-block">Add Course</a>
                 </li>
                 <li class="mb-1">
                     <a href="launch-course.php" class="text-decoration-none d-block">Launch Course</a>
