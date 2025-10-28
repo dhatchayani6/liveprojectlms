@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<?php session_start(); ?>
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -122,19 +122,18 @@
 
 
 
-        <div class="d-flex  align-items-center">
-            <div class="user-profile">
-                <img src="../images/image.png" alt="Dr. Emily Rodriguez" class="profile-pic">
-                <div class="user-details">
-                    <div class="name">Dr. Emily Rodriguez</div>
-                    <div class="info">
-                        <span class="id">Faculty ID: FAC21032305</span>
-                        &bull;
-                        <span class="dept">Computer Science</span>
+        <div class="user-profile">
+                    <img src="../images/image.png" alt="Dr. Emily Rodriguez" class="profile-pic">
+                    <div class="user-details">
+                      <div class="name">Dr. <?php echo htmlspecialchars($_SESSION['name'] ?? ''); ?></div>
+
+                        <div class="info">
+                            <span class="id">Faculty ID: <?php echo htmlspecialchars($_SESSION['regno'] ?? ''); ?></span>
+                            &bull;
+                            <span class="dept">Medical</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
         <!-- Tabs -->
         <?php $current_page = basename($_SERVER['PHP_SELF']); ?>

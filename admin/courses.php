@@ -1,7 +1,7 @@
 <?php
 session_start();
 ?>
-<?php include('auth_check.php'); ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -277,7 +277,7 @@ session_start();
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="token_refresh.js"></script>
+    <!-- <script src="token_refresh.js"></script> -->
 
     <script>
         // JavaScript state
@@ -628,7 +628,7 @@ session_start();
             const token = getCookie("access_token");
             if (!token) {
                 alert("⚠️ Authorization token not found. Please log in first.");
-                window.location.href = "../index.php"; // redirect to login
+                window.location.href = "../adminlogin.php"; // redirect to login
                 return;
             }
 

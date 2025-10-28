@@ -1,0 +1,16 @@
+allow uploads up to 1GB : [ XAMPP C:\xampp\php\php.ini ] file 
+-------------------------
+upload_max_filesize = 1024M
+post_max_size = 1024M
+max_execution_time = 3600
+max_input_time = 3600
+memory_limit = 1024M
+
+
+PO1: Demonstrate advanced understanding of educational process and planning.
+PO2: Design and implement evidence-based teaching-learning strategies based on sound principles and theories.
+PO3: Design and implement evidence-based assessment strategies based on sound principles.
+PO4: Evaluate and design curriculum with all its components
+PO5: Demonstrate attributes of leadership and quality educational management
+PO6: Conduct and publish research in health professions education.
+PO7: Function as reflective practitioners and change agents.
