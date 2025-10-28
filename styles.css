@@ -273,7 +273,9 @@ body {
     padding-bottom: 0;
     /* Tabs are inside this container */
     /* margin-bottom: 20px; */
-    height: 791px;
+    /* height: 791px; */
+        height: calc(100vh - 0px);
+
 
 }
 

@@ -17,7 +17,7 @@ session_start();
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
- 
+
 
     <style>
         .slot-icon {
@@ -31,6 +31,9 @@ session_start();
             font-weight: 600;
             font-size: 16px;
             color: white;
+        }
+        .profile-area {
+            height: 100%;
         }
     </style>
 
@@ -116,7 +119,7 @@ session_start();
                     </div>
 
                     <div class="card-content">
-                        <a href="overall_assignments.php" class="text-decoration-none">
+                        <a href="enrollment_request.php" class="text-decoration-none">
                             <div class="card-title">Enrollment Requests</div>
                         </a>
                         <div class="card-subtitle">Pending student requests</div>
@@ -127,8 +130,8 @@ session_start();
                 </div>
 
 
-                <div class="assignments-card">
-
+                <div class="assignments-cards  p-3 m-3">
+                    <h6>Todays Class Schedule</h6>
                     <div class="card-content">
                         <div class="d-flex align-items-center justify-content-between border rounded-3 p-3 mb-2 shadow-sm" style="background:#e3f2fd;">
                             <div class="d-flex align-items-center">
@@ -141,7 +144,9 @@ session_start();
                                     <small class="fw-semibold text-primary">CS1234: Introduction to Data Science</small>
                                 </div>
                             </div>
-                            <button class="btn btn-outline-primary btn-sm rounded-pill fw-semibold">Mark Attendance</button>
+                            <a href="attendance.php">
+                                <button class="btn btn-outline-primary btn-sm rounded-pill fw-semibold">Mark Attendance</button>
+                            </a>
                         </div>
                     </div>
                 </div>
