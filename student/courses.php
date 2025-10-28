@@ -157,6 +157,7 @@
 
                     <div class=" p-3 mb-4 courses-scroll">
 
+                        <div class="fw-semibold text-dark mb-2">Slot A</div>
                         <a href="courses_detail.php" class="text-dark">
                             <div class="mb-3 p-3 bg-courses-grey rounded shadow-sm">
                                 <div class="d-flex justify-content-between align-items-center">
@@ -173,6 +174,7 @@
                             </div>
                         </a>
 
+                        <div class="fw-semibold text-dark mb-2">Slot B</div>
                         <div class="mb-3 p-3 bg-courses-grey rounded shadow-sm">
                             <div class="d-flex justify-content-between align-items-center">
                                 <small class="fw-medium">CS3456: Algorithms</small>
@@ -187,19 +189,12 @@
                             </div>
                         </div>
 
-                        <div class="mb-3 p-3 bg-courses-grey rounded shadow-sm">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <small class="fw-medium">CS4567: Computer Networks</small>
-                                <button class="btn btn-blue-courses btn-sm">View Details</button>
-                            </div>
-                            <div class="progress-container mt-2">
-                                <div class="progress">
-                                    <div class="progress-bar" style="width: 30%;" role="progressbar" aria-valuenow="30"
-                                        aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <span class="percentage-label">30%</span>
-                            </div>
+                        <div class="fw-semibold text-dark mb-2">Slot C</div>
+                        <div class="slot-card text-center p-3 border rounded shadow-sm mb-2" style="background:#f8f9fa; max-width:100%; margin:auto;">
+                            <button class="btn btn-blue-courses btn-sm w-10 fw-semibold" data-bs-toggle="modal" data-bs-target="#enrollSlotModal">Enroll in Slot C</button>
                         </div>
+
+
 
                         <div class="mb-3 p-3 bg-courses-grey rounded shadow-sm">
                             <div class="d-flex justify-content-between align-items-center">
@@ -236,9 +231,107 @@
         </div>
     </main>
 
+    <!-- Modal -->
+    <div class="modal fade" id="enrollSlotModal" tabindex="-1" aria-labelledby="enrollSlotModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-semibold" id="enrollSlotModalLabel">Enroll in Slot E</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <!-- Search Bar -->
+                    <div class="mb-3">
+                        <input type="text" class="form-control rounded-pill shadow-sm" id="searchCourse" placeholder="Search course by name or code...">
+                    </div>
+
+                    <!-- Course List -->
+                    <div id="courseList" class="d-flex flex-column gap-2">
+                        <!-- Example Course Item -->
+                        <div class="course-item p-3 rounded border d-flex justify-content-between align-items-start shadow-sm" data-course="CS101">
+                            <div>
+                                <div class="fw-semibold text-dark">CS101</div>
+                                <div class="text-muted small">Intro to Programming</div>
+                                <div class="text-muted small">Dr. Sai Amrish</div>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm select-btn">Select</button>
+                        </div>
+
+                        <div class="course-item p-3 rounded border d-flex justify-content-between align-items-start shadow-sm" data-course="CS102">
+                            <div>
+                                <div class="fw-semibold text-dark">CS102</div>
+                                <div class="text-muted small">Data Structures</div>
+                                <div class="text-muted small">Dr. Aakash</div>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm select-btn">Select</button>
+                        </div>
+
+                        <div class="course-item p-3 rounded border d-flex justify-content-between align-items-start shadow-sm" data-course="CS103">
+                            <div>
+                                <div class="fw-semibold text-dark">CS103</div>
+                                <div class="text-muted small">Computer Architecture</div>
+                                <div class="text-muted small">Dr. Manohar</div>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm select-btn">Select</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer border-0 pt-0">
+                    <button id="requestJoinBtn" class="btn btn-primary w-100 fw-semibold rounded-pill py-2">
+                        Request to Join (0)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Optional JS for Search + Selection -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const searchInput = document.getElementById("searchCourse");
+            const courseItems = document.querySelectorAll(".course-item");
+            const requestBtn = document.getElementById("requestJoinBtn");
+            let selectedCount = 0;
 
+            // ✅ Search Function
+            searchInput.addEventListener("input", () => {
+                const query = searchInput.value.toLowerCase();
+                courseItems.forEach(item => {
+                    const text = item.textContent.toLowerCase();
+                    item.style.display = text.includes(query) ? "flex" : "none";
+                });
+            });
+
+            // ✅ Selection Toggle
+            courseItems.forEach(item => {
+                const button = item.querySelector(".select-btn");
+                button.addEventListener("click", () => {
+                    const isSelected = button.classList.contains("btn-primary");
+
+                    if (isSelected) {
+                        // Unselect
+                        button.classList.remove("btn-primary");
+                        button.classList.add("btn-outline-primary");
+                        button.textContent = "Select";
+                        item.classList.remove("bg-light");
+                        selectedCount--;
+                    } else {
+                        // Select
+                        button.classList.add("btn-primary");
+                        button.classList.remove("btn-outline-primary");
+                        button.textContent = "Selected";
+                        item.classList.add("bg-light");
+                        selectedCount++;
+                    }
+
+                    requestBtn.textContent = `Request to Join (${selectedCount})`;
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

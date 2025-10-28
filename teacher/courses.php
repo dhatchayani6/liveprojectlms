@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<?php session_start(); ?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,11 +48,12 @@
                 <div class="user-profile">
                     <img src="../images/image.png" alt="Dr. Emily Rodriguez" class="profile-pic">
                     <div class="user-details">
-                        <div class="name">Dr. Emily Rodriguez</div>
+                      <div class="name">Dr. <?php echo htmlspecialchars($_SESSION['name'] ?? ''); ?></div>
+
                         <div class="info">
-                            <span class="id">Faculty ID: FAC21032305</span>
+                            <span class="id">Faculty ID: <?php echo htmlspecialchars($_SESSION['regno'] ?? ''); ?></span>
                             &bull;
-                            <span class="dept">Computer Science</span>
+                            <span class="dept">Medical</span>
                         </div>
                     </div>
                 </div>
@@ -61,21 +62,19 @@
 
                 <nav class="tabs-nav">
                     <a href="dashboard.php" class="tab <?php if ($current_page == 'dashboard.php')
-                        echo 'active'; ?>">Dashboard</a>
+                                                            echo 'active'; ?>">Dashboard</a>
                     <a href="assignments.php" class="tab <?php if ($current_page == 'assignments.php')
-                        echo 'active'; ?>">
+                                                                echo 'active'; ?>">
                         Assignments
                         <span class="badge">5</span>
                     </a>
                     <a href="courses.php" class="tab <?php if ($current_page == 'courses.php')
-                        echo 'active'; ?>">Courses</a>
+                                                            echo 'active'; ?>">Courses</a>
                 </nav>
-
-
 
                 <!-- Courses Section -->
                 <div class="courses-section p-3">
-                    <div class="courses-header d-flex justify-content-between align-items-center mb-1">
+                    <!-- <div class="courses-header d-flex justify-content-between align-items-center mb-1">
                         <h6>Your Courses</h6>
                         <a href="add-courses.php"><button class="btn" style="background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);
                         color: white;
@@ -83,54 +82,10 @@
                         box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.2) 0px 1px 2px;
                                    "><i class="bi bi-plus"></i>
                                 Add Course</button></a>
-                    </div>
+                    </div> -->
 
-                    <div class="course-list">
-                        <!-- Course 1 -->
-                        <a href="courses-detail.php" class="text-decoration-none text-dark">
-                            <div
-                                class="course-item d-flex justify-content-between align-items-center p-3 rounded shadow-sm mb-1 bg-light">
-                                <div>
-                                    <h6 class="mb-1">CS1234: Introduction to Data Science</h6>
-                                    <small class="text-muted">35 Students</small>
-                                </div>
-                                <div class="text-end">
-                                    <small class="text-secondary d-block mb-2">Mon, Wed 10:00 - 11:30 AM</small>
-                                    <a href="courses-detail.php" class="btn btn-outline-secondary btn-sm">Manage</a>
-                                </div>
-                            </div>
-                        </a>
-
-                        <!-- Course 2 -->
-                        <a href="courses-detail.php" class="text-decoration-none text-dark">
-                            <div
-                                class="course-item d-flex justify-content-between align-items-center p-3 rounded shadow-sm mb-1 bg-light">
-                                <div>
-                                    <h6 class="mb-1">CS2345: Database Systems</h6>
-                                    <small class="text-muted">28 Students</small>
-                                </div>
-                                <div class="text-end">
-                                    <small class="text-secondary d-block mb-2">Tue, Thu 1:00 - 2:30 PM</small>
-                                    <a href="courses-detail.php" class="btn btn-outline-secondary btn-sm">Manage</a>
-                                </div>
-                            </div>
-                        </a>
-
-                        <!-- Course 3 -->
-                        <a href="courses-detail.php" class="text-decoration-none text-dark">
-                            <div
-                                class="course-item d-flex justify-content-between align-items-center p-3 rounded shadow-sm mb-1 bg-light">
-                                <div>
-                                    <h6 class="mb-1">CS3456: Algorithms</h6>
-                                    <small class="text-muted">32 Students</small>
-                                </div>
-                                <div class="text-end">
-                                    <small class="text-secondary d-block mb-2">Wed, Fri 3:00 - 4:30 PM</small>
-                                    <a href="courses-detail.php" class="btn btn-outline-secondary btn-sm">Manage</a>
-                                </div>
-                            </div>
-                        </a>
-
+                    <div class="course-list" id="facultyCourseList">
+                        <p class="text-muted text-center">Loading courses...</p>
                     </div>
                 </div>
 
@@ -143,6 +98,65 @@
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const courseContainer = document.getElementById("facultyCourseList");
+
+            // Fetch courses for current faculty
+            fetch("api/faculty_courses.php")
+                .then(res => res.json())
+                .then(response => {
+                    console.log("API Response:", response);
+
+                    if (response.status === "success" && response.data.length > 0) {
+                        let html = "";
+
+                        response.data.forEach(course => {
+                            html += `
+                        <div class="course-item d-flex justify-content-between align-items-center p-3 rounded shadow-sm mb-2 bg-light"
+                             data-launch-id="${course.launch_id}"
+                             style="cursor:pointer;">
+                            <div>
+                                <h6 class="mb-1">${course.course_code}: ${course.course_name}</h6>
+                                <small class="text-muted">${course.total_students || 0} Students</small>
+                            </div>
+                            <div class="text-end">
+                                <small class="text-secondary d-block mb-2">${course.schedule || "No Schedule"}</small>
+                                <a href="courses-detail.php?launch_id=${course.launch_id}" 
+                                   class="btn btn-outline-secondary btn-sm">Manage</a>
+                            </div>
+                        </div>
+                    `;
+                        });
+
+                        courseContainer.innerHTML = html;
+
+                        // Optional: Click on full course card
+                        courseContainer.querySelectorAll(".course-item").forEach(card => {
+                            card.addEventListener("click", function(e) {
+                                // Avoid double triggering if Manage button clicked
+                                if (e.target.tagName.toLowerCase() === "a") return;
+                                const launchId = this.dataset.launchId;
+                                window.location.href = `courses-detail.php?launch_id=${launchId}`;
+                            });
+                        });
+
+                    } else {
+                        courseContainer.innerHTML = `
+                    <p class="text-muted text-center">No courses found for your account.</p>
+                `;
+                    }
+                })
+                .catch(error => {
+                    console.error("Error loading courses:", error);
+                    courseContainer.innerHTML = `
+                <p class="text-danger text-center">Failed to load courses. Please try again later.</p>
+            `;
+                });
+        });
+    </script>
+
 </body>
 
 </html>

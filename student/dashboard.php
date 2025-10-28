@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faculty Dashboard</title>
+    <title>Student Dashboard</title>
     <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
 
     <!-- Bootstrap CSS -->
@@ -86,8 +86,7 @@
             <div
                 class="header d-flex justify-content-between align-items-center position-relative px-3 py-2 bg-secondary text-dark">
                 <h5 class="mb-0 assignment-titles">
-                    <a href="dashboard.php"><i class="bi bi-chevron-left rounded-circle"></i></a> Manage: Introduction
-                    to Data Science
+                    <a href="dashboard.php"><i class="bi bi-chevron-left rounded-circle"></i></a>Viana Study
                 </h5>
                 <a href="../index.php">
                     <button class="btn d-flex align-items-center logout-btn gap-2">
