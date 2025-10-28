@@ -417,7 +417,7 @@ body {
 /* --- 5. Active Courses List --- */
 .courses-section {
     padding: 0 20px;
-    height: 46%;
+    /* height: 46%; */
 }
 
 .courses-header {

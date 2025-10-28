@@ -32,7 +32,39 @@ session_start();
             font-size: 16px;
             color: white;
         }
-        
+
+        .btn-gradient-glossy {
+            position: relative;
+            background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);
+            color: white;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            box-shadow:
+                rgba(255, 255, 255, 0.4) 0px 1px 0px inset,
+                rgba(0, 0, 0, 0.3) 0px 1px 3px;
+            text-shadow: rgba(0, 0, 0, 0.25) 0px -1px 0px;
+            overflow: hidden;
+            border-radius: 8px;
+            padding: 6px 25px;
+            font-weight: 500;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .btn-success {
+            background-color: #8BC34A !important;
+            border: none;
+            border-radius: 8px;
+
+        }
+
+        .bg-success {
+            background-color: #8BC34A !important;
+            border: none;
+            border-radius: 8px;
+        }
+
+        .form-check-input {
+            border: 1px solid #0000ffa1;
+        }
     </style>
 
 </head>
@@ -67,127 +99,106 @@ session_start();
                         </ul>
                     </div>
                 </div>
-                <div class="user-profile">
-                    <img src="../images/image.png" alt="Dr. Emily Rodriguez" class="profile-pic">
-                    <div class="user-details">
-                        <div class="name">Dr. <?php echo htmlspecialchars($_SESSION['name'] ?? ''); ?></div>
 
-                        <div class="info">
-                            <span class="id">Faculty ID: <?php echo htmlspecialchars($_SESSION['regno'] ?? ''); ?></span>
-                            &bull;
-                            <span class="dept">Medical</span>
-                        </div>
-                    </div>
-                </div>
+                <div class="container mt-4 mb-5">
+                    <h6 class="fw-bold mb-3">Today's Class Schedule</h6>
 
-                <?php $current_page = basename($_SERVER['PHP_SELF']); ?>
-
-                <nav class="tabs-nav">
-                    <a href="dashboard.php" class="tab <?php if ($current_page == 'dashboard.php')
-                                                            echo 'active'; ?>">Dashboard</a>
-                    <a href="assignments.php" class="tab <?php if ($current_page == 'assignments.php')
-                                                                echo 'active'; ?>">
-                        Assignments
-                        <span class="badge">5</span>
-                    </a>
-                    <a href="courses.php" class="tab <?php if ($current_page == 'courses.php')
-                                                            echo 'active'; ?>">Courses</a>
-                </nav>
-
-                <div class="assignments-card">
-                    <div class="card-icon">
-                        <span class="material-icons">assignment</span>
-                    </div>
-                    <div class="card-content">
-                        <a href="overall_assignments.php" class="text-decoration-none">
-                            <div class="card-title">Assignments</div>
-                        </a>
-                        <div class="card-subtitle">Pending student submissions</div>
-                    </div>
-                    <div class="card-action">
-                        <span class="assignment-count">5</span>
-                    </div>
-                </div>
-
-                <div class="assignments-card">
-                    <div class="card-icon">
-                        <span class="material-symbols-outlined">
-                            back_hand
-                        </span>
-                    </div>
-
-                    <div class="card-content">
-                        <a href="overall_assignments.php" class="text-decoration-none">
-                            <div class="card-title">Enrollment Requests</div>
-                        </a>
-                        <div class="card-subtitle">Pending student requests</div>
-                    </div>
-                    <div class="card-action">
-                        <span class="assignment-count">12</span>
-                    </div>
-                </div>
-
-
-                <div class="assignments-cards  p-3 m-3">
-                    <h6>Todays Class Schedule</h6>
-                    <div class="card-content">
-                        <div class="d-flex align-items-center justify-content-between border rounded-3 p-3 mb-2 shadow-sm" style="background:#e3f2fd;">
-                            <div class="d-flex align-items-center">
-                                <div class="slot-icon me-3">
-                                    <span class="fw-bold text-white">A</span>
-                                </div>
+                    <!-- Slot Card -->
+                    <div class="card shadow-sm border-0 mb-4">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
                                 <div>
-                                    <div class="fw-semibold text-dark">Slot A</div>
-                                    <small class="text-muted">8:00 - 9:30 AM</small><br>
-                                    <small class="fw-semibold text-primary">CS1234: Introduction to Data Science</small>
+                                    <h6 class="fw-semibold mb-1">Slot A</h6>
+                                    <p class="mb-1 text-muted small">8:00 - 9:30 AM</p>
+                                    <p class="text-primary fw-semibold small mb-0">CS1234: Introduction to Data Science
+                                    </p>
+                                </div>
+                                <span class="text-light bg-success px-3 py-2 mt-2 mt-md-0">90 min left</span>
+                            </div>
+
+                            <p class="small text-secondary mb-2">Present: <span class="fw-semibold">0/4</span></p>
+
+                            <div class="d-flex gap-2 mb-3 flex-wrap">
+                                <button class="btn btn-sm btn-gradient-glossy flex-fill fw-semibold">Mark All
+                                    Present</button>
+                                <button class="btn btn-sm btn-success flex-fill fw-semibold">Save Attendance</button>
+                            </div>
+
+                            <!-- Students in Nearby Zone -->
+                            <div>
+                                <h6 class="fw-semibold mb-2">Students in Nearby Zone</h6>
+
+                                <div class="list-group border-0">
+                                    <div class="list-group-item d-flex align-items-center justify-content-between">
+                                        <div class="d-flex align-items-center">
+                                            <img src="../images/image.png" alt="John Smith" class="rounded-circle me-3"
+                                                width="40" height="40">
+                                            <div>
+                                                <p class="mb-0 fw-semibold">John Smith</p>
+                                                <small class="text-muted">CS2023001</small>
+                                            </div>
+                                        </div>
+                                        <input class="form-check-input" type="checkbox">
+                                    </div>
+
+                                    <div class="list-group-item d-flex align-items-center justify-content-between">
+                                        <div class="d-flex align-items-center">
+                                            <img src="../images/image.png" alt="Emily Chen" class="rounded-circle me-3"
+                                                width="40" height="40">
+                                            <div>
+                                                <p class="mb-0 fw-semibold">Emily Chen</p>
+                                                <small class="text-muted">CS2023002</small>
+                                            </div>
+                                        </div>
+                                        <input class="form-check-input" type="checkbox">
+                                    </div>
+
+                                    <div class="list-group-item d-flex align-items-center justify-content-between">
+                                        <div class="d-flex align-items-center">
+                                            <img src="../images/image.png" alt="Michael Brown"
+                                                class="rounded-circle me-3" width="40" height="40">
+                                            <div>
+                                                <p class="mb-0 fw-semibold">Michael Brown</p>
+                                                <small class="text-muted">CS2023003</small>
+                                            </div>
+                                        </div>
+                                        <input class="form-check-input" type="checkbox">
+                                    </div>
                                 </div>
                             </div>
-                            <button class="btn btn-outline-primary btn-sm rounded-pill fw-semibold">Mark Attendance</button>
+
+                            <!-- Not in Nearby Zone -->
+                            <div class="mt-3">
+                                <h6 class="fw-semibold mb-2">Not in Nearby Zone</h6>
+                                <div
+                                    class="list-group-item d-flex align-items-center justify-content-between bg-light rounded">
+                                    <div class="d-flex align-items-center">
+                                        <img src="../images/image.png" alt="Sarah Johnson" class="rounded-circle me-3"
+                                            width="40" height="40">
+                                        <div>
+                                            <p class="mb-0 fw-semibold text-secondary">Sarah Johnson</p>
+                                            <small class="text-muted">CS2023004</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <input class="form-check-input" type="checkbox">
+                                        <p class="text-danger mb-0 small">Not Nearby</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="mt-4">
+                                <button class="btn btn-gradient-glossy w-100 fw-semibold">Submit & Archive
+                                    Attendance</button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
 
-                <div class="courses-section">
-                    <div class="courses-header">
-                        <h2>Active Courses</h2>
-                        <button class="view-all-btn" style="    background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);
-                        color: white;
-                        border: 1px solid rgba(0, 0, 0, 0.2);
-                        box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.2) 0px 1px 2px;">View
-                            All</button>
-                    </div>
-
-                    <div class="course-list">
-                        <a href="courses-detail.php">
-                            <div class="course-item">
-                                <div class="course-details">
-                                    <div class="course-name"></div>
-                                    <div class="student-count"></div>
-                                </div>
-                                <div class="course-time"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
 
 
-                <!-- <div class="action-footer">
-                    <button class="action-btn grade-btn" style="background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);
-                        color: white;
-                        border: 1px solid rgba(0, 0, 0, 0.2);
-                        box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.2) 0px 1px 2px;">
-                        <span class="material-icons">check_circle_outline</span>
-                        Grade Assignments
-                    </button>
-                    <button class="action-btn add-btn" style="background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);
-                        color: white;
-                        border: 1px solid rgba(0, 0, 0, 0.2);
-                        box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.2) 0px 1px 2px;">
-                        <span class="material-icons">add</span>
-                        Add New Course
-                    </button>
-                </div> -->
             </div>
         </div>
     </main>
@@ -196,40 +207,7 @@ session_start();
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            fetch('api/faculty_courses.php')
-                .then(res => res.json())
-                .then(response => {
-                    if (response.status === 'success') {
-                        const courses = response.data;
-                        let html = '';
 
-                        courses.forEach(course => {
-                            html += `
-                        <a href="courses-detail.php?launch_id=${course.launch_id}">
-                            <div class="course-item">
-                                <div class="course-details">
-                                    <div class="course-name">${course.course_code}: ${course.course_name}</div>
-                                    <div class="student-count">${course.student_count} Students</div>
-                                </div>
-                                <div class="course-time">Slot: ${course.slot}</div>
-                            </div>
-                        </a>
-                    `;
-                        });
-
-                        $('.course-list').html(html);
-                    } else {
-                        $('.course-list').html(`<p>${response.message}</p>`);
-                    }
-                })
-                .catch(err => {
-                    console.error(err);
-                    $('.course-list').html(`<p>Unable to load courses. Please try again.</p>`);
-                });
-        });
-    </script>
 </body>
 
 </html>

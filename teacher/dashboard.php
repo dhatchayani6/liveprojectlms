@@ -32,9 +32,9 @@ session_start();
             font-size: 16px;
             color: white;
         }
-        .profile-area {
+        /* .profile-area {
             height: 100%;
-        }
+        } */
     </style>
 
 </head>
@@ -44,8 +44,7 @@ session_start();
 
         <div class="content-container">
             <div class="profile-area">
-                <div
-                    class="header d-flex justify-content-between p-4 align-items-center position-relative bg-primary text-white">
+                <div class="header d-flex justify-content-between p-4 align-items-center position-relative bg-primary text-white">
                     <h5 class="mb-0">Viana Study</h5>
 
                     <!-- Profile / Menu Dropdown (Desktop & Mobile) -->

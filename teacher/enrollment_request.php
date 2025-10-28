@@ -17,6 +17,9 @@ session_start();
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <!-- Add this in your <head> if not already included -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
 
 
     <style>
@@ -32,24 +35,28 @@ session_start();
             font-size: 16px;
             color: white;
         }
+
+        .btn-success {
+            background-color: #6feb58 !important;
+            border: none;
+        }
     </style>
 
 </head>
 
 <body>
     <main class="dashboard-main">
-
         <div class="content-container">
             <div class="profile-area">
-                <div
-                    class="header d-flex justify-content-between p-4 align-items-center position-relative bg-primary text-white">
+                <!-- Header -->
+                <div class="header d-flex justify-content-between p-3 align-items-center bg-primary text-white">
                     <h5 class="mb-0">Viana Study</h5>
 
-                    <!-- Profile / Menu Dropdown (Desktop & Mobile) -->
+                    <!-- Hamburger Dropdown -->
                     <div class="dropdown">
-                        <button class="btn dropdown-toggle d-flex align-items-center" type="button" id="profileDropdown"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <div class="d-flex flex-column justify-content-between " style="height: 18px;">
+                        <button class="btn p-0 border-0" type="button" id="profileDropdown" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <div class="d-flex flex-column justify-content-between" style="height: 18px;">
                                 <span style="display:block; height:2px; width:20px; background-color:#fff;"></span>
                                 <span style="display:block; height:2px; width:20px; background-color:#fff;"></span>
                                 <span style="display:block; height:2px; width:20px; background-color:#fff;"></span>
@@ -59,130 +66,136 @@ session_start();
                             <li><button class="dropdown-item w-100 text-start">Dashboard</button></li>
                             <li><button class="dropdown-item w-100 text-start">Assignments</button></li>
                             <li><button class="dropdown-item w-100 text-start">Courses</button></li>
-
-                            <a href="../index.php">
-                                <li><button class="dropdown-item w-100 text-start text-danger">Logout</button></li>
-                            </a>
+                            <li><a href="../index.php" class="dropdown-item text-danger">Logout</a></li>
                         </ul>
                     </div>
                 </div>
 
-
-
-
-                <div class="assignment-card card p-3 shadow-sm m-3 mb-3">
-                    <div class="row align-items-center">
-                        <div class="col-12 d-flex flex-sm-row align-items-center justify-content-between gap-3">
-
-                            <!-- Left Section: Profile + Info -->
-                            <div class="d-flex align-items-center gap-3">
-                                <!-- Profile Image -->
-                                <img src="../images/image.png" alt="Student Photo"
-                                    class="profile-pic"
-                                    style="width:50px; height:50px; border-radius:50%; object-fit:cover;">
-
-                                <!-- Student Details -->
-                                <div>
-                                    <p class="mb-1 fw-semibold text-dark">Priya Sharma</p>
-                                    <p class="text-muted mb-1 small">Reg No: SID2023012</p>
-                                    <p class="text-muted mb-0 small">Department: ECE</p>
+                <!-- Assignment Cards -->
+                <div class="container-fluid py-3">
+                    <div class="row gy-3">
+                        <!-- Card Example (Repeat this block) -->
+                        <div class="col-12">
+                            <div class="card p-3 shadow-sm">
+                                <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                                    <!-- Left: Profile Info -->
+                                    <div class="d-flex align-items-center gap-3 flex-wrap">
+                                        <img src="../images/image.png" alt="Student Photo" class="profile-pic"
+                                            style="width:50px; height:50px; border-radius:50%; object-fit:cover;">
+                                        <div>
+                                            <p class="mb-1 fw-semibold text-dark">Rahul Menon</p>
+                                            <p class="text-muted mb-1 small">Reg No: SID2023008</p>
+                                            <p class="text-muted mb-0 small">Department: CSE</p>
+                                        </div>
+                                    </div>
+                                    <!-- Right: Action Buttons -->
+                                    <div class="d-flex gap-2 flex-shrink-0">
+                                        <button
+                                            class="btn btn-sm btn-success d-flex align-items-center justify-content-center px-3">
+                                            <i class="bi bi-hand-thumbs-up-fill me-1"></i><span
+                                                class="d-sm-inline">Accept</span>
+                                        </button>
+                                        <button
+                                            class="btn btn-sm btn-danger d-flex align-items-center justify-content-center px-3">
+                                            <i class="bi bi-hand-thumbs-down-fill me-1"></i><span
+                                                class="d-sm-inline">Reject</span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-
-                            <!-- Right Section: Action Buttons -->
-                            <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-success px-3">Accept</button>
-                                <button class="btn btn-sm btn-danger px-3">Reject</button>
-                            </div>
-
                         </div>
-                    </div>
-                </div>
 
-                <div class="assignment-card card p-3 shadow-sm m-3 mb-3">
-                    <div class="row align-items-center">
-                        <div class="col-12 d-flex flex-sm-row align-items-center justify-content-between gap-3">
-
-                            <!-- Left Section: Profile + Info -->
-                            <div class="d-flex align-items-center gap-3">
-                                <!-- Profile Image -->
-                                <img src="../images/image.png" alt="Student Photo"
-                                    class="profile-pic"
-                                    style="width:50px; height:50px; border-radius:50%; object-fit:cover;">
-
-                                <!-- Student Details -->
-                                <div>
-                                    <p class="mb-1 fw-semibold text-dark">Priya Sharma</p>
-                                    <p class="text-muted mb-1 small">Reg No: SID2023012</p>
-                                    <p class="text-muted mb-0 small">Department: ECE</p>
+                        <div class="col-12">
+                            <div class="card p-3 shadow-sm">
+                                <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                                    <div class="d-flex align-items-center gap-3 flex-wrap">
+                                        <img src="../images/image.png" alt="Student Photo" class="profile-pic"
+                                            style="width:50px; height:50px; border-radius:50%; object-fit:cover;">
+                                        <div>
+                                            <p class="mb-1 fw-semibold text-dark">Meera Krishnan</p>
+                                            <p class="text-muted mb-1 small">Reg No: SID2023015</p>
+                                            <p class="text-muted mb-0 small">Department: IT</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-2 flex-shrink-0">
+                                        <button
+                                            class="btn btn-sm btn-success d-flex align-items-center justify-content-center px-3">
+                                            <i class="bi bi-hand-thumbs-up-fill me-1"></i><span
+                                                class="d-sm-inline">Accept</span>
+                                        </button>
+                                        <button
+                                            class="btn btn-sm btn-danger d-flex align-items-center justify-content-center px-3">
+                                            <i class="bi bi-hand-thumbs-down-fill me-1"></i><span
+                                                class="d-sm-inline">Reject</span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-
-                            <!-- Right Section: Action Buttons -->
-                            <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-success px-3">Accept</button>
-                                <button class="btn btn-sm btn-danger px-3">Reject</button>
-                            </div>
-
                         </div>
-                    </div>
-                </div>
-                <div class="assignment-card card p-3 shadow-sm m-3 mb-3">
-                    <div class="row align-items-center">
-                        <div class="col-12 d-flex flex-sm-row align-items-center justify-content-between gap-3">
 
-                            <!-- Left Section: Profile + Info -->
-                            <div class="d-flex align-items-center gap-3">
-                                <!-- Profile Image -->
-                                <img src="../images/image.png" alt="Student Photo"
-                                    class="profile-pic"
-                                    style="width:50px; height:50px; border-radius:50%; object-fit:cover;">
-
-                                <!-- Student Details -->
-                                <div>
-                                    <p class="mb-1 fw-semibold text-dark">Priya Sharma</p>
-                                    <p class="text-muted mb-1 small">Reg No: SID2023012</p>
-                                    <p class="text-muted mb-0 small">Department: ECE</p>
+                        <div class="col-12">
+                            <div class="card p-3 shadow-sm">
+                                <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                                    <div class="d-flex align-items-center gap-3 flex-wrap">
+                                        <img src="../images/image.png" alt="Student Photo" class="profile-pic"
+                                            style="width:50px; height:50px; border-radius:50%; object-fit:cover;">
+                                        <div>
+                                            <p class="mb-1 fw-semibold text-dark">Sanjay Reddy</p>
+                                            <p class="text-muted mb-1 small">Reg No: SID2023021</p>
+                                            <p class="text-muted mb-0 small">Department: EEE</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-2 flex-shrink-0">
+                                        <button
+                                            class="btn btn-sm btn-success d-flex align-items-center justify-content-center px-3">
+                                            <i class="bi bi-hand-thumbs-up-fill me-1"></i><span
+                                                class="d-sm-inline">Accept</span>
+                                        </button>
+                                        <button
+                                            class="btn btn-sm btn-danger d-flex align-items-center justify-content-center px-3">
+                                            <i class="bi bi-hand-thumbs-down-fill me-1"></i><span
+                                                class="d-sm-inline">Reject</span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-
-                            <!-- Right Section: Action Buttons -->
-                            <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-success px-3">Accept</button>
-                                <button class="btn btn-sm btn-danger px-3">Reject</button>
-                            </div>
-
                         </div>
+
+                        <div class="col-12">
+                            <div class="card p-3 shadow-sm">
+                                <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                                    <div class="d-flex align-items-center gap-3 flex-wrap">
+                                        <img src="../images/image.png" alt="Student Photo" class="profile-pic"
+                                            style="width:50px; height:50px; border-radius:50%; object-fit:cover;">
+                                        <div>
+                                            <p class="mb-1 fw-semibold text-dark">Aditi Nair</p>
+                                            <p class="text-muted mb-1 small">Reg No: SID2023034</p>
+                                            <p class="text-muted mb-0 small">Department: Mechanical</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-2 flex-shrink-0">
+                                        <button
+                                            class="btn btn-sm btn-success d-flex align-items-center justify-content-center px-3">
+                                            <i class="bi bi-hand-thumbs-up-fill me-1"></i><span
+                                                class="d-sm-inline">Accept</span>
+                                        </button>
+                                        <button
+                                            class="btn btn-sm btn-danger d-flex align-items-center justify-content-center px-3">
+                                            <i class="bi bi-hand-thumbs-down-fill me-1"></i><span
+                                                class="d-sm-inline">Reject</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-                
-
-
-
-
-
-
-
-
-
-                <!-- <div class="action-footer">
-                    <button class="action-btn grade-btn" style="background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);
-                        color: white;
-                        border: 1px solid rgba(0, 0, 0, 0.2);
-                        box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.2) 0px 1px 2px;">
-                        <span class="material-icons">check_circle_outline</span>
-                        Grade Assignments
-                    </button>
-                    <button class="action-btn add-btn" style="background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);
-                        color: white;
-                        border: 1px solid rgba(0, 0, 0, 0.2);
-                        box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.2) 0px 1px 2px;">
-                        <span class="material-icons">add</span>
-                        Add New Course
-                    </button>
-                </div> -->
             </div>
         </div>
+
+
+
     </main>
 
 
@@ -190,7 +203,7 @@ session_start();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             fetch('api/faculty_courses.php')
                 .then(res => res.json())
                 .then(response => {
