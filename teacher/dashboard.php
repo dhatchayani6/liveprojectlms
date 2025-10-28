@@ -16,6 +16,8 @@ session_start();
 
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+ 
 
     <style>
         .slot-icon {
@@ -107,9 +109,12 @@ session_start();
                 </div>
 
                 <div class="assignments-card">
-                    <div class="card-icon" style="background:linear-gradient(135deg,#e8f5e9,#a5d6a7); color:#2e7d32;">
-                        <span class="material-icons">how_to_reg</span>
+                    <div class="card-icon">
+                        <span class="material-symbols-outlined">
+                            back_hand
+                        </span>
                     </div>
+
                     <div class="card-content">
                         <a href="overall_assignments.php" class="text-decoration-none">
                             <div class="card-title">Enrollment Requests</div>
@@ -121,9 +126,9 @@ session_start();
                     </div>
                 </div>
 
-                
+
                 <div class="assignments-card">
-                    
+
                     <div class="card-content">
                         <div class="d-flex align-items-center justify-content-between border rounded-3 p-3 mb-2 shadow-sm" style="background:#e3f2fd;">
                             <div class="d-flex align-items-center">
@@ -140,7 +145,7 @@ session_start();
                         </div>
                     </div>
                 </div>
-                
+
 
                 <div class="courses-section">
                     <div class="courses-header">
