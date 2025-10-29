@@ -172,6 +172,61 @@ session_start();
                             </div>
                         </a>
                     </div>
+                    <div class="course-list">
+                        <a href="courses-detail.php">
+                            <div class="course-item">
+                                <div class="course-details">
+                                    <div class="course-name"></div>
+                                    <div class="student-count"></div>
+                                </div>
+                                <div class="course-time"></div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="course-list">
+                        <a href="courses-detail.php">
+                            <div class="course-item">
+                                <div class="course-details">
+                                    <div class="course-name"></div>
+                                    <div class="student-count"></div>
+                                </div>
+                                <div class="course-time"></div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="course-list">
+                        <a href="courses-detail.php">
+                            <div class="course-item">
+                                <div class="course-details">
+                                    <div class="course-name"></div>
+                                    <div class="student-count"></div>
+                                </div>
+                                <div class="course-time"></div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="course-list">
+                        <a href="courses-detail.php">
+                            <div class="course-item">
+                                <div class="course-details">
+                                    <div class="course-name"></div>
+                                    <div class="student-count"></div>
+                                </div>
+                                <div class="course-time"></div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="course-list">
+                        <a href="courses-detail.php">
+                            <div class="course-item">
+                                <div class="course-details">
+                                    <div class="course-name"></div>
+                                    <div class="student-count"></div>
+                                </div>
+                                <div class="course-time"></div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
 
 
