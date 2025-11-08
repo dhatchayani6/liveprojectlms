@@ -22,7 +22,7 @@ $launch_id = $_GET['launch_id'];
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
 
     <style>
-        #ytClickLayer {
+        /* #ytClickLayer {
             position: absolute;
             top: 0;
             left: 0;
@@ -31,7 +31,7 @@ $launch_id = $_GET['launch_id'];
             cursor: pointer;
             z-index: 9;
             background: transparent;
-        }
+        } */
 
         #youtubeContainer iframe {
             width: 50%;
@@ -225,7 +225,7 @@ $launch_id = $_GET['launch_id'];
                                         </div>
                                     </div>
 
-                                   
+
                                 </div>
                             </div>
 
@@ -287,29 +287,25 @@ $launch_id = $_GET['launch_id'];
                                     <div class="p-3" id="videoSection" style="display:none;">
                                         <div class="border rounded shadow-sm overflow-hidden bg-light">
                                             <div class="p-2 border-bottom bg-secondary text-dark">Video Material</div>
-                                            <div class="p-3">
+                                            <div class="p-3" style="height:700px;">
                                                 <!-- <p class="small">Data Preprocessing Techniques</p> -->
 
-                                                <!-- ✅ Local Video Player -->
-                                                <div class="ratio ratio-16x9 border rounded shadow-sm" id="localVideoContainer">
-                                                    <video id="player" playsinline controls>
-                                                        <source src="" type="video/mp4" />
-                                                        Your browser does not support HTML5 video.
+                                                <!-- Local Video -->
+                                                <div id="localVideoContainer" class="ratio ratio-16x9 border rounded shadow-sm" style="display:none">
+                                                    <video id="player" playsinline controls style="width:100%;height:100%;">
+                                                        <source src="" type="video/mp4">
                                                     </video>
                                                 </div>
 
-                                                <!-- ✅ YouTube Player -->
-                                                <div id="youtubeContainer" class="border rounded shadow-sm" style="height:700px; display:block; background:#000;">
-                                                    <div class="ratio ratio-16x9">
-                                                        <iframe
-                                                            id="youtubeIframe"
-                                                            frameborder="0"
-                                                            allow="encrypted-media"
-                                                            allowfullscreen
-                                                            style="width:100%; height:100%; display:block; border-radius:10px;"></iframe>
+                                                <!-- YouTube Player -->
+                                                <div id="youtubeContainer" class="border rounded shadow-sm" style="height:500px; display:none; background:#000;">
+                                                    <div class="ratio ratio-16x9" style="width:100%;height:100%;">
+                                                        <!-- IMPORTANT: Must be div, NOT iframe -->
+                                                        <div id="youtubeIframe" style="width:100%;height:100%;border-radius:10px;"></div>
                                                     </div>
-                                                    <div id="ytClickLayer"></div>
                                                 </div>
+
+
 
                                             </div>
                                         </div>
@@ -515,7 +511,7 @@ $launch_id = $_GET['launch_id'];
 
     <!-- YouTube Iframe API -->
     <script src="https://www.youtube.com/iframe_api"></script>
-    
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -628,7 +624,7 @@ $launch_id = $_GET['launch_id'];
         });
     </script> -->
 
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const player = new Plyr("#player");
@@ -724,23 +720,24 @@ $launch_id = $_GET['launch_id'];
                     let html = `<h6 class="fw-semibold mb-3">Chapters Overview</h6>`;
                     data.data.forEach(topic => {
                         html += `
-        <div class="mb-3 p-3 border rounded bg-courses-grey topic-card" 
-             data-topic-id="${topic.topic_id}">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <h6 class="fw-semibold mb-1 text-dark">${topic.title}</h6>
-                    <small class="text-muted">${topic.description}</small>
-                </div>
-                <div class="topic-progress-badge px-2 py-1 rounded text-white fw-semibold text-center"
-                     data-tid="${topic.topic_id}"
-                     style="min-width:60px; background:gray;">0%</div>
-            </div>
-            <div class="progress mt-2" style="height:6px;">
-                <div class="progress-bar topic-progress-bar" 
-                     data-tid="${topic.topic_id}"
-                     style="width:0%; background:gray;"></div>
-            </div>
-        </div>`;
+                        <div class="mb-3 p-3 border rounded bg-courses-grey topic-card" 
+                            data-topic-id="${topic.topic_id}">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="fw-semibold mb-1 text-dark">${topic.title}</h6>
+                                    
+                                    <small class="text-muted">${topic.description}</small>
+                                </div>
+                                <div class="topic-progress-badge px-2 py-1 rounded text-white fw-semibold text-center"
+                                    data-tid="${topic.topic_id}"
+                                    style="min-width:60px; background:gray;">0%</div>
+                            </div>
+                            <div class="progress mt-2" style="height:6px;">
+                                <div class="progress-bar topic-progress-bar" 
+                                    data-tid="${topic.topic_id}"
+                                    style="width:0%; background:gray;"></div>
+                            </div>
+                        </div>`;
                     });
 
                     overviewContainer.innerHTML = html;
@@ -825,91 +822,100 @@ $launch_id = $_GET['launch_id'];
 
 
             function loadMaterialsForTopic(topicId) {
-                const currentType = currentMaterialType || "reading";
-                coListContainer.innerHTML = `<p class='text-center text-muted py-3'>Loading ${currentType} materials...</p>`;
+    const currentType = currentMaterialType || "reading";
+    coListContainer.innerHTML = `<p class='text-center text-muted py-3'>Loading ${currentType} materials...</p>`;
 
-                fetch(`api/get_materials_by_topic.php?launch_id=${launchId}&topic_id=${topicId}&type=${currentType}`)
-                    .then(res => res.json())
-                    .then(async data => {
-                        if (data.status !== 200 || !data.data.length) {
-                            coListContainer.innerHTML = `<p class='text-center text-danger py-3'>No ${currentType} materials found.</p>`;
-                            return;
-                        }
-
-                        let html = "";
-
-                        // ✅ Practice Type — allow unlimited attempts
-                        if (currentType === "practice") {
-                            for (const item of data.data) {
-                                // Fetch previous score (if any)
-                                const scoreRes = await fetch(
-                                    `api/get_practice_score.php?launch_id=${launchId}&topic_id=${topicId}&co_id=${item.co_id}`
-                                );
-                                const scoreData = await scoreRes.json();
-
-                                let badge = `<span class="badge bg-secondary score-badge" data-co="${item.co_id}">Not Attempted</span>`;
-
-                                if (scoreData.status === 200 && scoreData.attempted) {
-                                    const score = scoreData.score ?? 0;
-                                    let color = "bg-danger";
-                                    if (score >= 80) color = "bg-success";
-                                    else if (score >= 50) color = "bg-warning";
-                                    badge = `<span class="badge ${color} score-badge" data-co="${item.co_id}">Score: ${score}%</span>`;
-                                }
-
-                                // ✅ Remove disabling logic — user can click anytime
-                                html += `
-                                    <div class="col-6 col-sm-6">
-                                        <div class="card border-0 shadow-sm p-3 bg-courses-grey co-card"
-                                            data-co-id="${item.co_id}" data-url="${item.material_url}">
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="me-3 flex-shrink-0">
-                                                        <div class="p-3 rounded-circle d-flex justify-content-center align-items-center">
-                                                            <i class="bi bi-book text-primary fs-6"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="text-truncate">
-                                                        <h6 class="fw-semibold text-dark mb-1">${limitWords(item.co_level, 2)}</h6>
-                                                        <small class="text-muted">${limitWords(item.course_description, 2)}</small>
-
-                                                    </div>
-                                                </div>
-                                                ${badge}
-                                            </div>
-                                        </div>
-                                    </div>`;
-                            }
-                        }else {
-                            // ✅ Reading / Video / Assignment
-                            data.data.forEach(item => {
-                                html += `
-                                    <div class="col-6 col-sm-6">
-                                        <div class="card border-0 shadow-sm p-3 bg-courses-grey co-card"
-                                            data-co-id="${item.co_id}" data-url="${item.material_url}">
-                                            <div class="d-flex align-items-center">
-                                                <div class="me-3 flex-shrink-0">
-                                                    <div class="p-3 rounded-circle d-flex justify-content-center align-items-center">
-                                                        <i class="bi bi-book text-primary fs-6"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="text-truncate">
-                                                    <h6 class="fw-semibold text-dark mb-1">${item.co_level}</h6>
-                                                    <small class="text-muted">${item.course_description}</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>`;
-                            });
-                        }
-
-                        coListContainer.innerHTML = html;
-                    })
-                    .catch(err => {
-                        console.error(err);
-                        coListContainer.innerHTML = `<p class='text-center text-danger py-3'>Error loading materials.</p>`;
-                    });
+    fetch(`api/get_materials_by_topic.php?launch_id=${launchId}&topic_id=${topicId}&type=${currentType}`)
+        .then(res => res.json())
+        .then(async data => {
+            if (data.status !== 200 || !data.data.length) {
+                coListContainer.innerHTML = `<p class='text-center text-danger py-3'>No ${currentType} materials found.</p>`;
+                return;
             }
+
+            let html = "";
+
+            // ✅ PRACTICE MATERIALS
+            if (currentType === "practice") {
+                for (const item of data.data) {
+                    const scoreRes = await fetch(
+                        `api/get_practice_score.php?launch_id=${launchId}&topic_id=${topicId}&co_id=${item.co_id}`
+                    );
+                    const scoreData = await scoreRes.json();
+
+                    let badge = `<span class="badge bg-secondary score-badge" data-co="${item.co_id}">Not Attempted</span>`;
+
+                    if (scoreData.status === 200 && scoreData.attempted) {
+                        const score = scoreData.score ?? 0;
+                        let color = "bg-danger";
+                        if (score >= 80) color = "bg-success";
+                        else if (score >= 50) color = "bg-warning";
+                        badge = `<span class="badge ${color} score-badge" data-co="${item.co_id}">Score: ${score}%</span>`;
+                    }
+
+                    html += `
+                        <div class="col-6 col-sm-6">
+                            <div class="card border-0 shadow-sm p-3 bg-courses-grey co-card"
+                                data-co-id="${item.co_id}" data-url="${item.material_url}">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center">
+                                        <div class="me-3 flex-shrink-0">
+                                            <div class="p-3 rounded-circle d-flex justify-content-center align-items-center">
+                                                <i class="bi bi-book text-primary fs-6"></i>
+                                            </div>
+                                        </div>
+                                        <div class="text-truncate">
+                                            <h6 class="fw-semibold text-dark mb-1">${limitWords(item.co_level, 4)}</h6>
+                                            <small class="text-muted">${limitWords(item.course_description, 4)}</small>
+                                        </div>
+                                    </div>
+                                    ${badge}
+                                </div>
+                            </div>
+                        </div>`;
+                }
+            } 
+            
+            else {
+                // ✅ READING / VIDEO / ASSIGNMENT — Simple completed check
+                data.data.forEach(item => {
+
+                    const doneBadge = item.completed == 1
+                        ? `<span class="badge bg-success">Completed</span>`
+                        : `<span class="badge bg-secondary">Pending</span>`;
+
+                    html += `
+                        <div class="col-6 col-sm-6">
+                            <div class="card border-0 shadow-sm p-3 bg-courses-grey co-card"
+                                data-co-id="${item.co_id}" data-url="${item.material_url}">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center">
+                                        <div class="me-3 flex-shrink-0">
+                                            <div class="p-3 rounded-circle d-flex justify-content-center align-items-center">
+                                                <i class="bi bi-book text-primary fs-6"></i>
+                                            </div>
+                                        </div>
+                                        <div class="text-truncate">
+                                            <h6 class="fw-semibold text-dark mb-1">${limitWords(item.co_level, 4)}</h6>
+                                            <small class="text-muted">${limitWords(item.course_description, 4)}</small>
+                                        </div>
+                                    </div>
+                                    ${doneBadge}
+                                </div>
+                            </div>
+                        </div>`;
+                });
+            }
+
+            coListContainer.innerHTML = html;
+
+        })
+        .catch(err => {
+            console.error(err);
+            coListContainer.innerHTML = `<p class='text-center text-danger py-3'>Error loading materials.</p>`;
+        });
+}
+
 
 
 
@@ -922,12 +928,31 @@ $launch_id = $_GET['launch_id'];
                 showSelectedMaterial(coId, currentMaterialType, materialUrl);
             });
 
-            let ytPlayer;
-            let ytReady = false;
+            const MARK_ON_PLAY = false; // mark when user presses play
+            const MARK_ON_PERCENT = 10; // mark when X% watched
+            /* ------------------------------------------------ */
 
-            window.onYouTubeIframeAPIReady = function() {
-                ytReady = true;
-            };
+            /* Store completed items to avoid duplicate marking */
+            function markOnce(videoKey, topicId, coId) {
+                if (_pdfCompleteFiredFor.has(videoKey)) return;
+                _pdfCompleteFiredFor.add(videoKey);
+                console.log("✅ Progress saved for video:", videoKey);
+                markMaterialComplete(topicId, coId, "video");
+            }
+
+            /* Load YouTube API only once */
+            function ensureYouTubeAPI() {
+                return new Promise(resolve => {
+                    if (window.YT && window.YT.Player) return resolve();
+                    if (!document.getElementById("yt-api")) {
+                        let s = document.createElement("script");
+                        s.src = "https://www.youtube.com/iframe_api";
+                        s.id = "yt-api";
+                        document.head.appendChild(s);
+                    }
+                    window.onYouTubeIframeAPIReady = () => resolve();
+                });
+            }
 
             function showSelectedMaterial(coId, materialType, materialUrl) {
                 showMaterialSection(materialType);
@@ -1074,183 +1099,225 @@ $launch_id = $_GET['launch_id'];
                         }, MIN_SECONDS * 2000);
                     }
                 } else if (materialType === "video") {
+
                     const youtubeContainer = document.getElementById("youtubeContainer");
                     const localVideoContainer = document.getElementById("localVideoContainer");
-                    const localVideoSource = document.querySelector("#player source");
                     const localVideo = document.getElementById("player");
-                    const youtubeIframe = document.getElementById("youtubeIframe");
-                    const clickLayer = document.getElementById("ytClickLayer");
+                    const localSrc = document.querySelector("#player source");
+                    const ytBox = document.getElementById("youtubeIframe");
+
+                    if (!youtubeContainer || !localVideoContainer || !localVideo || !ytBox) {
+                        console.error("❌ Video DOM missing");
+                        return;
+                    }
 
                     const cleanUrl = decodeURIComponent(materialUrl.trim());
-                    const youtubeRegex = /(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
-                    const match = cleanUrl.match(youtubeRegex);
+                    const ytMatch = cleanUrl.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
 
                     const videoKey = `${currentTopicId}:${coId}`;
 
-                    if (match) {
-                        // ✅ YOUTUBE VIDEO
-                        const videoId = match[1];
-                        const embed = `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`;
+                    /* ----------- YouTube Video ----------- */
+                    if (ytMatch) {
+                        const videoId = ytMatch[1];
 
                         localVideoContainer.style.display = "none";
                         youtubeContainer.style.display = "block";
-                        youtubeIframe.src = embed;
 
-                        // Only award once
-                        if (!_pdfCompleteFiredFor.has(videoKey)) {
-                            clickLayer.addEventListener("click", function handlePlay() {
-                                clickLayer.removeEventListener("click", handlePlay);
-                                _pdfCompleteFiredFor.add(videoKey);
+                        ensureYouTubeAPI().then(() => {
+                            if (window.ytPlayer) {
+                                try {
+                                    window.ytPlayer.destroy();
+                                } catch (e) {}
+                                window.ytPlayer = null;
+                            }
 
-                                console.log("🎬 YouTube play clicked — progress marked");
-                                markMaterialComplete(currentTopicId, coId, "video");
+                            window.ytPlayer = new YT.Player("youtubeIframe", {
+                                videoId,
+                                playerVars: {
+                                    rel: 0,
+                                    modestbranding: 1,
+                                    enablejsapi: 1
+                                },
+                                events: {
+                                    onStateChange: (e) => {
+                                        if (e.data === YT.PlayerState.PLAYING) {
+                                            if (MARK_ON_PLAY) markOnce(videoKey, currentTopicId, coId);
 
-                                // Remove overlay so user can control video normally
-                                clickLayer.style.display = "none";
+                                            if (!window._ytInterval) {
+                                                window._ytInterval = setInterval(() => {
+                                                    try {
+                                                        const dur = ytPlayer.getDuration();
+                                                        const cur = ytPlayer.getCurrentTime();
+                                                        if (dur > 0 && cur / dur * 100 >= MARK_ON_PERCENT) {
+                                                            markOnce(videoKey, currentTopicId, coId);
+                                                            clearInterval(window._ytInterval);
+                                                            window._ytInterval = null;
+                                                        }
+                                                    } catch {}
+                                                }, 1000);
+                                            }
+                                        }
+
+                                        if (e.data === YT.PlayerState.ENDED) {
+                                            markOnce(videoKey, currentTopicId, coId);
+                                            clearInterval(window._ytInterval);
+                                            window._ytInterval = null;
+                                        }
+                                    }
+                                }
                             });
-                        }
+                        });
 
                     } else {
-                        // ✅ LOCAL VIDEO
+                        /* ----------- Local Video ----------- */
                         youtubeContainer.style.display = "none";
-                        clickLayer.style.display = "none";
                         localVideoContainer.style.display = "block";
 
-                        localVideoSource.src = `../uploads/materials/${materialUrl}`;
+                        localSrc.src = `../uploads/materials/${materialUrl}`;
                         localVideo.load();
 
-                        localVideo.onended = () => {
-                            markMaterialComplete(currentTopicId, coId, "video");
+                        localVideo.onplay = () => {
+                            if (MARK_ON_PLAY) markOnce(videoKey, currentTopicId, coId);
                         };
+
+                        localVideo.ontimeupdate = () => {
+                            if (_pdfCompleteFiredFor.has(videoKey)) return;
+                            const dur = localVideo.duration;
+                            if (dur > 0 && (localVideo.currentTime / dur * 100 >= MARK_ON_PERCENT)) {
+                                markOnce(videoKey, currentTopicId, coId);
+                            }
+                        };
+
+                        localVideo.onended = () => markOnce(videoKey, currentTopicId, coId);
                     }
                 } else if (materialType === "practice") {
-                    loadPracticeQuestions(coId);
-                }
+                loadPracticeQuestions(coId);
             }
+        }
 
 
-            // --- Load Practice Questions ---
-            function loadPracticeQuestions(coId) {
-                const topicId = currentTopicId;
-                const container = document.querySelector("#practiceSection #questionsContainer");
-                const submitBtn = document.querySelector("#practiceSection #submitContainer");
+        // --- Load Practice Questions ---
+        function loadPracticeQuestions(coId) {
+            const topicId = currentTopicId;
+            const container = document.querySelector("#practiceSection #questionsContainer");
+            const submitBtn = document.querySelector("#practiceSection #submitContainer");
 
-                container.innerHTML = `<p class="text-center text-muted py-3">Loading questions...</p>`;
-                submitBtn.style.display = "none";
+            container.innerHTML = `<p class="text-center text-muted py-3">Loading questions...</p>`;
+            submitBtn.style.display = "none";
 
-                fetch(`api/get_practice_questions.php?launch_id=${launchId}&topic_id=${topicId}&co_id=${coId}`)
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.status !== 200 || !data.data.length) {
-                            container.innerHTML = `<p class='text-center text-danger py-3'>No practice questions found.</p>`;
-                            return;
-                        }
+            fetch(`api/get_practice_questions.php?launch_id=${launchId}&topic_id=${topicId}&co_id=${coId}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status !== 200 || !data.data.length) {
+                        container.innerHTML = `<p class='text-center text-danger py-3'>No practice questions found.</p>`;
+                        return;
+                    }
 
-                        let html = "";
-                        data.data.forEach((q, i) => {
-                            let optionsHTML = "";
-                            Object.entries(q.options).forEach(([key, value]) => {
-                                optionsHTML += `
+                    let html = "";
+                    data.data.forEach((q, i) => {
+                        let optionsHTML = "";
+                        Object.entries(q.options).forEach(([key, value]) => {
+                            optionsHTML += `
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q${q.pq_id}" value="${key}" id="q${q.pq_id}_${key}">
                                 <label class="form-check-label" for="q${q.pq_id}_${key}">${key}. ${value}</label>
                             </div>`;
-                            });
+                        });
 
-                            html += `
+                        html += `
                         <div class="mb-3 question-block" data-pqid="${q.pq_id}">
                             <label class="form-label fw-semibold">${i + 1}. ${q.question}</label>
                             ${optionsHTML}
                         </div>`;
-                        });
-
-                        container.innerHTML = html;
-                        submitBtn.style.display = "flex";
-                        submitBtn.dataset.coId = coId;
-                    })
-                    .catch(err => {
-                        console.error(err);
-                        container.innerHTML = `<p class='text-center text-danger py-3'>Error loading questions.</p>`;
                     });
+
+                    container.innerHTML = html;
+                    submitBtn.style.display = "flex";
+                    submitBtn.dataset.coId = coId;
+                })
+                .catch(err => {
+                    console.error(err);
+                    container.innerHTML = `<p class='text-center text-danger py-3'>Error loading questions.</p>`;
+                });
+        }
+
+        // --- Submit Practice Answers ---
+        document.querySelector("#practiceSection button.btn-gradient-glossy").addEventListener("click", () => {
+            const answers = [];
+            document.querySelectorAll(".question-block").forEach(block => {
+                const pqId = block.dataset.pqid;
+                const selected = block.querySelector("input[type='radio']:checked")?.value;
+                if (selected) answers.push({
+                    pq_id: pqId,
+                    selected_answer: selected
+                });
+            });
+
+            if (!answers.length) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Incomplete!",
+                    text: "Please answer at least one question before submitting.",
+                    confirmButtonColor: "#3085d6"
+                });
+                return;
             }
 
-            // --- Submit Practice Answers ---
-            document.querySelector("#practiceSection button.btn-gradient-glossy").addEventListener("click", () => {
-                const answers = [];
-                document.querySelectorAll(".question-block").forEach(block => {
-                    const pqId = block.dataset.pqid;
-                    const selected = block.querySelector("input[type='radio']:checked")?.value;
-                    if (selected) answers.push({
-                        pq_id: pqId,
-                        selected_answer: selected
-                    });
-                });
-
-                if (!answers.length) {
-                    Swal.fire({
-                        icon: "warning",
-                        title: "Incomplete!",
-                        text: "Please answer at least one question before submitting.",
-                        confirmButtonColor: "#3085d6"
-                    });
-                    return;
-                }
-
-                fetch("api/submit_practice_answers.php", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            answers
-                        })
+            fetch("api/submit_practice_answers.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        answers
                     })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.status === 200) {
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === 200) {
 
-                            const coId = document.querySelector("#practiceSection #submitContainer").dataset.coId;
+                        const coId = document.querySelector("#practiceSection #submitContainer").dataset.coId;
 
-                            // ✅ If score >= 50% then mark material complete
-                            if (data.score >= 50) {
-                                markMaterialComplete(currentTopicId, coId, "practice");
-                                console.log("✅ Practice passed, progress updated");
-                            } else {
-                                console.log("❌ Practice failed (below 50%), progress not updated");
-                            }
-
-                            // ✅ Show result alert
-                            Swal.fire({
-                                icon: data.score >= 50 ? "success" : "warning",
-                                title: data.score >= 50 ? "Practice Passed!" : "Practice Attempted",
-                                text: `Your score: ${data.score}%`,
-                                confirmButtonColor: data.score >= 50 ? "#4CAF50" : "#FF9800"
-                            }).then(() => {
-                                // Refresh materials + badges showing score
-                                showCourseOutcomeList();
-                                loadMaterialsForTopic(currentTopicId);
-                            });
+                        // ✅ If score >= 50% then mark material complete
+                        if (data.score >= 50) {
+                            markMaterialComplete(currentTopicId, coId, "practice");
+                            console.log("✅ Practice passed, progress updated");
                         } else {
-                            Swal.fire({
-                                icon: "error",
-                                title: "Submission Failed",
-                                text: data.message,
-                                confirmButtonColor: "#d33"
-                            });
+                            console.log("❌ Practice failed (below 50%), progress not updated");
                         }
-                    })
 
-
-                    .catch(err => {
-                        console.error(err);
+                        // ✅ Show result alert
+                        Swal.fire({
+                            icon: data.score >= 50 ? "success" : "warning",
+                            title: data.score >= 50 ? "Practice Passed!" : "Practice Attempted",
+                            text: `Your score: ${data.score}%`,
+                            confirmButtonColor: data.score >= 50 ? "#4CAF50" : "#FF9800"
+                        }).then(() => {
+                            // Refresh materials + badges showing score
+                            showCourseOutcomeList();
+                            loadMaterialsForTopic(currentTopicId);
+                        });
+                    } else {
                         Swal.fire({
                             icon: "error",
-                            title: "Error",
-                            text: "An error occurred while submitting the practice test.",
+                            title: "Submission Failed",
+                            text: data.message,
                             confirmButtonColor: "#d33"
                         });
+                    }
+                })
+
+
+                .catch(err => {
+                    console.error(err);
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: "An error occurred while submitting the practice test.",
+                        confirmButtonColor: "#d33"
                     });
-            });
+                });
+        });
 
         });
     </script>
@@ -1280,7 +1347,7 @@ $launch_id = $_GET['launch_id'];
                 .then(res => {
                     console.log("✅ Material saved:", res);
 
-                    // ✅ Update Topic Progress
+                    //✅ Update Topic Progress
                     fetch("api/update_topic_progress.php", {
                             method: "POST",
                             headers: {
