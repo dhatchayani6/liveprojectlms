@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Viana Study - Dashboard</title>
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../responsive.css">
@@ -183,138 +184,8 @@
         </div>
 
         <!-- Assignment Cards -->
-        <div class="assignment-cards p-2">
-
-            <!-- Card 1 -->
-            <a href="assignment_details.php">
-                <div class="assignment-card card p-3 shadow-sm mb-3">
-                    <div class="row align-items-center">
-                        <!-- Left section: Image + Details -->
-                        <div class="col-12 d-flex flex-sm-row  align-items-start gap-3">
-
-                            <!-- Profile Pic -->
-                            <img src="../images/image.png" alt="Dr. Emily Rodriguez" class="profile-pic"
-                                style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
-
-                            <!-- Text Section -->
-                            <div class="flex-grow-1 w-100">
-                                <!-- Title + Badge -->
-                                <div class="d-flex flex-wrap align-items-center justify-content-between">
-                                    <strong class="title text-truncate">Database Normalization</strong>
-                                    <span class="badge bg-success">On Time</span>
-                                </div>
-
-                                <!-- Course -->
-                                <p class="text-muted mb-1">Course: Database Systems</p>
-
-                                <!-- By + Submitted -->
-                                <div class="d-flex flex-row justify-content-between text-muted small">
-                                    <span>By: Alex Johnson (SID2023001)</span>
-                                    <span>Submitted: 2023-11-16</span>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-
-
-            <!-- Card 2 -->
-            <div class="assignment-card card p-3 shadow-sm mb-3">
-                <div class="row align-items-center">
-                    <!-- Left section: Image + Details -->
-                    <div class="col-12 d-flex flex-sm-row  align-items-start gap-3">
-
-                        <!-- Profile Pic -->
-                        <img src="../images/image.png" alt="Dr. Emily Rodriguez" class="profile-pic"
-                            style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
-
-                        <!-- Text Section -->
-                        <div class="flex-grow-1 w-100">
-                            <!-- Title + Badge -->
-                            <div class="d-flex flex-wrap align-items-center justify-content-between">
-                                <strong class="title text-truncate">Database Normalization</strong>
-                                <span class="badge bg-warning">Late</span>
-                            </div>
-
-                            <!-- Course -->
-                            <p class="text-muted mb-1">Course: Database Systems</p>
-
-                            <!-- By + Submitted -->
-                            <div class="d-flex flex-row justify-content-between text-muted small">
-                                <span>By: Alex Johnson (SID2023001)</span>
-                                <span>Submitted: 2023-11-16</span>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="assignment-card card p-3 shadow-sm mb-3">
-                <div class="row align-items-center">
-                    <!-- Left section: Image + Details -->
-                    <div class="col-12 d-flex flex-sm-row  align-items-start gap-3">
-
-                        <!-- Profile Pic -->
-                        <img src="../images/image.png" alt="Dr. Emily Rodriguez" class="profile-pic"
-                            style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
-
-                        <!-- Text Section -->
-                        <div class="flex-grow-1 w-100">
-                            <!-- Title + Badge -->
-                            <div class="d-flex flex-wrap align-items-center justify-content-between">
-                                <strong class="title text-truncate">Database Normalization</strong>
-                                <span class="badge bg-success">On Time</span>
-                            </div>
-
-                            <!-- Course -->
-                            <p class="text-muted mb-1">Course: Database Systems</p>
-
-                            <!-- By + Submitted -->
-                            <div class="d-flex flex-row justify-content-between text-muted small">
-                                <span>By: Alex Johnson (SID2023001)</span>
-                                <span>Submitted: 2023-11-16</span>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="assignment-card card p-3 shadow-sm mb-3">
-                <div class="row align-items-center">
-                    <!-- Left section: Image + Details -->
-                    <div class="col-12 d-flex flex-sm-row  align-items-start gap-3">
-
-                        <!-- Profile Pic -->
-                        <img src="../images/image.png" alt="Dr. Emily Rodriguez" class="profile-pic"
-                            style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
-
-                        <!-- Text Section -->
-                        <div class="flex-grow-1 w-100">
-                            <!-- Title + Badge -->
-                            <div class="d-flex flex-wrap align-items-center justify-content-between">
-                                <strong class="title text-truncate">Database Normalization</strong>
-                                <span class="badge bg-warning">Late</span>
-                            </div>
-
-                            <!-- Course -->
-                            <p class="text-muted mb-1">Course: Database Systems</p>
-
-                            <!-- By + Submitted -->
-                            <div class="d-flex flex-row justify-content-between text-muted small">
-                                <span>By: Alex Johnson (SID2023001)</span>
-                                <span>Submitted: 2023-11-16</span>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+        <div class="assignment-cards p-2" id="facultyAssignmentList">
+            <div class="text-center text-muted p-4">Loading assignments...</div>
         </div>
 
 
@@ -322,6 +193,62 @@
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            loadAssignments();
+
+            function loadAssignments() {
+                $.getJSON("api/faculty_overall_assignments.php", function(res) {
+                    const container = $("#facultyAssignmentList");
+
+                    if (res.status !== 200) {
+                        container.html('<div class="text-danger text-center p-4">Unable to load assignments.</div>');
+                        return;
+                    }
+
+                    if (res.data.length === 0) {
+                        container.html('<div class="text-center text-muted p-4">No student submissions yet.</div>');
+                        return;
+                    }
+
+                    let html = "";
+                    res.data.forEach(item => {
+                        const badgeColor = item.status === "On Time" ? "bg-success" : "bg-warning";
+                        const badgeText = item.status;
+                        const marks = item.marks_obtained ? `<span class='badge bg-info text-dark'>Graded</span>` : ``;
+
+                        html += `
+                <a href="assignment_details.php?sub_id=${item.sub_id}" class="text-decoration-none">
+                    <div class="assignment-card card p-3 shadow-sm mb-3">
+                        <div class="row align-items-center">
+                            <div class="col-12 d-flex flex-sm-row align-items-start gap-3">
+                                <img src="../images/image.png" alt="Student Photo" class="profile-pic"
+                                    style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
+                                <div class="flex-grow-1 w-100">
+                                    <div class="d-flex flex-wrap align-items-center justify-content-between">
+                                        <strong class="title text-truncate">${item.assignment_title}</strong>
+                                        <span class="badge ${badgeColor}">${badgeText}</span>
+                                    </div>
+                                    <p class="text-muted mb-1">Course: ${item.course_name}</p>
+                                    <div class="d-flex flex-row justify-content-between text-muted small">
+                                        <span>By: ${item.student_name} (${item.reg_no})</span>
+                                        <span>Submitted: ${item.submission_date}</span>
+                                    </div>
+                                    ${marks}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>`;
+                    });
+
+                    container.html(html);
+                });
+            }
+        });
+    </script>
+
 </body>
 
 </html>

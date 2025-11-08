@@ -63,11 +63,11 @@
                 <nav class="tabs-nav">
                     <a href="dashboard.php" class="tab <?php if ($current_page == 'dashboard.php')
                                                             echo 'active'; ?>">Dashboard</a>
-                    <a href="assignments.php" class="tab <?php if ($current_page == 'assignments.php')
+                    <!-- <a href="assignments.php" class="tab <?php if ($current_page == 'assignments.php')
                                                                 echo 'active'; ?>">
                         Assignments
                         <span class="badge">5</span>
-                    </a>
+                    </a> -->
                     <a href="courses.php" class="tab <?php if ($current_page == 'courses.php')
                                                             echo 'active'; ?>">Courses</a>
                 </nav>
@@ -119,7 +119,7 @@
                              style="cursor:pointer;">
                             <div>
                                 <h6 class="mb-1">${course.course_code}: ${course.course_name}</h6>
-                                <small class="text-muted">${course.total_students || 0} Students</small>
+                                <small class="text-muted">${course.student_count || 0} Students</small>
                             </div>
                             <div class="text-end">
                                 <small class="text-secondary d-block mb-2">${course.schedule || "No Schedule"}</small>

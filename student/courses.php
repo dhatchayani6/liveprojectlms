@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php session_start() ?>
 
 <head>
     <meta charset="UTF-8">
@@ -62,9 +63,9 @@
             font-size: 10px;
         }
 
-        .content-scroll {
-            max-height: 648px !important;
-        }
+        /* .content-scroll {
+            max-height: 100% !important;
+        } */
 
         .btn-blue-courses {
             background: linear-gradient(rgb(168, 213, 255) 0%, rgb(126, 182, 247) 100%);
@@ -110,7 +111,7 @@
         .courses-scroll {
             height: 100%;
             max-height: 515px;
-            overflow-y: scroll;
+            overflow-y: auto;
         }
     </style>
 </head>
@@ -119,32 +120,8 @@
     <main class="dashboard-main">
         <div class="content-container bg-light">
 
-            <!-- Header -->
-            <div
-                class="header d-flex justify-content-between align-items-center position-relative px-3 py-2 bg-secondary text-dark">
-                <h5 class="mb-0 assignment-titles">
-                    <a href="dashboard.php"><i class="bi bi-chevron-left rounded-circle"></i></a>Viana Study
-                </h5>
-                <a href="../index.php">
-                    <button class="btn d-flex align-items-center logout-btn gap-2">
-                        <i class="bi bi-box-arrow-right"></i>
-                        <span>Logout</span>
-                    </button>
-                </a>
-            </div>
 
-            <!-- User Profile -->
-            <div class="user-profile"
-                style="background: linear-gradient(rgb(240, 246, 255), rgb(216, 232, 255)); border-bottom: 1px solid rgb(184, 208, 240); box-shadow: rgba(255, 255, 255, 0.6) 0px 1px 0px inset;">
-                <img src="../images/image.png" alt="Dr. Emily Rodriguez" class="profile-pic">
-                <div class="user-details ps-2">
-                    <div class="name">Dr. Emily Rodriguez</div>
-                    <div class="info">
-                        <span class="id">Student ID: FAC21032305</span> &bull;
-                        <span class="dept">Computer Science</span>
-                    </div>
-                </div>
-            </div>
+            <?php include("header.php"); ?>
 
             <div class="content-scroll">
                 <div class="p-4">
@@ -156,73 +133,7 @@
                     <h5 class="fw-semibold mb-3">Current Courses</h5>
 
                     <div class=" p-3 mb-4 courses-scroll">
-
-                        <div class="fw-semibold text-dark mb-2">Slot A</div>
-                        <a href="courses_detail.php" class="text-dark">
-                            <div class="mb-3 p-3 bg-courses-grey rounded shadow-sm">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <small class="fw-medium">CS2345: Database Systems</small>
-                                    <button class="btn btn-blue-courses btn-sm">View Details</button>
-                                </div>
-                                <div class="progress-container mt-2">
-                                    <div class="progress">
-                                        <div class="progress-bar" style="width: 42%;" role="progressbar"
-                                            aria-valuenow="42" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span class="percentage-label">42%</span>
-                                </div>
-                            </div>
-                        </a>
-
-                        <div class="fw-semibold text-dark mb-2">Slot B</div>
-                        <div class="mb-3 p-3 bg-courses-grey rounded shadow-sm">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <small class="fw-medium">CS3456: Algorithms</small>
-                                <button class="btn btn-blue-courses btn-sm">View Details</button>
-                            </div>
-                            <div class="progress-container mt-2">
-                                <div class="progress">
-                                    <div class="progress-bar" style="width: 78%;" role="progressbar" aria-valuenow="78"
-                                        aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <span class="percentage-label">78%</span>
-                            </div>
-                        </div>
-
-                        <div class="fw-semibold text-dark mb-2">Slot C</div>
-                        <div class="slot-card text-center p-3 border rounded shadow-sm mb-2" style="background:#f8f9fa; max-width:100%; margin:auto;">
-                            <button class="btn btn-blue-courses btn-sm w-10 fw-semibold" data-bs-toggle="modal" data-bs-target="#enrollSlotModal">Enroll in Slot C</button>
-                        </div>
-
-
-
-                        <div class="mb-3 p-3 bg-courses-grey rounded shadow-sm">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <small class="fw-medium">CS5678: Web Development</small>
-                                <button class="btn btn-blue-courses btn-sm">View Details</button>
-                            </div>
-                            <div class="progress-container mt-2">
-                                <div class="progress">
-                                    <div class="progress-bar" style="width: 55%;" role="progressbar" aria-valuenow="55"
-                                        aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <span class="percentage-label">55%</span>
-                            </div>
-                        </div>
-
-                        <div class="mb-3 p-3 bg-courses-grey rounded shadow-sm">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <small class="fw-medium">CS6789: Mobile App Development</small>
-                                <button class="btn btn-blue-courses btn-sm">View Details</button>
-                            </div>
-                            <div class="progress-container mt-2">
-                                <div class="progress">
-                                    <div class="progress-bar" style="width: 22%;" role="progressbar" aria-valuenow="22"
-                                        aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <span class="percentage-label">22%</span>
-                            </div>
-                        </div>
+                        <div id="slotCoursesContainer" class="mt-3"></div>
 
                     </div>
                 </div>
@@ -231,12 +142,12 @@
         </div>
     </main>
 
-    <!-- Modal -->
+    <!-- Enroll Slot Modal -->
     <div class="modal fade" id="enrollSlotModal" tabindex="-1" aria-labelledby="enrollSlotModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content border-0 shadow-lg rounded-4">
                 <div class="modal-header border-0 pb-0">
-                    <h5 class="modal-title fw-semibold" id="enrollSlotModalLabel">Enroll in Slot E</h5>
+                    <h5 class="modal-title fw-semibold" id="enrollSlotModalLabel">Enroll in Slot</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
@@ -246,92 +157,278 @@
                         <input type="text" class="form-control rounded-pill shadow-sm" id="searchCourse" placeholder="Search course by name or code...">
                     </div>
 
-                    <!-- Course List -->
-                    <div id="courseList" class="d-flex flex-column gap-2">
-                        <!-- Example Course Item -->
-                        <div class="course-item p-3 rounded border d-flex justify-content-between align-items-start shadow-sm" data-course="CS101">
-                            <div>
-                                <div class="fw-semibold text-dark">CS101</div>
-                                <div class="text-muted small">Intro to Programming</div>
-                                <div class="text-muted small">Dr. Sai Amrish</div>
-                            </div>
-                            <button class="btn btn-outline-primary btn-sm select-btn">Select</button>
-                        </div>
-
-                        <div class="course-item p-3 rounded border d-flex justify-content-between align-items-start shadow-sm" data-course="CS102">
-                            <div>
-                                <div class="fw-semibold text-dark">CS102</div>
-                                <div class="text-muted small">Data Structures</div>
-                                <div class="text-muted small">Dr. Aakash</div>
-                            </div>
-                            <button class="btn btn-outline-primary btn-sm select-btn">Select</button>
-                        </div>
-
-                        <div class="course-item p-3 rounded border d-flex justify-content-between align-items-start shadow-sm" data-course="CS103">
-                            <div>
-                                <div class="fw-semibold text-dark">CS103</div>
-                                <div class="text-muted small">Computer Architecture</div>
-                                <div class="text-muted small">Dr. Manohar</div>
-                            </div>
-                            <button class="btn btn-outline-primary btn-sm select-btn">Select</button>
-                        </div>
-                    </div>
+                    <!-- Course List (dynamically loaded) -->
+                    <div id="courseList" class="d-flex flex-column gap-2"></div>
                 </div>
 
                 <div class="modal-footer border-0 pt-0">
-                    <button id="requestJoinBtn" class="btn btn-primary w-100 fw-semibold rounded-pill py-2">
+                    <button id="requestJoinBtn" class="btn btn-primary w-100 fw-semibold rounded-pill py-2" disabled>
                         Request to Join (0)
                     </button>
                 </div>
             </div>
         </div>
     </div>
+
+
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Optional JS for Search + Selection -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const searchInput = document.getElementById("searchCourse");
-            const courseItems = document.querySelectorAll(".course-item");
-            const requestBtn = document.getElementById("requestJoinBtn");
-            let selectedCount = 0;
+        // function markMaterialComplete(topicId, materialId) {
+        //     const launchId = new URLSearchParams(window.location.search).get("launch_id");
 
-            // ✅ Search Function
-            searchInput.addEventListener("input", () => {
-                const query = searchInput.value.toLowerCase();
-                courseItems.forEach(item => {
-                    const text = item.textContent.toLowerCase();
-                    item.style.display = text.includes(query) ? "flex" : "none";
+        //     fetch("api/mark_material_complete.php", {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/x-www-form-urlencoded"
+        //         },
+        //         body: `launch_id=${launchId}&topic_id=${topicId}&material_id=${materialId}`
+        //     });
+        // }
+
+        // markMaterialComplete(currentTopicId, materialId);
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            loadStudentCourses();
+
+            function loadStudentCourses() {
+                $.getJSON("api/get_student_approved_courses.php", function(response) {
+                    if (response.status !== "success") {
+                        $("#slotCoursesContainer").html('<div class="text-danger text-center">Error loading courses</div>');
+                        return;
+                    }
+
+                    const data = response.data;
+                    let html = "";
+
+                    data.forEach(item => {
+                        if (item.has_approved) {
+                            html += `
+                <div class="fw-semibold text-dark mb-2">Slot ${item.slot}</div>
+                <a href="courses_detail.php?launch_id=${item.launch_id}" class="text-dark text-decoration-none">
+                    <div class="mb-3 p-3 bg-courses-grey rounded shadow-sm slot-course" data-launch="${item.launch_id}">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="fw-medium">${item.course_code}: ${item.course_name}</small>
+                            <button class="btn btn-blue-courses btn-sm">View Details</button>
+                        </div>
+                        <div class="progress-container mt-2">
+                            <div class="progress">
+                                <div class="progress-bar" 
+                                     style="width:0%;" 
+                                     role="progressbar"></div>
+                            </div>
+                            <span class="percentage-label">0%</span>
+                        </div>
+                    </div>
+                </a>
+                `;
+                        } else {
+                            html += `
+                <div class="fw-semibold text-dark mb-2">Slot ${item.slot}</div>
+                <div class="slot-card text-center p-3 border rounded shadow-sm mb-2"
+                    style="background:#f8f9fa; max-width:100%; margin:auto;">
+                    <button class="btn btn-blue-courses btn-sm fw-semibold enroll-btn" 
+                        data-slot="${item.slot}"
+                        data-bs-toggle="modal" data-bs-target="#enrollSlotModal">
+                        Enroll in Slot ${item.slot}
+                    </button>
+                </div>
+                `;
+                        }
+                    });
+
+                    $("#slotCoursesContainer").html(html);
+
+                    // ✅ AFTER rendering, fetch progress for each approved course
+                    $(".slot-course").each(function() {
+                        const launchId = $(this).data("launch");
+                        const card = $(this);
+
+                        $.ajax({
+                            url: "api/progress_utils.php",
+                            type: "POST",
+                            data: {
+                                launch_id: launchId
+                            },
+                            success: function(resp) {
+                                if (resp.status === 200) {
+                                    const pct = resp.course_progress ?? 0;
+                                    card.find(".progress-bar").css("width", pct + "%");
+                                    card.find(".percentage-label").text(pct + "%");
+                                }
+                            }
+                        });
+                    });
+                });
+            }
+
+
+
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            let selectedCourses = [];
+            let courseData = [];
+
+            // 🔹 Load slot courses dynamically
+            $(document).on("click", ".enroll-btn", function() {
+                const slot = $(this).data("slot");
+                $("#enrollSlotModalLabel").text(`Enroll in ${slot}`);
+                $("#courseList").html('<div class="text-center py-3">Loading...</div>');
+                $("#requestJoinBtn").prop("disabled", true).text("Request to Join (0)");
+                selectedCourses = [];
+
+                $.getJSON("api/get_slot_courses.php", {
+                    slot: slot
+                }, function(res) {
+                    if (res.status !== 200) {
+                        $("#courseList").html('<div class="text-danger text-center">Error loading</div>');
+                        return;
+                    }
+
+                    courseData = res.data;
+                    renderCourses(courseData);
                 });
             });
 
-            // ✅ Selection Toggle
-            courseItems.forEach(item => {
-                const button = item.querySelector(".select-btn");
-                button.addEventListener("click", () => {
-                    const isSelected = button.classList.contains("btn-primary");
+            function renderCourses(data) {
+                let html = "";
+                data.forEach(c => {
+                    let btnClass = "btn-outline-primary";
+                    let btnText = "Select";
+                    let disabled = "";
+                    let bg = "";
 
-                    if (isSelected) {
-                        // Unselect
-                        button.classList.remove("btn-primary");
-                        button.classList.add("btn-outline-primary");
-                        button.textContent = "Select";
-                        item.classList.remove("bg-light");
-                        selectedCount--;
-                    } else {
-                        // Select
-                        button.classList.add("btn-primary");
-                        button.classList.remove("btn-outline-primary");
-                        button.textContent = "Selected";
-                        item.classList.add("bg-light");
-                        selectedCount++;
+                    switch (c.approval_status) {
+                        case "pending":
+                            btnClass = "btn-secondary";
+                            btnText = "Pending";
+                            disabled = "disabled";
+                            break;
+                        case "approved":
+                            btnClass = "btn-success";
+                            btnText = "Approved";
+                            disabled = "disabled";
+                            break;
+                        case "rejected":
+                            btnClass = "btn-warning reapply-btn";
+                            btnText = "Re-Apply";
+                            break;
                     }
 
-                    requestBtn.textContent = `Request to Join (${selectedCount})`;
+                    html += `
+                    <div class="course-item p-3 rounded border d-flex justify-content-between align-items-start shadow-sm ${bg}" data-launch-id="${c.launch_id}">
+                    <div>
+                        <div class="fw-semibold text-dark">${c.course_code}</div>
+                        <div class="text-muted small">${c.course_name}</div>
+                        <div class="text-muted small">Faculty Name: ${c.name ?? "TBA"}</div>
+                    </div>
+                    <button class="btn ${btnClass} btn-sm select-btn" ${disabled}>${btnText}</button>
+                    </div>`;
+                });
+                $("#courseList").html(html);
+            }
+
+            // 🔹 Search
+            $(document).on("input", "#searchCourse", function() {
+                const q = $(this).val().toLowerCase();
+                $(".course-item").each(function() {
+                    $(this).toggle($(this).text().toLowerCase().includes(q));
+                });
+            });
+
+            // 🔹 Toggle selection
+            $(document).on("click", ".select-btn", function() {
+                const $btn = $(this);
+                const id = $btn.closest(".course-item").data("launch-id");
+                if ($btn.hasClass("btn-primary")) {
+                    $btn.removeClass("btn-primary").addClass("btn-outline-primary").text("Select");
+                    selectedCourses = selectedCourses.filter(i => i !== id);
+                } else {
+                    $btn.addClass("btn-primary").removeClass("btn-outline-primary").text("Selected");
+                    selectedCourses.push(id);
+                }
+                $("#requestJoinBtn").text(`Request to Join (${selectedCourses.length})`);
+                $("#requestJoinBtn").prop("disabled", selectedCourses.length === 0);
+            });
+
+            // 🔹 Send all selected for approval
+            $("#requestJoinBtn").on("click", function() {
+                if (selectedCourses.length === 0) return;
+                const btn = $(this);
+                btn.prop("disabled", true).text("Sending...");
+
+                $.ajax({
+                    url: "api/apply_course.php",
+                    type: "POST",
+                    data: JSON.stringify({
+                        launch_ids: selectedCourses
+                    }),
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function(res) {
+                        if (res.status === 200) {
+                            res.updated.forEach(u => {
+                                const item = $(`.course-item[data-launch-id='${u.launch_id}']`);
+                                const button = item.find(".select-btn");
+                                button.removeClass("btn-outline-primary btn-primary btn-warning")
+                                    .addClass("btn-secondary")
+                                    .text("Pending")
+                                    .prop("disabled", true);
+                            });
+                            selectedCourses = [];
+                            btn.text("Request to Join (0)").prop("disabled", true);
+                        } else {
+                            alert(res.message);
+                        }
+                    },
+                    error: function() {
+                        alert("Server error");
+                    },
+                    complete: function() {
+                        btn.prop("disabled", false);
+                    }
+                });
+            });
+
+            // 🔹 Reapply logic
+            $(document).on("click", ".reapply-btn", function() {
+                const id = $(this).closest(".course-item").data("launch-id");
+                const $btn = $(this);
+                $btn.prop("disabled", true).text("Re-Applying...");
+                $.ajax({
+                    url: "api/apply_course.php",
+                    type: "POST",
+                    data: JSON.stringify({
+                        launch_ids: [id]
+                    }),
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function(res) {
+                        if (res.status === 200) {
+                            $btn.removeClass("btn-warning reapply-btn")
+                                .addClass("btn-secondary")
+                                .text("Pending")
+                                .prop("disabled", true);
+                        } else {
+                            alert(res.message);
+                        }
+                    },
+                    error: function() {
+                        alert("Server error");
+                    }
                 });
             });
         });
     </script>
+
+
+
 </body>
 
 </html>

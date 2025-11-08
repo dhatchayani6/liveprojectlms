@@ -18,15 +18,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.css" />
     <style>
         .rounded-circle {
-            width: 20px !important;
-            height: 20px !important;
+            width: 30px !important;
+            height: 30px !important;
             background: linear-gradient(#c4e0f9, #96c6f3);
             border: 1px solid #ddd;
             padding: 11px;
         }
 
         .rounded-circle i {
-            font-size: 11px !important;
+            font-size: 10px !important;
 
         }
 
@@ -60,8 +60,7 @@
         <div
             class="header d-flex justify-content-between align-items-center position-relative px-3 py-2 bg-secondary text-dark">
             <h5 class="mb-0 assignment-titles">
-                <a href="dashboard.php"><i class="bi bi-chevron-left rounded-circle"></i></a> Manage: Introduction to
-                Data Science
+                <a href="dashboard.php"><i class="bi bi-chevron-left rounded-circle"></i></a>
             </h5>
 
             <!-- Profile / Menu Dropdown (Desktop & Mobile) -->
@@ -77,9 +76,9 @@
                         Dashboard</a>
                 </h6>
                 <!-- Committee Report button (hidden by default) -->
-                <button id="committeeReportBtn" class="d-none">
+                <!-- <button id="committeeReportBtn" class="d-none">
                     <i class="bi bi-file-bar-graph"></i> Committee Report
-                </button>
+                </button> -->
             </div>
 
             <div class="assignmnent p-3" id="assignments-slider">
@@ -96,8 +95,8 @@
                             </p> -->
                             <div
                                 class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center pt-3">
-                                <small class="text-muted">0 Students</small>
-                                <small class="text-muted" id="slt">Slot A</small>
+                                <small class="text-muted" id="studentCount">0 Students</small>
+                                <small class="text-muted" id="slt"></small>
                             </div>
 
                         </div>
@@ -118,12 +117,12 @@
                                     Materials
                                 </button>
                             </li>
-                            <!-- <li class="nav-item" role="presentation">
+                            <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="students-tab" data-bs-toggle="tab"
                                     data-bs-target="#students" type="button" role="tab" aria-selected="false">
                                     Students
                                 </button>
-                            </li> -->
+                            </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="settings-tab" data-bs-toggle="tab"
                                     data-bs-target="#settings" type="button" role="tab" aria-selected="false">
@@ -190,326 +189,11 @@
                                         </div>
 
                                     </div>
-                                    <div class="border rounded mb-3">
-                                        <!-- Header -->
-                                        <div class="bg-secondary text-dark p-3 rounded-top">
-                                            <h5 class="mb-0" style="    font-size: 1rem;">Course Goals</h5>
-                                        </div>
-                                        <div class="p-3">
-                                            <ul>
-                                                <li><small class="text-muted">Understand core data science concepts and
-                                                        methodologies</small></li>
-                                                <li><small class="text-muted">Develop proficiency in data collection,
-                                                        cleaning,
-                                                        and preprocessing</small></li>
-                                                <li><small class="text-muted">Apply statistical methods to extract
-                                                        insights from
-                                                        data</small></li>
-                                                <li><small class="text-muted">Create effective data visualizations to
-                                                        communicate findings</small></li>
-                                                <li><small class="text-muted">Implement basic machine learning
-                                                        algorithms for
-                                                        data analysis</small></li>
-                                            </ul>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="border rounded mb-3">
-                                        <!-- Header -->
-                                        <div class="bg-secondary text-dark p-3 rounded-top">
-                                            <h5 class="mb-0" style="font-size: 1rem;">Committee Recommendations
-                                            </h5>
-                                        </div>
-                                        <div class="p-3">
-                                            <small class="text-muted">The following recommendations were made by the
-                                                course
-                                                committee to improve course delivery and student outcomes:
-
-                                            </small>
-                                            <ol class="list-unstyled pt-2">
-                                                <li class="mb-2 d-flex align-items-start">
-                                                    <span class="badge bg-blue text-blue  me-2 rounded-circle"
-                                                        style="width: 24px; height: 24px; ">1</span>
-                                                    <span class="text-muted small">Increase hands-on lab sessions from 1
-                                                        to 2
-                                                        hours per week</span>
-                                                </li>
-                                                <li class="mb-2 d-flex align-items-start">
-                                                    <span class="badge bg-blue text-blue me-2 rounded-circle"
-                                                        style="width: 24px; height: 24px;">2</span>
-                                                    <span class="text-muted small">Incorporate more real-world datasets
-                                                        from
-                                                        industry partners</span>
-                                                </li>
-                                                <li class="mb-2 d-flex align-items-start">
-                                                    <span class="badge bg-blue text-blue me-2 rounded-circle"
-                                                        style="width: 24px; height: 24px;">3</span>
-                                                    <span class="text-muted small">Add a mid-term group project to
-                                                        enhance
-                                                        collaborative skills</span>
-                                                </li>
-                                                <li class="mb-2 d-flex align-items-start">
-                                                    <span class="badge bg-blue text-blue me-2 rounded-circle"
-                                                        style="width: 24px; height: 24px;">4</span>
-                                                    <span class="text-muted small">Update statistical methods section to
-                                                        include
-                                                        Bayesian approaches</span>
-                                                </li>
-                                                <li class="mb-3 d-flex align-items-start">
-                                                    <span class="badge bg-blue text-blue me-2 rounded-circle"
-                                                        style="width: 24px; height: 24px;">5</span>
-                                                    <span class="text-muted small">Include guest lectures from industry
-                                                        practitioners</span>
-                                                </li>
-                                            </ol>
-
-                                            <div class="d-flex justify-content-end">
-                                                <button class="view-committe rounded p-2 font-bold"><small
-                                                        class="text-muted "
-                                                        style="font-weight: 500;color:white !important">View Full
-                                                        Committee
-                                                        Report</small></button>
-                                            </div>
 
 
-                                        </div>
-                                    </div>
 
-                                    <div class="border rounded mb-3">
-                                        <!-- Header -->
-                                        <div class="bg-secondary text-dark p-3 rounded-top">
-                                            <h5 class="mb-0" style="font-size: 1rem;">Learning Outcomes & Mappings</h5>
-                                        </div>
 
-                                        <!-- Body -->
-                                        <div class="p-3">
-                                            <!-- Course Outcomes List -->
-                                            <div class="mb-3">
-                                                <h6>Course Outcomes (COs)</h6>
-                                                <ul class="list-unstyled">
-                                                    <li class="py-1"><span class="badge bg-blue text-blue me-2"
-                                                            style="font-size: 0.8rem;    font-weight: 500 !important;">CO1</span><small>Define
-                                                            and
-                                                            explain key
-                                                            concepts in data science</small></li>
-                                                    <li class="py-1"><span class="badge bg-blue text-blue me-2"
-                                                            style="font-size: 0.8rem;    font-weight: 500 !important;">CO2</span><small>Apply
-                                                            appropriate
-                                                            data
-                                                            collection and preprocessing techniques</small></li>
-                                                    <li class="py-1"><span class="badge bg-blue text-blue me-2"
-                                                            style="font-size: 0.8rem;    font-weight: 500 !important;">CO3</span><small>Perform
-                                                            exploratory
-                                                            data
-                                                            analysis using statistical methods</small></li>
-                                                    <li class="py-1"><span class="badge bg-blue text-blue me-2"
-                                                            style="font-size: 0.8rem;    font-weight: 500 !important;">CO4</span><small>Develop
-                                                            and
-                                                            evaluate basic
-                                                            machine learning models</small></li>
-                                                    <li class="py-1"><span class="badge bg-blue text-blue me-2"
-                                                            style="font-size: 0.8rem;    font-weight: 500 !important;">CO5</span><small>Communicate
-                                                            insights
-                                                            derived from data analysis effectively</small></li>
-                                                </ul>
-                                            </div>
 
-                                            <div class="mb-3">
-                                                <h6>Program Outcomes (POs)</h6>
-                                                <ul class="list-unstyled">
-                                                    <li class="py-1"><span class="badge bg-blue text-blue me-2"
-                                                            style="font-size: 0.8rem;    font-weight: 500 !important;">PO1</span><small>Demonstrate advanced understanding of educational process and planning.</small></li>
-                                                    <li class="py-1"><span class="badge bg-blue text-blue me-2"
-                                                            style="font-size: 0.8rem;    font-weight: 500 !important;">PO2</span><small>Design and implement evidence-based teaching-learning strategies based on sound principles and theories.</small></li>
-                                                    <li class="py-1"><span class="badge bg-blue text-blue me-2"
-                                                            style="font-size: 0.8rem;    font-weight: 500 !important;">PO3</span><small>Design and implement evidence-based assessment strategies based on sound principles.</small></li>
-                                                    <li class="py-1"><span class="badge bg-blue text-blue me-2"
-                                                            style="font-size: 0.8rem;    font-weight: 500 !important;">PO4</span><small>Evaluate and design curriculum with all its components</small></li>
-                                                    <li class="py-1"><span class="badge bg-blue text-blue me-2"
-                                                            style="font-size: 0.8rem;    font-weight: 500 !important;">PO5</span><small>Demonstrate attributes of leadership and quality educational management</small></li>
-                                                    <li class="py-1"><span class="badge bg-blue text-blue me-2"
-                                                            style="font-size: 0.8rem;    font-weight: 500 !important;">PO6</span><small>Conduct and publish research in health professions education.</small></li>
-                                                    <li class="py-1"><span class="badge bg-blue text-blue me-2"
-                                                            style="font-size: 0.8rem;    font-weight: 500 !important;">PO7</span><small>Function as reflective practitioners and change agents.</small></li>
-                                                </ul>
-                                            </div>
-
-                                            <!-- Legend -->
-                                            <div class="mb-2">
-                                                <span class="badge bg-success"
-                                                    style="font-weight: 400 !important;">Strong</span>
-                                                <span class="badge bg-blue text-blue"
-                                                    style="font-weight: 400 !important;">Moderate</span>
-                                                <span class="badge bg-warning text-dark"
-                                                    style="font-weight: 400 !important;">Slight</span>
-                                            </div>
-
-                                            <!-- CO-PO Mapping Table -->
-                                            <div class="table-responsive">
-                                                <table class="table table-bordered align-middle text-center">
-                                                    <thead class="border rounded bg-secondary ">
-                                                        <tr class="bg-secondary text-white">
-                                                            <th scope="col"><small class="text-muted"
-                                                                    style="font-weight: 500 !important;">CO / PO</small>
-                                                            </th>
-                                                            <th scope="col"><small class="text-muted"
-                                                                    style="font-weight: 500 !important;">PO1</small>
-                                                            </th>
-                                                            <th scope="col"><small class="text-muted"
-                                                                    style="font-weight: 500 !important;">PO2</small>
-                                                            </th>
-                                                            <th scope="col"><small class="text-muted"
-                                                                    style="font-weight: 500 !important;">PO3</small>
-                                                            </th>
-                                                            <th scope="col"><small class="text-muted"
-                                                                    style="font-weight: 500 !important;">PO4</small>
-                                                            </th>
-                                                            <th scope="col"><small class="text-muted"
-                                                                    style="font-weight: 500 !important;">PO5</small>
-                                                            </th>
-                                                            <th scope="col"><small class="text-muted"
-                                                                    style="font-weight: 500 !important;">PO6</small>
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <th scope="row" class="text-start"><small class="text-muted"
-                                                                    style="font-weight: 500 !important;">CO1</small>
-                                                            </th>
-                                                            <td><span class="badge bg-success">Strong</span></td>
-                                                            <td><span class="badge bg-blue text-blue">Moderate</span>
-                                                            </td>
-                                                            <td><span class="badge bg-warning ">Slight</span></td>
-                                                            <td>
-                                                                <div class="rounded"
-                                                                    style="    --tw-bg-opacity: 1; background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));">
-                                                                    -</div>
-                                                            </td>
-                                                            <td><span class="badge bg-warning">Slight</span></td>
-                                                            <td><span class="badge bg-blue text-blue">Moderate</span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row" class="text-start"><small class="text-muted"
-                                                                    style="font-weight: 500 !important;">CO2</small>
-                                                            </th>
-                                                            <td><span class="badge bg-success">Strong</span></td>
-                                                            <td><span class="badge bg-success">Strong</span></td>
-                                                            <td><span class="badge bg-blue text-blue">Moderate</span>
-                                                            </td>
-                                                            <td><span class="badge bg-warning ">Slight</span></td>
-                                                            <td>
-                                                                <div class="rounded"
-                                                                    style="    --tw-bg-opacity: 1; background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));">
-                                                                    -</div>
-                                                            </td>
-                                                            <td><span class="badge bg-warning text-dark">Slight</span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row" class="text-start"><small class="text-muted"
-                                                                    style="font-weight: 500 !important;">CO3</small>
-                                                            </th>
-                                                            <td><span class="badge bg-success">Strong</span></td>
-                                                            <td><span class="badge bg-success">Strong</span></td>
-                                                            <td><span class="badge bg-success">Strong</span></td>
-                                                            <td><span class="badge bg-warning ">Slight</span></td>
-                                                            <td>
-                                                                <div class="rounded"
-                                                                    style="    --tw-bg-opacity: 1; background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));">
-                                                                    -</div>
-                                                            </td>
-                                                            <td><span class="badge bg-blue text-blue">Moderate</span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row" class="text-start"><small class="text-muted"
-                                                                    style="font-weight: 500 !important;">CO4</small>
-                                                            </th>
-                                                            <td><span class="badge bg-blue text-blue">Moderate</span>
-                                                            </td>
-                                                            <td><span class="badge bg-success">Strong</span></td>
-                                                            <td><span class="badge bg-success">Strong</span></td>
-                                                            <td><span class="badge bg-blue text-blue">Moderate</span>
-                                                            </td>
-                                                            <td><span class="badge bg-warning ">Slight</span></td>
-                                                            <td><span class="badge bg-warning ">Slight</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row" class="text-start"><small class="text-muted"
-                                                                    style="font-weight: 500 !important;">CO5</small>
-                                                            </th>
-                                                            <td><span class="badge bg-warning ">Slight</span></td>
-                                                            <td><span class="badge bg-warning ">Slight</span></td>
-                                                            <td><span class="badge bg-blue text-blue">Moderate</span>
-                                                            </td>
-                                                            <td><span class="badge bg-blue text-blue">Moderate</span>
-                                                            </td>
-                                                            <td><span class="badge bg-blue text-blue">Moderate</span>
-                                                            </td>
-                                                            <td><span class="badge bg-success">Strong</span></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="rounded border mb-3">
-                                        <!-- Header -->
-                                        <div class="bg-secondary text-dark p-3 rounded-top">
-                                            <h5 class="mb-0" style="font-size: 1rem;">Required Textbooks</h5>
-                                        </div>
-
-                                        <!-- Book List -->
-                                        <div class="p-3">
-                                            <!-- Book 1 -->
-                                            <div class="d-flex justify-content-between align-items-start mb-3">
-                                                <div class="d-flex">
-                                                    <div class="me-3">
-                                                        <div class=" border rounded p-2 book"
-                                                            style="background-color: #f0f0f0;">
-                                                            <i class="bi bi-book"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div>
-                                                        <div>Introduction to Data Science with
-                                                            Python</div>
-                                                        <div class="text-muted small">By John Smith</div>
-                                                        <div class="text-muted small">Academic Press, 2022</div>
-                                                        <div class="text-muted small">ISBN: 978-1234567890</div>
-                                                    </div>
-                                                </div>
-                                                <!-- <span class="badge bg-primary">Required</span> -->
-                                                <small class="btn-blue">Required</small>
-                                            </div>
-
-                                            <hr class="my-2" />
-
-                                            <!-- Book 2 -->
-                                            <div class="d-flex justify-content-between align-items-start">
-                                                <div class="d-flex">
-                                                    <div class="me-3">
-                                                        <div class="border rounded p-2 book"
-                                                            style="background-color: #f0f0f0;">
-                                                            <i class="bi bi-book"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div>
-                                                        <div>Statistical Methods for Data Analysis
-                                                        </div>
-                                                        <div class="text-muted small">By Emily Chen</div>
-                                                        <div class="text-muted small">Tech Publications, 2021</div>
-                                                        <div class="text-muted small">ISBN: 978-0987654321</div>
-                                                    </div>
-                                                </div>
-                                                <!-- <span class="badge bg-light text-dark border">Optional</span> -->
-                                                <small class="text-muted btn-gray">Optional</small>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                 </div>
                             </div>
@@ -645,8 +329,8 @@
                                                         </div>
 
                                                         <div class="col-12 mb-3">
-                                                            <label for="poDescription" class="form-label">PO Description</label>
-                                                            <textarea readonly class="form-control" id="poDescription" name="po_description" rows="4" placeholder="PO Description" required></textarea>
+                                                            <!-- <label for="poDescription" class="form-label">PO Description</label> -->
+                                                            <input readonly type="hidden" class="form-control" id="poDescription" name="po_description" rows="4" placeholder="PO Description" required>
                                                         </div>
                                                     </div>
 
@@ -657,7 +341,6 @@
                                                         </div>
                                                     </div>
                                                 </form>
-
                                             </div>
                                         </div>
 
@@ -697,8 +380,7 @@
                                         <!-- Outcome Detail -->
                                         <div id="outcomeDetail" style="display:none;">
                                             <div class="d-flex align-items-center mb-3" style="gap:30%;">
-                                                <button id="backToOutcomes" class="btn btn-sm text-primary">← Back to
-                                                    Outcomes</button>
+                                                <button id="backToOutcomes" class="btn btn-sm text-primary">← Back to Outcomes</button>
                                                 <h6 class="mb-0" id="out-come-Title">-</h6>
                                             </div>
                                             <div class="mb-3">
@@ -728,7 +410,7 @@
                                             </ul>
 
                                             <div class="tab-content border p-3">
-                                                <div class="d-flex align-items-center justify-content-end mb-2 gap-2">
+                                                <!-- <div class="d-flex align-items-center justify-content-end mb-2 gap-2">
                                                     <button id="editBtn" class="btn edit-btn btn-sm">
                                                         <i class="bi bi-pencil"></i> Edit
                                                     </button>
@@ -736,10 +418,16 @@
                                                         style="display:none;">Save</button>
                                                     <button id="cancelBtn" class="btn outcome-cancel-btn btn-sm"
                                                         style="display:none;">Cancel</button>
-                                                </div>
+                                                </div> -->
 
                                                 <!-- Notes Tab -->
                                                 <div class="tab-pane fade show active pt-2" id="notes">
+                                                    <div class="d-flex align-items-center justify-content-end mb-2 gap-2 notes-actions">
+                                                        <button id="editPdfBtn" class="btn btn-sm btn-secondary"><i class="bi bi-pencil"></i> Edit</button>
+                                                        <button id="savePdfBtn" class="btn btn-sm btn-success" style="display:none;">Save</button>
+                                                        <button id="cancelPdfBtn" class="btn btn-sm btn-danger" style="display:none;">Cancel</button>
+                                                    </div>
+
                                                     <!-- 🟢 Static Notes (preview when stored PDF exists) -->
                                                     <div id="staticNotesSection" class="border rounded p-3 mb-4 bg-light shadow-sm" style="display:none;">
                                                         <h6 class="fw-semibold mb-3">📘 Static Notes</h6>
@@ -767,32 +455,27 @@
 
                                                 <!-- Video Tab -->
                                                 <div class="tab-pane fade show pt-2" id="video">
-                                                    <!-- Static Video preview (if stored) -->
-                                                    <div id="staticVideoSection" class="border rounded p-3 mb-4 bg-light shadow-sm" style="display:none;">
-                                                        <h6 class="fw-semibold mb-3">📺 Flipped Class</h6>
-                                                        <div class="ratio ratio-16x9">
-                                                            <video id="staticVideoPlayer" playsinline controls controlsList="nodownload noremoteplayback" oncontextmenu="return false">
-                                                                <source id="staticVideoSource" src="" type="video/mp4" />
-                                                            </video>
-                                                        </div>
+                                                    <div class="d-flex align-items-center justify-content-end mb-2 gap-2 video-actions">
+                                                        <button id="editVideoBtn" class="btn btn-sm btn-secondary"><i class="bi bi-pencil"></i> Edit</button>
+                                                        <button id="saveVideoBtn" class="btn btn-sm btn-success" style="display:none;">Save</button>
+                                                        <button id="cancelVideoBtn" class="btn btn-sm btn-danger" style="display:none;">Cancel</button>
                                                     </div>
 
-                                                    <!-- Upload video (shown if no stored video) -->
+                                                    <!-- View saved video link (optional tiny section) -->
+                                                    <div id="staticVideoSection" class="border rounded p-3 mb-3 bg-light shadow-sm" style="display:none;">
+                                                        <h6 class="fw-semibold mb-2">Saved YouTube Link:</h6>
+                                                        <a id="savedVideoLink" href="#" target="_blank" class="text-primary"></a>
+                                                    </div>
+
+                                                    <!-- Add / Edit YouTube Link -->
                                                     <div id="videoUploadSection" class="border rounded p-3 bg-light shadow-sm" style="display:none;">
-                                                        <h6 class="fw-semibold mb-3">🎥 Upload & Preview Your Video</h6>
-
-                                                        <div id="videoDropZone" class="border border-primary rounded p-5 text-center mb-3" style="cursor: pointer; background-color: #f8f9fa;">
-                                                            <p class="mb-0 fw-semibold">📂 Drag & Drop your video here or Click to Upload</p>
-                                                            <input type="file" id="videoInput" accept="video/*" style="display:none;">
-                                                        </div>
-
-                                                        <div id="videoPreviewContainer" class="ratio ratio-16x9" style="display:none;">
-                                                            <video id="uploadedVideo" playsinline controls controlsList="nodownload noremoteplayback" oncontextmenu="return false">
-                                                                <source type="video/mp4" />
-                                                            </video>
-                                                        </div>
+                                                        <h6 class="fw-semibold mb-3">Add YouTube Video Link</h6>
+                                                        <input type="text" id="youtubeLinkInput" class="form-control mb-2"
+                                                            placeholder="Paste YouTube link here (example: https://youtu.be/xyz123)">
+                                                        <small class="text-muted">* Only YouTube link allowed</small>
                                                     </div>
                                                 </div>
+
 
 
                                                 <!-- PRACTICE TAB -->
@@ -936,11 +619,11 @@
 
                             <div class="tab-pane fade" id="students" role="tabpanel" aria-labelledby="students-tab">
                                 <div class="p-4">
-                                    <h6 class="mb-4">Enrolled Students</h6>
+                                    <h6 class="mb-4"></h6>
                                     <div class="rounded border">
                                         <!-- Header -->
                                         <div class="bg-secondary text-dark p-3 rounded-top">
-                                            <h5 class="mb-0" style="font-size: 1rem;">Students (5)</h5>
+                                            <h5 class="mb-0" style="font-size: 1rem;">Enrolled Students</h5>
                                         </div>
 
                                         <!-- Body -->
@@ -951,165 +634,12 @@
                                                         <th>Student</th>
                                                         <th>Registration</th>
                                                         <th>Progress</th>
-                                                        <th>Attendance</th>
+                                                        <!-- <th>Attendance</th> -->
                                                     </tr>
                                                 </thead>
-                                                <tbody>
-                                                    <!-- Student 1 -->
-                                                    <tr>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-2"
-                                                                    style="width: 30px;height: 30px;background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);">
-                                                                    AJ
-                                                                </div>
-                                                                <div>
-                                                                    <div>Alex Johnson</div>
-                                                                    <small
-                                                                        class="text-muted">alex.johnson@example.com</small>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>SID2023001</td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="progress flex-grow-1 me-2"
-                                                                    style="height:8px;">
-                                                                    <div class="progress-bar bg-success"
-                                                                        role="progressbar" style="width: 78%"></div>
-                                                                </div>
-                                                                <small>78%</small>
-                                                            </div>
-                                                        </td>
-                                                        <td><span
-                                                                class="badge bg-success-subtle text-success">92%</span>
-                                                        </td>
-                                                    </tr>
-
-                                                    <!-- Student 2 -->
-                                                    <tr>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-2"
-                                                                    style="width: 30px;height: 30px;background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);">
-                                                                    EW
-                                                                </div>
-                                                                <div>
-                                                                    <div>Emma Williams</div>
-                                                                    <small
-                                                                        class="text-muted">emma.williams@example.com</small>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>SID2023002</td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="progress flex-grow-1 me-2"
-                                                                    style="height:8px;">
-                                                                    <div class="progress-bar bg-primary"
-                                                                        role="progressbar" style="width: 65%"></div>
-                                                                </div>
-                                                                <small>65%</small>
-                                                            </div>
-                                                        </td>
-                                                        <td><span
-                                                                class="badge bg-primary-subtle text-primary">85%</span>
-                                                        </td>
-                                                    </tr>
-
-                                                    <!-- Student 3 -->
-                                                    <tr>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-2"
-                                                                    style="width: 30px;height: 30px;background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);">
-                                                                    MB
-                                                                </div>
-                                                                <div>
-                                                                    <div>Michael Brown</div>
-                                                                    <small
-                                                                        class="text-muted">michael.brown@example.com</small>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>SID2023003</td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="progress flex-grow-1 me-2"
-                                                                    style="height:8px;">
-                                                                    <div class="progress-bar bg-success"
-                                                                        role="progressbar" style="width: 92%"></div>
-                                                                </div>
-                                                                <small>92%</small>
-                                                            </div>
-                                                        </td>
-                                                        <td><span
-                                                                class="badge bg-success-subtle text-success">98%</span>
-                                                        </td>
-                                                    </tr>
-
-                                                    <!-- Student 4 -->
-                                                    <tr>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-2"
-                                                                    style="width: 30px;height: 30px;background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);">
-                                                                    SD
-                                                                </div>
-                                                                <div>
-                                                                    <div>Sophia Davis</div>
-                                                                    <small
-                                                                        class="text-muted">sophia.davis@example.com</small>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>SID2023004</td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="progress flex-grow-1 me-2"
-                                                                    style="height:8px;">
-                                                                    <div class="progress-bar bg-danger"
-                                                                        role="progressbar" style="width: 45%"></div>
-                                                                </div>
-                                                                <small>45%</small>
-                                                            </div>
-                                                        </td>
-                                                        <td><span class="badge bg-danger-subtle text-danger">72%</span>
-                                                        </td>
-                                                    </tr>
-
-                                                    <!-- Student 5 -->
-                                                    <tr>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-2"
-                                                                    style="width: 30px;height: 30px;background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);">
-                                                                    JW
-                                                                </div>
-                                                                <div>
-                                                                    <div>James Wilson</div>
-                                                                    <small
-                                                                        class="text-muted">james.wilson@example.com</small>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>SID2023005</td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="progress flex-grow-1 me-2"
-                                                                    style="height:8px;">
-                                                                    <div class="progress-bar bg-success"
-                                                                        role="progressbar" style="width: 82%"></div>
-                                                                </div>
-                                                                <small>82%</small>
-                                                            </div>
-                                                        </td>
-                                                        <td><span
-                                                                class="badge bg-primary-subtle text-primary">88%</span>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
+                                                <tbody id="studentProgressTable"></tbody>
                                             </table>
+
                                         </div>
                                     </div>
 
@@ -1232,8 +762,8 @@
 
                                 </div>
 
-                                <div class="p-4">
-                                    <!-- Header -->
+                                <!-- <div class="p-4">
+                                
                                     <div class="bg-secondary text-dark p-3 rounded-top">
                                         <h5 class="mb-0" style="font-size: 1rem;">Advanced Settings
                                         </h5>
@@ -1293,7 +823,7 @@
                                     </div>
 
 
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -1302,7 +832,6 @@
         </div>
     </div>
 
-    <!-- assignments preview -->
     <!-- 📄 PDF Preview Modal -->
     <div class="modal fade" id="pdfPreviewModal" tabindex="-1" aria-labelledby="pdfPreviewLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered">
@@ -1317,6 +846,71 @@
             </div>
         </div>
     </div>
+
+    <!-- Edit Topic Modal -->
+    <div class="modal fade" id="editTopicModal" tabindex="-1">
+        <div class="modal-dialog">
+            <form id="editTopicForm" class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Topic</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <input type="hidden" id="edit_topic_id">
+
+                    <div class="mb-3">
+                        <label class="form-label">Topic Name</label>
+                        <input type="text" id="edit_topic_title" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Topic Description</label>
+                        <textarea id="edit_topic_desc" class="form-control" rows="3" required></textarea>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Outcome Modal -->
+    <div class="modal fade" id="editOutcomeModal" tabindex="-1">
+        <div class="modal-dialog">
+            <form id="editOutcomeForm" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Course Outcome</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <input type="hidden" id="edit_co_id">
+
+                    <div class="mb-3">
+                        <label class="form-label">CO Level (e.g., CO1)</label>
+                        <input type="text" id="edit_co_title" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Outcome Description</label>
+                        <textarea id="edit_co_desc" class="form-control" rows="3" required></textarea>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 
 
     <script>
@@ -1701,87 +1295,252 @@
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- Select Course Topic / Outcomes  -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        // ===== Globals =====
+        let selectedTopicId = null; // currently opened topic (right pane header)
+        const currentLaunchId = window.currentLaunchId || (
+            new URLSearchParams(location.search).get("launch_id")
+        );
+
+        // ===== Load topics into a container =====
         function loadTopics(launch_id, containerId) {
             const container = document.getElementById(containerId);
             if (!container) return;
 
             fetch(`api/faculty_topics.php?launch_id=${launch_id}`)
-                .then(res => res.json())
+                .then(r => r.json())
                 .then(response => {
-                    if (response.status === 'success') {
-                        const course = response.data[0];
+                    if (response.status !== 'success' || !Array.isArray(response.data) || !response.data.length) {
+                        container.innerHTML = `<p class="text-muted">${response.message || 'No topics found.'}</p>`;
+                        return;
+                    }
 
-                        // ✅ These are course-level details (same for all topics)
-                        document.getElementById('cCodename').textContent = course.course_code + ": " + course.course_name;
-                        document.getElementById('CCode').textContent = course.course_code || "N/A";
-                        document.getElementById('cName').textContent = course.course_name || "N/A";
-                        document.getElementById('slt').textContent = "Slot " + (course.slot || "N/A");
-                        document.getElementById('schedule').textContent = "Slot " + (course.slot || "N/A");
-                        document.getElementById('seatallot').textContent = course.seat_allotment;
+                    const course = response.data[0];
+                    document.getElementById("studentCount").innerText = course.student_count + " Student";
 
-                        // ✅ Fill form details (only once)
-                        document.getElementById('courseCode-form').value = course.course_code || "N/A";
-                        document.getElementById('courseName-form').value = course.course_name || "N/A";
-                        document.getElementById('department-form').value = course.department || "N/A";
-                        document.getElementById('creditHours-form').value = course.credit_hours || "N/A";
-                        document.getElementById('courseDescription-form').value = course.course_description || "N/A";
-                        document.getElementById('schedule-form').value = course.Schedule || "N/A";
-                        document.getElementById('location-form').value = course.location || "N/A";
-                        document.getElementById('prerequisites-form').value = course.Prerequisites || "N/A";
-                        document.getElementById('coordinatorName-form').value = course.user_name || "N/A";
-                        document.getElementById('email-form').value = course.email || "N/A";
-                        document.getElementById('phone-form').value = course.phone || "N/A";
+                    // Course header fields
+                    setText('cCodename', `${course.course_code}: ${course.course_name}`);
+                    setText('CCode', course.course_code);
+                    setText('cName', course.course_name);
+                    setText('slt', `Slot ${course.slot}`);
+                    setText('schedule', `Slot ${course.slot}`);
+                    setText('seatallot', course.seat_allotment);
 
-                        // ✅ Generate topics list
-                        let html = '';
-                        response.data.forEach(topic => {
-                            html += `
-                        <div class="topic-card rounded border p-4 mb-3"
-                            data-topic-id="${topic.topic_id}"
-                            data-topic-title="${topic.topic_title}"
-                            data-topic-desc="${topic.topic_description}"
-                            style="background:linear-gradient(180deg,#f9f9f9 0%,#f0f0f0 100%);
-                                   cursor:pointer;">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h6>${topic.topic_title}</h6>
-                                <button class="outcomes-btn btn btn-sm btn-outline-primary" data-topic-id="${topic.topic_id}">
-                                    ${topic.outcome_count} outcomes
-                                </button>
-                            </div>
-                            <small style="color:rgb(75 85 99)">${topic.topic_description}</small>
-                        </div>
-                    `;
-                        });
-                        container.innerHTML = html;
+                    // Pre-fill form fields (if present)
+                    setValue('courseCode-form', course.course_code);
+                    setValue('courseName-form', course.course_name);
+                    setValue('department-form', course.department);
+                    setValue('creditHours-form', course.credit_hours);
+                    setValue('courseDescription-form', course.course_description);
+                    setValue('schedule-form', course.Schedule);
+                    setValue('location-form', course.location);
+                    setValue('prerequisites-form', course.Prerequisites);
+                    setValue('coordinatorName-form', course.user_name);
+                    setValue('email-form', course.email);
+                    setValue('phone-form', course.phone);
 
-                        // ✅ Handle topic click (each card)
-                        container.querySelectorAll('.topic-card').forEach(card => {
-                            card.addEventListener('click', function() {
-                                const topicId = this.dataset.topicId;
-                                const topicTitle = this.dataset.topicTitle;
-                                const topicDesc = this.dataset.topicDesc;
+                    // Build topic cards
+                    let html = '';
+                    response.data.forEach(t => {
+                        html += `
+          <div class="topic-card rounded border p-4 mb-3"
+               data-topic-id="${t.topic_id}"
+               data-topic-title="${escapeAttr(t.topic_title)}"
+               data-topic-desc="${escapeAttr(t.topic_description)}"
+               style="background:linear-gradient(180deg,#f9f9f9 0%,#f0f0f0 100%); cursor:pointer;">
 
-                                // 🧠 FIXED: Set the current topic title & desc here dynamically
-                                document.getElementById('cTName').textContent = topicTitle || "-";
-                                document.getElementById('cTDesc').textContent = topicDesc || "-";
+            <div class="d-flex justify-content-between align-items-center">
+              <h6 class="mb-0 topic-title-text">${escapeHtml(t.topic_title)}</h6>
 
-                                // Then show outcome section
-                                showOutcomeSection(topicId, topicTitle, topicDesc);
-                            });
-                        });
+              <div class="d-flex gap-2">
+                <button type="button"
+                        class="btn btn-sm btn-outline-secondary edit-topic-btn"
+                        data-topic-id="${t.topic_id}"
+                        data-title="${escapeAttr(t.topic_title)}"
+                        data-desc="${escapeAttr(t.topic_description)}">
+                  ✏️ Edit
+                </button>
 
+                <button type="button"
+                        class="outcomes-btn btn btn-sm btn-outline-primary"
+                        data-topic-id="${t.topic_id}">
+                  ${t.outcome_count ?? 0} outcomes
+                </button>
+              </div>
+            </div>
+
+            <small class="text-secondary topic-desc-text">${escapeHtml(t.topic_description)}</small>
+          </div>
+        `;
+                    });
+
+                    container.innerHTML = html;
+
+                    // Event delegation — one listener for the whole container
+                    container.addEventListener('click', onTopicContainerClick, {
+                        passive: true
+                    });
+                })
+                .catch(err => {
+                    console.error(err);
+                    document.getElementById(containerId).innerHTML = `<p class="text-danger">No Data Found.</p>`;
+                });
+        }
+
+        // ===== Container click handler (delegated) =====
+        function onTopicContainerClick(e) {
+            const editBtn = e.target.closest('.edit-topic-btn');
+            const outcomesBtn = e.target.closest('.outcomes-btn');
+            const card = e.target.closest('.topic-card');
+
+            // Edit button clicked -> open modal; DO NOT let card click run
+            if (editBtn) {
+                e.preventDefault();
+                e.stopPropagation();
+                openEditModalFromButton(editBtn);
+                return;
+            }
+
+            // Outcomes button clicked -> call outcome loader; DO NOT let card click run
+            if (outcomesBtn) {
+                e.preventDefault();
+                e.stopPropagation();
+                const topicId = outcomesBtn.getAttribute('data-topic-id');
+                const cardEl = outcomesBtn.closest('.topic-card');
+                const title = cardEl?.getAttribute('data-topic-title') || '';
+                const desc = cardEl?.getAttribute('data-topic-desc') || '';
+                selectedTopicId = topicId;
+                setText('cTName', title);
+                setText('cTDesc', desc);
+                if (typeof showOutcomeSection === 'function') {
+                    showOutcomeSection(topicId, title, desc);
+                }
+                return;
+            }
+
+            // Clicked empty part of the card -> load the topic details
+            if (card) {
+                const topicId = card.getAttribute('data-topic-id');
+                const title = card.getAttribute('data-topic-title') || '';
+                const desc = card.getAttribute('data-topic-desc') || '';
+                selectedTopicId = topicId;
+                setText('cTName', title);
+                setText('cTDesc', desc);
+                if (typeof showOutcomeSection === 'function') {
+                    showOutcomeSection(topicId, title, desc);
+                }
+            }
+        }
+
+        // ===== Open Edit Modal and prefill =====
+        function openEditModalFromButton(btn) {
+            const id = btn.getAttribute('data-topic-id');
+            const title = btn.getAttribute('data-title') || '';
+            const desc = btn.getAttribute('data-desc') || '';
+
+            document.getElementById('edit_topic_id').value = id;
+            document.getElementById('edit_topic_title').value = title;
+            document.getElementById('edit_topic_desc').value = desc;
+
+            const modalEl = document.getElementById('editTopicModal');
+            const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+            modal.show();
+        }
+
+        // ===== Save Edited Topic (AJAX) =====
+        document.getElementById('editTopicForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const topic_id = document.getElementById('edit_topic_id').value.trim();
+            const topic_title = document.getElementById('edit_topic_title').value.trim();
+            const topic_desc = document.getElementById('edit_topic_desc').value.trim();
+
+            fetch('api/update_topic.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams({
+                        topic_id,
+                        topic_title,
+                        topic_desc
+                    })
+                })
+                .then(r => r.json())
+                .then(resp => {
+                    if (resp.status == 200) {
+                        // Patch the card in-place
+                        const card = document.querySelector(`.topic-card[data-topic-id="${CSS.escape(topic_id)}"]`);
+                        if (card) {
+                            // Text nodes
+                            const titleNode = card.querySelector('.topic-title-text');
+                            const descNode = card.querySelector('.topic-desc-text');
+                            if (titleNode) titleNode.textContent = topic_title;
+                            if (descNode) descNode.textContent = topic_desc;
+
+                            // Data attributes (used by click handler)
+                            card.setAttribute('data-topic-title', topic_title);
+                            card.setAttribute('data-topic-desc', topic_desc);
+
+                            // Also update the edit button data so the modal re-opens with latest
+                            const eb = card.querySelector('.edit-topic-btn');
+                            if (eb) {
+                                eb.setAttribute('data-title', topic_title);
+                                eb.setAttribute('data-desc', topic_desc);
+                            }
+                        }
+
+                        // If this is the currently opened topic, update the right header too
+                        if (selectedTopicId && selectedTopicId.toString() === topic_id.toString()) {
+                            setText('cTName', topic_title);
+                            setText('cTDesc', topic_desc);
+                        }
+
+                        Swal.fire('Updated!', 'Topic updated successfully.', 'success');
+
+                        // Close modal
+                        const modalEl = document.getElementById('editTopicModal');
+                        bootstrap.Modal.getInstance(modalEl)?.hide();
+                        // Optional: modalEl.querySelector('form').reset();
                     } else {
-                        container.innerHTML = `<p class="text-muted">${response.message}</p>`;
+                        Swal.fire('Error', resp.message || 'Failed to update topic', 'error');
                     }
                 })
                 .catch(err => {
-                    console.error('Error loading topics:', err);
-                    container.innerHTML = `<p class="text-danger">Failed to load topics.</p>`;
+                    console.error(err);
+                    Swal.fire('Error', 'Network/Server error', 'error');
                 });
+        });
+
+        // ===== Helpers =====
+        function setText(id, val) {
+            const el = document.getElementById(id);
+            if (el) el.textContent = val ?? '';
         }
+
+        function setValue(id, val) {
+            const el = document.getElementById(id);
+            if (el) el.value = val ?? '';
+        }
+
+        function escapeHtml(s = '') {
+            return s.replace(/[&<>"']/g, m => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            } [m]));
+        }
+
+        function escapeAttr(s = '') {
+            // Same as escapeHtml for safety in data-* attributes
+            return escapeHtml(s);
+        }
+
+
+
 
         /**
          * Display the outcome section for a given topic
@@ -1821,11 +1580,10 @@
             const outcomeDetail = document.getElementById('outcomeDetail');
             const createOutcomeForm = document.getElementById('createOutcomeForm');
 
-            // ✅ Always reset previous view
             outcomeList.innerHTML = "";
             outcomeList.style.display = "block";
             createOutcomeForm.style.display = "none";
-            if (outcomeDetail) outcomeDetail.style.display = "none"; // hide materials tab
+            if (outcomeDetail) outcomeDetail.style.display = "none";
 
             fetch(`api/faculty_outcomes.php?topic_id=${topicId}`)
                 .then(res => res.json())
@@ -1835,42 +1593,52 @@
 
                         response.data.forEach(outcome => {
                             html += `
-                        <div class="card outcome-card shadow-sm border rounded-3 mb-3"
-                            data-outcome-id="${outcome.co_id}"
-                            data-topic-id="${outcome.topic_id}"        
-                            data-launch-id="${outcome.launch_id}"  
-                            data-co-title="${outcome.co_level}"
-                            data-co-desc="${outcome.course_description}"
-                            style="background: linear-gradient(#f9f9f9, #f0f0f0); cursor:pointer;">
-                            <div class="card-body p-3">
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <h6 class="card-title mb-0 text-dark">${outcome.co_level}</h6>
-                                    <div class="d-flex gap-2">
-                                        <div class="rounded-circle d-flex align-items-center justify-content-center"
-                                            style="width: 30px; height: 30px; background: linear-gradient(#c4e0f9, #96c6f3); border:1px solid #ddd;">
-                                            <i class="bi bi-eye text-primary"></i>
-                                        </div>
-                                        <div class="rounded-circle d-flex align-items-center justify-content-center"
-                                            style="width: 30px; height: 30px; background: linear-gradient(#f9c4c4, #f39696); border:1px solid #ddd;">
-                                            <i class="bi bi-journal-text text-danger"></i>
-                                        </div>
-                                        <div class="rounded-circle d-flex align-items-center justify-content-center"
-                                            style="width: 30px; height: 30px; background: linear-gradient(#c4f9c4, #96f396); border:1px solid #ddd;">
-                                            <i class="bi bi-file-earmark-check text-success"></i>
-                                        </div>
+                    <div class="card outcome-card shadow-sm border rounded-3 mb-3"
+                        data-outcome-id="${outcome.co_id}"
+                        data-topic-id="${outcome.topic_id}"        
+                        data-launch-id="${outcome.launch_id}"  
+                        data-co-title="${outcome.co_level}"
+                        data-co-desc="${outcome.course_description}"
+                        style="background: linear-gradient(#f9f9f9, #f0f0f0); cursor:pointer;">
+
+                        <div class="card-body p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="card-title mb-0 text-dark">${outcome.co_level}</h6>
+                                <div class="d-flex gap-2 align-items-center">
+                                    <!-- Existing Icons -->
+                                    <div class="rounded-circle d-flex align-items-center justify-content-center"
+                                        style="width: 30px; height: 30px; background: linear-gradient(#c4e0f9, #96c6f3); border:1px solid #ddd;">
+                                        <i class="bi bi-eye text-primary"></i>
                                     </div>
+                                    <div class="rounded-circle d-flex align-items-center justify-content-center"
+                                        style="width: 30px; height: 30px; background: linear-gradient(#f9c4c4, #f39696); border:1px solid #ddd;">
+                                        <i class="bi bi-journal-text text-danger"></i>
+                                    </div>
+                                    <div class="rounded-circle d-flex align-items-center justify-content-center"
+                                        style="width: 30px; height: 30px; background: linear-gradient(#c4f9c4, #96f396); border:1px solid #ddd;">
+                                        <i class="bi bi-file-earmark-check text-success"></i>
+                                    </div>
+
+                                    <!-- 🖊️ Edit Button -->
+                                    <button type="button"
+                                        class="btn btn-sm btn-outline-secondary edit-co-btn"
+                                        data-co="${outcome.co_id}"
+                                        data-title="${outcome.co_level}"
+                                        data-desc="${outcome.course_description}">
+                                        ✏️ Edit
+                                    </button>
                                 </div>
-                                <p class="card-text text-muted small mb-0">${outcome.course_description}</p>
                             </div>
+
+                            <p class="card-text text-muted small mb-0">${outcome.course_description}</p>
                         </div>
-                    `;
+                    </div>`;
                         });
 
                         outcomeList.innerHTML = html;
 
-                        // ✅ Click on outcome to show materials
-                        const cards = outcomeList.querySelectorAll('.outcome-card');
-                        cards.forEach(card => {
+                        // ✅ Handle clicking on a card (to show details)
+                        outcomeList.querySelectorAll('.outcome-card').forEach(card => {
                             card.addEventListener('click', function() {
                                 const title = this.dataset.coTitle;
                                 const desc = this.dataset.coDesc;
@@ -1881,10 +1649,8 @@
                                 document.getElementById("out-come-Title").textContent = title;
                                 document.getElementById("outcomeDescription").textContent = desc;
 
-                                // Reset tabs inside detail
                                 const notesTab = outcomeDetail.querySelector('#notes-tab');
                                 const notesPane = outcomeDetail.querySelector('#notes');
-
                                 outcomeDetail.querySelectorAll('.tab-pane').forEach(tab => tab.classList.remove('show', 'active'));
                                 outcomeDetail.querySelectorAll('.nav-link').forEach(nav => nav.classList.remove('active'));
 
@@ -1895,24 +1661,11 @@
                             });
                         });
                     } else {
-                        // ✅ Hide materials if no outcomes
                         if (outcomeDetail) outcomeDetail.style.display = "none";
-
                         outcomeList.innerHTML = `
                     <div class="text-center p-4 border rounded bg-light">
                         <p class="text-muted mb-2">No outcomes found for this topic.</p>
-                       
-                    </div>
-                `;
-
-                        // Handle "Add Outcome" button
-                        const addEmptyBtn = document.getElementById('addOutcomeBtnEmpty');
-                        if (addEmptyBtn) {
-                            addEmptyBtn.addEventListener('click', () => {
-                                outcomeList.style.display = 'none';
-                                createOutcomeForm.style.display = 'block';
-                            });
-                        }
+                    </div>`;
                     }
                 })
                 .catch(err => {
@@ -1921,6 +1674,60 @@
                     if (outcomeDetail) outcomeDetail.style.display = "none";
                 });
         }
+        // 🖊️ Open Edit Modal
+        $(document).on("click", ".edit-co-btn", function(e) {
+            e.preventDefault();
+            e.stopPropagation(); // avoid card click
+
+            $("#edit_co_id").val($(this).data("co"));
+            $("#edit_co_title").val($(this).data("title"));
+            $("#edit_co_desc").val($(this).data("desc"));
+
+            new bootstrap.Modal(document.getElementById("editOutcomeModal")).show();
+        });
+
+        // 💾 Save Edited Outcome
+        $("#editOutcomeForm").on("submit", function(e) {
+            e.preventDefault();
+
+            $.post("api/update_outcome.php", {
+                co_id: $("#edit_co_id").val(),
+                co_level: $("#edit_co_title").val(),
+                course_description: $("#edit_co_desc").val()
+            }, function(resp) {
+                try {
+                    resp = JSON.parse(resp);
+                } catch {}
+
+                if (resp.status == 200) {
+                    Swal.fire("Updated!", "Outcome updated successfully.", "success");
+
+                    const id = $("#edit_co_id").val();
+                    const newTitle = $("#edit_co_title").val();
+                    const newDesc = $("#edit_co_desc").val();
+
+                    const card = $(`.outcome-card[data-outcome-id="${id}"]`);
+                    card.find(".card-title").text(newTitle);
+                    card.find("p").text(newDesc);
+                    card.find(".edit-co-btn").data("title", newTitle);
+                    card.find(".edit-co-btn").data("desc", newDesc);
+
+                    // ✅ Update dataset attributes too
+                    card.attr("data-co-title", newTitle);
+                    card.attr("data-co-desc", newDesc);
+
+                    // ✅ Refresh UI everywhere like topics
+                    loadOutcomes(selectedTopicId);
+                    loadTopics(currentLaunchId, "topicContainer");
+
+                    $("#editOutcomeModal").modal("hide");
+                } else {
+                    Swal.fire("Error", resp.message || "Update failed", "error");
+                }
+            });
+        });
+
+
 
 
         /**
@@ -2073,297 +1880,192 @@
     </script>
 
     <!-- PDF / Video Material -->
-    <script>
-        (async function() {
-            // Utility helpers
-            const show = el => el && (el.style.display = 'block');
-            const hide = el => el && (el.style.display = 'none');
+  <script>
+(async function () {
+    const show = el => el && (el.style.display = 'block');
+    const hide = el => el && (el.style.display = 'none');
 
-            let uploadedPlayer = null;
-            let staticPlayer = null;
+    // ✅ PDF buttons
+    const editPdfBtn = document.getElementById("editPdfBtn");
+    const savePdfBtn = document.getElementById("savePdfBtn");
+    const cancelPdfBtn = document.getElementById("cancelPdfBtn");
 
+    // ✅ Video buttons
+    const editVideoBtn = document.getElementById("editVideoBtn");
+    const saveVideoBtn = document.getElementById("saveVideoBtn");
+    const cancelVideoBtn = document.getElementById("cancelVideoBtn");
 
-            // DOM references
-            const editBtn = document.getElementById("editBtn");
-            const saveBtn = document.getElementById("saveBtn");
-            const cancelBtn = document.getElementById("cancelBtn");
+    // ✅ PDF UI
+    const staticNotesSection = document.getElementById("staticNotesSection");
+    const notesUploadSection = document.getElementById("notesUploadSection");
+    const pdfViewer = document.getElementById("pdfViewer");
+    const pdfPreviewContainer = document.getElementById("pdfPreviewContainer");
+    const dropZone = document.getElementById("dropZone");
+    const fileInput = document.getElementById("fileInput");
+    const staticPdfViewer = document.getElementById("staticPdfViewer");
 
-            const staticNotesSection = document.getElementById("staticNotesSection");
-            const staticPdfViewer = document.getElementById("staticPdfViewer");
-            const notesUploadSection = document.getElementById("notesUploadSection");
-            const dropZone = document.getElementById("dropZone");
-            const fileInput = document.getElementById("fileInput");
-            const pdfPreviewContainer = document.getElementById("pdfPreviewContainer");
-            const pdfViewer = document.getElementById("pdfViewer");
+    // ✅ Video UI
+    const staticVideoSection = document.getElementById("staticVideoSection");
+    const videoUploadSection = document.getElementById("videoUploadSection");
+    const youtubeLinkInput = document.getElementById("youtubeLinkInput");
+    const savedVideoLink = document.getElementById("savedVideoLink");
 
-            const staticVideoSection = document.getElementById("staticVideoSection");
-            const staticVideoSource = document.getElementById("staticVideoSource");
-            const staticVideoPlayer = document.getElementById("staticVideoPlayer");
-            const videoUploadSection = document.getElementById("videoUploadSection");
-            const videoDropZone = document.getElementById("videoDropZone");
-            const videoInput = document.getElementById("videoInput");
-            const videoPreviewContainer = document.getElementById("videoPreviewContainer");
-            const uploadedVideo = document.getElementById("uploadedVideo");
+    let selectedFile = null;
 
-            let selectedFile = null;
-            let selectedType = null;
+    // ✅ Context from topic/outcome click
+    window.setMaterialContext = ({ launch_id, topic_id, co_id }) => {
+        window._materialContext = { launch_id, topic_id, co_id };
+    };
 
-            // ✅ Context setter (called before load)
-            window.setMaterialContext = function({
-                launch_id,
-                topic_id,
-                co_id
-            }) {
-                window._materialContext = {
-                    launch_id,
-                    topic_id,
-                    co_id
-                };
-            };
+    // ✅ Load saved materials
+    window.loadModulesForCurrentContext = async function () {
+        const ctx = window._materialContext || {};
+        if (!ctx.launch_id || !ctx.topic_id || !ctx.co_id) return;
 
-            // ✅ Load existing materials
-            window.loadModulesForCurrentContext = async function() {
-                const ctx = window._materialContext || {};
-                if (!ctx.launch_id || !ctx.topic_id || !ctx.co_id) {
-                    show(notesUploadSection);
-                    show(videoUploadSection);
-                    hide(staticNotesSection);
-                    hide(staticVideoSection);
-                    hide(editBtn);
-                    return;
-                }
+        try {
+            const res = await fetch(`api/get_modules.php?launch_id=${ctx.launch_id}&topic_id=${ctx.topic_id}&co_id=${ctx.co_id}`);
+            const data = await res.json();
 
-                try {
-                    const res = await fetch(`./api/get_modules.php?launch_id=${ctx.launch_id}&topic_id=${ctx.topic_id}&co_id=${ctx.co_id}`);
-                    const json = await res.json();
+            let pdfModule = null, videoModule = null;
 
-                    if (json.status !== "success" || !json.data || json.data.length === 0) {
-                        show(notesUploadSection);
-                        show(videoUploadSection);
-                        hide(staticNotesSection);
-                        hide(staticVideoSection);
-                        hide(editBtn);
-                        return;
-                    }
-
-                    let pdfModule = null,
-                        videoModule = null;
-                    json.data.forEach(m => {
-                        const lt = (m.learning_type || '').toLowerCase();
-                        const filename = m.url ? m.url.replace(/\\/g, '/') : null;
-                        if (!filename) return;
-                        const filePath = `../uploads/materials/${filename}`;
-                        if (lt === 'pdf' || lt === 'document') pdfModule = filePath;
-                        if (lt === 'video') videoModule = filePath;
-                    });
-
-                    // ✅ PDF
-                    if (pdfModule) {
-                        staticPdfViewer.src = pdfModule;
-                        show(staticNotesSection);
-                        hide(notesUploadSection);
-                    } else {
-                        show(notesUploadSection);
-                        hide(staticNotesSection);
-                    }
-
-                    // ✅ Video (separate static player)
-                    // ✅ Video (separate static player)
-                    if (videoModule) {
-                        const staticSource = staticVideoPlayer.querySelector("source");
-                        staticSource.src = videoModule;
-
-                        // Small delay ensures video is visible when switching tabs
-                        setTimeout(() => {
-                            staticVideoPlayer.load();
-                            if (staticPlayer) staticPlayer.restart();
-                        }, 100);
-
-                        show(staticVideoSection);
-                        hide(videoUploadSection);
-                    } else {
-                        show(videoUploadSection);
-                        hide(staticVideoSection);
-                    }
-
-
-                    if (pdfModule || videoModule) show(editBtn);
-                    else hide(editBtn);
-                    hide(saveBtn);
-                    hide(cancelBtn);
-                } catch (err) {
-                    console.error("Error fetching modules:", err);
-                    show(notesUploadSection);
-                    show(videoUploadSection);
-                    hide(staticNotesSection);
-                    hide(staticVideoSection);
-                    hide(editBtn);
-                }
-            };
-
-            // ✅ File selection unified handler
-            function handleFileSelect(file, type) {
-                selectedFile = file;
-                selectedType = type;
-
-                if (type === "pdf") {
-                    const fileURL = URL.createObjectURL(file);
-                    pdfViewer.src = fileURL;
-                    show(pdfPreviewContainer);
-                }
-
-                if (type === "video") {
-                    const fileURL = URL.createObjectURL(file);
-
-                    // ✅ Only affect the PREVIEW player (uploadedVideo)
-                    const previewSource = uploadedVideo.querySelector("source");
-                    previewSource.src = fileURL;
-                    uploadedVideo.load();
-                    show(videoPreviewContainer);
-
-                    // ✅ Reinitialize Plyr for preview only (not for static)
-                    if (uploadedPlayer) uploadedPlayer.destroy();
-                    uploadedPlayer = new Plyr('#uploadedVideo', {
-                        controls: ['play', 'progress', 'current-time', 'volume', 'fullscreen'],
-                        hideControls: false
-                    });
-                }
-
-                hide(editBtn);
-                show(saveBtn);
-                show(cancelBtn);
+            if (data.status && data.data.length) {
+                data.data.forEach(m => {
+                    const t = m.learning_type.toLowerCase();
+                    if (t === "pdf") pdfModule = `../uploads/materials/${m.url}`;
+                    if (t === "video") videoModule = m.url;
+                });
             }
 
-            // ✅ Upload to backend
-            async function uploadMaterial() {
-                if (!selectedFile || !selectedType) return alert("No file selected!");
-
-                const ctx = window._materialContext || {};
-                const fd = new FormData();
-                fd.append("launch_id", ctx.launch_id);
-                fd.append("topic_id", ctx.topic_id);
-                fd.append("co_id", ctx.co_id);
-                fd.append("learning_type", selectedType);
-                fd.append("file", selectedFile);
-
-                saveBtn.disabled = true;
-                saveBtn.textContent = "Uploading...";
-
-                try {
-                    const resp = await fetch("api/upload_module.php", {
-                        method: "POST",
-                        body: fd
-                    });
-                    const j = await resp.json();
-                    if (j.status === "success") {
-                        alert("✅ Material uploaded successfully!");
-                        selectedFile = null;
-                        selectedType = null;
-                        await loadModulesForCurrentContext();
-                    } else {
-                        alert("❌ Upload failed: " + (j.message || "Unknown error"));
-                    }
-                } catch (e) {
-                    console.error(e);
-                    alert("⚠️ Upload error, please try again.");
-                } finally {
-                    saveBtn.disabled = false;
-                    saveBtn.textContent = "Save";
-                }
-            }
-
-            // ✅ Edit / Cancel button logic
-            editBtn.addEventListener("click", () => {
+            // ✅ PDF display
+            if (pdfModule) {
+                staticPdfViewer.src = pdfModule;
+                show(staticNotesSection);
+                hide(notesUploadSection);
+            } else {
                 hide(staticNotesSection);
-                hide(staticVideoSection);
                 show(notesUploadSection);
+            }
+
+            // ✅ Video display
+            if (videoModule) {
+                savedVideoLink.textContent = videoModule;
+                savedVideoLink.href = videoModule;
+                youtubeLinkInput.value = videoModule;
+                show(staticVideoSection);
+                hide(videoUploadSection);
+            } else {
+                youtubeLinkInput.value = "";
+                hide(staticVideoSection);
                 show(videoUploadSection);
-                hide(editBtn);
-                show(saveBtn);
-                show(cancelBtn);
-            });
+            }
 
-            cancelBtn.addEventListener("click", async () => {
-                selectedFile = null;
-                selectedType = null;
-                await loadModulesForCurrentContext();
-            });
+            // ✅ Default state
+            hide(savePdfBtn);
+            hide(cancelPdfBtn);
+            hide(saveVideoBtn);
+            hide(cancelVideoBtn);
 
-            saveBtn.addEventListener("click", uploadMaterial);
+            show(editPdfBtn);
+            show(editVideoBtn);
 
-            // ✅ Drag-drop and click upload triggers (PDF)
-            dropZone.addEventListener("click", () => fileInput.click());
-            dropZone.addEventListener("dragover", e => e.preventDefault());
-            dropZone.addEventListener("drop", e => {
-                e.preventDefault();
-                const f = e.dataTransfer.files[0];
-                if (f && f.type === "application/pdf") handleFileSelect(f, "pdf");
-                else alert("Please upload a valid PDF file.");
-            });
-            fileInput.addEventListener("change", e => {
-                const f = e.target.files[0];
-                if (f && f.type === "application/pdf") handleFileSelect(f, "pdf");
-                e.target.value = "";
-            });
+        } catch (e) {
+            console.error(e);
+        }
+    };
 
-            // ✅ Drag-drop and click upload triggers (Video)
-            videoDropZone.addEventListener("click", () => videoInput.click());
-            videoDropZone.addEventListener("dragover", e => e.preventDefault());
-            videoDropZone.addEventListener("drop", e => {
-                e.preventDefault();
-                const f = e.dataTransfer.files[0];
-                if (f && f.type.startsWith("video/")) handleFileSelect(f, "video");
-                else alert("Please upload a valid video file.");
-            });
-            videoInput.addEventListener("change", e => {
-                const f = e.target.files[0];
-                if (f && f.type.startsWith("video/")) handleFileSelect(f, "video");
-                e.target.value = "";
-            });
+    // ✅ Handle PDF file select
+    dropZone.addEventListener("click", () => fileInput.click());
+    fileInput.addEventListener("change", e => {
+        const f = e.target.files[0];
+        if (f && f.type === "application/pdf") {
+            selectedFile = f;
+            pdfViewer.src = URL.createObjectURL(f);
+            show(pdfPreviewContainer);
+            show(savePdfBtn);
+            show(cancelPdfBtn);
+            hide(editPdfBtn);
+        }
+    });
 
-            // ✅ Attach click handler for .outcome-card
-            document.addEventListener("click", async e => {
-                const card = e.target.closest(".outcome-card");
-                if (!card) return;
+    // ✅ Save handler
+    async function saveMaterial(type) {
+        const ctx = window._materialContext;
 
-                const coId = card.dataset.outcomeId;
-                const topicId = card.dataset.topicId;
-                const launchId = card.dataset.launchId;
+        const fd = new FormData();
+        fd.append("launch_id", ctx.launch_id);
+        fd.append("topic_id", ctx.topic_id);
+        fd.append("co_id", ctx.co_id);
 
-                setMaterialContext({
-                    launch_id: launchId,
-                    topic_id: topicId,
-                    co_id: coId
-                });
+        if (type === "pdf") {
+            fd.append("learning_type", "pdf");
+            fd.append("file", selectedFile);
+        } else {
+            fd.append("learning_type", "video");
+            fd.append("url", youtubeLinkInput.value.trim());
+        }
 
-                document.getElementById("courseOutcomeList").style.display = "none";
-                document.getElementById("outcomeDetail").style.display = "block";
+        await fetch("api/upload_module.php", { method: "POST", body: fd });
+        await loadModulesForCurrentContext();
+    }
 
-                await loadModulesForCurrentContext();
-            });
+    // ✅ PDF buttons
+    editPdfBtn.onclick = () => {
+        hide(staticNotesSection);
+        show(notesUploadSection);
+        show(savePdfBtn);
+        show(cancelPdfBtn);
+        hide(editPdfBtn);
+    };
 
-            // ✅ Initialize Plyr for static video (existing stored video)
-            document.addEventListener("DOMContentLoaded", () => {
-                staticPlayer = new Plyr("#staticVideoPlayer", {
-                    controls: ['play', 'progress', 'current-time', 'volume', 'fullscreen'],
-                    hideControls: false
-                });
-            });
+    savePdfBtn.onclick = () => saveMaterial("pdf");
+    cancelPdfBtn.onclick = loadModulesForCurrentContext;
 
-            document.addEventListener("shown.bs.tab", function(e) {
-                if (e.target && e.target.id === "video-tab") {
-                    const video = document.getElementById("staticVideoPlayer");
-                    if (video) {
-                        setTimeout(() => {
-                            video.load();
-                            if (staticPlayer) staticPlayer.play();
-                        }, 200);
-                    }
-                }
-            });
+    // ✅ Video buttons
+    editVideoBtn.onclick = () => {
+        hide(staticVideoSection);
+        show(videoUploadSection);
+        show(saveVideoBtn);
+        show(cancelVideoBtn);
+        hide(editVideoBtn);
+    };
 
-        })();
-    </script>
+    saveVideoBtn.onclick = () => {
+        if (!youtubeLinkInput.value.trim()) return alert("Paste YouTube link");
+        saveMaterial("video");
+    };
+
+    cancelVideoBtn.onclick = loadModulesForCurrentContext;
+
+    // ✅ Show save when typing YouTube
+    youtubeLinkInput.addEventListener("input", () => {
+        if (youtubeLinkInput.value.trim()) {
+            show(saveVideoBtn);
+            show(cancelVideoBtn);
+        }
+    });
+
+    // ✅ Load content when selecting outcome
+    document.addEventListener("click", async e => {
+        const card = e.target.closest(".outcome-card");
+        if (!card) return;
+
+        setMaterialContext({
+            launch_id: card.dataset.launchId,
+            topic_id: card.dataset.topicId,
+            co_id: card.dataset.outcomeId
+        });
+
+        document.getElementById("courseOutcomeList").style.display = "none";
+        document.getElementById("outcomeDetail").style.display = "block";
+
+        await loadModulesForCurrentContext();
+    });
+
+})();
+</script>
+
+
+
 
     <!-- Add / Upload Assignments -->
     <script>
@@ -2769,6 +2471,70 @@
         });
     </script>
 
+
+    <!-- student course progress -->
+    <script>
+        function loadStudentProgress() {
+            const launchId = new URLSearchParams(window.location.search).get("launch_id");
+            const tbody = $("#studentProgressTable");
+
+            tbody.html(`<tr><td colspan='4' class='text-center'>Loading...</td></tr>`);
+
+            fetch(`api/faculty_get_student_progress.php?launch_id=${launchId}`)
+                .then(res => res.json())
+                .then(res => {
+                    if (res.status !== 200 || res.students.length === 0) {
+                        tbody.html(`<tr><td colspan='4' class='text-center text-muted'>No students found</td></tr>`);
+                        return;
+                    }
+
+                    let html = "";
+                    res.students.forEach(std => {
+                        const initials = std.name.split(" ").map(w => w[0]).join("").toUpperCase().slice(0, 2);
+                        const progressColor = std.progress >= 75 ? "bg-success" : std.progress >= 40 ? "bg-warning" : "bg-danger";
+
+                        html += `
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle text-white d-flex align-items-center justify-content-center me-2"
+                                style="width:35px; height:35px; background:linear-gradient(rgb(75,147,213), rgb(21,103,186)); font-weight:bold;">
+                                ${initials}
+                            </div>
+                            <div>
+                                <div>${std.name}</div>
+                                <small class="text-muted">${std.email}</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td>${std.reg_no}</td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="progress flex-grow-1 me-2" style="height:8px;">
+                                <div class="progress-bar ${progressColor}" style="width:${std.progress}%"></div>
+                            </div>
+                            <small>${std.progress}%</small>
+                        </div>
+                    </td>
+                  
+                </tr>`;
+                    });
+                    //   <td>
+                    //     <span class="badge bg-success-subtle text-success">${std.attendance}%</span>
+                    // </td>
+
+                    tbody.html(html);
+                })
+                .catch(() => {
+                    tbody.html(`<tr><td colspan='4' class='text-danger text-center'>Error loading data</td></tr>`);
+                });
+        }
+
+        // 🚀 Auto-load when page opens
+        $(document).ready(function() {
+            loadStudentProgress();
+        });
+    </script>
 
 
 
