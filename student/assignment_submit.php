@@ -76,8 +76,8 @@
 
             <div class="content-scroll">
                 <div class="d-flex justify-content-between align-items-center p-3">
-                    <h6 class="mb-0 pending"><a href="dashboard.php"><i class="bi bi-arrow-left me-2"></i>Back to
-                            Dashboard</a>
+                    <h6 class="mb-0 pending"><a href="assignments.php"><i class="bi bi-arrow-left me-2"></i>Back to
+                            Assignments</a>
                     </h6>
 
                 </div>
@@ -194,6 +194,109 @@
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const ass_id = urlParams.get('ass_id');
+
+            if (!ass_id) {
+                alert("Assignment ID missing");
+                return;
+            }
+
+            // Fetch submission details
+            $.getJSON(`api/student_submission_detail.php?ass_id=${ass_id}`, function(res) {
+                if (res.status !== 200) {
+                    alert("Unable to load submission details");
+                    return;
+                }
+
+                const a = res.data;
+
+                // Header Title
+                $(".assignment-titles").html(`
+            <div class="d-flex gap-2">
+                <a href="dashboard.php"><i class="bi bi-chevron-left rounded-circle"></i></a>${a.course_name}
+            </div>
+        `);
+
+                // Assignment Title
+                $(".card-header h6").text(a.title || "Assignment");
+
+                // Course Detail
+                $(".card-body h6 strong").text(`"${a.course_name}"`);
+
+                // Assignment Instructions
+                const questionBox = $(".card-body .p-4");
+                questionBox.html("");
+
+                if (a.instruction && a.instruction.trim() !== "") {
+                    const questions = a.instruction.split("\n").filter(q => q.trim() !== "");
+                    questions.forEach(q => {
+                        questionBox.append(`<div class="mb-2">${q}</div>`);
+                    });
+                } else {
+                    questionBox.append(`<div>No instructions provided.</div>`);
+                }
+
+                // Due Date
+                $(".card-body .badge").first().text(a.due_date ? a.due_date.split(" ")[0] : "N/A");
+
+                // Status
+                const statusColor = a.status === "feedback" ?
+                    "linear-gradient(rgb(129,199,132), rgb(76,175,80))" :
+                    "linear-gradient(rgb(249,217,118), rgb(243,159,89))";
+
+                $(".card-body .btn-gradient-glossy")
+                    .css("background", statusColor)
+                    .find("small")
+                    .text(a.status.charAt(0).toUpperCase() + a.status.slice(1));
+
+                // Submission date
+                const submitDate = a.submission_date ? new Date(a.submission_date).toLocaleDateString() : "N/A";
+                $(".p-3 strong:contains('Submitted On:')").next().text(submitDate);
+
+                // Student Answer
+                const answerBox = $(".p-3 strong:contains('Your Answer:')").next();
+                answerBox.text(a.student_answer ? a.student_answer : "No answer submitted.");
+
+                // Uploaded Files
+                const fileList = $(".p-3 ul.list-unstyled");
+                fileList.html("");
+
+                if (a.file_list && a.file_list.length > 0) {
+                    a.file_list.forEach(file => {
+                        const fileName = file.split('/').pop();
+                        const ext = fileName.split('.').pop().toLowerCase();
+                        const icon = ext === "pdf" ? "bi-file-earmark-pdf text-danger" : "bi-file-earmark-image text-primary";
+                        fileList.append(`
+                    <li class="border rounded p-2 mb-1 d-flex align-items-center"
+                        style="background:linear-gradient(#f9f9f9, #f0f0f0);">
+                        <i class="bi ${icon} me-2"></i> 
+                        <a href="../uploads/assignments/${file}" target="_blank" class="text-decoration-none">${fileName}</a>
+                    </li>
+                `);
+                    });
+                } else {
+                    fileList.append(`<li class="text-muted">No files uploaded.</li>`);
+                }
+
+                // Add Faculty Feedback if exists
+                if (a.status === "feedback" && a.comments) {
+                    $(".content-scroll .p-3").append(`
+                <div class="card mt-4 border-success">
+                    <div class="card-header bg-success text-white fw-semibold">Faculty Feedback</div>
+                    <div class="card-body">
+                        <p><strong>Marks:</strong> ${a.marks_obtained ?? "N/A"}</p>
+                        <p><strong>Comments:</strong> ${a.comments}</p>
+                    </div>
+                </div>
+            `);
+                }
+            });
+        });
+    </script>
 
 
 

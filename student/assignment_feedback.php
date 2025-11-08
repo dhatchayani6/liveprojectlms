@@ -99,10 +99,10 @@
                         <!-- Card Header -->
                         <div class="card-header d-flex align-items-center bg-secondary p-3">
                             <i class="bi bi-book fs-5 me-2" style="background-color: #DBEAFF; 
-                  border: 1px solid rgba(59, 130, 246, 0.5); 
-                  color: #2563EB; 
-                  border-radius: 50%; 
-                  padding: 5px;">
+                                border: 1px solid rgba(59, 130, 246, 0.5); 
+                                color: #2563EB; 
+                                border-radius: 50%; 
+                                padding: 5px;">
                             </i>
                             <h6 class="mb-0 fw-semibold">Data Science Project Due</h6>
                         </div>
@@ -211,9 +211,9 @@
                                 <strong>Instructor Feedback:
                                 </strong>
                                 <div class="border rounded p-3 bg-primary" style="background: linear-gradient(rgb(240, 249, 255) 0%, rgb(224, 242, 254) 100%);
-    border-color: rgba(59, 130, 246, 0.3);
-    box-shadow: rgba(255, 255, 255, 0.6) 0px 1px 0px inset, rgba(0, 0, 0, 0.1) 0px 1px 2px;    --tw-text-opacity: 1;
-    color: rgb(30 64 175 / var(--tw-text-opacity, 1));">
+                                    border-color: rgba(59, 130, 246, 0.3);
+                                    box-shadow: rgba(255, 255, 255, 0.6) 0px 1px 0px inset, rgba(0, 0, 0, 0.1) 0px 1px 2px;    --tw-text-opacity: 1;
+                                    color: rgb(30 64 175 / var(--tw-text-opacity, 1));">
                                     Excellent work! Your implementation is efficient and well-documented. The time
                                     complexity analysis is accurate and the edge cases are handled properly.
                                 </div>
@@ -232,6 +232,130 @@
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+$(document).ready(function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const ass_id = urlParams.get("ass_id");
+
+    if (!ass_id) {
+        $(".content-scroll").html('<div class="p-4 text-center text-danger">Invalid assignment ID</div>');
+        return;
+    }
+
+    loadFeedback();
+
+    function loadFeedback() {
+        $.getJSON(`api/student_assignment_feedback.php?ass_id=${ass_id}`, function(res) {
+            if (res.status !== 200) {
+                $(".content-scroll").html('<div class="p-4 text-center text-muted">No data found.</div>');
+                return;
+            }
+
+            const a = res.data;
+            const grade = a.marks_obtained ? a.marks_obtained : "N/A";
+            const hasFeedback = a.faculty_feedback ? true : false;
+
+            // Build HTML
+            let html = `
+            <div class="p-3">
+
+                <!-- Assignment Details -->
+                <div class="card rounded border mb-4">
+                    <div class="card-header d-flex align-items-center bg-secondary p-3">
+                        <i class="bi bi-book fs-5 me-2" style="background-color:#DBEAFF;border:1px solid rgba(59,130,246,0.5);color:#2563EB;border-radius:50%;padding:5px;"></i>
+                        <h6 class="mb-0 fw-semibold">${a.assignment_title}</h6>
+                    </div>
+                    <div class="card-body bg-white">
+                        <small class="fw-semibold">Details:</small>
+                        <h6 class="mb-3 text-gray fw-normal pt-2">
+                            ${a.instruction || "No additional instructions."}
+                            <br><strong>(${a.course_name})</strong>
+                        </h6>
+
+                        ${a.notes ? `
+                        <div class="mb-3">
+                            <a href="../uploads/assignments/${a.notes}" target="_blank" class="text-decoration-none fw-semibold">
+                                📄 View Material
+                            </a>
+                        </div>` : ""}
+
+                        <div class="d-flex flex-column align-items-start">
+                            <small class="fw-semibold mb-1">Due Date:</small>
+                            <span class="badge rounded fs-6" style="background:linear-gradient(#f9d976,#f39f59);color:white;">${a.due_date}</span>
+                        </div>
+
+                        <div class="d-flex flex-column align-items-start pt-3">
+                            <small class="fw-semibold mb-1">Status</small>
+                            <span class="rounded fs-6 btn-graded">
+                                <small>${hasFeedback ? `Graded : ${grade}` : "Submitted (Awaiting Review)"}</small>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Student Submission -->
+                <div class="rounded mt-3" style="border:1px solid #dee2e6;">
+                    <div class="p-3" style="background-color:#e9ecef;">
+                        <h6 class="mb-0 fw-semibold">Your Submission</h6>
+                    </div>
+                    <div class="p-3">
+                        <div class="mb-3">
+                            <strong>Submitted On:</strong>
+                            <div>${a.submission_date}</div>
+                        </div>
+                        <div class="mb-3">
+                            <strong>Your Answer:</strong>
+                            <div class="border rounded p-3 bg-light">${a.student_answer || "No text submission."}</div>
+                        </div>
+                        <div class="mb-3">
+                            <strong>Uploaded Files:</strong>
+                            <ul class="list-unstyled mt-2">
+                                ${(a.file_urls && a.file_urls.length > 0)
+                                    ? a.file_urls.map(f => `
+                                        <li class="border rounded p-2 mb-1 d-flex align-items-center bg-light">
+                                            <i class="bi bi-file-earmark-text me-2 text-primary"></i>
+                                            <a href="../uploads/assignments/${f}" target="_blank" class="text-decoration-none text-dark">${f.split('/').pop()}</a>
+                                        </li>`).join('')
+                                    : "<li class='text-muted'>No files uploaded.</li>"
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>`;
+
+            // Feedback section (if graded)
+            if (hasFeedback) {
+                html += `
+                <div class="rounded mt-3" style="border:1px solid #dee2e6;">
+                    <div class="p-3" style="background-color:#e9ecef;">
+                        <h6 class="mb-0 fw-semibold">Feedback</h6>
+                    </div>
+                    <div class="p-3">
+                        <div class="mb-3 d-flex justify-content-between">
+                            <strong>Grade:</strong>
+                            <div class="btn-graded rounded-2 px-3">${grade}</div>
+                        </div>
+                        <div class="mb-3">
+                            <strong>Graded On:</strong>
+                            <div>${a.submission_date}</div>
+                        </div>
+                        <div class="mb-3">
+                            <strong>Instructor Feedback:</strong>
+                            <div class="border rounded p-3" style="background:linear-gradient(#f0f9ff,#e0f2fe);border-color:rgba(59,130,246,0.3);color:#1e40af;">
+                                ${a.faculty_feedback}
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            }
+
+            html += `</div>`;
+            $(".content-scroll").html(html);
+        });
+    }
+});
+</script>
 
 
 </body>

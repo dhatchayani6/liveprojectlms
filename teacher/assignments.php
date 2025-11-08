@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php session_start(); ?>
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Viana Study - Dashboard</title>
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../responsive.css">
@@ -123,31 +125,31 @@
 
 
         <div class="user-profile">
-                    <img src="../images/image.png" alt="Dr. Emily Rodriguez" class="profile-pic">
-                    <div class="user-details">
-                      <div class="name">Dr. <?php echo htmlspecialchars($_SESSION['name'] ?? ''); ?></div>
+            <img src="../images/image.png" alt="Dr. Emily Rodriguez" class="profile-pic">
+            <div class="user-details">
+                <div class="name">Dr. <?php echo htmlspecialchars($_SESSION['name'] ?? ''); ?></div>
 
-                        <div class="info">
-                            <span class="id">Faculty ID: <?php echo htmlspecialchars($_SESSION['regno'] ?? ''); ?></span>
-                            &bull;
-                            <span class="dept">Medical</span>
-                        </div>
-                    </div>
+                <div class="info">
+                    <span class="id">Faculty ID: <?php echo htmlspecialchars($_SESSION['regno'] ?? ''); ?></span>
+                    &bull;
+                    <span class="dept">Medical</span>
                 </div>
+            </div>
+        </div>
 
         <!-- Tabs -->
         <?php $current_page = basename($_SERVER['PHP_SELF']); ?>
 
         <nav class="tabs-nav">
             <a href="dashboard.php" class="tab <?php if ($current_page == 'dashboard.php')
-                echo 'active'; ?>">Dashboard</a>
+                                                    echo 'active'; ?>">Dashboard</a>
             <a href="assignments.php" class="tab <?php if ($current_page == 'assignments.php')
-                echo 'active'; ?>">
+                                                        echo 'active'; ?>">
                 Assignments
                 <span class="badge">5</span>
             </a>
             <a href="courses.php" class="tab <?php if ($current_page == 'courses.php')
-                echo 'active'; ?>">Courses</a>
+                                                    echo 'active'; ?>">Courses</a>
         </nav>
 
         <!-- Pending Assignments -->
@@ -168,59 +170,62 @@
         <!-- Assignment Cards -->
         <div class="assignment-cards">
 
-            <!-- Card 1 -->
-            <div class="assignment-card card p-3 shadow-sm mb-3">
-                <div class="row align-items-center">
-                    <!-- Title -->
-                    <div class="col-8 col-sm-8 col-md-9 col-lg-10 text-truncate">
-                        <strong>Database Normalization </strong>
+            <a href="course_wise_assignments.php">
+                <!-- Card 1 -->
+                <div class="assignment-card card p-3 shadow-sm mb-3">
+                    <div class="row align-items-center">
+                        <!-- Title -->
+                        <div class="col-8 col-sm-8 col-md-9 col-lg-10 text-truncate">
+                            <strong>Database Normalization </strong>
+                        </div>
+                        <!-- Status -->
+                        <div class="col-3 col-sm-4 col-md-3 col-lg-2 text-sm-end mt-sm-0">
+                            <span class="badge pending-badge text-light">Pending</span>
+                        </div>
                     </div>
-                    <!-- Status -->
-                    <div class="col-3 col-sm-4 col-md-3 col-lg-2 text-sm-end mt-sm-0">
-                        <span class="badge pending-badge text-light">Pending</span>
+
+
+                    <!-- Info Row: Column on <640px, Row on ≥640px -->
+                    <div class="d-flex flex-column flex-sm-row  text-sm-start">
+                        <div class="flex-fill mb-sm-0">
+                            <small class="text-muted">Course: Database Systems</small>
+                        </div>
+                        <div class="flex-fill mb-sm-0">
+                            <small class="text-muted">Student: John Smith</small>
+                        </div>
+                        <div class="flex-fill  text-sm-end">
+                            <small class="text-muted">Submitted: 2023-11-05</small>
+                        </div>
                     </div>
                 </div>
+            </a>
 
+            <a href="course_wise_assignments.php">
+                <!-- Card 2 -->
+                <div class="assignment-card card p-3 shadow-sm mb-3">
+                    <div class="row align-items-center">
+                        <div class="col-8 col-sm-8 col-md-9 col-lg-10 text-truncate">
+                            <strong>Machine Learning Project</strong>
+                        </div>
+                        <div class="col-3 col-sm-4 col-md-3 col-lg-2 text-sm-end mt-sm-0">
+                            <span class="badge pending-badge text-light">Pending</span>
+                        </div>
+                    </div>
 
-                <!-- Info Row: Column on <640px, Row on ≥640px -->
-                <div class="d-flex flex-column flex-sm-row  text-sm-start">
-                    <div class="flex-fill mb-sm-0">
-                        <small class="text-muted">Course: Database Systems</small>
-                    </div>
-                    <div class="flex-fill mb-sm-0">
-                        <small class="text-muted">Student: John Smith</small>
-                    </div>
-                    <div class="flex-fill  text-sm-end">
-                        <small class="text-muted">Submitted: 2023-11-05</small>
+                    <!-- Info Row updated to flex layout -->
+                    <div class="d-flex flex-column flex-sm-row  text-sm-start">
+                        <div class="flex-fill mb-sm-0">
+                            <small class="text-muted">Course: Introduction to Data Science</small>
+                        </div>
+                        <div class="flex-fill mb-sm-0">
+                            <small class="text-muted">Student: Emily Chen</small>
+                        </div>
+                        <div class="flex-fill  text-sm-end">
+                            <small class="text-muted">Submitted: 2023-11-05</small>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="assignment-card card p-3 shadow-sm mb-3">
-                <div class="row align-items-center">
-                    <div class="col-8 col-sm-8 col-md-9 col-lg-10 text-truncate">
-                        <strong>Machine Learning Project</strong>
-                    </div>
-                    <div class="col-3 col-sm-4 col-md-3 col-lg-2 text-sm-end mt-sm-0">
-                        <span class="badge pending-badge text-light">Pending</span>
-                    </div>
-                </div>
-
-                <!-- Info Row updated to flex layout -->
-                <div class="d-flex flex-column flex-sm-row  text-sm-start">
-                    <div class="flex-fill mb-sm-0">
-                        <small class="text-muted">Course: Introduction to Data Science</small>
-                    </div>
-                    <div class="flex-fill mb-sm-0">
-                        <small class="text-muted">Student: Emily Chen</small>
-                    </div>
-                    <div class="flex-fill  text-sm-end">
-                        <small class="text-muted">Submitted: 2023-11-05</small>
-                    </div>
-                </div>
-            </div>
-
+            </a>
         </div>
 
 

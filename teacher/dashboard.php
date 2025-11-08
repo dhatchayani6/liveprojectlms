@@ -1,6 +1,41 @@
 <?php
-session_start();
+include "../includes/config.php";
+
+$faculty_id = $_SESSION['user_id'];
+$department = "N/A";
+
+// Enable MySQLi exceptions for try/catch
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
+try {
+    // Prepare query
+    $sql = "
+        SELECT c.department
+        FROM users u
+        INNER JOIN launch_courses lc ON lc.faculty_id = u.user_id 
+        LEFT JOIN courses c ON c.course_id = lc.course_id 
+        WHERE lc.faculty_id = ?
+        LIMIT 1
+    ";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $faculty_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($row = $result->fetch_assoc()) {
+        $department = $row['department'] ?? "N/A";
+    }
+
+    $stmt->close();
+
+} catch (Exception $e) {
+    error_log("Error fetching faculty department: " . $e->getMessage());
+    $department = "N/A"; // fallback if error happens
+}
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,6 +67,7 @@ session_start();
             font-size: 16px;
             color: white;
         }
+
         /* .profile-area {
             height: 100%;
         } */
@@ -71,12 +107,12 @@ session_start();
                 <div class="user-profile">
                     <img src="../images/image.png" alt="Dr. Emily Rodriguez" class="profile-pic">
                     <div class="user-details">
-                        <div class="name">Dr. <?php echo htmlspecialchars($_SESSION['name'] ?? ''); ?></div>
+                        <div class="name"> <?php echo htmlspecialchars($_SESSION['name'] ?? ''); ?></div>
 
                         <div class="info">
                             <span class="id">Faculty ID: <?php echo htmlspecialchars($_SESSION['regno'] ?? ''); ?></span>
                             &bull;
-                            <span class="dept">Medical</span>
+                            <span class="dept"><?php echo $department;?></span>
                         </div>
                     </div>
                 </div>
@@ -86,11 +122,11 @@ session_start();
                 <nav class="tabs-nav">
                     <a href="dashboard.php" class="tab <?php if ($current_page == 'dashboard.php')
                                                             echo 'active'; ?>">Dashboard</a>
-                    <a href="assignments.php" class="tab <?php if ($current_page == 'assignments.php')
+                    <!-- <a href="assignments.php" class="tab <?php if ($current_page == 'assignments.php')
                                                                 echo 'active'; ?>">
                         Assignments
                         <span class="badge">5</span>
-                    </a>
+                    </a> -->
                     <a href="courses.php" class="tab <?php if ($current_page == 'courses.php')
                                                             echo 'active'; ?>">Courses</a>
                 </nav>
@@ -106,9 +142,11 @@ session_start();
                         <div class="card-subtitle">Pending student submissions</div>
                     </div>
                     <div class="card-action">
-                        <span class="assignment-count">5</span>
+                        <span class="assignment-count">-</span>
                     </div>
                 </div>
+
+
 
                 <div class="assignments-card">
                     <div class="card-icon">
@@ -121,15 +159,17 @@ session_start();
                         <a href="enrollment_request.php" class="text-decoration-none">
                             <div class="card-title">Enrollment Requests</div>
                         </a>
-                        <div class="card-subtitle">Pending student requests</div>
+                        <div class="card-subtitle-enrollment">Pending student requests</div>
                     </div>
+
                     <div class="card-action">
-                        <span class="assignment-count">12</span>
+                        <span class="enrollmentCount">0</span>
                     </div>
                 </div>
 
 
-                <div class="assignments-cards  p-3 m-3">
+
+                <!-- <div class="assignments-cards  p-3 m-3">
                     <h6>Todays Class Schedule</h6>
                     <div class="card-content">
                         <div class="d-flex align-items-center justify-content-between border rounded-3 p-3 mb-2 shadow-sm" style="background:#e3f2fd;">
@@ -148,7 +188,7 @@ session_start();
                             </a>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
 
                 <div class="courses-section">
@@ -172,61 +212,7 @@ session_start();
                             </div>
                         </a>
                     </div>
-                    <div class="course-list">
-                        <a href="courses-detail.php">
-                            <div class="course-item">
-                                <div class="course-details">
-                                    <div class="course-name"></div>
-                                    <div class="student-count"></div>
-                                </div>
-                                <div class="course-time"></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="course-list">
-                        <a href="courses-detail.php">
-                            <div class="course-item">
-                                <div class="course-details">
-                                    <div class="course-name"></div>
-                                    <div class="student-count"></div>
-                                </div>
-                                <div class="course-time"></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="course-list">
-                        <a href="courses-detail.php">
-                            <div class="course-item">
-                                <div class="course-details">
-                                    <div class="course-name"></div>
-                                    <div class="student-count"></div>
-                                </div>
-                                <div class="course-time"></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="course-list">
-                        <a href="courses-detail.php">
-                            <div class="course-item">
-                                <div class="course-details">
-                                    <div class="course-name"></div>
-                                    <div class="student-count"></div>
-                                </div>
-                                <div class="course-time"></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="course-list">
-                        <a href="courses-detail.php">
-                            <div class="course-item">
-                                <div class="course-details">
-                                    <div class="course-name"></div>
-                                    <div class="student-count"></div>
-                                </div>
-                                <div class="course-time"></div>
-                            </div>
-                        </a>
-                    </div>
+
                 </div>
 
 
@@ -288,6 +274,55 @@ session_start();
                 });
         });
     </script>
+    <script>
+        $(document).ready(function() {
+            loadPendingRequestCount();
+
+            function loadPendingRequestCount() {
+                $.getJSON("api/faculty_pending_count.php", function(res) {
+                    if (res.status === 200) {
+                        $(".enrollmentCount").text(res.pending_count);
+                        $(".card-subtitle-enrollment").text(
+                        res.pending_count > 0 ?
+                        `${res.pending_count} Pending student requests` :
+                        "No pending submissions 🎉"
+                    );
+                    } else {
+                        $(".enrollmentCount").text("0");
+                    }
+                }).fail(function() {
+                    $(".enrollmentCount").text("0");
+                });
+            }
+
+            // Optional: Auto-refresh count every 30 seconds
+            setInterval(loadPendingRequestCount, 30000);
+        });
+    </script>
+    <!-- Assignment Count -->
+    <script>
+        $(document).ready(function() {
+            // Load pending assignment requests
+            $.getJSON("api/faculty_assignment_count.php", function(res) {
+                if (res.status === 200) {
+                    const count = res.data.pending_assignments;
+                    $(".assignment-count").text(count);
+                    $(".card-subtitle").text(
+                        count > 0 ?
+                        `${count} pending student submissions` :
+                        "No pending submissions 🎉"
+                    );
+                } else {
+                    $(".assignment-count").text("0");
+                    $(".card-subtitle").text("Unable to load data");
+                }
+            }).fail(function() {
+                $(".assignment-count").text("0");
+                $(".card-subtitle").text("Error fetching count");
+            });
+        });
+    </script>
+
 </body>
 
 </html>

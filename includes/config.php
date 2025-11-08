@@ -30,7 +30,7 @@ $host = "localhost";     // Database host (use your DB host)
 $username = "root";          // Database username
 $password = "12345";               // Database password
 // $password = "";
-$database = "lmslive";    // Database name
+$database = "auditlms";    // Database name
 
 // Create connection
 $conn = new mysqli($host, $username, $password, $database);

@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Viana Study - Dashboard</title>
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../responsive.css">
@@ -25,7 +26,7 @@
 
         .container {
             max-width: 64rem !important;
-            height: 100vh;
+            height: 100%;
         }
 
         .profile-img {
@@ -219,753 +220,199 @@
             </div>
 
             <div class="assignmnent p-3" id="assignments-slider">
-                <!-- asiignment1 -->
-                <div class="assignment-detail">
-                    <div class="bg-secondary px-2 py-0 w-100 d-flex justify-content-between align-items-center">
-                        <div class=" p-3">
-                            <h5 class="mb-0 assignment-titles">
-                                Data Analytics Project
-                            </h5>
-                        </div>
-
-                        <i class="bi bi-x-lg"></i>
-                    </div>
-                    <div class="details-ass p-3">
-                        <div class="d-flex align-items-center mb-3">
-                            <!-- Profile image -->
-                            <div class="me-3" style="width: 40px; height: 40px; overflow: hidden; border-radius: 50%;">
-                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80"
-                                    alt="Alex Johnson" class="img-fluid w-100 h-100" style="object-fit: cover;">
-                            </div>
-                            <!-- Name and ID -->
-                            <div>
-                                <h6 class="mb-0 text-dark">Alex Johnson</h6>
-                                <small class="text-muted">ID: SID2023001</small>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <small class="mb-0 text-dark text-muted">Course: Introduction to Data Structure</small>
-                            <small class="text-muted">Submitted: 2023-11-16</small>
-                        </div>
-                        <div class="d-flex justify-content-between pt-2 mb-2">
-                            <small class="mb-0 text-dark text-muted">Due: 2023-11-16</small>
-                            <span class="badge bg-warning">Late</span>
-                        </div>
-                        <div class="mb-4">
-                            <h4 class="h4">Submission:</h4>
-                            <div class="p-3 rounded border bg-gray"
-                                style="background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);">
-                                <p class="mb-0">I have analyzed the dataset using Python and Pandas. The key findings
-                                    are
-                                    presented
-                                    in
-                                    the attached Jupyter notebook with visualizations created using Matplotlib and
-                                    Seaborn.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                            <h4 class="h4">Attached Files:</h4>
-                            <div class="d-flex align-items-center p-2 border rounded mb-2"
-                                style="background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="me-2 text-primary"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
-                                    </path>
-                                </svg>
-                                <span class="small text-secondary">data_analysis.ipynb</span>
-                            </div>
-
-                            <div class="d-flex align-items-center p-2 border rounded mb-2"
-                                style="background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="me-2 text-primary"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
-                                    </path>
-                                </svg>
-                                <span class="small text-secondary">data_analysis.ipynb</span>
-                            </div>
-
-                        </div>
-                        <div class="mb-4">
-                            <h4 class="form-label h4">Grade:</h4>
-
-                            <div class="d-flex gap-2 w-25 mb-4">
-                                <!-- Select dropdown -->
-                                <select class="form-select  border-blue grade-select">
-                                    <option value="">Select grade</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                </select>
-
-                                <span class="align-self-center">or</span>
-
-                                <!-- Text input -->
-                                <input type="text" class="form-control grade-input border-blue"
-                                    placeholder="Enter grade">
-                            </div>
-                            <div class="mb-4">
-                                <h4 class="form-label h4">Feedback:</h4>
-                                <textarea name="" id="" rows="3" class="w-100 border-blue rounded p-4"></textarea>
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <!-- assignment 2 -->
-                <div class="assignment-detail d-none">
-                    <div class="bg-secondary px-2 py-0 w-100 d-flex justify-content-between align-items-center">
-                        <div class=" p-3">
-                            <h5 class="mb-0 assignment-titles">
-                                Data Analytics Project
-                            </h5>
-                        </div>
-
-                        <i class="bi bi-x-lg"></i>
-                    </div>
-                    <div class="details-ass p-3">
-                        <div class="d-flex align-items-center mb-3">
-                            <!-- Profile image -->
-                            <div class="me-3" style="width: 40px; height: 40px; overflow: hidden; border-radius: 50%;">
-                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80"
-                                    alt="Alex Johnson" class="img-fluid w-100 h-100" style="object-fit: cover;">
-                            </div>
-                            <!-- Name and ID -->
-                            <div>
-                                <h6 class="mb-0 text-dark">Aakash</h6>
-                                <small class="text-muted">ID: SID2023001</small>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <small class="mb-0 text-dark text-muted">Course: Introduction to Data Structure</small>
-                            <small class="text-muted">Submitted: 2023-11-16</small>
-                        </div>
-                        <div class="d-flex justify-content-between pt-2 mb-2">
-                            <small class="mb-0 text-dark text-muted">Due: 2023-11-16</small>
-                            <span class="badge bg-warning">Late</span>
-                        </div>
-                        <div class="mb-4">
-                            <h4 class="h4">Submission:</h4>
-                            <div class="p-3 rounded border bg-gray"
-                                style="background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);">
-                                <p class="mb-0">I have analyzed the dataset using Python and Pandas. The key findings
-                                    are
-                                    presented
-                                    in
-                                    the attached Jupyter notebook with visualizations created using Matplotlib and
-                                    Seaborn.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                            <h4 class="h4">Attached Files:</h4>
-                            <div class="d-flex align-items-center p-2 border rounded mb-2"
-                                style="background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="me-2 text-primary"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
-                                    </path>
-                                </svg>
-                                <span class="small text-secondary">data_analysis.ipynb</span>
-                            </div>
-
-                            <div class="d-flex align-items-center p-2 border rounded mb-2"
-                                style="background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="me-2 text-primary"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
-                                    </path>
-                                </svg>
-                                <span class="small text-secondary">data_analysis.ipynb</span>
-                            </div>
-
-                        </div>
-                        <div class="mb-4">
-                            <h4 class="form-label h4">Grade:</h4>
-
-                            <div class="d-flex gap-2 w-25 mb-4">
-                                <!-- Select dropdown -->
-                                <select class="form-select  border-blue grade-select">
-                                    <option value="">Select grade</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                </select>
-
-                                <span class="align-self-center">or</span>
-
-                                <!-- Text input -->
-                                <input type="text" class="form-control grade-input border-blue"
-                                    placeholder="Enter grade">
-                            </div>
-                            <div class="mb-4">
-                                <h4 class="form-label h4">Feedback:</h4>
-                                <textarea name="" id="" rows="3" class="w-100 border-blue rounded p-4"></textarea>
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <!-- assignment 3 -->
-                <div class="assignment-detail d-none">
-                    <div class="bg-secondary px-2 py-0 w-100 d-flex justify-content-between align-items-center">
-                        <div class=" p-3">
-                            <h5 class="mb-0 assignment-titles">
-                                Data Analytics Project
-                            </h5>
-                        </div>
-
-                        <i class="bi bi-x-lg"></i>
-                    </div>
-                    <div class="details-ass p-3">
-                        <div class="d-flex align-items-center mb-3">
-                            <!-- Profile image -->
-                            <div class="me-3" style="width: 40px; height: 40px; overflow: hidden; border-radius: 50%;">
-                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80"
-                                    alt="Alex Johnson" class="img-fluid w-100 h-100" style="object-fit: cover;">
-                            </div>
-                            <!-- Name and ID -->
-                            <div>
-                                <h6 class="mb-0 text-dark">Dhatchayani</h6>
-                                <small class="text-muted">ID: SID2023001</small>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <small class="mb-0 text-dark text-muted">Course: Introduction to Data Structure</small>
-                            <small class="text-muted">Submitted: 2023-11-16</small>
-                        </div>
-                        <div class="d-flex justify-content-between pt-2 mb-2">
-                            <small class="mb-0 text-dark text-muted">Due: 2023-11-16</small>
-                            <span class="badge bg-warning">Late</span>
-                        </div>
-                        <div class="mb-4">
-                            <h4 class="h4">Submission:</h4>
-                            <div class="p-3 rounded border bg-gray"
-                                style="background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);">
-                                <p class="mb-0">I have analyzed the dataset using Python and Pandas. The key findings
-                                    are
-                                    presented
-                                    in
-                                    the attached Jupyter notebook with visualizations created using Matplotlib and
-                                    Seaborn.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                            <h4 class="h4">Attached Files:</h4>
-                            <div class="d-flex align-items-center p-2 border rounded mb-2"
-                                style="background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="me-2 text-primary"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
-                                    </path>
-                                </svg>
-                                <span class="small text-secondary">data_analysis.ipynb</span>
-                            </div>
-
-                            <div class="d-flex align-items-center p-2 border rounded mb-2"
-                                style="background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="me-2 text-primary"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
-                                    </path>
-                                </svg>
-                                <span class="small text-secondary">data_analysis.ipynb</span>
-                            </div>
-
-                        </div>
-                        <div class="mb-4">
-                            <h4 class="form-label h4">Grade:</h4>
-
-                            <div class="d-flex gap-2 w-25 mb-4">
-                                <!-- Select dropdown -->
-                                <select class="form-select grade-select  border-blue grade-select">
-                                    <option value="">Select grade</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                </select>
-
-                                <span class="align-self-center">or</span>
-
-                                <!-- Text input -->
-                                <input type="text" class="form-control grade-input border-blue"
-                                    placeholder="Enter grade">
-                            </div>
-                            <div class="mb-4">
-                                <h4 class="form-label h4">Feedback:</h4>
-                                <textarea name="" id="" rows="3" class="w-100 border-blue rounded p-4"></textarea>
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="border rounded"
-                    style="background: linear-gradient(180deg, #f0f0f0 0%, #d8d8d8 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);">
-
-                    <!-- Dots indicator -->
-                    <div class="d-flex justify-content-center py-2">
-                        <div class="d-flex justify-content-center py-2 dots-indicator"></div>
-
-                    </div>
-
-                    <!-- Action buttons and navigation -->
-                    <div class="d-flex justify-content-between align-items-center px-3 py-2">
-                        <!-- Left arrow -->
-                        <button id="prev-btn" class="btn btn-light p-1 rounded-circle">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
-                                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-                            </svg>
-                        </button>
-
-
-                        <!-- Reject button -->
-                        <button class="btn text-danger px-3 py-2 d-flex align-items-center"
-                            style="border:1px solid rgba(229,62,62,0.3); background: linear-gradient(180deg, #f8f8f8 0%, #e8e8e8 100%);">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"
-                                stroke="currentColor" stroke-width="2" class="me-2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                            Reject
-                        </button>
-
-                        <!-- Approve button -->
-                        <button class="btn text-white px-3 py-2 d-flex align-items-center approve-btn"
-                            style="background: linear-gradient(180deg, #e0e0e0 0%, #c0c0c0 100%); border:1px solid rgba(0,0,0,0.15);"
-                            disabled>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"
-                                stroke="currentColor" stroke-width="2" class="me-2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                            </svg>
-                            Approve
-                        </button>
-
-                        <!-- Right arrow -->
-                        <button id="next-btn" class="btn btn-light p-1 rounded-circle">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
-                                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </button>
-
-                    </div>
-
-                    <!-- Progress text -->
-                    <div class="text-center pb-2">
-                        <small id="progress-text" class="text-muted">1 of 3</small>
-                    </div>
-                </div>
 
 
             </div>
         </div>
 
     </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const assignments = Array.from(document.querySelectorAll(".assignment-detail"));
-            const approveBtn = document.querySelector(".approve-btn");
-            const rejectBtn = document.querySelector(".btn.text-danger");
-            const prevBtn = document.getElementById("prev-btn");
-            const nextBtn = document.getElementById("next-btn");
-            const dotsContainer = document.querySelector(".dots-indicator");
-            const progressText = document.getElementById("progress-text");
-            let currentIndex = 0;
-
-            // Enable/disable Approve button based on grade input
-            function toggleApprove() {
-                const currentAssignment = assignments[currentIndex];
-                const gradeSelect = currentAssignment.querySelector(".grade-select");
-                const gradeInput = currentAssignment.querySelector(".grade-input");
-
-                if ((gradeSelect && gradeSelect.value.trim() !== "") ||
-                    (gradeInput && gradeInput.value.trim() !== "")) {
-                    approveBtn.disabled = false;
-                    approveBtn.style.background = "linear-gradient(180deg, #4CAF50 0%, #388E3C 100%)";
-                    approveBtn.style.cursor = "pointer";
-                } else {
-                    approveBtn.disabled = true;
-                    approveBtn.style.background = "linear-gradient(180deg, #e0e0e0 0%, #c0c0c0 100%)";
-                    approveBtn.style.cursor = "not-allowed";
-                }
-            }
-
-            // Listen for grade changes
-            assignments.forEach((assignment) => {
-                const gradeSelect = assignment.querySelector(".grade-select");
-                const gradeInput = assignment.querySelector(".grade-input");
-
-                gradeSelect?.addEventListener("change", toggleApprove);
-                gradeInput?.addEventListener("input", toggleApprove);
-            });
-
-            // Create dots dynamically
-            assignments.forEach((_, index) => {
-                const dot = document.createElement("span");
-                dot.classList.add("dot");
-                dot.style.cssText = `
-            width:10px; height:10px; margin:0 5px; border-radius:50%;
-            display:inline-block; cursor:pointer; background:${index === 0 ? '#1a73e8' : '#ccc'};
-        `;
-                dot.addEventListener("click", () => showAssignment(index));
-                dotsContainer.appendChild(dot);
-            });
-            const dots = document.querySelectorAll(".dot");
-
-            // Update progress text
-            function updateProgress(index) {
-                if (progressText) {
-                    progressText.textContent = `${index + 1} of ${assignments.length}`;
-                }
-            }
-
-            // Show assignment at index
-            function showAssignment(index) {
-                assignments.forEach((a, i) => {
-                    a.classList.toggle("d-none", i !== index);
-                    dots[i].style.background = i === index ? "#1a73e8" : "#ccc";
-                });
-                currentIndex = index;
-                updateProgress(currentIndex);
-                toggleApprove();
-                updateNavigationButtons();
-            }
-
-            // Prev/Next navigation
-            function updateNavigationButtons() {
-                prevBtn.disabled = currentIndex === 0;
-                nextBtn.disabled = currentIndex === assignments.length - 1;
-            }
-            prevBtn?.addEventListener("click", () => {
-                if (currentIndex > 0) showAssignment(currentIndex - 1);
-            });
-            nextBtn?.addEventListener("click", () => {
-                if (currentIndex < assignments.length - 1) showAssignment(currentIndex + 1);
-            });
-
-            // Approve button click
-            approveBtn?.addEventListener("click", () => {
-                if (!approveBtn.disabled) moveToNext();
-            });
-
-            // Reject button click
-            rejectBtn?.addEventListener("click", moveToNext);
-
-            function moveToNext() {
-                assignments[currentIndex].classList.add("d-block");
-                let nextIndex = currentIndex + 1;
-
-                // Skip hidden assignments
-                while (nextIndex < assignments.length && assignments[nextIndex].classList.contains("d-block")) {
-                    nextIndex++;
-                }
-
-                if (nextIndex < assignments.length) {
-                    showAssignment(nextIndex);
-                } else {
-                    // No more assignments left
-                    assignments.forEach(a => a.classList.add("d-block"));
-                    progressText.textContent = `0 of ${assignments.length}`;
-                }
-            }
-
-            // Initialize
-            showAssignment(0);
-        });
-    </script>
-
-
-
-    <!-- <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const assignments = Array.from(document.querySelectorAll(".assignment-detail"));
-            const gradeSelects = document.querySelectorAll(".grade-select");
-            const gradeInputs = document.querySelectorAll(".grade-input");
-            const approveBtn = document.querySelector(".approve-btn");
-            const rejectBtn = document.querySelector(".btn.text-danger");
-            const prevBtn = document.getElementById("prev-btn");
-            const nextBtn = document.getElementById("next-btn");
-            const dotsContainer = document.querySelector(".dots-indicator");
-            const progressText = document.getElementById("progress-text");
-            let currentIndex = 0;
-
-            // Enable Approve button only if grade is selected or entered
-            function toggleApprove() {
-                const currentAssignment = assignments[currentIndex];
-                const gradeSelect = currentAssignment.querySelector(".grade-select");
-                const gradeInput = currentAssignment.querySelector(".grade-input");
-
-                if ((gradeSelect && gradeSelect.value.trim() !== "") ||
-                    (gradeInput && gradeInput.value.trim() !== "")) {
-                    approveBtn.disabled = false;
-                    approveBtn.style.background = "linear-gradient(180deg, #4CAF50 0%, #388E3C 100%)";
-                    approveBtn.style.cursor = "pointer";
-                } else {
-                    approveBtn.disabled = true;
-                    approveBtn.style.background = "linear-gradient(180deg, #e0e0e0 0%, #c0c0c0 100%)";
-                    approveBtn.style.cursor = "not-allowed";
-                }
-            }
-
-            // Listen to input/select changes for all assignments
-            assignments.forEach((assignment, index) => {
-                const gradeSelect = assignment.querySelector(".grade-select");
-                const gradeInput = assignment.querySelector(".grade-input");
-
-                gradeSelect?.addEventListener("change", toggleApprove);
-                gradeInput?.addEventListener("input", toggleApprove);
-            });
-
-            // Create dots dynamically
-            assignments.forEach((_, index) => {
-                const dot = document.createElement("span");
-                dot.classList.add("dot");
-                dot.style.cssText = `
-            width:10px; height:10px; margin:0 5px; border-radius:50%;
-            display:inline-block; cursor:pointer; background:${index === 0 ? '#1a73e8' : '#ccc'};
-        `;
-                dot.addEventListener("click", () => showAssignment(index));
-                dotsContainer.appendChild(dot);
-            });
-
-            const dots = document.querySelectorAll(".dot");
-
-            // Update progress text
-            function updateProgress(index) {
-                if (progressText) {
-                    progressText.textContent = `${index + 1} of ${assignments.length}`;
-                }
-            }
-
-            // Show assignment at index
-            function showAssignment(index) {
-                assignments.forEach((a, i) => {
-                    a.classList.toggle("d-none", i !== index);
-                    dots[i].style.background = i === index ? "#1a73e8" : "#ccc";
-                });
-                currentIndex = index;
-                updateProgress(currentIndex);
-                toggleApprove(); // check Approve button for this assignment
-            }
-
-            // Prev/Next navigation
-            prevBtn?.addEventListener("click", () => {
-                if (currentIndex > 0) showAssignment(currentIndex - 1);
-            });
-            nextBtn?.addEventListener("click", () => {
-                if (currentIndex < assignments.length - 1) showAssignment(currentIndex + 1);
-            });
-
-            // Approve action: hide current assignment and go to next
-            approveBtn?.addEventListener("click", () => {
-                if (!approveBtn.disabled) {
-                    assignments[currentIndex].classList.add("d-none");
-                    const nextIndex = assignments.findIndex(a => !a.classList.contains("d-none"));
-                    if (nextIndex !== -1) showAssignment(nextIndex);
-                }
-            });
-
-            // Reject action: hide current assignment and go to next
-            rejectBtn?.addEventListener("click", () => {
-                assignments[currentIndex].classList.add("d-none");
-                const nextIndex = assignments.findIndex(a => !a.classList.contains("d-none"));
-                if (nextIndex !== -1) showAssignment(nextIndex);
-            });
-
-            // Initialize
-            showAssignment(0);
-        });
-    </script> -->
-
-    <!-- <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const assignments = Array.from(document.querySelectorAll(".assignment-detail"));
-            const dotsContainer = document.querySelector(".dots-indicator");
-            const prevBtn = document.getElementById("prev-btn");
-            const nextBtn = document.getElementById("next-btn");
-            const progressText = document.getElementById("progress-text");
-            let currentIndex = 0;
-
-            // Create dots dynamically
-            assignments.forEach((_, index) => {
-                const dot = document.createElement("span");
-                dot.classList.add("dot");
-                dot.style.cssText = `
-            width:10px; height:10px; margin:0 5px; border-radius:50%;
-            display:inline-block; cursor:pointer; background:${index === 0 ? '#1a73e8' : '#ccc'};
-        `;
-                dot.addEventListener("click", () => showAssignment(index));
-                dotsContainer.appendChild(dot);
-            });
-
-            const dots = document.querySelectorAll(".dot");
-
-            // Update progress text
-            function updateProgress(index) {
-                if (progressText) {
-                    progressText.textContent = `${index + 1} of ${assignments.length}`;
-                }
-            }
-
-            // Show assignment at index
-            function showAssignment(index) {
-                assignments.forEach((a, i) => {
-                    a.classList.toggle("d-none", i !== index);
-                    dots[i].style.background = i === index ? "#1a73e8" : "#ccc";
-                });
-                currentIndex = index;
-                updateProgress(currentIndex);
-            }
-
-            // Previous button
-            prevBtn?.addEventListener("click", () => {
-                if (currentIndex > 0) showAssignment(currentIndex - 1);
-            });
-
-            // Next button
-            nextBtn?.addEventListener("click", () => {
-                if (currentIndex < assignments.length - 1) showAssignment(currentIndex + 1);
-            });
-
-            // Initialize
-            showAssignment(0);
-        });
-    </script> -->
-
-
-
-    <!-- <script>
-        function toggleApprove(e) {
-            const wrapper = e.target.closest('.assignment-detail');
-            const approveBtn = wrapper ? wrapper.querySelector('.approve-btn') : null;
-
-            if (!approveBtn) return; // stop if no button found
-
-            if (wrapper.querySelector('.grade-select').value ||
-                wrapper.querySelector('.grade-input').value.trim() !== "") {
-                approveBtn.removeAttribute("disabled");
-                approveBtn.style.background = "linear-gradient(180deg, #4CAF50 0%, #388E3C 100%)";
-            } else {
-                approveBtn.setAttribute("disabled", true);
-                approveBtn.style.background = "linear-gradient(180deg, #e0e0e0 0%, #c0c0c0 100%)";
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            const assignments = document.querySelectorAll(".assignment-detail");
-            const dotsContainer = document.querySelector(".dots-indicator");
-            const prevBtn = document.getElementById("prev-btn");
-            const nextBtn = document.getElementById("next-btn");
-            let currentIndex = 0;
-
-            // Create dots dynamically
-            assignments.forEach((_, index) => {
-                const dot = document.createElement("span");
-                dot.classList.add("dot");
-                dot.style.width = "10px";
-                dot.style.height = "10px";
-                dot.style.margin = "0 5px";
-                dot.style.borderRadius = "50%";
-                dot.style.display = "inline-block";
-                dot.style.cursor = "pointer";
-                dot.style.background = index === 0 ? "#1a73e8" : "#ccc";
-
-                dot.addEventListener("click", () => showAssignment(index));
-                dotsContainer.appendChild(dot);
-            });
-
-            const dots = document.querySelectorAll(".dot");
-
-            function showAssignment(index) {
-                assignments.forEach((a, i) => {
-                    a.classList.toggle("d-none", i !== index);
-                    dots[i].style.background = i === index ? "#1a73e8" : "#ccc";
-                });
-                currentIndex = index;
-            }
-
-            prevBtn.addEventListener("click", () => {
-                if (currentIndex > 0) {
-                    showAssignment(currentIndex - 1);
-                }
-            });
-
-            nextBtn.addEventListener("click", () => {
-                if (currentIndex < assignments.length - 1) {
-                    showAssignment(currentIndex + 1);
-                }
-            });
-
-            // Enable Approve only after grading
-            assignments.forEach((assignment) => {
-                const gradeSelect = assignment.querySelector("select");
-                const gradeInput = assignment.querySelector("input[type='text']");
-                const approveBtn = assignment.querySelector(".approve-btn");
-
-                function toggleApprove() {
-                    if ((gradeSelect && gradeSelect.value) || (gradeInput && gradeInput.value.trim() !== "")) {
-                        approveBtn.removeAttribute("disabled");
-                        approveBtn.style.background = "linear-gradient(180deg, #4CAF50 0%, #388E3C 100%)";
-                        approveBtn.style.cursor = "pointer";
-                    } else {
-                        approveBtn.setAttribute("disabled", "true");
-                        approveBtn.style.background = "linear-gradient(180deg, #e0e0e0 0%, #c0c0c0 100%)";
-                        approveBtn.style.cursor = "not-allowed";
-                    }
-                }
-
-                if (gradeSelect) gradeSelect.addEventListener("change", toggleApprove);
-                if (gradeInput) gradeInput.addEventListener("input", toggleApprove);
-
-                // Approve button action
-                approveBtn.addEventListener("click", () => {
-                    if (!approveBtn.hasAttribute("disabled")) {
-                        assignment.classList.add("d-none"); // hide current assignment
-                        if (currentIndex < assignments.length - 1) {
-                            showAssignment(currentIndex + 1);
-                        } else {
-                            alert("🎉 All assignments reviewed!");
-                        }
-                    }
-                });
-            });
-
-            // Reject button just hides the assignment
-            document.querySelectorAll(".reject-btn").forEach((btn, idx) => {
-                btn.addEventListener("click", () => {
-                    assignments[idx].classList.add("d-none");
-                    if (currentIndex < assignments.length - 1) {
-                        showAssignment(currentIndex + 1);
-                    } else {
-                        alert("🎉 All assignments reviewed!");
-                    }
-                });
-            });
-
-            // Initialize first assignment
-            showAssignment(0);
-        });
-    </script> -->
-
-
-
 
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const sub_id = urlParams.get("sub_id");
+            let assignments = [];
+            let currentIndex = 0;
+
+            loadAssignments();
+
+            function loadAssignments() {
+                $("#assignments-slider").html('<div class="text-center text-muted p-4">Loading...</div>');
+
+                $.getJSON("api/faculty_assignment_details.php", {
+                    sub_id
+                }, function(res) {
+                    if (res.status !== 200 || !res.data.length) {
+                        $("#assignments-slider").html('<div class="text-center text-muted p-4">No assignments found.</div>');
+                        return;
+                    }
+                    assignments = res.data;
+                    renderAssignments();
+                });
+            }
+
+            function renderAssignments() {
+                let html = "";
+                assignments.forEach((item, index) => {
+                    const files = (item.file_urls || []).map(f => `
+                <div class="d-flex align-items-center p-2 border rounded mb-2"
+                    style="background:linear-gradient(180deg,#f9f9f9 0%,#f0f0f0 100%);">
+                    <i class="bi bi-file-earmark-text me-2 text-primary"></i>
+                    <a href="../../uploads/assignments/${f}" target="_blank" class="small text-secondary text-decoration-none">${f}</a>
+                </div>
+            `).join("");
+
+                    // Pre-filled values for graded assignments
+                    const marks = item.marks_obtained ? item.marks_obtained : "";
+                    const feedback = item.comments ? item.comments : "";
+                    const isLate = item.status === "Late";
+
+                    html += `
+                <div class="assignment-detail ${index === 0 ? '' : 'd-none'}" data-sub-id="${item.sub_id}">
+                    <div class="bg-secondary px-2 py-0 d-flex justify-content-between align-items-center">
+                        <div class="p-3"><h5 class="mb-0">${item.assignment_title}</h5></div>
+                        <i class="bi bi-x-lg"></i>
+                    </div>
+                    <div class="details-ass p-3">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="../images/image.png" class="me-3 rounded-circle" width="40" height="40">
+                            <div>
+                                <h6 class="mb-0">${item.student_name}</h6>
+                                <small class="text-muted">ID: ${item.reg_no}</small>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <small>Course: ${item.course_name}</small>
+                            <small>Submitted: ${item.submission_date}</small>
+                        </div>
+                        <div class="d-flex justify-content-between pt-2 mb-2">
+                            <small>Due: ${item.due_date}</small>
+                            <span class="badge ${isLate ? "bg-warning" : "bg-success"}">${item.status}</span>
+                        </div>
+
+                        <div class="mb-4">
+                            <h4 class="h4">Submission:</h4>
+                            <div class="p-3 rounded border bg-light">${item.context}</div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h4 class="h4">Attached Files:</h4>
+                            ${files || "<small class='text-muted'>No files attached.</small>"}
+                        </div>
+
+                        <div class="mb-4">
+                            <h4 class="form-label h4">Total Marks: ${item.marks}</h4>
+                            <h4 class="form-label h4">Grade / Marks:</h4>
+                            <div class="d-flex gap-2 w-25 mb-4">
+                                <select class="form-select grade-select border-blue">
+                                    <option value="">Select grade</option>
+                                    <option value="A" ${marks === 'A' ? 'selected' : ''}>A</option>
+                                    <option value="B" ${marks === 'B' ? 'selected' : ''}>B</option>
+                                    <option value="C" ${marks === 'C' ? 'selected' : ''}>C</option>
+                                </select>
+                                <span class="align-self-center">or</span>
+                                <input type="text" class="form-control grade-input border-blue" placeholder="Enter marks" value="${marks}">
+                            </div>
+
+                            <h4 class="form-label h4">Feedback:</h4>
+                            <textarea rows="3" class="w-100 border-blue rounded p-3 feedback-text">${feedback}</textarea>
+                        </div>
+                    </div>
+                </div>`;
+                });
+
+                html += `
+        <div class="border rounded" style="background:#f0f0f0;">
+            <div class="d-flex justify-content-center py-2"><div class="dots-indicator"></div></div>
+            <div class="d-flex justify-content-between align-items-center px-3 py-2">
+                <button id="prev-btn" class="btn btn-light p-1 rounded-circle"><i class="bi bi-chevron-left"></i></button>
+                <button id="reject-btn" class="btn text-danger border px-3 py-2">Reject</button>
+                <button id="approve-btn" class="btn btn-success px-3 py-2" disabled>Approve</button>
+                <button id="next-btn" class="btn btn-light p-1 rounded-circle"><i class="bi bi-chevron-right"></i></button>
+            </div>
+            <div class="text-center pb-2"><small id="progress-text" class="text-muted"></small></div>
+        </div>`;
+
+                $("#assignments-slider").html(html);
+                initSlider();
+            }
+
+            function initSlider() {
+                const items = $(".assignment-detail");
+                let index = 0;
+
+                const updateView = () => {
+                    items.addClass("d-none").eq(index).removeClass("d-none");
+                    $("#progress-text").text(`${index + 1} of ${items.length}`);
+                    checkApproveButton();
+                };
+
+                updateView();
+
+                $(document).on("input change", ".grade-select, .grade-input", checkApproveButton);
+
+                $("#prev-btn").click(() => {
+                    if (index > 0) {
+                        index--;
+                        updateView();
+                    }
+                });
+                $("#next-btn").click(() => {
+                    if (index < items.length - 1) {
+                        index++;
+                        updateView();
+                    }
+                });
+
+                $("#approve-btn").click(() => handleSubmit("approved", index));
+                $("#reject-btn").click(() => handleSubmit("rejected", index));
+
+                function checkApproveButton() {
+                    const current = items.eq(index);
+                    const hasValue = current.find(".grade-select").val() || current.find(".grade-input").val();
+                    const approveBtn = $("#approve-btn");
+                    if (hasValue) {
+                        approveBtn.prop("disabled", false)
+                            .css("background", "linear-gradient(180deg,#4CAF50 0%,#2E7D32 100%)")
+                            .css("cursor", "pointer");
+                    } else {
+                        approveBtn.prop("disabled", true)
+                            .css("background", "linear-gradient(180deg,#e0e0e0 0%,#bdbdbd 100%)")
+                            .css("cursor", "not-allowed");
+                    }
+                }
+            }
+
+            function handleSubmit(status, currentIndex) {
+                const current = $(".assignment-detail").eq(currentIndex);
+                const sub_id = current.data("sub-id");
+                const marks = current.find(".grade-select").val() || current.find(".grade-input").val();
+                const feedback = current.find(".feedback-text").val();
+
+                $.post("api/faculty_update_assignment.php", {
+                    sub_id,
+                    marks,
+                    feedback,
+                    status
+                }, function(res) {
+                    if (res.status === 200) {
+                        alert("✅ " + res.message);
+                        $("#next-btn").trigger("click");
+                    } else {
+                        alert("⚠️ " + res.message);
+                    }
+                }, "json");
+            }
+        });
+    </script>
+
+
 </body>
 
 </html>

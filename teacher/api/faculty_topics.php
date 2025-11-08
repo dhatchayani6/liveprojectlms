@@ -64,19 +64,41 @@ $sql = "
         lc.code AS launch_code,
         lc.slot,
         lc.seat_allotment,
+
+        -- ✅ exact student count for this launch (approved only)
+        (
+            SELECT COUNT(*)
+            FROM student_course_approval sca
+            WHERE sca.launch_id = lc.launch_id
+              AND sca.status = 'approved'
+        ) AS student_count,
+
         t.c_topic_id AS topic_id,
         t.topic_title,
         t.topic_description,
-        COUNT(co.co_id) AS outcome_count
+
+        -- keep outcome count but avoid multiplying rows
+        COALESCE(oc.outcome_count, 0) AS outcome_count
+
     FROM launch_courses lc
     INNER JOIN courses c ON lc.course_id = c.course_id
-    LEFT JOIN course_topic t ON lc.launch_id = t.launch_id
-    LEFT JOIN course_outcome co ON t.c_topic_id = co.topic_id
     LEFT JOIN users u ON lc.faculty_id = u.user_id
+
+    -- topics for this launch
+    LEFT JOIN course_topic t ON lc.launch_id = t.launch_id
+
+    -- pre-aggregated outcomes per topic to avoid row explosion
+    LEFT JOIN (
+        SELECT topic_id, COUNT(*) AS outcome_count
+        FROM course_outcome
+        GROUP BY topic_id
+    ) oc ON oc.topic_id = t.c_topic_id
+
     WHERE lc.launch_id = ?
-    GROUP BY t.c_topic_id, t.topic_title, t.topic_description, c.course_code, c.course_name, c.course_category, c.regulation, lc.launch_id, lc.code, lc.slot
     ORDER BY t.c_topic_id ASC
 ";
+
+
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $launch_id);
 $stmt->execute();
@@ -84,29 +106,31 @@ $result = $stmt->get_result();
 
 $data = [];
 while ($row = $result->fetch_assoc()) {
-    $data[] = [
-        "course_code"        => $row["course_code"],
-        "course_name"        => $row["course_name"],
-        "course_category"    => $row["course_category"],
-        "course_description" => $row["course_description"],
-        "Schedule"           => $row["Schedule"],
-        "location"           => $row["Location"],
-        "Prerequisites"      => $row["Prerequisites"],
-        "regulation"         => $row["regulation"],
-        "launch_id"          => $row["launch_id"],
-        "launch_code"        => $row["launch_code"],
-        "seat_allotment"     => $row["seat_allotment"],
-        "slot"               => $row["slot"],
-        "topic_id"           => $row["topic_id"],
-        "topic_title"        => $row["topic_title"],
-        "topic_description"  => $row["topic_description"],
-        "department"         => $row["department"],
-        "credit_hours"       => $row["credit_hours"],
-        "user_name" => $row["name"],
-        "email" => $row["email"],
-        "phone" => $row["phone"],
-        "outcome_count"      => strval($row["outcome_count"])
-    ];
+   $data[] = [
+    "course_code"        => $row["course_code"],
+    "course_name"        => $row["course_name"],
+    "course_category"    => $row["course_category"],
+    "course_description" => $row["course_description"],
+    "Schedule"           => $row["Schedule"],
+    "location"           => $row["Location"],
+    "Prerequisites"      => $row["Prerequisites"],
+    "regulation"         => $row["regulation"],
+    "launch_id"          => $row["launch_id"],
+    "launch_code"        => $row["launch_code"],
+    "seat_allotment"     => $row["seat_allotment"],
+    "slot"               => $row["slot"],
+    "student_count"      => intval($row["student_count"]),  // ✅ Added here
+    "topic_id"           => $row["topic_id"],
+    "topic_title"        => $row["topic_title"],
+    "topic_description"  => $row["topic_description"],
+    "department"         => $row["department"],
+    "credit_hours"       => $row["credit_hours"],
+    "user_name"          => $row["name"],
+    "email"              => $row["email"],
+    "phone"              => $row["phone"],
+    "outcome_count"      => strval($row["outcome_count"])
+];
+
 }
 
 if (empty($data)) {

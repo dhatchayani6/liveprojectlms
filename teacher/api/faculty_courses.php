@@ -25,6 +25,7 @@ $sql = "
         lc.launch_id,
         lc.code AS course_code,
         c.course_name,
+        c.Schedule,
         lc.slot,
         lc.seat_allotment,
         COUNT(sca.student_id) AS student_count
@@ -66,7 +67,8 @@ while ($row = mysqli_fetch_assoc($result)) {
         "course_name"    => $row['course_name'],
         "slot"           => $row['slot'],
         "seat_allotment" => $row['seat_allotment'],
-        "student_count"  => $row['student_count']
+        "student_count"  => $row['student_count'],
+        "schedule" =>$row['Schedule'],
     ];
 }
 

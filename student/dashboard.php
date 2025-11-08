@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -82,43 +83,18 @@
 
         <div class="content-container bg-light ">
 
-            <!-- Header -->
-            <div
-                class="header d-flex justify-content-between align-items-center position-relative px-3 py-2 bg-secondary text-dark">
-                <h5 class="mb-0 assignment-titles">
-                    <a href="dashboard.php"><i class="bi bi-chevron-left rounded-circle"></i></a>Viana Study
-                </h5>
-                <a href="../index.php">
-                    <button class="btn d-flex align-items-center logout-btn gap-2">
-                        <i class="bi bi-box-arrow-right"></i>
-                        <span>Logout</span>
-                    </button>
-                </a>
-            </div>
-
-            <!-- User Profile -->
-            <div class="user-profile"
-                style="background: linear-gradient(rgb(240, 246, 255), rgb(216, 232, 255)); border-bottom: 1px solid rgb(184, 208, 240); box-shadow: rgba(255, 255, 255, 0.6) 0px 1px 0px inset;">
-                <img src="../images/image.png" alt="Dr. Emily Rodriguez" class="profile-pic">
-                <div class="user-details ps-2">
-                    <div class="name">Dr. Emily Rodriguez</div>
-                    <div class="info">
-                        <span class="id">Student ID: FAC21032305</span> &bull;
-                        <span class="dept">Computer Science</span>
-                    </div>
-                </div>
-            </div>
+            <?php include ("header.php") ?>
 
             <div class="p-3">
                 <!-- Notifications -->
                 <div class="rounded border">
-                    <div class="notifications  p-3">
+                    <!-- <div class="notifications  p-3">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <small>Notifications</small>
                             <small class="text-primary fw-semibold">• 3 new</small>
                         </div>
 
-                        <!-- Notification Cards -->
+                 
 
                         <a href="notification_assignments.php">
                             <div class="notification-card mb-2 rounded border p-2"
@@ -126,10 +102,10 @@
                                 <div class="d-flex gap-2">
                                     <div class="p-2 rounded-circle d-flex align-items-center justify-content-center"
                                         style="background: linear-gradient(rgb(219, 231, 255), rgb(196, 215, 255)); 
-            box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.1) 0px 1px 2px; 
-            border: 1px solid rgba(79, 129, 251, 0.3); width: 32px; height: 32px;">
-                                        <i class="bi bi-file-text" style="    --tw-text-opacity: 1;
-    color: rgb(37 99 235 / var(--tw-text-opacity, 1));"></i>
+                                                        box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.1) 0px 1px 2px; 
+                                                        border: 1px solid rgba(79, 129, 251, 0.3); width: 32px; height: 32px;">
+                                                                                    <i class="bi bi-file-text" style="    --tw-text-opacity: 1;
+                                                color: rgb(37 99 235 / var(--tw-text-opacity, 1));"></i>
                                     </div>
                                     <div class="d-flex flex-column">
                                         <small class="mb-0 text-dark "> Data Science Project Review</small>
@@ -140,16 +116,16 @@
                             </div>
                         </a>
 
-                        <!-- Midterm Exam Schedule Notification -->
+                
                         <a href="notification_schedule.php" class="text-dark">
                             <div class="notification-card mb-2 rounded border p-2" style="background: linear-gradient(rgb(255, 249, 246), rgb(255, 244, 237)); 
-            border: 1px solid rgba(251, 146, 79, 0.2); 
-            box-shadow: rgba(255, 255, 255, 0.8) 0px 1px 0px inset, rgba(0, 0, 0, 0.05) 0px 1px 2px;">
+                                    border: 1px solid rgba(251, 146, 79, 0.2); 
+                                    box-shadow: rgba(255, 255, 255, 0.8) 0px 1px 0px inset, rgba(0, 0, 0, 0.05) 0px 1px 2px;">
                                 <div class="d-flex gap-2">
                                     <div class="p-2 rounded-circle d-flex align-items-center justify-content-center"
                                         style="background: linear-gradient(rgb(255, 230, 210), rgb(255, 210, 180)); 
-                    box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.1) 0px 1px 2px; 
-                    border: 1px solid rgba(251, 146, 79, 0.3); width: 32px; height: 32px;">
+                                            box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.1) 0px 1px 2px; 
+                                            border: 1px solid rgba(251, 146, 79, 0.3); width: 32px; height: 32px;">
                                         <i class="bi bi-bell text-warning"></i>
                                     </div>
                                     <div class="d-flex flex-column">
@@ -159,18 +135,18 @@
                                     </div>
                                 </div>
                             </div>
-                        </a>
+                        </a>    
 
-                        <!-- Algorithm Evaluation Meeting Notification -->
+                  
                         <a href="notification_assignments.php" class="text-dark">
                             <div class="notification-card rounded border p-2" style="background: linear-gradient(rgb(246, 249, 255), rgb(237, 243, 255)); 
-            border: 1px solid rgba(79, 129, 251, 0.2); 
-            box-shadow: rgba(255, 255, 255, 0.8) 0px 1px 0px inset, rgba(0, 0, 0, 0.05) 0px 1px 2px;">
+                                    border: 1px solid rgba(79, 129, 251, 0.2); 
+                                    box-shadow: rgba(255, 255, 255, 0.8) 0px 1px 0px inset, rgba(0, 0, 0, 0.05) 0px 1px 2px;">
                                 <div class="d-flex gap-2">
                                     <div class="p-2 rounded-circle d-flex align-items-center justify-content-center"
                                         style="background: linear-gradient(rgb(219, 231, 255), rgb(196, 215, 255)); 
-                    box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.1) 0px 1px 2px; 
-                    border: 1px solid rgba(79, 129, 251, 0.3); width: 32px; height: 32px;">
+                                            box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.1) 0px 1px 2px; 
+                                            border: 1px solid rgba(79, 129, 251, 0.3); width: 32px; height: 32px;">
                                         <i class="bi bi-people text-primary"></i>
                                     </div>
                                     <div class="d-flex flex-column">
@@ -182,7 +158,7 @@
                             </div>
                         </a>
 
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="rounded border mt-3">
@@ -198,10 +174,10 @@
                             <button class="menu-btn menu-assignments p-4 rounded  w-100 text-start"
                                 style="background: linear-gradient(rgb(182, 240, 200), rgb(139, 224, 166)); border: 1px solid rgba(16, 185, 129, 0.5); box-shadow: rgba(16, 185, 129, 0.3) 0px 2px 4px, rgba(255, 255, 255, 0.6) 0px 1px 0px inset;">
                                 <i class="bi bi-file-earmark-text" style="background: rgba(16, 185, 129, 0.15);
-    color: rgb(0, 0, 0);"></i> Assignments
+                                color: rgb(0, 0, 0);"></i> Assignments
                             </button>
                         </a>
-                        <a href="transcripts.php">
+                        <!-- <a href="transcripts.php">
                             <button class="menu-btn menu-grading p-4 rounded  w-100 text-start"
                                 style="background: linear-gradient(rgb(224, 200, 249), rgb(201, 167, 242)); border: 1px solid rgba(139, 92, 246, 0.5); box-shadow: rgba(139, 92, 246, 0.3) 0px 2px 4px, rgba(255, 255, 255, 0.6) 0px 1px 0px inset;">
                                 <i class="bi bi-check2-circle"></i> Transcripts
@@ -212,7 +188,7 @@
                                 style="background: linear-gradient(rgb(255, 213, 184), rgb(255, 186, 139)); border: 1px solid rgba(249, 115, 22, 0.5); box-shadow: rgba(249, 115, 22, 0.3) 0px 2px 4px, rgba(255, 255, 255, 0.6) 0px 1px 0px inset;">
                                 <i class="bi bi-calendar3"></i> Schedule
                             </button>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
             </div>

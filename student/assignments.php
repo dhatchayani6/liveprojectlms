@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php session_start(); ?>
 
 <head>
     <meta charset="UTF-8">
@@ -120,34 +121,7 @@
 
         <div class="content-container bg-light ">
 
-            <!-- Header -->
-            <div
-                class="header d-flex justify-content-between align-items-center position-relative px-3 py-2 bg-secondary text-dark">
-                <h5 class="mb-0 assignment-titles">
-                    <div class="d-flex gap-2">
-                        <a href="dashboard.php"><i class="bi bi-chevron-left rounded-circle"></i></a>Viana Study
-
-                    </div>
-                </h5>
-                <a href="../index.php">
-                    <button class="btn d-flex align-items-center logout-btn gap-2">
-                        <i class="bi bi-box-arrow-right"></i>
-                        <span>Logout</span>
-                    </button>
-                </a>
-            </div>
-            <!-- User Profile -->
-            <div class="user-profile"
-                style="background: linear-gradient(rgb(240, 246, 255), rgb(216, 232, 255)); border-bottom: 1px solid rgb(184, 208, 240); box-shadow: rgba(255, 255, 255, 0.6) 0px 1px 0px inset;">
-                <img src="../images/image.png" alt="Dr. Emily Rodriguez" class="profile-pic">
-                <div class="user-details ps-2">
-                    <div class="name">Dr. Emily Rodriguez</div>
-                    <div class="info">
-                        <span class="id">Student ID: FAC21032305</span> &bull;
-                        <span class="dept">Computer Science</span>
-                    </div>
-                </div>
-            </div>
+            <?php include "header.php"; ?>
 
             <div class="content-scroll">
                 <div class="p-4 min-vh-100">
@@ -159,71 +133,8 @@
 
                     <h5 class="mb-3">Your Assignments</h5>
 
-                    <!-- Assignment Card 1 -->
-                    <a href="assignment_pending.php">
-                        <div class="card mb-3  " style="border-radius: 10px;border:none !important;    background: linear-gradient(rgb(249, 249, 249) 0%, rgb(232, 232, 232) 100%);
-    box-shadow: rgba(255, 255, 255, 0.8) 0px 1px 0px inset, rgba(0, 0, 0, 0.1) 0px 1px 2px;">
-                            <div class="card-body ">
-                                <div class="d-flex justify-content-between">
-                                    <h6 class="mb-1 fw-bold">Data Analysis Project</h6>
-                                    <button class=" btn-pending btn-sm rounded-2 " style="width:125px;"><small>Pending</small></button>
+                    <div id="assignmentsContainer"></div>
 
-                                </div>
-                                <div>
-                                    <p class="mb-1 text-muted">Introduction to Data Science</p>
-
-                                </div>
-                                <div class=" d-flex justify-content-between align-items-center">
-                                    <small class="text-muted">Due: 2023-11-15</small>
-
-                                    <button class=" btn-submit btn-sm rounded-2" style="width:125px;"><small>Submit Now</small></button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Assignment Card 2 -->
-                    <a href="assignment_submit.php">
-                        <div class="card mb-3 " style="border-radius: 10px;border:none !important;      background: linear-gradient(rgb(249, 249, 249) 0%, rgb(232, 232, 232) 100%);
-    box-shadow: rgba(255, 255, 255, 0.8) 0px 1px 0px inset, rgba(0, 0, 0, 0.1) 0px 1px 2px;">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between">
-                                    <h6 class="mb-1 fw-bold">Database Design</h6>
-                                    <button class=" btn-submitted btn-sm rounded-2" style="width:125px;"><small>Submitted</small></button>
-                                </div>
-                                <div>
-                                    <p class="mb-1 text-muted">Database Systems</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <small class="text-muted">Due: 2023-11-18</small>
-                                    <button class=" btn-review btn-sm rounded-2 p-1" style="width:125px;"><small>Review
-                                            Submission</small></button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Assignment Card 3 -->
-                    <a href="assignment_feedback.php">
-                        <div class="card mb-3 " style="border-radius: 10px; border:none !important;     background: linear-gradient(rgb(249, 249, 249) 0%, rgb(232, 232, 232) 100%);
-    box-shadow: rgba(255, 255, 255, 0.8) 0px 1px 0px inset, rgba(0, 0, 0, 0.1) 0px 1px 2px;">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between">
-                                    <h6 class="mb-1 fw-bold">Algorithm Implementation</h6>
-                                    <button class=" btn-graded btn-sm rounded-2 p-1" style="width:125px;"><small>Graded: A</small></button>
-                                </div>
-                                <div>
-                                    <p class="mb-1 text-muted">Algorithms</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <small class="text-muted">Due: 2023-11-20</small>
-                                    <button class=" btn-viewfeed btn-sm  rounded-2 p-1"
-                                        style="background-color: #cda2f2; color: white;border:none !important; width:125px;"><small>View
-                                            Feedback</small></button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
                 </div>
             </div>
 
@@ -236,6 +147,80 @@
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            loadAssignments();
+
+            function loadAssignments() {
+                $("#assignmentsContainer").html('<div class="text-center text-muted p-4">Loading...</div>');
+
+                $.getJSON("api/student_assignments.php", function(res) {
+                    if (res.status !== 200) {
+                        $("#assignmentsContainer").html('<div class="text-danger p-4 text-center">Unable to load assignments.</div>');
+                        return;
+                    }
+
+                    if (res.data.length === 0) {
+                        $("#assignmentsContainer").html('<div class="text-center text-muted p-4">No assignments available.</div>');
+                        return;
+                    }
+
+                    let html = "";
+
+                    res.data.forEach(item => {
+                        const dueDate = item.due_date ? new Date(item.due_date).toISOString().slice(0, 10) : "N/A";
+                        const status = item.status || "pending";
+                        const marks = item.marks_obtained || 0;
+
+                        let statusBadge = "";
+                        let btnLabel = "";
+                        let link = "#";
+
+                        // UI logic
+                        if (status === "pending") {
+                            statusBadge = `<button class="btn btn-pending btn-sm rounded-2" style="width:125px;"><small>Pending</small></button>`;
+                            btnLabel = "Submit Now";
+                            link = `assignment_pending.php?ass_id=${item.ass_id}`;
+                        } else if (status === "submitted" && !marks) {
+                            statusBadge = `<button class="btn btn-warning btn-sm rounded-2" style="width:125px;"><small>Submitted</small></button>`;
+                            btnLabel = "Review Submission";
+                            link = `assignment_submit.php?ass_id=${item.ass_id}`;
+                        } else if (status === "feedback" && marks) {
+                            statusBadge = `<button class="btn btn-success btn-sm rounded-2" style="width:125px;"><small>Grade - ${marks}</small></button>`;
+                            btnLabel = "View Feedback";
+                            link = `assignment_feedback.php?ass_id=${item.ass_id}`;
+                        }
+
+                        html += `
+                    <a href="${link}" class="text-decoration-none">
+                        <div class="card mb-3" style="border-radius:10px;border:none;
+                            background:linear-gradient(#f9f9f9 0%, #e8e8e8 100%);
+                            box-shadow:rgba(255,255,255,0.8)0px 1px 0px inset,rgba(0,0,0,0.1)0px 1px 2px;">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h6 class="mb-1 fw-bold">${item.title}</h6>
+                                    ${statusBadge}
+                                </div>
+                                <div>
+                                    <p class="mb-1 text-muted">${item.course_name}</p>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">Due: ${dueDate}</small>
+                                    <button class="btn btn-submit btn-sm rounded-2" style="width:125px;">
+                                        <small>${btnLabel}</small>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </a>`;
+                    });
+
+                    $("#assignmentsContainer").html(html);
+                });
+            }
+        });
+    </script>
 
 </body>
 
