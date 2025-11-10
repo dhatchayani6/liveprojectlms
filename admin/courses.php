@@ -577,103 +577,42 @@ session_start();
         updateCriteriaToggle();
     </script>
 
+    <!-- create course -->
     <script>
-        // Save course to FastAPI backend
-        document.getElementById('saveCourseBtn').addEventListener('click', function() {
-            const courseName = document.getElementById('courseName').value.trim();
-            const courseCode = document.getElementById('courseCode').value.trim();
+        $("#saveCourseBtn").click(function() {
 
-            if (!courseName || !courseCode) {
-                alert("Please fill in all course details!");
-                return;
-            }
-
-            // 🟩 Prepare payload
-            const courseData = {
-                course_code: courseCode,
-                course_name: courseName,
-                course_category: selectedCategory || "",
-                regulation: selectedRegulation || "",
-                rubric: selectedRubric || "",
-                status: "draft",
+            let payload = {
+                course_name: $("#courseName").val().trim(),
+                course_code: $("#courseCode").val().trim(),
+                category: selectedCategory,
+                regulation: selectedRegulation,
+                rubric: selectedRubric,
                 components: [],
-                passing_criteria: {}
+                passing_criteria: passingCriteria
             };
 
-            // 🟩 Add rubric components
             rubrics.forEach(r => {
-                r.components.forEach(c => {
-                    courseData.components.push({
-                        component_name: c.name,
-                        max_marks: c.maxMarks,
-                        passing_marks: c.passingMarks
-                    });
-                });
+                r.components.forEach(c => payload.components.push(c));
             });
 
-            // 🟩 Add passing criteria
-            if (passingCriteria.length > 0) {
-                const pc = passingCriteria[0];
-                const compList = {};
-                pc.components.forEach(c => {
-                    compList[c.component] = c.maxMarks;
-                });
-                courseData.passing_criteria = {
-                    component_list: compList,
-                    required_marks: pc.requiredMarks,
-                    total_marks: pc.maximumMarks
-                };
-            }
-
-            const token = getCookie("access_token");
-            if (!token) {
-                alert("⚠️ Authorization token not found. Please log in first.");
-                window.location.href = "../adminlogin.php"; // redirect to login
-                return;
-            }
-
-            // Helper function to read cookies
-            function getCookie(name) {
-                const value = `; ${document.cookie}`;
-                const parts = value.split(`; ${name}=`);
-                if (parts.length === 2) return parts.pop().split(';').shift();
-            }
-
-            // 🟩 AJAX call with Bearer token
             $.ajax({
-                url: "http://127.0.0.1:8000/admin/courses", // your API endpoint
+                url: "api/create_course.php",
                 type: "POST",
                 contentType: "application/json",
-                headers: {
-                    "Authorization": "Bearer " + token // 👈 Important line
-                },
-                data: JSON.stringify(courseData),
-                success: function(response) {
-                    console.log(response);
-                    alert("✅ Course saved successfully!");
-                    location.reload();
-                },
-                error: function(xhr, status, error) {
-                    console.error("Error:", xhr.responseText);
-
-                    let message = "❌ Failed to save course.";
-
-                    try {
-                        // Try to parse FastAPI JSON error
-                        const err = JSON.parse(xhr.responseText);
-                        if (err.message) message += "\nMessage: " + err.message;
-                        if (err.data && err.data.reason) message += "\nReason: " + err.data.reason;
-                        if (err.error_code) message += "\nCode: " + err.error_code;
-                    } catch (e) {
-                        // Fallback if response isn’t valid JSON
-                        message += "\nResponse: " + xhr.responseText;
+                data: JSON.stringify(payload),
+                success: function(res) {
+                    if (res.status) {
+                        Swal.fire("Success", "Course Created!", "success");
+                        setTimeout(() => location.reload(), 1200);
+                    } else {
+                        Swal.fire("Error", res.message, "error");
                     }
-
-                    alert(message);
                 }
             });
+
         });
     </script>
+
 
 </body>
 

@@ -1,6 +1,5 @@
-<?php
-session_start();
-?>
+<?php include "../includes/auth_faculty.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 

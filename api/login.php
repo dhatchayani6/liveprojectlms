@@ -63,7 +63,7 @@ if ($pass !== $user['password_hash']) {
 
 // Role-based redirect
 $redirectMap = [
-    "admin"   => "admin/dashboard.php",
+    "admin"   => "admin/courses.php",
     "faculty" => "teacher/dashboard.php",
     "student" => "student/dashboard.php"
 ];

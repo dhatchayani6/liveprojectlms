@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php include "../includes/auth_faculty.php"; ?>
 
 <head>
     <meta charset="UTF-8" />

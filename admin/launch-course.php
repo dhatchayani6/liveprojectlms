@@ -1,4 +1,3 @@
-<?php include('auth_check.php'); ?>
 <?php include "../includes/config.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -300,225 +299,77 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="token_refresh.js"></script>
-
 
     <script>
-        // Helper function to read cookies
-        function getCookie(name) {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) return parts.pop().split(';').shift();
-        }
-
-        // Search in table
-        $('#courseSearch').on('keyup', function() {
-            let searchValue = $(this).val().toLowerCase();
-            $('#coursesTable tbody tr').filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+        function loadCourses() {
+            $.get("api/get_courses.php", function(res) {
+                if (res.status) {
+                    res.courses.forEach(c => {
+                        $("#courseName").append(`<option value="${c.course_id}">${c.course_name}</option>`);
+                        $("#courseCode").append(`<option value="${c.course_id}">${c.course_code}</option>`);
+                    });
+                }
             });
+        }
+        loadCourses();
+        $("#courseName").change(function() {
+            $("#courseCode").val($(this).val());
         });
+        $("#courseCode").change(function() {
+            $("#courseName").val($(this).val());
+        });
+    </script>
 
-        $('#addCourseForm').on('submit', async function(e) {
+    <script>
+        $("#addCourseForm").on("submit", function(e) {
             e.preventDefault();
 
-            const $form = $(this);
-            const $btn = $form.find('button[type="submit"]');
-            $btn.prop('disabled', true);
-
-            const token = getCookie("access_token");
-            if (!token) {
-                alert("⚠️ Token missing. Please log in again.");
-                window.location.href = "../index.php";
-                return;
-            }
-
-            // Collect form data
-            const course_id = $("#courseid").val();
-            const code = $("#courseCode").val();
-            const seat_allotment = parseInt($("#seatAllotment").val());
-            const faculty_id = parseInt($("#faculty_id").val());
-            const slot = $("#slot").val();
-
-            // Prepare JSON payload
-            const payload = {
-                course_id: parseInt(course_id),
-                code: code,
-                seat_allotment: seat_allotment,
-                faculty_id: faculty_id,
-                slot: slot
+            let payload = {
+                course_id: $("#courseName").val(),
+                seat_allotment: $("#seatAllotment").val(),
+                faculty_id: $("#faculty_id").val(),
+                slot: $("#slot").val()
             };
 
-            console.log("📦 Sending Launch Payload:", payload);
-
-            try {
-                const res = await fetch("http://127.0.0.1:8000/admin/launch-courses", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": "Bearer " + token
-                    },
-                    body: JSON.stringify(payload)
-                });
-
-                const data = await res.json();
-                console.log("🎯 Launch Response:", data);
-
-                if (res.ok && data.status === "success") {
-                    Swal.fire({
-                        icon: 'success',
-                        title: '✅ Course Launched!',
-                        text: data.message,
-                        showConfirmButton: false,
-                        timer: 2000
-                    });
-
-                    // Reset form
-                    $form[0].reset();
-
-                    // Reload launch courses table
-                    loadLaunchCourses();
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: '❌ Failed!',
-                        text: data.message || "Launch failed. Please try again."
-                    });
-                }
-            } catch (err) {
-                console.error("🚨 Launch Error:", err);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'An error occurred while launching the course.'
-                });
-            } finally {
-                $btn.prop('disabled', false);
-            }
-        });
-
-
-        async function loadLaunchCourses() {
-            const token = getCookie("access_token");
-            if (!token) {
-                console.warn("⚠️ Token missing. Please log in again.");
-                return;
-            }
-
-            try {
-                const res = await fetch("http://127.0.0.1:8000/admin/launch-courses", {
-                    headers: {
-                        "Authorization": "Bearer " + token
+            $.ajax({
+                url: "api/launch_course.php",
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(payload),
+                success: function(res) {
+                    if (res.status) {
+                        Swal.fire("Success", res.message, "success");
+                        loadLaunchedCourses();
+                        $("#addCourseForm")[0].reset();
+                    } else {
+                        Swal.fire("Error", res.message, "error");
                     }
-                });
-
-                const data = await res.json();
-                console.log("📦 Launch Courses List:", data);
-
-                if (data.status === "success") {
-                    const launches = data.data.launches;
-                    let rows = "";
-
-                    launches.forEach((l, i) => {
-                        rows += `
-                    <tr>
-                        <td>${i + 1}</td>
-                        <td>${l.code}</td>
-                        <td>${l.seat_allotment}</td>
-                        <td>${l.faculty_name} (ID: ${l.faculty_regno})</td>
-                        <td>${l.slot}</td>
-                        <td>${new Date(l.created_at).toLocaleString()}</td>
-                    </tr>
-                `;
-                    });
-
-                    $("#coursesTableBody").html(rows);
-                } else {
-                    console.warn("⚠️ Failed to load launch courses:", data.message);
-                    $("#coursesTableBody").html("<tr><td colspan='6'>No data available</td></tr>");
                 }
-            } catch (err) {
-                console.error("🚨 Error loading launch courses:", err);
-                $("#coursesTableBody").html("<tr><td colspan='6'>Error fetching data</td></tr>");
-            }
-        }
-
-
-        // <td>
-        //     <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editcourse"><i class="bi bi-pencil"></i></button>
-        //     <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
-        // </td>
-
-        async function loadCourseDropdowns() {
-
-
-            const token = getCookie("access_token");
-
-
-            if (!token) {
-                alert("⚠️ Token missing. Please log in again.");
-                window.location.href = "../index.php";
-                return;
-            }
-
-            try {
-                const res = await fetch("http://127.0.0.1:8000/admin/courses_list", {
-                    headers: {
-                        "Authorization": "Bearer " + token
-                    }
-                });
-
-                const data = await res.json();
-                console.log("Course List Response:", data); // 🧩 Debugging log
-
-                if (data.status === "success" && data.data && data.data.courses) {
-                    const courses = data.data.courses;
-
-                    let nameOptions = '<option value="" disabled selected>Select Course Name</option>';
-                    let codeOptions = '<option value="" disabled selected>Select Course Code</option>';
-
-                    courses.forEach(course => {
-                        nameOptions += `<option value="${course.course_name}" data-code="${course.course_code}" data-id="${course.course_id}">
-                    ${course.course_name}
-                </option>`;
-                        codeOptions += `<option value="${course.course_code}" data-name="${course.course_name}" data-id="${course.course_id}">
-                    ${course.course_code}
-                </option>`;
-                    });
-
-                    $("#courseName").html(nameOptions);
-                    $("#courseCode").html(codeOptions);
-
-                    // When selecting Course Name → auto select Course Code
-                    $("#courseName").on("change", function() {
-                        const code = $(this).find(":selected").data("code");
-                        const id = $(this).find(":selected").data("id");
-                        $("#courseCode").val(code);
-                        $("#courseid").val(id);
-                    });
-
-                    // When selecting Course Code → auto select Course Name
-                    $("#courseCode").on("change", function() {
-                        const name = $(this).find(":selected").data("name");
-                        const id = $(this).find(":selected").data("id");
-                        $("#courseName").val(name);
-                        $("#courseid").val(id);
-                    });
-                } else {
-                    alert("❌ No courses found or failed to load.");
-                    console.error("Courses response error:", data);
-                }
-            } catch (err) {
-                console.error("⚠️ Error loading courses:", err);
-                alert("⚠️ Error fetching course list.");
-            }
-        }
-
-        // Load courses on page load
-        $(document).ready(function() {
-            loadLaunchCourses();
-            loadCourseDropdowns();
+            });
         });
+    </script>
+
+    <script>
+        function loadLaunchedCourses() {
+            $.get("api/get_launched_courses.php", function(res) {
+                if (res.status) {
+                    let html = "";
+                    res.courses.forEach(c => {
+                        html += `
+                <tr>
+                    <td>${c.sno}</td>
+                    <td>${c.code}</td>
+                    <td>${c.seat_allotment}</td>
+                    <td>${c.faculty_name}</td>
+                    <td>${c.slot}</td>
+                    <td>${c.created_at}</td>
+                </tr>`;
+                    });
+                    $("#coursesTableBody").html(html);
+                }
+            });
+        }
+        loadLaunchedCourses();
     </script>
 
 </body>

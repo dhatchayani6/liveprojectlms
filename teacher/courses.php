@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php session_start(); ?>
+<?php include "../includes/auth_faculty.php"; ?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,23 +37,23 @@
                             </div>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                            <li><button class="dropdown-item w-100 text-start">Dashboard</button></li>
-                            <li><button class="dropdown-item w-100 text-start">Assignments</button></li>
-                            <li><button class="dropdown-item w-100 text-start">Courses</button></li>
+                           <a href="dashboard.php"> <li><button class="dropdown-item w-100 text-start">Dashboard</button></li></a>
+                           <a href="overall_assignments.php"><li><button class="dropdown-item w-100 text-start">Assignments</button></li></a> 
+                           <a href="courses.php"><li><button class="dropdown-item w-100 text-start">Courses</button></li></a> 
 
-                            <li><button class="dropdown-item w-100 text-start text-danger">Logout</button></li>
+                            <a href="../index.php"><li><button class="dropdown-item w-100 text-start text-danger">Logout</button></li></a>
                         </ul>
                     </div>
                 </div>
                 <div class="user-profile">
-                    <img src="../images/image.png" alt="Dr. Emily Rodriguez" class="profile-pic">
+                    <img src="../images/<?php echo $profile; ?>" alt="Dr. Emily Rodriguez" class="profile-pic">
                     <div class="user-details">
-                      <div class="name">Dr. <?php echo htmlspecialchars($_SESSION['name'] ?? ''); ?></div>
+                      <div class="name"> <?php echo htmlspecialchars($_SESSION['name'] ?? ''); ?></div>
 
                         <div class="info">
                             <span class="id">Faculty ID: <?php echo htmlspecialchars($_SESSION['regno'] ?? ''); ?></span>
                             &bull;
-                            <span class="dept">Medical</span>
+                            <span class="dept"><?php echo $department;?></span>
                         </div>
                     </div>
                 </div>

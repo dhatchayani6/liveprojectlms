@@ -1,17 +1,3 @@
-<?php session_start();
-if (!isset($_SESSION["user_logged_in"]) || $_SESSION["user_logged_in"] !== true) {
-    // Not logged in → redirect to login
-    header("Location: ../index.php");
-    exit;
-}
-
-if (!isset($_SESSION["user_type"]) || $_SESSION["user_type"] !== "Admin") {
-    // Logged in but not Faculty → force logout
-    session_destroy();
-    header("Location: ../index.php");
-    exit;
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -85,7 +71,6 @@ if (!isset($_SESSION["user_type"]) || $_SESSION["user_type"] !== "Admin") {
 
                     <!-- Courses Table -->
                     <div class="card-custom shadow mt-4 p-4">
-
                         <h5 class="mb-4">Courses List</h5>
                         <div class="table-responsive">
                             <table class="table table-bordered align-middle" id="coursesTable">
@@ -94,20 +79,16 @@ if (!isset($_SESSION["user_type"]) || $_SESSION["user_type"] !== "Admin") {
                                         <th>S no</th>
                                         <th>Course Name</th>
                                         <th>Course Code</th>
-                                      
-                                        <th>Course Type</th>
-                      
-                                        <th>Seats</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
+                                        <th>Course Category</th>
+                                        <th>Components (Max / Pass Marks)</th>
+                                        <th>Passing Criteria</th>
                                     </tr>
                                 </thead>
-                                <tbody id="coursesApproveReject">
-
-                                </tbody>
+                                <tbody id="coursesApproveReject"></tbody>
                             </table>
                         </div>
                     </div>
+
 
                 </div>
 
@@ -118,77 +99,72 @@ if (!isset($_SESSION["user_type"]) || $_SESSION["user_type"] !== "Admin") {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
-        $(document).ready(function () {
-            function loadCourses() {
-                $.ajax({
-                    url: 'api/get_courses.php',
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function (courses) {
-                        let tbody = '';
-                        courses.forEach((course, index) => {
-                            let statusBadge = course.status === 'approved' ? 'bg-success' :
-                                course.status === 'rejected' ? 'bg-danger' : 'bg-warning';
-                            let statusText = course.status ? course.status.charAt(0).toUpperCase() + course.status.slice(1) : 'Pending';
+        function loadAllCourses() {
+            $.get("api/get_all_courses_full.php", function(res) {
 
-                            tbody += `<tr data-id="${course.id}">
-                            <td>${index + 1}</td>
-                            <td>${course.course_name}</td>
-                            <td>${course.course_code}</td>
-                           
-                            <td>${course.course_type}</td>
-                         
-                            <td>${course.seat_allotment}</td>
-                            <td><span class="badge ${statusBadge}">${statusText}</span></td>
-                            <td>
-                                <button class="btn btn-success btn-sm me-1 approveBtn">Approve</button>
-                                <button class="btn btn-danger btn-sm rejectBtn">Reject</button>
-                            </td>
-                        </tr>`;
+                console.log("API response:", res); // <-- Debug
+
+                if (!res.status) {
+                    $("#coursesApproveReject").html("<tr><td colspan='6'>No courses found</td></tr>");
+                    return;
+                }
+
+                let html = "";
+
+                res.courses.forEach(c => {
+
+                    let compStr = "";
+                    if (Array.isArray(c.components)) {
+                        c.components.forEach(comp => {
+                            compStr += `${comp.name}: ${comp.max_marks} (${comp.passing_marks} pass)<br>`;
                         });
-                        $('#coursesApproveReject').html(tbody);
-                    },
-                    error: function (err) {
-                        console.error('Error fetching courses:', err);
+                    } else {
+                        compStr = "-";
                     }
-                });
-            }
 
-            loadCourses();
+                    let pcStr = "";
+                    if (Array.isArray(c.passing_criteria)) {
+                        c.passing_criteria.forEach(pc => {
+                            let compsJson = pc.component_list;
 
-            // Approve/Reject buttons with backend call
-            $('#coursesApproveReject').on('click', '.approveBtn, .rejectBtn', function () {
-                let row = $(this).closest('tr');
-                let courseId = row.data('id');
-                let newStatus = $(this).hasClass('approveBtn') ? 'approved' : 'rejected';
-
-                $.ajax({
-                    url: 'api/update_course_status.php',
-                    type: 'POST',
-                    data: {
-                        id: courseId,
-                        status: newStatus
-                    },
-                    dataType: 'json',
-                    success: function (res) {
-                        if (res.status === "success") {
-                            let badge = row.find('td:nth-child(9) span');
-                            if (newStatus === 'approved') {
-                                badge.removeClass('bg-warning bg-danger').addClass('bg-success').text('Approved');
-                            } else {
-                                badge.removeClass('bg-warning bg-success').addClass('bg-danger').text('Rejected');
+                            // ✅ If string, parse. If already object, use directly
+                            if (typeof compsJson === "string") {
+                                try {
+                                    compsJson = JSON.parse(compsJson);
+                                } catch (e) {}
                             }
-                        } else {
-                            alert("Error: " + res.message);
-                        }
-                    },
-                    error: function (err) {
-                        console.error("Error updating status:", err);
+
+                            if (typeof compsJson === "object") {
+                                let parts = [];
+                                for (const key in compsJson) {
+                                    parts.push(`${key}: ${compsJson[key]}`);
+                                }
+                                pcStr += `${parts.join(", ")} → Min: ${pc.required_marks}/${pc.total_marks}<br>`;
+                            }
+                        });
+                    } else {
+                        pcStr = "-";
                     }
+
+                    html += `
+                        <tr>
+                            <td>${c.sno}</td>
+                            <td>${c.course_name}</td>
+                            <td>${c.course_code}</td>
+                            <td>${c.course_category}</td>
+                            <td>${compStr}</td>
+                            <td>${pcStr}</td>
+                        </tr>`;
                 });
+
+
+                $("#coursesApproveReject").html(html);
             });
-        });
+        }
+
+        loadAllCourses();
     </script>
+
 
 </body>
 

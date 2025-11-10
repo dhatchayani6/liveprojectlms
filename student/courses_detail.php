@@ -1,3 +1,4 @@
+<?php include "../includes/auth_student.php"; ?>
 <?php
 $launch_id = $_GET['launch_id'];
 ?>
@@ -159,10 +160,21 @@ $launch_id = $_GET['launch_id'];
                 <div class="assignment-detail">
                     <div class="mb-3">
                         <div class="p-4 rounded border bg-courses-grey">
-                            <h4 class="teacher-courses-titile">
-                                <!-- course code and course name -->
-                            </h4>
-                            <small>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h4 class="teacher-courses-titile m-0"></h4>
+
+                                <!-- <div class="text-end" style="min-width:200px;">
+                                    <button id="btnCertificate" class="btn btn-secondary w-100" disabled>
+                                        Check Eligibility
+                                    </button>
+
+                                    <div style="height:40px; display:flex; align-items:center; justify-content:flex-end;">
+                                        <small id="certMessage" class="text-muted text-end" style="font-size:12px;"></small>
+                                    </div>
+                                </div> -->
+                            </div>
+
+                            <small id="courseDesc">
                                 <!-- course description -->
                             </small>
                             <div class="pt-2">
@@ -624,7 +636,6 @@ $launch_id = $_GET['launch_id'];
         });
     </script> -->
 
-
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const player = new Plyr("#player");
@@ -713,7 +724,8 @@ $launch_id = $_GET['launch_id'];
                     // ✅ Display Course Info
                     document.querySelector(".teacher-courses-titile").innerHTML =
                         `${data.course.course_code}: ${data.course.course_name}`;
-                    document.querySelector(".teacher-courses-titile + small").innerText =
+                    document.getElementById("courseDesc").innerText =
+
                         data.course.course_description;
 
                     // ✅ Display Topic Cards (no progress yet)
@@ -732,6 +744,7 @@ $launch_id = $_GET['launch_id'];
                                     data-tid="${topic.topic_id}"
                                     style="min-width:60px; background:gray;">0%</div>
                             </div>
+                            
                             <div class="progress mt-2" style="height:6px;">
                                 <div class="progress-bar topic-progress-bar" 
                                     data-tid="${topic.topic_id}"
@@ -809,10 +822,6 @@ $launch_id = $_GET['launch_id'];
                     overviewContainer.innerHTML = `<p class='text-danger small'>Failed to load topics.</p>`;
                 });
 
-
-
-
-
             // --- Fetch Materials for selected Topic ---
             function limitWords(text, maxWords = 50) {
                 const words = text.trim().split(/\s+/);
@@ -820,40 +829,39 @@ $launch_id = $_GET['launch_id'];
                 return words.slice(0, maxWords).join(" ") + "...";
             }
 
-
             function loadMaterialsForTopic(topicId) {
-    const currentType = currentMaterialType || "reading";
-    coListContainer.innerHTML = `<p class='text-center text-muted py-3'>Loading ${currentType} materials...</p>`;
+                const currentType = currentMaterialType || "reading";
+                coListContainer.innerHTML = `<p class='text-center text-muted py-3'>Loading ${currentType} materials...</p>`;
 
-    fetch(`api/get_materials_by_topic.php?launch_id=${launchId}&topic_id=${topicId}&type=${currentType}`)
-        .then(res => res.json())
-        .then(async data => {
-            if (data.status !== 200 || !data.data.length) {
-                coListContainer.innerHTML = `<p class='text-center text-danger py-3'>No ${currentType} materials found.</p>`;
-                return;
-            }
+                fetch(`api/get_materials_by_topic.php?launch_id=${launchId}&topic_id=${topicId}&type=${currentType}`)
+                    .then(res => res.json())
+                    .then(async data => {
+                        if (data.status !== 200 || !data.data.length) {
+                            coListContainer.innerHTML = `<p class='text-center text-danger py-3'>No ${currentType} materials found.</p>`;
+                            return;
+                        }
 
-            let html = "";
+                        let html = "";
 
-            // ✅ PRACTICE MATERIALS
-            if (currentType === "practice") {
-                for (const item of data.data) {
-                    const scoreRes = await fetch(
-                        `api/get_practice_score.php?launch_id=${launchId}&topic_id=${topicId}&co_id=${item.co_id}`
-                    );
-                    const scoreData = await scoreRes.json();
+                        // ✅ PRACTICE MATERIALS
+                        if (currentType === "practice") {
+                            for (const item of data.data) {
+                                const scoreRes = await fetch(
+                                    `api/get_practice_score.php?launch_id=${launchId}&topic_id=${topicId}&co_id=${item.co_id}`
+                                );
+                                const scoreData = await scoreRes.json();
 
-                    let badge = `<span class="badge bg-secondary score-badge" data-co="${item.co_id}">Not Attempted</span>`;
+                                let badge = `<span class="badge bg-secondary score-badge" data-co="${item.co_id}">Not Attempted</span>`;
 
-                    if (scoreData.status === 200 && scoreData.attempted) {
-                        const score = scoreData.score ?? 0;
-                        let color = "bg-danger";
-                        if (score >= 80) color = "bg-success";
-                        else if (score >= 50) color = "bg-warning";
-                        badge = `<span class="badge ${color} score-badge" data-co="${item.co_id}">Score: ${score}%</span>`;
-                    }
+                                if (scoreData.status === 200 && scoreData.attempted) {
+                                    const score = scoreData.score ?? 0;
+                                    let color = "bg-danger";
+                                    if (score >= 80) color = "bg-success";
+                                    else if (score >= 50) color = "bg-warning";
+                                    badge = `<span class="badge ${color} score-badge" data-co="${item.co_id}">Score: ${score}%</span>`;
+                                }
 
-                    html += `
+                                html += `
                         <div class="col-6 col-sm-6">
                             <div class="card border-0 shadow-sm p-3 bg-courses-grey co-card"
                                 data-co-id="${item.co_id}" data-url="${item.material_url}">
@@ -873,18 +881,16 @@ $launch_id = $_GET['launch_id'];
                                 </div>
                             </div>
                         </div>`;
-                }
-            } 
-            
-            else {
-                // ✅ READING / VIDEO / ASSIGNMENT — Simple completed check
-                data.data.forEach(item => {
+                            }
+                        } else {
+                            // ✅ READING / VIDEO / ASSIGNMENT — Simple completed check
+                            data.data.forEach(item => {
 
-                    const doneBadge = item.completed == 1
-                        ? `<span class="badge bg-success">Completed</span>`
-                        : `<span class="badge bg-secondary">Pending</span>`;
+                                const doneBadge = item.completed == 1 ?
+                                    `<span class="badge bg-success">Completed</span>` :
+                                    `<span class="badge bg-secondary">Pending</span>`;
 
-                    html += `
+                                html += `
                         <div class="col-6 col-sm-6">
                             <div class="card border-0 shadow-sm p-3 bg-courses-grey co-card"
                                 data-co-id="${item.co_id}" data-url="${item.material_url}">
@@ -904,20 +910,17 @@ $launch_id = $_GET['launch_id'];
                                 </div>
                             </div>
                         </div>`;
-                });
+                            });
+                        }
+
+                        coListContainer.innerHTML = html;
+
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        coListContainer.innerHTML = `<p class='text-center text-danger py-3'>Error loading materials.</p>`;
+                    });
             }
-
-            coListContainer.innerHTML = html;
-
-        })
-        .catch(err => {
-            console.error(err);
-            coListContainer.innerHTML = `<p class='text-center text-danger py-3'>Error loading materials.</p>`;
-        });
-}
-
-
-
 
             // --- CO Card click handler ---
             coListContainer.addEventListener("click", e => {
@@ -928,7 +931,7 @@ $launch_id = $_GET['launch_id'];
                 showSelectedMaterial(coId, currentMaterialType, materialUrl);
             });
 
-            const MARK_ON_PLAY = false; // mark when user presses play
+            const MARK_ON_PLAY = true; // mark when user presses play
             const MARK_ON_PERCENT = 10; // mark when X% watched
             /* ------------------------------------------------ */
 
@@ -954,21 +957,21 @@ $launch_id = $_GET['launch_id'];
                 });
             }
 
+
+
             function showSelectedMaterial(coId, materialType, materialUrl) {
                 showMaterialSection(materialType);
 
+                /* -------- PDF MATERIAL -------- */
                 if (materialType === "reading") {
                     const pdfEl = document.querySelector("#readingSection iframe, #readingSection embed");
                     if (!pdfEl) return;
 
-                    // set src exactly as you do now
+                    const pdfKey = `pdf:${currentTopicId}:${coId}`;
+                    _pdfCompleteFiredFor.delete(pdfKey);
+
                     pdfEl.src = `../uploads/materials/${materialUrl}`;
 
-                    // avoid firing multiple times for same (topic,co)
-                    const pdfKey = `${currentTopicId}:${coId}`;
-                    _pdfCompleteFiredFor.delete(pdfKey); // allow re-open to re-check
-
-                    // ---- STRATEGY A: try real scroll of the PDF document
                     const attachInnerScrollWatcher = () => {
                         try {
                             const win = pdfEl.contentWindow;
@@ -979,12 +982,11 @@ $launch_id = $_GET['launch_id'];
                             const onScroll = () => {
                                 if (done) return;
                                 const el = doc.scrollingElement;
-                                // within 10px of bottom
                                 if (el.scrollTop + el.clientHeight >= el.scrollHeight - 10) {
                                     done = true;
                                     if (!_pdfCompleteFiredFor.has(pdfKey)) {
                                         _pdfCompleteFiredFor.add(pdfKey);
-                                        console.log("✅ PDF reached bottom (inner scroll)");
+                                        console.log("✅ PDF reached bottom");
                                         markMaterialComplete(currentTopicId, coId, "pdf");
                                     }
                                 }
@@ -992,66 +994,48 @@ $launch_id = $_GET['launch_id'];
                             doc.addEventListener("scroll", onScroll, {
                                 passive: true
                             });
-                            // also check once in case it's a single-page fit
                             setTimeout(onScroll, 500);
                             return true;
-                        } catch (e) {
-                            // plugin blocked access
+                        } catch {
                             return false;
                         }
                     };
 
-                    // try to attach when loaded
                     const tryAttach = () => {
                         if (!attachInnerScrollWatcher()) {
-                            // ---- STRATEGY B (fallback): heuristic — watch user interaction + time on viewer
                             installPdfFallbackWatcher();
                         }
                     };
 
-                    // If iframe fires load, attempt inner watcher; some browsers need a small delay
                     pdfEl.addEventListener("load", () => setTimeout(tryAttach, 200));
-
-                    // If the PDF plugin never fires load (happens sometimes), also try after a short delay
                     setTimeout(tryAttach, 1200);
 
                     function installPdfFallbackWatcher() {
-                        console.log("ℹ️ Using fallback PDF completion detector");
-                        // Conditions to consider it "read":
-                        //  - viewer is visible on screen
-                        //  - user attempts to scroll over it several times
-                        //  - minimum time spent (e.g., 20s)
-                        let visible = false;
-                        let scrollAttempts = 0;
-                        let secondsOnViewer = 0;
-                        let completed = false;
+                        console.log("ℹ️ PDF fallback mode");
+                        let visible = false,
+                            scrollAttempts = 0,
+                            secondsOnViewer = 0,
+                            completed = false;
+                        const MIN_SECONDS = 20,
+                            MIN_SCROLLS = 3;
 
-                        const MIN_SECONDS = 20;
-                        const MIN_SCROLLS = 3;
-
-                        // visibility
                         const io = new IntersectionObserver(entries => {
-                            entries.forEach(e => {
-                                visible = e.isIntersecting;
-                            });
+                            entries.forEach(e => visible = e.isIntersecting);
                         }, {
                             threshold: 0.5
                         });
                         io.observe(pdfEl);
 
-                        // wheel/touch over iframe area increments scrollAttempts
-                        const wheelHandler = (e) => {
-                            // only count if viewer is visible and user actually tried to scroll
+                        const container = document.getElementById("readingSection") || document;
+                        const wheelHandler = () => {
                             if (visible) scrollAttempts++;
                             maybeComplete();
                         };
-                        const touchHandler = (e) => {
+                        const touchHandler = () => {
                             if (visible) scrollAttempts++;
                             maybeComplete();
                         };
 
-                        // Attach on parent container so events are captured (iframe won’t bubble)
-                        const container = document.getElementById("readingSection") || document;
                         container.addEventListener("wheel", wheelHandler, {
                             passive: true
                         });
@@ -1059,7 +1043,6 @@ $launch_id = $_GET['launch_id'];
                             passive: true
                         });
 
-                        // time on viewer
                         const timer = setInterval(() => {
                             if (visible) secondsOnViewer++;
                             maybeComplete();
@@ -1079,26 +1062,18 @@ $launch_id = $_GET['launch_id'];
                                 cleanup();
                                 if (!_pdfCompleteFiredFor.has(pdfKey)) {
                                     _pdfCompleteFiredFor.add(pdfKey);
-                                    console.log("✅ PDF marked complete (fallback heuristic)");
+                                    console.log("✅ PDF completed (fallback)");
                                     markMaterialComplete(currentTopicId, coId, "pdf");
                                 }
                             }
                         }
-
-                        // safety: if the user stays long enough even without scroll
-                        setTimeout(() => {
-                            if (!completed && visible && secondsOnViewer >= MIN_SECONDS * 2) {
-                                completed = true;
-                                cleanup();
-                                if (!_pdfCompleteFiredFor.has(pdfKey)) {
-                                    _pdfCompleteFiredFor.add(pdfKey);
-                                    console.log("✅ PDF marked complete (time-based fallback)");
-                                    markMaterialComplete(currentTopicId, coId, "pdf");
-                                }
-                            }
-                        }, MIN_SECONDS * 2000);
                     }
-                } else if (materialType === "video") {
+
+                    return;
+                }
+
+                /* -------- VIDEO MATERIAL -------- */
+                if (materialType === "video") {
 
                     const youtubeContainer = document.getElementById("youtubeContainer");
                     const localVideoContainer = document.getElementById("localVideoContainer");
@@ -1114,9 +1089,10 @@ $launch_id = $_GET['launch_id'];
                     const cleanUrl = decodeURIComponent(materialUrl.trim());
                     const ytMatch = cleanUrl.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
 
-                    const videoKey = `${currentTopicId}:${coId}`;
+                    const videoKey = `video:${currentTopicId}:${coId}`;
+                    _pdfCompleteFiredFor.delete(videoKey);
 
-                    /* ----------- YouTube Video ----------- */
+                    /* -------- YOUTUBE VIDEO -------- */
                     if (ytMatch) {
                         const videoId = ytMatch[1];
 
@@ -1127,7 +1103,7 @@ $launch_id = $_GET['launch_id'];
                             if (window.ytPlayer) {
                                 try {
                                     window.ytPlayer.destroy();
-                                } catch (e) {}
+                                } catch {}
                                 window.ytPlayer = null;
                             }
 
@@ -1140,6 +1116,8 @@ $launch_id = $_GET['launch_id'];
                                 },
                                 events: {
                                     onStateChange: (e) => {
+
+                                        // ✅ mark on play
                                         if (e.data === YT.PlayerState.PLAYING) {
                                             if (MARK_ON_PLAY) markOnce(videoKey, currentTopicId, coId);
 
@@ -1148,7 +1126,7 @@ $launch_id = $_GET['launch_id'];
                                                     try {
                                                         const dur = ytPlayer.getDuration();
                                                         const cur = ytPlayer.getCurrentTime();
-                                                        if (dur > 0 && cur / dur * 100 >= MARK_ON_PERCENT) {
+                                                        if (dur > 0 && (cur / dur * 100) >= MARK_ON_PERCENT) {
                                                             markOnce(videoKey, currentTopicId, coId);
                                                             clearInterval(window._ytInterval);
                                                             window._ytInterval = null;
@@ -1158,6 +1136,7 @@ $launch_id = $_GET['launch_id'];
                                             }
                                         }
 
+                                        // ✅ mark on full watch
                                         if (e.data === YT.PlayerState.ENDED) {
                                             markOnce(videoKey, currentTopicId, coId);
                                             clearInterval(window._ytInterval);
@@ -1169,155 +1148,162 @@ $launch_id = $_GET['launch_id'];
                         });
 
                     } else {
-                        /* ----------- Local Video ----------- */
+                        /* -------- LOCAL VIDEO -------- */
                         youtubeContainer.style.display = "none";
                         localVideoContainer.style.display = "block";
 
                         localSrc.src = `../uploads/materials/${materialUrl}`;
                         localVideo.load();
 
+                        // ✅ mark on play
                         localVideo.onplay = () => {
                             if (MARK_ON_PLAY) markOnce(videoKey, currentTopicId, coId);
                         };
 
+                        // ✅ mark on 10% progress
                         localVideo.ontimeupdate = () => {
                             if (_pdfCompleteFiredFor.has(videoKey)) return;
                             const dur = localVideo.duration;
-                            if (dur > 0 && (localVideo.currentTime / dur * 100 >= MARK_ON_PERCENT)) {
+                            if (dur > 0 && (localVideo.currentTime / dur * 100) >= MARK_ON_PERCENT) {
                                 markOnce(videoKey, currentTopicId, coId);
                             }
                         };
 
+                        // ✅ mark on ending
                         localVideo.onended = () => markOnce(videoKey, currentTopicId, coId);
                     }
-                } else if (materialType === "practice") {
-                loadPracticeQuestions(coId);
+
+                    return;
+                }
+
+                /* -------- PRACTICE MATERIAL -------- */
+                if (materialType === "practice") {
+                    loadPracticeQuestions(coId);
+                }
             }
-        }
 
+            // --- Load Practice Questions ---
+            function loadPracticeQuestions(coId) {
+                const topicId = currentTopicId;
+                const container = document.querySelector("#practiceSection #questionsContainer");
+                const submitBtn = document.querySelector("#practiceSection #submitContainer");
 
-        // --- Load Practice Questions ---
-        function loadPracticeQuestions(coId) {
-            const topicId = currentTopicId;
-            const container = document.querySelector("#practiceSection #questionsContainer");
-            const submitBtn = document.querySelector("#practiceSection #submitContainer");
+                container.innerHTML = `<p class="text-center text-muted py-3">Loading questions...</p>`;
+                submitBtn.style.display = "none";
 
-            container.innerHTML = `<p class="text-center text-muted py-3">Loading questions...</p>`;
-            submitBtn.style.display = "none";
+                fetch(`api/get_practice_questions.php?launch_id=${launchId}&topic_id=${topicId}&co_id=${coId}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.status !== 200 || !data.data.length) {
+                            container.innerHTML = `<p class='text-center text-danger py-3'>No practice questions found.</p>`;
+                            return;
+                        }
 
-            fetch(`api/get_practice_questions.php?launch_id=${launchId}&topic_id=${topicId}&co_id=${coId}`)
-                .then(res => res.json())
-                .then(data => {
-                    if (data.status !== 200 || !data.data.length) {
-                        container.innerHTML = `<p class='text-center text-danger py-3'>No practice questions found.</p>`;
-                        return;
-                    }
-
-                    let html = "";
-                    data.data.forEach((q, i) => {
-                        let optionsHTML = "";
-                        Object.entries(q.options).forEach(([key, value]) => {
-                            optionsHTML += `
+                        let html = "";
+                        data.data.forEach((q, i) => {
+                            let optionsHTML = "";
+                            Object.entries(q.options).forEach(([key, value]) => {
+                                optionsHTML += `
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="q${q.pq_id}" value="${key}" id="q${q.pq_id}_${key}">
                                 <label class="form-check-label" for="q${q.pq_id}_${key}">${key}. ${value}</label>
                             </div>`;
-                        });
+                            });
 
-                        html += `
+                            html += `
                         <div class="mb-3 question-block" data-pqid="${q.pq_id}">
                             <label class="form-label fw-semibold">${i + 1}. ${q.question}</label>
                             ${optionsHTML}
                         </div>`;
+                        });
+
+                        container.innerHTML = html;
+                        submitBtn.style.display = "flex";
+                        submitBtn.dataset.coId = coId;
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        container.innerHTML = `<p class='text-center text-danger py-3'>Error loading questions.</p>`;
                     });
-
-                    container.innerHTML = html;
-                    submitBtn.style.display = "flex";
-                    submitBtn.dataset.coId = coId;
-                })
-                .catch(err => {
-                    console.error(err);
-                    container.innerHTML = `<p class='text-center text-danger py-3'>Error loading questions.</p>`;
-                });
-        }
-
-        // --- Submit Practice Answers ---
-        document.querySelector("#practiceSection button.btn-gradient-glossy").addEventListener("click", () => {
-            const answers = [];
-            document.querySelectorAll(".question-block").forEach(block => {
-                const pqId = block.dataset.pqid;
-                const selected = block.querySelector("input[type='radio']:checked")?.value;
-                if (selected) answers.push({
-                    pq_id: pqId,
-                    selected_answer: selected
-                });
-            });
-
-            if (!answers.length) {
-                Swal.fire({
-                    icon: "warning",
-                    title: "Incomplete!",
-                    text: "Please answer at least one question before submitting.",
-                    confirmButtonColor: "#3085d6"
-                });
-                return;
             }
 
-            fetch("api/submit_practice_answers.php", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        answers
-                    })
-                })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.status === 200) {
-
-                        const coId = document.querySelector("#practiceSection #submitContainer").dataset.coId;
-
-                        // ✅ If score >= 50% then mark material complete
-                        if (data.score >= 50) {
-                            markMaterialComplete(currentTopicId, coId, "practice");
-                            console.log("✅ Practice passed, progress updated");
-                        } else {
-                            console.log("❌ Practice failed (below 50%), progress not updated");
-                        }
-
-                        // ✅ Show result alert
-                        Swal.fire({
-                            icon: data.score >= 50 ? "success" : "warning",
-                            title: data.score >= 50 ? "Practice Passed!" : "Practice Attempted",
-                            text: `Your score: ${data.score}%`,
-                            confirmButtonColor: data.score >= 50 ? "#4CAF50" : "#FF9800"
-                        }).then(() => {
-                            // Refresh materials + badges showing score
-                            showCourseOutcomeList();
-                            loadMaterialsForTopic(currentTopicId);
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: "error",
-                            title: "Submission Failed",
-                            text: data.message,
-                            confirmButtonColor: "#d33"
-                        });
-                    }
-                })
-
-
-                .catch(err => {
-                    console.error(err);
-                    Swal.fire({
-                        icon: "error",
-                        title: "Error",
-                        text: "An error occurred while submitting the practice test.",
-                        confirmButtonColor: "#d33"
+            // --- Submit Practice Answers ---
+            document.querySelector("#practiceSection button.btn-gradient-glossy").addEventListener("click", () => {
+                const answers = [];
+                document.querySelectorAll(".question-block").forEach(block => {
+                    const pqId = block.dataset.pqid;
+                    const selected = block.querySelector("input[type='radio']:checked")?.value;
+                    if (selected) answers.push({
+                        pq_id: pqId,
+                        selected_answer: selected
                     });
                 });
-        });
+
+                if (!answers.length) {
+                    Swal.fire({
+                        icon: "warning",
+                        title: "Incomplete!",
+                        text: "Please answer at least one question before submitting.",
+                        confirmButtonColor: "#3085d6"
+                    });
+                    return;
+                }
+
+                fetch("api/submit_practice_answers.php", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            answers
+                        })
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.status === 200) {
+
+                            const coId = document.querySelector("#practiceSection #submitContainer").dataset.coId;
+
+                            // ✅ If score >= 50% then mark material complete
+                            if (data.score >= 50) {
+                                markMaterialComplete(currentTopicId, coId, "practice");
+                                console.log("✅ Practice passed, progress updated");
+                            } else {
+                                console.log("❌ Practice failed (below 50%), progress not updated");
+                            }
+
+                            // ✅ Show result alert
+                            Swal.fire({
+                                icon: data.score >= 50 ? "success" : "warning",
+                                title: data.score >= 50 ? "Practice Passed!" : "Practice Attempted",
+                                text: `Your score: ${data.score}%`,
+                                confirmButtonColor: data.score >= 50 ? "#4CAF50" : "#FF9800"
+                            }).then(() => {
+                                // Refresh materials + badges showing score
+                                showCourseOutcomeList();
+                                loadMaterialsForTopic(currentTopicId);
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Submission Failed",
+                                text: data.message,
+                                confirmButtonColor: "#d33"
+                            });
+                        }
+                    })
+
+
+                    .catch(err => {
+                        console.error(err);
+                        Swal.fire({
+                            icon: "error",
+                            title: "Error",
+                            text: "An error occurred while submitting the practice test.",
+                            confirmButtonColor: "#d33"
+                        });
+                    });
+            });
 
         });
     </script>
@@ -1429,6 +1415,33 @@ $launch_id = $_GET['launch_id'];
         // ✅ Call when page loads
         loadInitialProgress();
     </script>
+
+    <!-- Check Certificate -->
+    <!-- <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const launch_id = new URLSearchParams(window.location.search).get("launch_id");
+
+            $.post("api/check_course_certificate_eligibility.php", {
+                launch_id
+            }, function(res) {
+                const btn = $("#btnCertificate");
+                const msg = $("#certMessage");
+
+                msg.text(res.msg);
+
+                if (res.eligible) {
+                    btn.removeClass("btn-secondary").addClass("btn-success");
+                    btn.prop("disabled", false);
+                    btn.html(`<a href="certificates/certificate.pdf" download class="text-white text-decoration-none">
+                         Download Certificate
+                      </a>`);
+                } else {
+                    btn.prop("disabled", true);
+                    btn.addClass("btn-secondary").removeClass("btn-success");
+                }
+            }, "json");
+        });
+    </script> -->
 
 </body>
 

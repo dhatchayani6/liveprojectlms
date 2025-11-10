@@ -1,40 +1,4 @@
-<?php
-include "../includes/config.php";
-
-$faculty_id = $_SESSION['user_id'];
-$department = "N/A";
-
-// Enable MySQLi exceptions for try/catch
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-
-try {
-    // Prepare query
-    $sql = "
-        SELECT c.department
-        FROM users u
-        INNER JOIN launch_courses lc ON lc.faculty_id = u.user_id 
-        LEFT JOIN courses c ON c.course_id = lc.course_id 
-        WHERE lc.faculty_id = ?
-        LIMIT 1
-    ";
-
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $faculty_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($row = $result->fetch_assoc()) {
-        $department = $row['department'] ?? "N/A";
-    }
-
-    $stmt->close();
-
-} catch (Exception $e) {
-    error_log("Error fetching faculty department: " . $e->getMessage());
-    $department = "N/A"; // fallback if error happens
-}
-
-?>
+<?php include "../includes/auth_faculty.php"; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -94,9 +58,15 @@ try {
                             </div>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                            <li><button class="dropdown-item w-100 text-start">Dashboard</button></li>
-                            <li><button class="dropdown-item w-100 text-start">Assignments</button></li>
-                            <li><button class="dropdown-item w-100 text-start">Courses</button></li>
+                            <a href="dashboard.php">
+                                <li><button class="dropdown-item w-100 text-start">Dashboard</button></li>
+                            </a>
+                            <a href="overall_assignments.php">
+                                <li><button class="dropdown-item w-100 text-start">Assignments</button></li>
+                            </a>
+                            <a href="courses.php">
+                                <li><button class="dropdown-item w-100 text-start">Courses</button></li>
+                            </a>
 
                             <a href="../index.php">
                                 <li><button class="dropdown-item w-100 text-start text-danger">Logout</button></li>
@@ -105,14 +75,14 @@ try {
                     </div>
                 </div>
                 <div class="user-profile">
-                    <img src="../images/image.png" alt="Dr. Emily Rodriguez" class="profile-pic">
+                    <img src="../images/<?php echo $profile; ?>" alt="Dr. Emily Rodriguez" class="profile-pic">
                     <div class="user-details">
                         <div class="name"> <?php echo htmlspecialchars($_SESSION['name'] ?? ''); ?></div>
 
                         <div class="info">
                             <span class="id">Faculty ID: <?php echo htmlspecialchars($_SESSION['regno'] ?? ''); ?></span>
                             &bull;
-                            <span class="dept"><?php echo $department;?></span>
+                            <span class="dept"><?php echo $department; ?></span>
                         </div>
                     </div>
                 </div>
@@ -123,7 +93,7 @@ try {
                     <a href="dashboard.php" class="tab <?php if ($current_page == 'dashboard.php')
                                                             echo 'active'; ?>">Dashboard</a>
                     <!-- <a href="assignments.php" class="tab <?php if ($current_page == 'assignments.php')
-                                                                echo 'active'; ?>">
+                                                                    echo 'active'; ?>">
                         Assignments
                         <span class="badge">5</span>
                     </a> -->
@@ -283,10 +253,10 @@ try {
                     if (res.status === 200) {
                         $(".enrollmentCount").text(res.pending_count);
                         $(".card-subtitle-enrollment").text(
-                        res.pending_count > 0 ?
-                        `${res.pending_count} Pending student requests` :
-                        "No pending submissions 🎉"
-                    );
+                            res.pending_count > 0 ?
+                            `${res.pending_count} Pending student requests` :
+                            "No pending submissions 🎉"
+                        );
                     } else {
                         $(".enrollmentCount").text("0");
                     }

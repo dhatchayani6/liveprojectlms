@@ -1,24 +1,17 @@
 <?php
-header('Content-Type: application/json');
+header("Content-Type: application/json");
 include "../../includes/config.php";
 
-$sql = "SELECT *
-FROM launch_courses
-ORDER BY 
-    CASE WHEN status = 'pending' THEN 0 ELSE 1 END,  -- Pending first
-    created_at ASC,  -- Oldest date first
-    id ASC;
-"; // adjust table/column names
+$sql = "SELECT course_id, course_code, course_name FROM courses ORDER BY course_name ASC";
 $result = $conn->query($sql);
 
-$courses = [];
-
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $courses[] = $row;
-    }
+$data = [];
+while($row = $result->fetch_assoc()){
+    $data[] = $row;
 }
 
-echo json_encode($courses);
-$conn->close();
+echo json_encode([
+    "status" => true,
+    "courses" => $data
+]);
 ?>

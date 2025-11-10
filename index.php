@@ -83,7 +83,7 @@
             .then(res => res.json())
             .then(response => {
                 if (response.status === 'success') {
-                    alert('Login Successfully ');
+                    // alert('Login Successfully ');
                     // Redirect based on backend response
                     window.location.href = response.redirect;
                 } else {

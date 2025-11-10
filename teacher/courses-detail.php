@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php include "../includes/auth_faculty.php"; ?>
 
 <head>
     <meta charset="UTF-8" />
@@ -158,11 +159,11 @@
                                             <div class="row mb-2">
                                                 <div class="col-md-6">
                                                     <small class="text-muted">Department:</small><br>
-                                                    <strong style="font-weight: 500;">Medical</strong>
+                                                    <strong style="font-weight: 500;" id="OverviewDepartment">Medical</strong>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <small class="text-muted">Credit Hours:</small><br>
-                                                    <strong style="font-weight: 500;">3</strong>
+                                                    <strong style="font-weight: 500;" id="Chours">3</strong>
                                                 </div>
                                             </div>
 
@@ -708,56 +709,55 @@
                                                     <input type="text" class="form-control" id="prerequisites-form">
                                                 </div>
                                             </div>
+
+
+                                            <div class="pt-3">
+                                                <div
+                                                    style="    background: rgba(255, 255, 255, 0.7);border: 1px solid #ecececee;">
+
+                                                </div>
+                                            </div>
+                                            <div class="p-3">
+                                                <!-- Section Title -->
+                                                <h6
+                                                    style="font-size: 0.875rem;line-height: 1.25rem;font-weight: 500;--tw-text-opacity: 1;color: rgb(55 65 81 / var(--tw-text-opacity, 1));">
+                                                    Course Coordinator Information</h6>
+
+                                                <div class="row g-3">
+                                                    <!-- Coordinator Name -->
+                                                    <div class="col-md-6">
+                                                        <label for="coordinatorName" class="form-label">Coordinator
+                                                            Name</label>
+                                                        <input type="text" class="form-control" id="coordinatorName-form">
+                                                    </div>
+
+                                                    <!-- Email -->
+                                                    <div class="col-md-6">
+                                                        <label for="email" class="form-label">Email</label>
+                                                        <input type="email" class="form-control" id="email-form">
+                                                    </div>
+
+                                                    <!-- Phone -->
+                                                    <div class="col-md-6">
+                                                        <label for="phone" class="form-label">Phone</label>
+                                                        <input type="text" class="form-control" id="phone-form">
+                                                    </div>
+
+                                                    <!-- Office Hours -->
+                                                    <div class="col-md-6">
+                                                        <label for="profile" class="form-label">Profile</label>
+                                                        <input type="file" class="form-control" id="profile">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="p-3">
+                                                <div class="d-flex justify-content-end gap-2">
+                                                    <!-- <button type="button" class="btn btn-secondary" id="btnResetCourse">Reset</button> -->
+                                                    <button type="button" class="btn btn-primary" id="btnSaveCourse">Save Changes</button>
+                                                </div>
+                                            </div>
                                         </form>
-
-                                        <div class="pt-3">
-                                            <div
-                                                style="    background: rgba(255, 255, 255, 0.7);border: 1px solid #ecececee;">
-
-                                            </div>
-                                        </div>
-                                        <div class="p-3">
-                                            <!-- Section Title -->
-                                            <h6
-                                                style="font-size: 0.875rem;line-height: 1.25rem;font-weight: 500;--tw-text-opacity: 1;color: rgb(55 65 81 / var(--tw-text-opacity, 1));">
-                                                Course Coordinator Information</h6>
-
-                                            <div class="row g-3">
-                                                <!-- Coordinator Name -->
-                                                <div class="col-md-6">
-                                                    <label for="coordinatorName" class="form-label">Coordinator
-                                                        Name</label>
-                                                    <input type="text" class="form-control" id="coordinatorName-form">
-                                                </div>
-
-                                                <!-- Email -->
-                                                <div class="col-md-6">
-                                                    <label for="email" class="form-label">Email</label>
-                                                    <input type="email" class="form-control" id="email-form">
-                                                </div>
-
-                                                <!-- Phone -->
-                                                <div class="col-md-6">
-                                                    <label for="phone" class="form-label">Phone</label>
-                                                    <input type="text" class="form-control" id="phone-form">
-                                                </div>
-
-                                                <!-- Office Hours -->
-                                                <div class="col-md-6">
-                                                    <label for="officeHours" class="form-label">Office Hours</label>
-                                                    <input readonly type="text" class="form-control" id="officeHours"
-                                                        value="Tues 2-4 PM, Thurs 1-3 PM">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="p-3">
-                                            <div class="d-flex justify-content-end gap-2">
-                                                <button type="button" class="btn btn-secondary" id="btnResetCourse">Reset</button>
-                                                <button type="button" class="btn btn-primary" id="btnSaveCourse">Save Changes</button>
-                                            </div>
-                                        </div>
-
                                     </div>
 
                                 </div>
@@ -1326,6 +1326,8 @@
                     setText('slt', `Slot ${course.slot}`);
                     setText('schedule', `Slot ${course.slot}`);
                     setText('seatallot', course.seat_allotment);
+                    setText('OverviewDepartment', course.department)
+                    setText('Chours', course.credit_hours)
 
                     // Pre-fill form fields (if present)
                     setValue('courseCode-form', course.course_code);
@@ -1880,189 +1882,201 @@
     </script>
 
     <!-- PDF / Video Material -->
-  <script>
-(async function () {
-    const show = el => el && (el.style.display = 'block');
-    const hide = el => el && (el.style.display = 'none');
+    <script>
+        (async function() {
+            const show = el => el && (el.style.display = 'block');
+            const hide = el => el && (el.style.display = 'none');
 
-    // ✅ PDF buttons
-    const editPdfBtn = document.getElementById("editPdfBtn");
-    const savePdfBtn = document.getElementById("savePdfBtn");
-    const cancelPdfBtn = document.getElementById("cancelPdfBtn");
+            // ✅ PDF buttons
+            const editPdfBtn = document.getElementById("editPdfBtn");
+            const savePdfBtn = document.getElementById("savePdfBtn");
+            const cancelPdfBtn = document.getElementById("cancelPdfBtn");
 
-    // ✅ Video buttons
-    const editVideoBtn = document.getElementById("editVideoBtn");
-    const saveVideoBtn = document.getElementById("saveVideoBtn");
-    const cancelVideoBtn = document.getElementById("cancelVideoBtn");
+            // ✅ Video buttons
+            const editVideoBtn = document.getElementById("editVideoBtn");
+            const saveVideoBtn = document.getElementById("saveVideoBtn");
+            const cancelVideoBtn = document.getElementById("cancelVideoBtn");
 
-    // ✅ PDF UI
-    const staticNotesSection = document.getElementById("staticNotesSection");
-    const notesUploadSection = document.getElementById("notesUploadSection");
-    const pdfViewer = document.getElementById("pdfViewer");
-    const pdfPreviewContainer = document.getElementById("pdfPreviewContainer");
-    const dropZone = document.getElementById("dropZone");
-    const fileInput = document.getElementById("fileInput");
-    const staticPdfViewer = document.getElementById("staticPdfViewer");
+            // ✅ PDF UI
+            const staticNotesSection = document.getElementById("staticNotesSection");
+            const notesUploadSection = document.getElementById("notesUploadSection");
+            const pdfViewer = document.getElementById("pdfViewer");
+            const pdfPreviewContainer = document.getElementById("pdfPreviewContainer");
+            const dropZone = document.getElementById("dropZone");
+            const fileInput = document.getElementById("fileInput");
+            const staticPdfViewer = document.getElementById("staticPdfViewer");
 
-    // ✅ Video UI
-    const staticVideoSection = document.getElementById("staticVideoSection");
-    const videoUploadSection = document.getElementById("videoUploadSection");
-    const youtubeLinkInput = document.getElementById("youtubeLinkInput");
-    const savedVideoLink = document.getElementById("savedVideoLink");
+            // ✅ Video UI
+            const staticVideoSection = document.getElementById("staticVideoSection");
+            const videoUploadSection = document.getElementById("videoUploadSection");
+            const youtubeLinkInput = document.getElementById("youtubeLinkInput");
+            const savedVideoLink = document.getElementById("savedVideoLink");
 
-    let selectedFile = null;
+            let selectedFile = null;
 
-    // ✅ Context from topic/outcome click
-    window.setMaterialContext = ({ launch_id, topic_id, co_id }) => {
-        window._materialContext = { launch_id, topic_id, co_id };
-    };
+            // ✅ Context from topic/outcome click
+            window.setMaterialContext = ({
+                launch_id,
+                topic_id,
+                co_id
+            }) => {
+                window._materialContext = {
+                    launch_id,
+                    topic_id,
+                    co_id
+                };
+            };
 
-    // ✅ Load saved materials
-    window.loadModulesForCurrentContext = async function () {
-        const ctx = window._materialContext || {};
-        if (!ctx.launch_id || !ctx.topic_id || !ctx.co_id) return;
+            // ✅ Load saved materials
+            window.loadModulesForCurrentContext = async function() {
+                const ctx = window._materialContext || {};
+                if (!ctx.launch_id || !ctx.topic_id || !ctx.co_id) return;
 
-        try {
-            const res = await fetch(`api/get_modules.php?launch_id=${ctx.launch_id}&topic_id=${ctx.topic_id}&co_id=${ctx.co_id}`);
-            const data = await res.json();
+                try {
+                    const res = await fetch(`api/get_modules.php?launch_id=${ctx.launch_id}&topic_id=${ctx.topic_id}&co_id=${ctx.co_id}`);
+                    const data = await res.json();
 
-            let pdfModule = null, videoModule = null;
+                    let pdfModule = null,
+                        videoModule = null;
 
-            if (data.status && data.data.length) {
-                data.data.forEach(m => {
-                    const t = m.learning_type.toLowerCase();
-                    if (t === "pdf") pdfModule = `../uploads/materials/${m.url}`;
-                    if (t === "video") videoModule = m.url;
+                    if (data.status && data.data.length) {
+                        data.data.forEach(m => {
+                            const t = m.learning_type.toLowerCase();
+                            if (t === "pdf") pdfModule = `../uploads/materials/${m.url}`;
+                            if (t === "video") videoModule = m.url;
+                        });
+                    }
+
+                    // ✅ PDF display
+                    if (pdfModule) {
+                        staticPdfViewer.src = pdfModule;
+                        show(staticNotesSection);
+                        hide(notesUploadSection);
+                    } else {
+                        hide(staticNotesSection);
+                        show(notesUploadSection);
+                    }
+
+                    // ✅ Video display
+                    if (videoModule) {
+                        savedVideoLink.textContent = videoModule;
+                        savedVideoLink.href = videoModule;
+                        youtubeLinkInput.value = videoModule;
+                        show(staticVideoSection);
+                        hide(videoUploadSection);
+                    } else {
+                        youtubeLinkInput.value = "";
+                        hide(staticVideoSection);
+                        show(videoUploadSection);
+                    }
+
+                    // ✅ Default state
+                    hide(savePdfBtn);
+                    hide(cancelPdfBtn);
+                    hide(saveVideoBtn);
+                    hide(cancelVideoBtn);
+
+                    show(editPdfBtn);
+                    show(editVideoBtn);
+
+                } catch (e) {
+                    console.error(e);
+                }
+            };
+
+            // ✅ Handle PDF file select
+            dropZone.addEventListener("click", () => fileInput.click());
+            fileInput.addEventListener("change", e => {
+                const f = e.target.files[0];
+                if (f && f.type === "application/pdf") {
+                    selectedFile = f;
+                    pdfViewer.src = URL.createObjectURL(f);
+                    show(pdfPreviewContainer);
+                    show(savePdfBtn);
+                    show(cancelPdfBtn);
+                    hide(editPdfBtn);
+                }
+            });
+
+            // ✅ Save handler
+            async function saveMaterial(type) {
+                const ctx = window._materialContext;
+
+                const fd = new FormData();
+                fd.append("launch_id", ctx.launch_id);
+                fd.append("topic_id", ctx.topic_id);
+                fd.append("co_id", ctx.co_id);
+
+                if (type === "pdf") {
+                    fd.append("learning_type", "pdf");
+                    fd.append("file", selectedFile);
+                } else {
+                    fd.append("learning_type", "video");
+                    fd.append("url", youtubeLinkInput.value.trim());
+                }
+
+                await fetch("api/upload_module.php", {
+                    method: "POST",
+                    body: fd
                 });
+                await loadModulesForCurrentContext();
             }
 
-            // ✅ PDF display
-            if (pdfModule) {
-                staticPdfViewer.src = pdfModule;
-                show(staticNotesSection);
-                hide(notesUploadSection);
-            } else {
+            // ✅ PDF buttons
+            editPdfBtn.onclick = () => {
                 hide(staticNotesSection);
                 show(notesUploadSection);
-            }
+                show(savePdfBtn);
+                show(cancelPdfBtn);
+                hide(editPdfBtn);
+            };
 
-            // ✅ Video display
-            if (videoModule) {
-                savedVideoLink.textContent = videoModule;
-                savedVideoLink.href = videoModule;
-                youtubeLinkInput.value = videoModule;
-                show(staticVideoSection);
-                hide(videoUploadSection);
-            } else {
-                youtubeLinkInput.value = "";
+            savePdfBtn.onclick = () => saveMaterial("pdf");
+            cancelPdfBtn.onclick = loadModulesForCurrentContext;
+
+            // ✅ Video buttons
+            editVideoBtn.onclick = () => {
                 hide(staticVideoSection);
                 show(videoUploadSection);
-            }
+                show(saveVideoBtn);
+                show(cancelVideoBtn);
+                hide(editVideoBtn);
+            };
 
-            // ✅ Default state
-            hide(savePdfBtn);
-            hide(cancelPdfBtn);
-            hide(saveVideoBtn);
-            hide(cancelVideoBtn);
+            saveVideoBtn.onclick = () => {
+                if (!youtubeLinkInput.value.trim()) return alert("Paste YouTube link");
+                saveMaterial("video");
+            };
 
-            show(editPdfBtn);
-            show(editVideoBtn);
+            cancelVideoBtn.onclick = loadModulesForCurrentContext;
 
-        } catch (e) {
-            console.error(e);
-        }
-    };
+            // ✅ Show save when typing YouTube
+            youtubeLinkInput.addEventListener("input", () => {
+                if (youtubeLinkInput.value.trim()) {
+                    show(saveVideoBtn);
+                    show(cancelVideoBtn);
+                }
+            });
 
-    // ✅ Handle PDF file select
-    dropZone.addEventListener("click", () => fileInput.click());
-    fileInput.addEventListener("change", e => {
-        const f = e.target.files[0];
-        if (f && f.type === "application/pdf") {
-            selectedFile = f;
-            pdfViewer.src = URL.createObjectURL(f);
-            show(pdfPreviewContainer);
-            show(savePdfBtn);
-            show(cancelPdfBtn);
-            hide(editPdfBtn);
-        }
-    });
+            // ✅ Load content when selecting outcome
+            document.addEventListener("click", async e => {
+                const card = e.target.closest(".outcome-card");
+                if (!card) return;
 
-    // ✅ Save handler
-    async function saveMaterial(type) {
-        const ctx = window._materialContext;
+                setMaterialContext({
+                    launch_id: card.dataset.launchId,
+                    topic_id: card.dataset.topicId,
+                    co_id: card.dataset.outcomeId
+                });
 
-        const fd = new FormData();
-        fd.append("launch_id", ctx.launch_id);
-        fd.append("topic_id", ctx.topic_id);
-        fd.append("co_id", ctx.co_id);
+                document.getElementById("courseOutcomeList").style.display = "none";
+                document.getElementById("outcomeDetail").style.display = "block";
 
-        if (type === "pdf") {
-            fd.append("learning_type", "pdf");
-            fd.append("file", selectedFile);
-        } else {
-            fd.append("learning_type", "video");
-            fd.append("url", youtubeLinkInput.value.trim());
-        }
+                await loadModulesForCurrentContext();
+            });
 
-        await fetch("api/upload_module.php", { method: "POST", body: fd });
-        await loadModulesForCurrentContext();
-    }
-
-    // ✅ PDF buttons
-    editPdfBtn.onclick = () => {
-        hide(staticNotesSection);
-        show(notesUploadSection);
-        show(savePdfBtn);
-        show(cancelPdfBtn);
-        hide(editPdfBtn);
-    };
-
-    savePdfBtn.onclick = () => saveMaterial("pdf");
-    cancelPdfBtn.onclick = loadModulesForCurrentContext;
-
-    // ✅ Video buttons
-    editVideoBtn.onclick = () => {
-        hide(staticVideoSection);
-        show(videoUploadSection);
-        show(saveVideoBtn);
-        show(cancelVideoBtn);
-        hide(editVideoBtn);
-    };
-
-    saveVideoBtn.onclick = () => {
-        if (!youtubeLinkInput.value.trim()) return alert("Paste YouTube link");
-        saveMaterial("video");
-    };
-
-    cancelVideoBtn.onclick = loadModulesForCurrentContext;
-
-    // ✅ Show save when typing YouTube
-    youtubeLinkInput.addEventListener("input", () => {
-        if (youtubeLinkInput.value.trim()) {
-            show(saveVideoBtn);
-            show(cancelVideoBtn);
-        }
-    });
-
-    // ✅ Load content when selecting outcome
-    document.addEventListener("click", async e => {
-        const card = e.target.closest(".outcome-card");
-        if (!card) return;
-
-        setMaterialContext({
-            launch_id: card.dataset.launchId,
-            topic_id: card.dataset.topicId,
-            co_id: card.dataset.outcomeId
-        });
-
-        document.getElementById("courseOutcomeList").style.display = "none";
-        document.getElementById("outcomeDetail").style.display = "block";
-
-        await loadModulesForCurrentContext();
-    });
-
-})();
-</script>
+        })();
+    </script>
 
 
 
@@ -2418,34 +2432,36 @@
                 const launch_id = urlParams.get("launch_id");
 
                 if (!launch_id) {
-                    alert("Launch ID missing in URL.");
+                    alert("Launch ID missing in URL");
                     return;
                 }
 
-                const data = {
-                    launch_id: launch_id,
-                    course_code: document.getElementById('courseCode-form').value.trim(),
-                    course_name: document.getElementById('courseName-form').value.trim(),
-                    department: document.getElementById('department-form').value.trim(),
-                    credit_hours: document.getElementById('creditHours-form').value.trim(),
-                    course_description: document.getElementById('courseDescription-form').value.trim(),
-                    schedule: document.getElementById('schedule-form').value.trim(),
-                    location: document.getElementById('location-form').value.trim(),
-                    prerequisites: document.getElementById('prerequisites-form').value.trim(),
-                    coordinator_name: document.getElementById('coordinatorName-form').value.trim(),
-                    email: document.getElementById('email-form').value.trim(),
-                    phone: document.getElementById('phone-form').value.trim()
-                };
+                let formData = new FormData();
+                formData.append("launch_id", launch_id);
+                formData.append("course_code", document.getElementById('courseCode-form').value.trim());
+                formData.append("course_name", document.getElementById('courseName-form').value.trim());
+                formData.append("department", document.getElementById('department-form').value.trim());
+                formData.append("credit_hours", document.getElementById('creditHours-form').value.trim());
+                formData.append("course_description", document.getElementById('courseDescription-form').value.trim());
+                formData.append("schedule", document.getElementById('schedule-form').value.trim());
+                formData.append("location", document.getElementById('location-form').value.trim());
+                formData.append("prerequisites", document.getElementById('prerequisites-form').value.trim());
+                formData.append("coordinator_name", document.getElementById('coordinatorName-form').value.trim());
+                formData.append("email", document.getElementById('email-form').value.trim());
+                formData.append("phone", document.getElementById('phone-form').value.trim());
+
+                // ✅ profile image file
+                const fileInput = document.getElementById("profile");
+                if (fileInput.files.length > 0) {
+                    formData.append("profile_image", fileInput.files[0]);
+                }
 
                 btnSave.disabled = true;
                 btnSave.textContent = "Saving...";
 
                 fetch("api/update_faculty_course.php", {
                         method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify(data)
+                        body: formData
                     })
                     .then(res => res.json())
                     .then(response => {
@@ -2456,14 +2472,15 @@
                         }
                     })
                     .catch(err => {
-                        console.error("Update Error:", err);
-                        alert("⚠️ Failed to update course. Try again later.");
+                        console.error(err);
+                        alert("⚠️ Failed to update. Try again.");
                     })
                     .finally(() => {
                         btnSave.disabled = false;
                         btnSave.textContent = "Save Changes";
                     });
             });
+
 
             btnReset.addEventListener("click", () => {
                 document.getElementById("topicDetailForm").reset();

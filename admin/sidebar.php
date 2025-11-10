@@ -31,7 +31,7 @@
                     <a href="launch-course.php" class="text-decoration-none d-block">Launch Course</a>
                 </li>
                 <li>
-                    <a href="course_approval.php" class="text-decoration-none d-block">Course Approval</a>
+                    <a href="course_approval.php" class="text-decoration-none d-block">Course List</a>
                 </li>
             </ul>
         </div>

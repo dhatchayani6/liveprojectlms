@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php session_start(); ?>
+<?php include "../includes/auth_faculty.php"; ?>
 
 <head>
     <meta charset="UTF-8" />
