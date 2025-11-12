@@ -2277,7 +2277,6 @@
         <input type="hidden" class="pq-id" value="${pq_id || ''}">
         <div class="d-flex justify-content-between mb-2">
             <h6 class="fw-semibold mb-0">Question ${index}</h6>
-            <i class="bi bi-x-circle removeQuestionBtn" style="color:red;cursor:pointer;"></i>
         </div>
 
         <div class="mb-3">
@@ -2295,7 +2294,7 @@
         </div>
         `;
 
-                card.querySelector('.removeQuestionBtn').addEventListener('click', () => card.remove());
+                // card.querySelector('.removeQuestionBtn').addEventListener('click', () => card.remove());
                 return {
                     element: card
                 };

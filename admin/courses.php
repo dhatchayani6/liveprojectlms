@@ -71,6 +71,7 @@ session_start();
                     <!-- Add New Course Form -->
                     <div class="card-custom shadow mt-4 p-4">
                         <h6 class="text-center mb-4">Course Creator</h6>
+
                         <!-- Course Details -->
                         <div class="mb-4">
                             <h6>Course Details</h6>
@@ -92,38 +93,50 @@ session_start();
                             </div>
                         </div>
 
-
-                        <!-- Category Selector -->
                         <div class="mb-4">
-                            <h6>Course Category</h6>
-                            <div id="categoryGroup" class="btn-group" role="group" aria-label="Category">
-                                <button type="button" class="btn btn-outline-primary">University Core</button>
-                                <button type="button" class="btn btn-outline-primary">University Elective</button>
-                                <button type="button" class="btn btn-outline-primary">Program Core</button>
-                                <button type="button" class="btn btn-outline-primary">Program Elective</button>
+                            <div class="row g-3">
+                                <!-- Category Selector -->
+                                <div class="col-md-6">
+                                    <h6>Course Category</h6>
+                                    <div id="categoryGroup" class="btn-group" role="group" aria-label="Category">
+                                        <button type="button" class="btn btn-outline-primary">University Core</button>
+                                        <button type="button" class="btn btn-outline-primary">University Elective</button>
+                                        <button type="button" class="btn btn-outline-primary">Program Core</button>
+                                        <button type="button" class="btn btn-outline-primary">Program Elective</button>
+                                    </div>
+                                </div>
+                                <!-- Regulation Selector -->
+                                <div class="col-md-6">
+                                    <h6>Select Regulation</h6>
+                                    <div class="dropdown">
+                                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="regBtn"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            Select Regulation
+                                        </button>
+                                        <ul class="dropdown-menu" id="regMenu">
+                                            <li><a class="dropdown-item" href="#" data-value="Regulation 2024">Regulation
+                                                    2024</a></li>
+                                            <li><a class="dropdown-item" href="#" data-value="Regulation 2023">Regulation
+                                                    2023</a></li>
+                                            <li><a class="dropdown-item" href="#" data-value="Regulation 2022">Regulation
+                                                    2022</a></li>
+                                            <li><a class="dropdown-item" href="#" data-value="Regulation 2021">Regulation
+                                                    2021</a></li>
+                                            <li><a class="dropdown-item" href="#" data-value="Regulation 2020">Regulation
+                                                    2020</a></li>
+                                            <li><a class="dropdown-item" href="#" data-value="Regulation 2019">Regulation
+                                                    2019</a></li>
+                                            <li><a class="dropdown-item" href="#" data-value="Regulation 2018">Regulation
+                                                    2018</a></li>
+                                            <li><a class="dropdown-item" href="#" data-value="Regulation 2017">Regulation
+                                                    2017</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
 
-                        <!-- Regulation Selector -->
-                        <div class="mb-4">
-                            <h6>Select Regulation</h6>
-                            <div class="dropdown">
-                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="regBtn"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Select Regulation
-                                </button>
-                                <ul class="dropdown-menu" id="regMenu">
-                                    <li><a class="dropdown-item" href="#" data-value="Regulation 2020">Regulation
-                                            2020</a></li>
-                                    <li><a class="dropdown-item" href="#" data-value="Regulation 2019">Regulation
-                                            2019</a></li>
-                                    <li><a class="dropdown-item" href="#" data-value="Regulation 2018">Regulation
-                                            2018</a></li>
-                                    <li><a class="dropdown-item" href="#" data-value="Regulation 2017">Regulation
-                                            2017</a></li>
-                                </ul>
-                            </div>
-                        </div>
 
                         <!-- Rubrics Selector -->
                         <div class="mb-4">
@@ -152,11 +165,11 @@ session_start();
                         <!-- Rubrics Table (shown when a rubric is selected) -->
                         <div class="mb-4" id="rubricTableSection" style="display:none;">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h6 id="rubricTitle"></h6>
-                                <button class="btn btn-sm btn-primary" id="saveRubricBtn">Save</button>
+                                <h6 id="rubricTitle" style="display:none;"></h6>
+                                <button class="btn btn-sm btn-primary"  style="display:none;" id="saveRubricBtn">Save</button>
                             </div>
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="rubricTable">
+                                <table class="table table-bordered" style="display:none;" id="rubricTable">
                                     <thead>
                                         <tr>
                                             <th>Component</th>
@@ -170,11 +183,11 @@ session_start();
                                     </tbody>
                                 </table>
                             </div>
-                            <button class="btn btn-sm btn-secondary" id="addComponentBtn">+ Add Component</button>
+                            <button class="btn btn-sm btn-secondary"  style="display:none;" id="addComponentBtn">+ Add Component</button>
                         </div>
 
                         <!-- Passing Criteria Section -->
-                        <div class="mb-4">
+                        <div class="mb-4" style="display: none;">
                             <h6>Passing Criteria</h6>
                             <div id="criteriaTableSection" style="display:none;">
                                 <div class="table-responsive">
