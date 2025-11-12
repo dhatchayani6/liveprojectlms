@@ -3,201 +3,230 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Student Dashboard</title>
-    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="../responsive.css">
-    <link rel="stylesheet" href="stylesheet/courses.css">
-
-    <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <style>
-        .bi-book::before {
-            color: #000 !important;
-
+        body {
+            background-color: #f9fafb;
+            font-family: 'Roboto', sans-serif;
         }
 
-        .bi-book {
-            background: rgba(59, 130, 246, 0.15);
-            padding: 7px;
-            border-radius: 53%;
-            font-size: medium !important;
+        .sidebar {
+            width: 260px;
+            min-height: 100vh;
+            background-color: #fff;
+            border-right: 1px solid #dee2e6;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
         }
 
-        .bi-file-earmark-text {
-            background: rgba(16, 185, 129, 0.15);
-            color: rgb(0, 0, 0);
-            padding: 7px;
-            border-radius: 53%;
-            font-size: medium !important;
+        .sidebar .nav-link.active {
+            background-color: #e7f1ff;
+            color: #0d6efd;
+            font-weight: 600;
         }
 
-        .bi-check2-circle {
-            background: rgba(139, 92, 246, 0.15);
-            color: rgb(0, 0, 0);
-            padding: 7px;
-            border-radius: 53%;
-            font-size: medium !important;
+        .sidebar .nav-link {
+            color: #495057;
+            border-radius: 0.5rem;
         }
 
-        .bi-calendar3 {
-            background: rgba(249, 115, 22, 0.15);
-            color: rgb(0, 0, 0);
-            padding: 7px;
-            border-radius: 53%;
-            font-size: medium !important;
+        .sidebar .nav-link:hover {
+            background-color: #f1f3f5;
         }
 
-        button {
-            background-color: lightgray;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: background-color 1s ease-out, transform 1s ease-out;
+        .avatar {
+            height: 80px;
+            width: 80px;
+            background-color: #cfe2ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        button:hover {
-            background-color: lightgreen;
+        .main-content {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .menu-btn {
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .menu-btn:hover {
             transform: scale(1.02);
-            transition: transform 0.2s ease, background-color 0.2s ease;
-            /* smooth effect */
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
         }
 
+        .btn-blue {
+            background: linear-gradient(rgb(168, 213, 255), rgb(126, 182, 247));
+            border: 1px solid rgba(59, 130, 246, 0.5);
+        }
 
-        .fs-6 {
-            font-size: 0.8rem !important;
+        .btn-green {
+            background: linear-gradient(rgb(182, 240, 200), rgb(139, 224, 166));
+            border: 1px solid rgba(16, 185, 129, 0.5);
+        }
+
+        .btn-purple {
+            background: linear-gradient(rgb(224, 200, 249), rgb(201, 167, 242));
+            border: 1px solid rgba(139, 92, 246, 0.5);
+        }
+
+        .btn-orange {
+            background: linear-gradient(rgb(255, 213, 184), rgb(255, 186, 139));
+            border: 1px solid rgba(249, 115, 22, 0.5);
+        }
+
+        .menu-icon {
+            border-radius: 50%;
+            padding: 6px;
+            margin-right: 8px;
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .sidebar .nav-link {
+            padding: 15px !important;
         }
     </style>
 </head>
 
 <body>
-    <main class="dashboard-main">
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <aside class="sidebar d-none d-md-flex flex-column">
+            <div class="text-center border-bottom p-4">
+                <div class="avatar mx-auto mb-3">
+                    <i class="bi bi-person-fill fs-1 text-primary"></i>
+                </div>
+                <h5 class="mb-1 fw-semibold text-dark"><?php echo $_SESSION['name']; ?></h5>
+                <p class="text-muted small">Student ID: <?php echo $_SESSION['regno']; ?></p>
+            </div>
 
-        <div class="content-container bg-light ">
+            <nav class="flex-grow-1 pt-3 px-3">
+                <ul class="nav flex-column gap-3">
+                    <li><a href="dashboard.php" class="nav-link active d-flex align-items-center px-3 py-2"><i
+                                class="bi bi-grid-fill me-2"></i>Dashboard</a></li>
+                    <li><a href="courses.php" class="nav-link d-flex align-items-center px-3 py-2"><i
+                                class="bi bi-book me-2"></i>Courses</a></li>
+                    <li><a href="assignments.php" class="nav-link d-flex align-items-center px-3 py-2"><i
+                                class="bi bi-file-earmark-text me-2"></i>Assignments</a></li>
 
-            <?php include ("header.php") ?>
+                </ul>
+            </nav>
+        </aside>
 
-            <div class="p-3">
-                <!-- Notifications -->
-                <div class="rounded border">
-                    <!-- <div class="notifications  p-3">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <small>Notifications</small>
-                            <small class="text-primary fw-semibold">• 3 new</small>
-                        </div>
+        <!-- Main Content -->
+        <div class="main-content d-flex flex-column flex-grow-1">
+            <!-- Header -->
+            <header class="bg-white border-bottom shadow-sm">
+                <div class="d-flex justify-content-between align-items-center px-4 py-3">
 
-                 
+                    <div class="d-flex align-items-center">
+                        <!-- 🔹 Offcanvas Toggle (Visible on Mobile Only) -->
+                        <button class="btn btn-light btn-sm me-2 d-md-none" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+                            <i class="bi bi-list"></i>
+                        </button>
 
-                        <a href="notification_assignments.php">
-                            <div class="notification-card mb-2 rounded border p-2"
-                                style="background: linear-gradient(rgb(246, 249, 255), rgb(237, 243, 255)); border: 1px solid rgba(79, 129, 251, 0.2); box-shadow: rgba(255, 255, 255, 0.8) 0px 1px 0px inset, rgba(0, 0, 0, 0.05) 0px 1px 2px;">
-                                <div class="d-flex gap-2">
-                                    <div class="p-2 rounded-circle d-flex align-items-center justify-content-center"
-                                        style="background: linear-gradient(rgb(219, 231, 255), rgb(196, 215, 255)); 
-                                                        box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.1) 0px 1px 2px; 
-                                                        border: 1px solid rgba(79, 129, 251, 0.3); width: 32px; height: 32px;">
-                                                                                    <i class="bi bi-file-text" style="    --tw-text-opacity: 1;
-                                                color: rgb(37 99 235 / var(--tw-text-opacity, 1));"></i>
-                                    </div>
-                                    <div class="d-flex flex-column">
-                                        <small class="mb-0 text-dark "> Data Science Project Review</small>
-                                        <small class="text-muted fs-6">Pending Student Submissions</small>
-                                        <small class="text-dark"><i class="bi bi-clock "></i> Due: 2023-11-15</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
+                        <!-- 🔹 Back Button (Visible on Desktop) -->
+                        <button onclick="window.history.back()"
+                            class="btn btn-light btn-sm me-2 d-none d-md-inline-flex">
+                            <i class="bi bi-chevron-left"></i>
+                        </button>
 
-                
-                        <a href="notification_schedule.php" class="text-dark">
-                            <div class="notification-card mb-2 rounded border p-2" style="background: linear-gradient(rgb(255, 249, 246), rgb(255, 244, 237)); 
-                                    border: 1px solid rgba(251, 146, 79, 0.2); 
-                                    box-shadow: rgba(255, 255, 255, 0.8) 0px 1px 0px inset, rgba(0, 0, 0, 0.05) 0px 1px 2px;">
-                                <div class="d-flex gap-2">
-                                    <div class="p-2 rounded-circle d-flex align-items-center justify-content-center"
-                                        style="background: linear-gradient(rgb(255, 230, 210), rgb(255, 210, 180)); 
-                                            box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.1) 0px 1px 2px; 
-                                            border: 1px solid rgba(251, 146, 79, 0.3); width: 32px; height: 32px;">
-                                        <i class="bi bi-bell text-warning"></i>
-                                    </div>
-                                    <div class="d-flex flex-column">
-                                        <small class="mb-0">Midterm Exam Schedule Posted</small>
-                                        <small class="text-muted fs-6">Database Systems - Faculty Allocation</small>
-                                        <small><i class="bi bi-clock"></i> Posted: 2023-11-10</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>    
+                        <h5 class="fw-semibold mb-0">Viana Study</h5>
+                    </div>
 
-                  
-                        <a href="notification_assignments.php" class="text-dark">
-                            <div class="notification-card rounded border p-2" style="background: linear-gradient(rgb(246, 249, 255), rgb(237, 243, 255)); 
-                                    border: 1px solid rgba(79, 129, 251, 0.2); 
-                                    box-shadow: rgba(255, 255, 255, 0.8) 0px 1px 0px inset, rgba(0, 0, 0, 0.05) 0px 1px 2px;">
-                                <div class="d-flex gap-2">
-                                    <div class="p-2 rounded-circle d-flex align-items-center justify-content-center"
-                                        style="background: linear-gradient(rgb(219, 231, 255), rgb(196, 215, 255)); 
-                                            box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.1) 0px 1px 2px; 
-                                            border: 1px solid rgba(79, 129, 251, 0.3); width: 32px; height: 32px;">
-                                        <i class="bi bi-people text-primary"></i>
-                                    </div>
-                                    <div class="d-flex flex-column">
-                                        <small class="mb-0">Algorithm Evaluation Meeting</small>
-                                        <small class="text-muted fs-6">Scheduled Faculty Discussion</small>
-                                        <small><i class="bi bi-clock"></i> Date: 2023-11-20</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                    </div> -->
+                    <a href="../index.php" class="btn btn-light d-flex align-items-center">
+                        <i class="bi bi-box-arrow-right me-2"></i> Logout
+                    </a>
+                </div>
+            </header>
+            <!-- Offcanvas Sidebar -->
+            <div class="offcanvas offcanvas-start offcanvas-full" tabindex="-1" id="offcanvasSidebar"
+                aria-labelledby="offcanvasSidebarLabel">
+                <div class="offcanvas-header border-bottom">
+                    <h5 class="offcanvas-title fw-semibold" id="offcanvasSidebarLabel">Student Menu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
 
-                <div class="rounded border mt-3">
-                    <!-- Faculty Menu -->
-                    <div class="menu-section d-flex flex-column p-4 gap-2  ">
-                        <a href="courses.php">
-                            <button class="menu-btn menu-courses p-4 rounded  w-100 text-start"
-                                style="background: linear-gradient(rgb(168, 213, 255), rgb(126, 182, 247)); border: 1px solid rgba(59, 130, 246, 0.5); box-shadow: rgba(59, 130, 246, 0.3) 0px 2px 4px, rgba(255, 255, 255, 0.6) 0px 1px 0px inset;">
-                                <i class="bi bi-book "></i> Course
-                            </button>
-                        </a>
-                        <a href="assignments.php">
-                            <button class="menu-btn menu-assignments p-4 rounded  w-100 text-start"
-                                style="background: linear-gradient(rgb(182, 240, 200), rgb(139, 224, 166)); border: 1px solid rgba(16, 185, 129, 0.5); box-shadow: rgba(16, 185, 129, 0.3) 0px 2px 4px, rgba(255, 255, 255, 0.6) 0px 1px 0px inset;">
-                                <i class="bi bi-file-earmark-text" style="background: rgba(16, 185, 129, 0.15);
-                                color: rgb(0, 0, 0);"></i> Assignments
-                            </button>
-                        </a>
-                        <!-- <a href="transcripts.php">
-                            <button class="menu-btn menu-grading p-4 rounded  w-100 text-start"
-                                style="background: linear-gradient(rgb(224, 200, 249), rgb(201, 167, 242)); border: 1px solid rgba(139, 92, 246, 0.5); box-shadow: rgba(139, 92, 246, 0.3) 0px 2px 4px, rgba(255, 255, 255, 0.6) 0px 1px 0px inset;">
-                                <i class="bi bi-check2-circle"></i> Transcripts
-                            </button>
-                        </a>
-                        <a href="schedule.php">
-                            <button class="menu-btn menu-research p-4 rounded  w-100 text-start"
-                                style="background: linear-gradient(rgb(255, 213, 184), rgb(255, 186, 139)); border: 1px solid rgba(249, 115, 22, 0.5); box-shadow: rgba(249, 115, 22, 0.3) 0px 2px 4px, rgba(255, 255, 255, 0.6) 0px 1px 0px inset;">
-                                <i class="bi bi-calendar3"></i> Schedule
-                            </button>
-                        </a> -->
-                    </div>
+                <div class="offcanvas-body p-0">
+                    <aside class="sidebar flex-column h-100 w-100">
+                        <div class="text-center border-bottom p-4">
+                            <div class="avatar mx-auto mb-3">
+                                <i class="bi bi-person-fill fs-1 text-primary"></i>
+                            </div>
+                            <h5 class="mb-1 fw-semibold text-dark"><?php echo $_SESSION['name']; ?></h5>
+                            <p class="text-muted small">Student ID: <?php echo $_SESSION['regno']; ?></p>
+                        </div>
+
+                        <nav class="flex-grow-1 pt-3 px-4">
+                            <ul class="nav flex-column gap-3">
+                                <li><a href="dashboard.php" class="nav-link d-flex align-items-center px-3 py-2">
+                                        <i class="bi bi-grid-fill me-2"></i>Dashboard</a></li>
+                                <li><a href="courses.php" class="nav-link d-flex align-items-center px-3 py-2">
+                                        <i class="bi bi-book me-2"></i>Courses</a></li>
+                                <li><a href="assignments.php"
+                                        class="nav-link active d-flex align-items-center px-3 py-2">
+                                        <i class="bi bi-file-earmark-text me-2"></i>Assignments</a></li>
+                            </ul>
+                        </nav>
+                    </aside>
                 </div>
             </div>
 
+            <!-- Dashboard Content -->
+            <main class="p-4">
+                <h4 class="fw-bold mb-4 text-dark">Quick Access</h4>
+                <div class="row g-3">
+                    <div class="col-md-6 col-lg-4">
+                        <a href="courses.php" class="text-decoration-none">
+                            <button class="menu-btn btn-blue text-dark">
+                                <i class="bi bi-book menu-icon"></i> Courses
+                            </button>
+                        </a>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <a href="assignments.php" class="text-decoration-none">
+                            <button class="menu-btn btn-green text-dark">
+                                <i class="bi bi-file-earmark-text menu-icon"></i> Assignments
+                            </button>
+                        </a>
+                    </div>
+                    <!-- <div class="col-md-6 col-lg-4">
+            <a href="transcripts.php" class="text-decoration-none">
+              <button class="menu-btn btn-purple text-dark">
+                <i class="bi bi-check2-circle menu-icon"></i> Transcripts
+              </button>
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <a href="schedule.php" class="text-decoration-none">
+              <button class="menu-btn btn-orange text-dark">
+                <i class="bi bi-calendar3 menu-icon"></i> Schedule
+              </button>
+            </a>
+          </div> -->
+                </div>
+            </main>
         </div>
-    </main>
+    </div>
 
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

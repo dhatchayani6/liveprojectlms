@@ -1,27 +1,110 @@
-<?php include "../includes/auth_student.php"; ?>
 <?php
 $launch_id = $_GET['launch_id'];
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
+<?php include "../includes/auth_student.php"; ?>
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Viana Study - Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viana Study Dashboard</title>
     <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="stylesheet/responsive.css">
+
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="../responsive.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="stylesheet/courses.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
-    <!-- Plyr CSS -->
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    <style>
+        body {
+            background-color: #f9fafb;
+            font-family: 'Roboto', sans-serif;
+            cursor: pointer;
+        }
 
+        /* Keep sidebar fixed width and prevent flex shrink */
+        .sidebar {
+            flex-shrink: 0;
+            width: 260px;
+        }
+
+        /* Ensure main content uses remaining space */
+        .main-content {
+            flex: 1;
+            min-width: 0;
+            /* prevents flex overflow */
+            overflow-x: hidden;
+        }
+
+        .sidebar {
+            width: 260px;
+            min-height: 100vh;
+            background-color: #fff;
+            border-right: 1px solid #dee2e6;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar .nav-link.active {
+            background-color: #e7f1ff;
+            color: #0d6efd;
+            font-weight: 600;
+        }
+
+        .sidebar .nav-link {
+            color: #495057;
+            border-radius: 0.5rem;
+        }
+
+        .sidebar .nav-link:hover {
+            background-color: #f1f3f5;
+        }
+
+        .avatar {
+            height: 80px;
+            width: 80px;
+            background-color: #cfe2ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .btn-blue-courses {
+            background: linear-gradient(rgb(168, 213, 255) 0%, rgb(126, 182, 247) 100%);
+            color: #000;
+            border-radius: 6px;
+            border: 1px solid rgba(59, 130, 246, 0.5);
+            box-shadow: rgba(59, 130, 246, 0.3) 0px 2px 4px;
+        }
+
+        .progress-bar {
+            background: linear-gradient(to right, rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);
+        }
+
+        .bg-courses-grey {
+            background: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .courses-scroll {
+            max-height: 515px;
+            overflow-y: auto;
+        }
+
+        /* Topic card text should wrap instead of expanding horizontally */
+        .topic-card p,
+        .topic-card small {
+            word-wrap: break-word;
+            white-space: normal;
+        }
+    </style>
     <style>
         /* #ytClickLayer {
             position: absolute;
@@ -131,39 +214,170 @@ $launch_id = $_GET['launch_id'];
             font-weight: 500;
             transition: all 0.2s ease-in-out;
         }
+
+        .nav-tabs.equal-tabs {
+            display: flex;
+            justify-content: space-between;
+            gap: 0;
+            /* optional spacing between tabs */
+        }
+
+        .nav-tabs.equal-tabs .nav-item {
+            flex: 1;
+            /* each tab takes equal width */
+            text-align: center;
+        }
+
+        .nav-tabs.equal-tabs .nav-link {
+            width: 100%;
+            border-radius: 0;
+            font-weight: 500;
+        }
+
+        .bg-secondary {
+            background: linear-gradient(rgb(233, 233, 233) 0%, rgb(196, 196, 196) 100%);
+        }
+
+        .sidebar .nav-link {
+            padding: 15px !important;
+        }
+
+        /* #content-scroll {
+            height: 100%;
+            max-height: 710px;
+            overflow-y: scroll;
+        } */
+
+        /* Ensure text wraps inside cards on smaller screens */
+        .text-container {
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            white-space: normal;
+        }
+
+        @media (max-width: 991.98px) {
+
+            /* sm and md screens */
+            .co-card {
+                text-align: left;
+            }
+
+            .co-card .d-flex.align-items-start {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+
+            .co-card h6,
+            .co-card small {
+                white-space: normal;
+            }
+        }
     </style>
 </head>
 
 <body>
-
-    <div class="container-fluid p-0">
-        <!-- Header -->
-        <div class="header d-flex justify-content-between align-items-center px-3 py-2 bg-secondary text-dark">
-            <h5 class="mb-0 assignment-titles">
-                <a href="dashboard.php"><i class="bi bi-chevron-left rounded-circle"></i></a>
-            </h5>
-            <a href="../index.php">
-                <button class="btn d-flex align-items-center logout-btn gap-2">
-                    <i class="bi bi-box-arrow-right"></i><span>Logout</span>
-                </button>
-            </a>
-        </div>
-
-        <div class="content-scroll bg-light">
-            <div class="d-flex justify-content-between align-items-center p-3">
-                <h6 class="mb-0 pending">
-                    <a href="courses.php"><i class="bi bi-arrow-left me-2"></i>Back to Courses</a>
-                </h6>
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <aside class="sidebar d-none d-md-flex flex-column">
+            <div class="text-center border-bottom p-4">
+                <div class="avatar mx-auto mb-3">
+                    <i class="bi bi-mortarboard fs-1 text-primary"></i>
+                </div>
+                <h5 class="mb-1 fw-semibold text-dark"><?php echo $_SESSION['name']; ?></h5>
+                <p class="text-muted small">Student ID: <?php echo $_SESSION['regno']; ?></p>
             </div>
 
-            <div class="assignmnent p-3" id="assignments-slider">
-                <div class="assignment-detail">
-                    <div class="mb-3">
-                        <div class="p-4 rounded border bg-courses-grey">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h4 class="teacher-courses-titile m-0"></h4>
+            <nav class="flex-grow-1 pt-3 px-3">
+                <ul class="nav flex-column gap-3">
+                    <li><a href="dashboard.php" class="nav-link active d-flex align-items-center px-3 py-2"><i
+                                class="bi bi-grid-fill me-2"></i>Dashboard</a></li>
+                    <li><a href="courses.php" class="nav-link d-flex align-items-center px-3 py-2"><i
+                                class="bi bi-book me-2"></i>Courses</a></li>
+                    <li><a href="assignments.php" class="nav-link d-flex align-items-center px-3 py-2"><i
+                                class="bi bi-file-earmark-text me-2"></i>Assignments</a></li>
+                </ul>
+            </nav>
+        </aside>
 
-                                <!-- <div class="text-end" style="min-width:200px;">
+        <!-- Main Content -->
+        <div class="main-content d-flex flex-column flex-grow-1">
+            <!-- Header -->
+            <!-- Header -->
+            <header class="bg-white border-bottom shadow-sm">
+                <div class="d-flex justify-content-between align-items-center px-4 py-3">
+
+                    <div class="d-flex align-items-center">
+                        <!-- 🔹 Offcanvas Toggle (Visible on Mobile Only) -->
+                        <button class="btn btn-light btn-sm me-2 d-md-none" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+                            <i class="bi bi-list"></i>
+                        </button>
+
+                        <!-- 🔹 Back Button (Visible on Desktop) -->
+                        <button onclick="window.history.back()"
+                            class="btn btn-light btn-sm me-2 d-none d-md-inline-flex">
+                            <i class="bi bi-chevron-left"></i>
+                        </button>
+
+                        <h5 class="fw-semibold mb-0">Viana Study</h5>
+                    </div>
+
+                    <a href="../index.php" class="btn btn-light d-flex align-items-center">
+                        <i class="bi bi-box-arrow-right me-2"></i> Logout
+                    </a>
+                </div>
+            </header>
+            <!-- Offcanvas Sidebar -->
+            <div class="offcanvas offcanvas-start offcanvas-full" tabindex="-1" id="offcanvasSidebar"
+                aria-labelledby="offcanvasSidebarLabel">
+                <div class="offcanvas-header border-bottom">
+                    <h5 class="offcanvas-title fw-semibold" id="offcanvasSidebarLabel">Student Menu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+
+                <div class="offcanvas-body p-0">
+                    <aside class="sidebar flex-column h-100 w-100">
+                        <div class="text-center border-bottom p-4">
+                            <div class="avatar mx-auto mb-3">
+                                <i class="bi bi-person-fill fs-1 text-primary"></i>
+                            </div>
+                            <h5 class="mb-1 fw-semibold text-dark"><?php echo $_SESSION['name']; ?></h5>
+                            <p class="text-muted small">Student ID: <?php echo $_SESSION['regno']; ?></p>
+                        </div>
+
+                        <nav class="flex-grow-1 pt-3 px-4">
+                            <ul class="nav flex-column gap-3">
+                                <li><a href="dashboard.php" class="nav-link d-flex align-items-center px-3 py-2">
+                                        <i class="bi bi-grid-fill me-2"></i>Dashboard</a></li>
+                                <li><a href="courses.php" class="nav-link d-flex align-items-center px-3 py-2">
+                                        <i class="bi bi-book me-2"></i>Courses</a></li>
+                                <li><a href="assignments.php"
+                                        class="nav-link active d-flex align-items-center px-3 py-2">
+                                        <i class="bi bi-file-earmark-text me-2"></i>Assignments</a></li>
+                            </ul>
+                        </nav>
+                    </aside>
+                </div>
+            </div>
+
+            <!-- Main -->
+            <main class="p-4" id="content-scroll">
+                <div class="mb-4">
+                    <a href="dashboard.php" class="btn btn-outline-primary btn-sm">
+                        <i class="bi bi-arrow-left me-2"></i>Back to Dashboard
+                    </a>
+                </div>
+
+                <h4 class="fw-bold mb-4 text-dark">Current Courses</h4>
+
+                <div class="assignmnent" id="assignments-slider">
+                    <div class="assignment-detail">
+                        <div class="mb-3">
+                            <div class="p-4 rounded border bg-courses-grey">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h4 class="teacher-courses-titile  m-0"></h4>
+
+                                    <!-- <div class="text-end" style="min-width:200px;">
                                     <button id="btnCertificate" class="btn btn-secondary w-100" disabled>
                                         Check Eligibility
                                     </button>
@@ -172,245 +386,261 @@ $launch_id = $_GET['launch_id'];
                                         <small id="certMessage" class="text-muted text-end" style="font-size:12px;"></small>
                                     </div>
                                 </div> -->
-                            </div>
-
-                            <small id="courseDesc">
-                                <!-- course description -->
-                            </small>
-                            <div class="pt-2">
-                                <small class="fw-medium">Course Progress</small>
-                            </div>
-                            <div class="progress-container mt-2">
-                                <div class="progress">
-                                    <div class="progress-bar btn-blue-courses" style="width: 0%;" role="progressbar"
-                                        aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
-                                <span class="percentage-label">
-                                    0%
-                                </span>
+
+                                <small id="courseDesc">
+                                    <!-- course description -->
+                                </small>
+                                <div class="pt-2">
+                                    <small class="fw-medium">Course Progress</small>
+                                </div>
+                                <div class="progress-container mt-2">
+                                    <div class="progress">
+                                        <div class="progress-bar btn-blue-courses" style="width: 0%;" role="progressbar"
+                                            aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <span class="percentage-label">
+                                        0%
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="details-ass border rounded">
-                        <!-- Tabs -->
-                        <ul class="nav nav-tabs flex-nowrap overflow-auto"
-                            style="background: linear-gradient(rgb(233, 233, 233) 0%, rgb(196, 196, 196) 100%);">
-                            <li class="nav-item">
-                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#overview"
-                                    type="button">Chapter</button>
-                            </li>
-                            <li class="nav-item">
-                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#materials"
-                                    type="button">Materials</button>
-                            </li>
-                            <!-- <li class="nav-item">
-                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#students"
-                                    type="button">Evaluation</button>
-                            </li> -->
-                        </ul>
+                        <div class="details-ass border rounded">
+                            <!-- Tabs -->
+                            <ul class="nav nav-tabs equal-tabs"
+                                style="background: linear-gradient(rgb(233,233,233) 0%, rgb(196,196,196) 100%);">
+                                <li class="nav-item">
+                                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#overview"
+                                        type="button">Chapter</button>
+                                </li>
+                                <li class="nav-item">
+                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#materials"
+                                        type="button">Materials</button>
+                                </li>
+                                <!-- <li class="nav-item">
+                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#students"
+                                        type="button">Evaluation</button>
+                                </li> -->
+                            </ul>
 
 
-                        <div class="tab-content mt-3">
 
-                            <!-- Chapters Tab -->
-                            <div class="tab-pane fade show active" id="overview">
-                                <div class="p-3 bg-white rounded shadow-sm">
-                                    <h6 class="fw-semibold mb-3">Chapters Overview</h6>
+                            <div class="tab-content mt-3">
 
-                                    <!-- Chapter Example -->
-                                    <div class="mb-3 p-3 border rounded bg-courses-grey">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <h6 class="fw-semibold mb-1 text-dark">Loading....</h6>
-                                                <small class="text-muted"></small>
+                                <!-- Chapters Tab -->
+                                <div class="tab-pane fade show active" id="overview">
+                                    <div class="p-3 bg-white rounded shadow-sm">
+                                        <h6 class="fw-medium mb-3">Chapters Overview</h6>
+
+                                        <!-- Chapter Example -->
+                                        <div class="mb-3 p-3 border rounded bg-courses-grey">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="fs-6">
+                                                    <p class="fw-medium mb-1 text-dark">Loading....</p>
+                                                    <small class="text-muted"></small>
+                                                </div>
+                                                <div class="px-2 py-1 rounded text-white fw-medium text-center"
+                                                    style="min-width:0px; background: linear-gradient(rgb(140, 198, 87), rgb(111, 173, 59));">
+                                                    0%
+                                                </div>
                                             </div>
-                                            <div class="px-2 py-1 rounded text-white fw-semibold text-center"
-                                                style="min-width:0px; background: linear-gradient(rgb(140, 198, 87), rgb(111, 173, 59));">
-                                                0%
+                                            <div class="progress mt-2" style="height: 6px;">
+                                                <div class="progress-bar"
+                                                    style="width: 0%; background: linear-gradient(to right, rgb(140, 198, 87), rgb(111, 173, 59));">
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="progress mt-2" style="height: 6px;">
-                                            <div class="progress-bar"
-                                                style="width: 0%; background: linear-gradient(to right, rgb(140, 198, 87), rgb(111, 173, 59));">
-                                            </div>
-                                        </div>
+
+
                                     </div>
-
-
                                 </div>
-                            </div>
 
-                            <!-- Materials Tab -->
-                            <div class="tab-pane fade" id="materials">
-                                <div class="p-3 bg-white rounded shadow-sm">
+                                <!-- Materials Tab -->
+                                <div class="tab-pane fade" id="materials">
+                                    <div class="p-3 bg-white rounded shadow-sm">
 
-                                    <!-- Header -->
-                                    <div class="d-flex align-items-center" style="gap: 250px; padding: 1rem;">
-                                        <h6 class="mb-0 pending">
-                                            <a href="courses_detail.php?launch_id=<?php echo $launch_id; ?>"><i class="bi bi-arrow-left me-2"></i>Back to
-                                                chapters</a>
-                                        </h6>
-                                        <h6 class="fw-semibold mb-0"></h6>
-                                    </div>
+                                        <!-- Header -->
+                                        <div class="d-flex align-items-center back-to"
+                                            style="gap: 250px; padding: 1rem;">
+                                            <h6 class="mb-0 pending">
+                                                <a href="courses_detail.php?launch_id=<?php echo $launch_id; ?>"><i
+                                                        class="bi bi-arrow-left me-2"></i>Back to
+                                                    chapters</a>
+                                            </h6>
+                                            <h6 class="fw-medium mb-0"></h6>
+                                        </div>
 
-                                    <!-- Action Buttons -->
-                                    <div class="p-3 d-flex flex-wrap gap-2">
-                                        <button class="section-btn flex-grow-1 flex-md-grow-0"
-                                            id="readingBtn">Reading</button>
-                                        <button class="section-btn flex-grow-1 flex-md-grow-0"
-                                            id="videoBtn">Videos</button>
-                                        <button class="section-btn flex-grow-1 flex-md-grow-0"
-                                            id="practiceBtn">Practice</button>
-                                        <!-- <button class="section-btn flex-grow-1 flex-md-grow-0"
+                                        <!-- Action Buttons -->
+                                        <div class="p-3 d-flex flex-wrap gap-2">
+                                            <button class="section-btn flex-grow-1 flex-md-grow-0"
+                                                id="readingBtn">Reading</button>
+                                            <button class="section-btn flex-grow-1 flex-md-grow-0"
+                                                id="videoBtn">Videos</button>
+                                            <button class="section-btn flex-grow-1 flex-md-grow-0"
+                                                id="practiceBtn">Practice</button>
+                                            <!-- <button class="section-btn flex-grow-1 flex-md-grow-0"
                                             id="assignmentBtn">Assignments</button> -->
-                                    </div>
+                                        </div>
 
-                                    <!-- Reading Section -->
-                                    <div class="p-3" id="readingSection" style="display:none;">
-                                        <div class="border rounded shadow-sm overflow-hidden bg-light">
-                                            <div class="p-2 border-bottom bg-secondary text-dark">
-                                                Reading Material
+                                        <!-- Reading Section -->
+                                        <div class="p-3" id="readingSection" style="display:none;">
+                                            <div class="border rounded shadow-sm overflow-hidden bg-light">
+                                                <div class="p-2 border-bottom bg-secondary text-dark">
+                                                    Reading Material
+                                                </div>
+                                                <div class="p-3">
+                                                    <p class="small">Data Collection Methods</p>
+
+                                                    <!-- Desktop PDF Viewer (iframe) -->
+                                                    <div
+                                                        class="ratio ratio-16x9 border rounded shadow-sm d-none d-md-block">
+                                                        <iframe src="../pdf/LARAVEL BASICS FOM SCRATCH.pdf" width="100%"
+                                                            height="600" style="border:none;"
+                                                            title="Course PDF Viewer"></iframe>
+                                                    </div>
+
+                                                    <!-- Mobile PDF Viewer (embed full-width) -->
+                                                    <div class="d-block d-md-none">
+                                                        <embed src="../pdf/LARAVEL BASICS FOM SCRATCH.pdf"
+                                                            type="application/pdf" width="100%" height="400"
+                                                            style="border:none;">
+                                                    </div>
+
+                                                </div>
                                             </div>
-                                            <div class="p-3">
-                                                <p class="small">Data Collection Methods</p>
+                                        </div>
 
-                                                <!-- Desktop PDF Viewer (iframe) -->
+
+                                        <!-- Video Section -->
+                                        <div class="p-3" id="videoSection" style="display:none;">
+                                            <div class="border rounded shadow-sm overflow-hidden bg-light">
+                                                <div class="p-2 border-bottom bg-secondary text-dark">Video Material
+                                                </div>
+                                                <div class="p-3" style="height:700px;">
+                                                    <!-- <p class="small">Data Preprocessing Techniques</p> -->
+
+                                                    <!-- Local Video -->
+                                                    <div id="localVideoContainer"
+                                                        class="ratio ratio-16x9 border rounded shadow-sm"
+                                                        style="display:none">
+                                                        <video id="player" playsinline controls
+                                                            style="width:100%;height:100%;">
+                                                            <source src="" type="video/mp4">
+                                                        </video>
+                                                    </div>
+
+                                                    <!-- YouTube Player -->
+                                                    <div id="youtubeContainer" class="border rounded shadow-sm"
+                                                        style="height:500px; display:none; background:#000;">
+                                                        <div class="ratio ratio-16x9" style="width:100%;height:100%;">
+                                                            <!-- IMPORTANT: Must be div, NOT iframe -->
+                                                            <div id="youtubeIframe"
+                                                                style="width:100%;height:100%;border-radius:10px;">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!-- Practice Section -->
+                                        <div class="p-3" id="practiceSection" style="display:none;">
+                                            <div class="border rounded shadow-sm overflow-hidden bg-light">
+                                                <div class="p-2 border-bottom bg-secondary text-dark">
+                                                    Practice Material
+                                                </div>
+                                                <div class="p-3">
+
+                                                    <!-- Questions Container -->
+                                                    <div id="questionsContainer">
+                                                        <!-- Question 1 -->
+                                                        <div class="mb-3">
+                                                            <label class="form-label fw-medium">1. What is the capital
+                                                                of
+                                                                France?</label>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="q1"
+                                                                    id="q1a" value="A">
+                                                                <label class="form-check-label" for="q1a">A.
+                                                                    Berlin</label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="q1"
+                                                                    id="q1b" value="B">
+                                                                <label class="form-check-label" for="q1b">B.
+                                                                    Madrid</label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="q1"
+                                                                    id="q1c" value="C">
+                                                                <label class="form-check-label" for="q1c">C.
+                                                                    Paris</label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="q1"
+                                                                    id="q1d" value="D">
+                                                                <label class="form-check-label" for="q1d">D.
+                                                                    Rome</label>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Question 2 -->
+                                                        <div class="mb-3">
+                                                            <label class="form-label fw-medium">2. Who wrote
+                                                                'Hamlet'?</label>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="q2"
+                                                                    id="q2a" value="A">
+                                                                <label class="form-check-label" for="q2a">A. Charles
+                                                                    Dickens</label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="q2"
+                                                                    id="q2b" value="B">
+                                                                <label class="form-check-label" for="q2b">B. William
+                                                                    Shakespeare</label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="q2"
+                                                                    id="q2c" value="C">
+                                                                <label class="form-check-label" for="q2c">C. Mark
+                                                                    Twain</label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="q2"
+                                                                    id="q2d" value="D">
+                                                                <label class="form-check-label" for="q2d">D. Leo
+                                                                    Tolstoy</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Submit Button -->
+                                                    <div class="d-flex justify-content-end mt-3" id="submitContainer">
+                                                        <button type="submit"
+                                                            class="btn btn-gradient-glossy btn-sm">Submit
+                                                            Answer</button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!-- Assignment Section -->
+                                        <div class="p-3" id="assignmentSection" style="display:none;">
+                                            <div class="card shadow-sm border-light">
+
+                                                <!-- Card Header -->
                                                 <div
-                                                    class="ratio ratio-16x9 border rounded shadow-sm d-none d-md-block">
-                                                    <iframe src="../pdf/LARAVEL BASICS FOM SCRATCH.pdf" width="100%"
-                                                        height="600" style="border:none;"
-                                                        title="Course PDF Viewer"></iframe>
-                                                </div>
-
-                                                <!-- Mobile PDF Viewer (embed full-width) -->
-                                                <div class="d-block d-md-none">
-                                                    <embed src="../pdf/LARAVEL BASICS FOM SCRATCH.pdf"
-                                                        type="application/pdf" width="100%" height="400"
-                                                        style="border:none;">
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <!-- Video Section -->
-                                    <div class="p-3" id="videoSection" style="display:none;">
-                                        <div class="border rounded shadow-sm overflow-hidden bg-light">
-                                            <div class="p-2 border-bottom bg-secondary text-dark">Video Material</div>
-                                            <div class="p-3" style="height:700px;">
-                                                <!-- <p class="small">Data Preprocessing Techniques</p> -->
-
-                                                <!-- Local Video -->
-                                                <div id="localVideoContainer" class="ratio ratio-16x9 border rounded shadow-sm" style="display:none">
-                                                    <video id="player" playsinline controls style="width:100%;height:100%;">
-                                                        <source src="" type="video/mp4">
-                                                    </video>
-                                                </div>
-
-                                                <!-- YouTube Player -->
-                                                <div id="youtubeContainer" class="border rounded shadow-sm" style="height:500px; display:none; background:#000;">
-                                                    <div class="ratio ratio-16x9" style="width:100%;height:100%;">
-                                                        <!-- IMPORTANT: Must be div, NOT iframe -->
-                                                        <div id="youtubeIframe" style="width:100%;height:100%;border-radius:10px;"></div>
-                                                    </div>
-                                                </div>
-
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <!-- Practice Section -->
-                                    <div class="p-3" id="practiceSection" style="display:none;">
-                                        <div class="border rounded shadow-sm overflow-hidden bg-light">
-                                            <div class="p-2 border-bottom bg-secondary text-dark">
-                                                Practice Material
-                                            </div>
-                                            <div class="p-3">
-
-                                                <!-- Questions Container -->
-                                                <div id="questionsContainer">
-                                                    <!-- Question 1 -->
-                                                    <div class="mb-3">
-                                                        <label class="form-label fw-semibold">1. What is the capital of
-                                                            France?</label>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="q1"
-                                                                id="q1a" value="A">
-                                                            <label class="form-check-label" for="q1a">A. Berlin</label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="q1"
-                                                                id="q1b" value="B">
-                                                            <label class="form-check-label" for="q1b">B. Madrid</label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="q1"
-                                                                id="q1c" value="C">
-                                                            <label class="form-check-label" for="q1c">C. Paris</label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="q1"
-                                                                id="q1d" value="D">
-                                                            <label class="form-check-label" for="q1d">D. Rome</label>
-                                                        </div>
-                                                    </div>
-
-                                                    <!-- Question 2 -->
-                                                    <div class="mb-3">
-                                                        <label class="form-label fw-semibold">2. Who wrote
-                                                            'Hamlet'?</label>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="q2"
-                                                                id="q2a" value="A">
-                                                            <label class="form-check-label" for="q2a">A. Charles
-                                                                Dickens</label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="q2"
-                                                                id="q2b" value="B">
-                                                            <label class="form-check-label" for="q2b">B. William
-                                                                Shakespeare</label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="q2"
-                                                                id="q2c" value="C">
-                                                            <label class="form-check-label" for="q2c">C. Mark
-                                                                Twain</label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="q2"
-                                                                id="q2d" value="D">
-                                                            <label class="form-check-label" for="q2d">D. Leo
-                                                                Tolstoy</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Submit Button -->
-                                                <div class="d-flex justify-content-end mt-3" id="submitContainer">
-                                                    <button type="submit" class="btn btn-gradient-glossy btn-sm">Submit
-                                                        Answer</button>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <!-- Assignment Section -->
-                                    <div class="p-3" id="assignmentSection" style="display:none;">
-                                        <div class="card shadow-sm border-light">
-
-                                            <!-- Card Header -->
-                                            <div
-                                                class="card-header bg-secondary text-dark d-flex justify-content-between align-items-center">
-                                                <span>Assignment Material</span>
-                                                <!-- <div class="d-flex gap-1">
+                                                    class="card-header bg-secondary text-dark d-flex justify-content-between align-items-center">
+                                                    <span>Assignment Material</span>
+                                                    <!-- <div class="d-flex gap-1">
                                                     <span class="rounded-circle bg-danger"
                                                         style="width:8px; height:8px;"></span>
                                                     <span class="rounded-circle bg-warning"
@@ -418,18 +648,19 @@ $launch_id = $_GET['launch_id'];
                                                     <span class="rounded-circle bg-success"
                                                         style="width:8px; height:8px;"></span>
                                                 </div> -->
-                                            </div>
+                                                </div>
 
-                                            <!-- Card Body -->
-                                            <div class="card-body bg-light">
-                                                <h6 class="p-3">Data Collection Exercise
-                                                </h6>
-                                                <!-- Assignment Details Card -->
-                                                <div class="card border shadow-sm mb-3">
-                                                    <div class="card-header bg-light">
-                                                        <div class="d-flex justify-content-between align-items-center">
-                                                            <span class="small fw-medium">Assignment Details</span>
-                                                            <!-- <div class="d-flex gap-1">
+                                                <!-- Card Body -->
+                                                <div class="card-body bg-light">
+                                                    <h6 class="p-3">Data Collection Exercise
+                                                    </h6>
+                                                    <!-- Assignment Details Card -->
+                                                    <div class="card border shadow-sm mb-3">
+                                                        <div class="card-header bg-light">
+                                                            <div
+                                                                class="d-flex justify-content-between align-items-center">
+                                                                <span class="small fw-medium">Assignment Details</span>
+                                                                <!-- <div class="d-flex gap-1">
                                                                 <span class="rounded-circle bg-danger"
                                                                     style="width:8px; height:8px;"></span>
                                                                 <span class="rounded-circle bg-warning"
@@ -437,89 +668,98 @@ $launch_id = $_GET['launch_id'];
                                                                 <span class="rounded-circle bg-success"
                                                                     style="width:8px; height:8px;"></span>
                                                             </div> -->
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="card-body bg-white">
-                                                        <!-- Instructions -->
-                                                        <div class="mb-3">
-                                                            <h6 class="small fw-medium">Instructions:</h6>
-                                                            <p class="small text-secondary">
-                                                                For this assignment, you will need to collect data from
-                                                                a public dataset of your choice,
-                                                                document your data collection process, and prepare a
-                                                                brief report on the dataset characteristics.
-                                                            </p>
-                                                        </div>
-
-                                                        <!-- Due Date -->
-                                                        <div class="mb-3">
-                                                            <h6 class="small fw-medium">Due Date:</h6>
-                                                            <p class="small text-secondary">2023-12-15</p>
-                                                        </div>
-
-                                                        <!-- File Upload -->
-                                                        <div class="mb-3">
-                                                            <h6 class="small fw-medium">Upload Your Solution:</h6>
-                                                            <div class="border border-2 border-dashed rounded p-4 text-center"
-                                                                style="background: rgba(0,0,0,0.02);">
-                                                                <i class="bi bi-upload"
-                                                                    style="font-size: 2rem; color: #6c757d;"></i>
-                                                                <p class="small text-secondary mb-1">Drag and drop your
-                                                                    files here</p>
-                                                                <p class="small text-muted mb-2">or</p>
-                                                                <div class="mb-3">
-
-                                                                    <div class="d-grid">
-                                                                        <label class="text-primary">
-                                                                            Browse files
-                                                                            <input type="file" accept=".pdf" hidden>
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
                                                             </div>
                                                         </div>
 
-                                                        <!-- Submit Button -->
-                                                        <div class="d-flex justify-content-end">
-                                                            <button type="button"
-                                                                class="btn btn-gradient-glossy px-4 btn-sm">
-                                                                Submit Assignment
-                                                            </button>
+                                                        <div class="card-body bg-white">
+                                                            <!-- Instructions -->
+                                                            <div class="mb-3">
+                                                                <h6 class="small fw-medium">Instructions:</h6>
+                                                                <p class="small text-secondary">
+                                                                    For this assignment, you will need to collect data
+                                                                    from
+                                                                    a public dataset of your choice,
+                                                                    document your data collection process, and prepare a
+                                                                    brief report on the dataset characteristics.
+                                                                </p>
+                                                            </div>
+
+                                                            <!-- Due Date -->
+                                                            <div class="mb-3">
+                                                                <h6 class="small fw-medium">Due Date:</h6>
+                                                                <p class="small text-secondary">2023-12-15</p>
+                                                            </div>
+
+                                                            <!-- File Upload -->
+                                                            <div class="mb-3">
+                                                                <h6 class="small fw-medium">Upload Your Solution:</h6>
+                                                                <div class="border border-2 border-dashed rounded p-4 text-center"
+                                                                    style="background: rgba(0,0,0,0.02);">
+                                                                    <i class="bi bi-upload"
+                                                                        style="font-size: 2rem; color: #6c757d;"></i>
+                                                                    <p class="small text-secondary mb-1">Drag and drop
+                                                                        your
+                                                                        files here</p>
+                                                                    <p class="small text-muted mb-2">or</p>
+                                                                    <div class="mb-3">
+
+                                                                        <div class="d-grid">
+                                                                            <label class="text-primary">
+                                                                                Browse files
+                                                                                <input type="file" accept=".pdf" hidden>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- Submit Button -->
+                                                            <div class="d-flex justify-content-end">
+                                                                <button type="button"
+                                                                    class="btn btn-gradient-glossy px-4 btn-sm">
+                                                                    Submit Assignment
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
-
                                 </div>
-                            </div>
 
-                            <!-- Evaluation Tab -->
-                            <div class="tab-pane fade" id="students">
-                                <div class="p-3 bg-white rounded shadow-sm">
-                                    <h6 class="fw-semibold mb-3">Evaluation & Assignments</h6>
-                                    <!-- Example Quiz -->
-                                    <div class="p-3 mb-2 border rounded bg-courses-grey">
-                                        <div class="d-flex justify-content-between">
-                                            <h6 class="mb-0 fw-semibold">Data Types Quiz</h6>
-                                            <span class="px-2 py-1 rounded text-white fw-semibold text-center"
-                                                style="background: linear-gradient(rgb(140, 198, 87), rgb(111, 173, 59));">8/10</span>
+                                <!-- Evaluation Tab -->
+                                <div class="tab-pane fade" id="students">
+                                    <div class="p-3 bg-white rounded shadow-sm">
+                                        <h6 class="fw-medium mb-3">Evaluation & Assignments</h6>
+                                        <!-- Example Quiz -->
+                                        <div class="p-3 mb-2 border rounded bg-courses-grey">
+                                            <div class="d-flex justify-content-between">
+                                                <h6 class="mb-0 fw-medium">Data Types Quiz</h6>
+                                                <span class="px-2 py-1 rounded text-white fw-medium text-center"
+                                                    style="background: linear-gradient(rgb(140, 198, 87), rgb(111, 173, 59));">8/10</span>
+                                            </div>
+                                            <p class="text-muted small mb-2">10 questions</p>
+                                            <button class="btn btn-secondary btn-sm" disabled>Completed</button>
                                         </div>
-                                        <p class="text-muted small mb-2">10 questions</p>
-                                        <button class="btn btn-secondary btn-sm" disabled>Completed</button>
                                     </div>
                                 </div>
+
                             </div>
-
                         </div>
-                    </div>
 
+                    </div>
                 </div>
-            </div>
+            </main>
         </div>
     </div>
+
+
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <!-- YouTube Iframe API -->
     <script src="https://www.youtube.com/iframe_api"></script>
@@ -531,8 +771,6 @@ $launch_id = $_GET['launch_id'];
     <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
     <!-- Toggle Sections JS -->
     <!-- <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -729,18 +967,18 @@ $launch_id = $_GET['launch_id'];
                         data.course.course_description;
 
                     // ✅ Display Topic Cards (no progress yet)
-                    let html = `<h6 class="fw-semibold mb-3">Chapters Overview</h6>`;
+                    let html = `<h6 class="fw-medium mb-3">Chapters Overview</h6>`;
                     data.data.forEach(topic => {
                         html += `
                         <div class="mb-3 p-3 border rounded bg-courses-grey topic-card" 
                             data-topic-id="${topic.topic_id}">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                    <h6 class="fw-semibold mb-1 text-dark">${topic.title}</h6>
+                                    <p class="fw-medium mb-1 text-dark" >${topic.title}</p>
                                     
                                     <small class="text-muted">${topic.description}</small>
                                 </div>
-                                <div class="topic-progress-badge px-2 py-1 rounded text-white fw-semibold text-center"
+                                <div class="topic-progress-badge px-2 py-1 rounded text-white fw-medium text-center"
                                     data-tid="${topic.topic_id}"
                                     style="min-width:60px; background:gray;">0%</div>
                             </div>
@@ -757,12 +995,12 @@ $launch_id = $_GET['launch_id'];
 
                     // ✅ Now fetch topic progress
                     fetch("api/progress_utils.php", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/x-www-form-urlencoded"
-                            },
-                            body: `launch_id=${launchId}`
-                        })
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        body: `launch_id=${launchId}`
+                    })
                         .then(r => r.json())
                         .then(progress => {
 
@@ -873,7 +1111,7 @@ $launch_id = $_GET['launch_id'];
                                             </div>
                                         </div>
                                         <div class="text-truncate">
-                                            <h6 class="fw-semibold text-dark mb-1">${limitWords(item.co_level, 4)}</h6>
+                                            <h6 class="fw-medium text-dark mb-1">${limitWords(item.co_level, 4)}</h6>
                                             <small class="text-muted">${limitWords(item.course_description, 4)}</small>
                                         </div>
                                     </div>
@@ -891,25 +1129,26 @@ $launch_id = $_GET['launch_id'];
                                     `<span class="badge bg-secondary">Pending</span>`;
 
                                 html += `
-                        <div class="col-6 col-sm-6">
-                            <div class="card border-0 shadow-sm p-3 bg-courses-grey co-card"
-                                data-co-id="${item.co_id}" data-url="${item.material_url}">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="d-flex align-items-center">
-                                        <div class="me-3 flex-shrink-0">
-                                            <div class="p-3 rounded-circle d-flex justify-content-center align-items-center">
-                                                <i class="bi bi-book text-primary fs-6"></i>
-                                            </div>
-                                        </div>
-                                        <div class="text-truncate">
-                                            <h6 class="fw-semibold text-dark mb-1">${limitWords(item.co_level, 4)}</h6>
-                                            <small class="text-muted">${limitWords(item.course_description, 4)}</small>
-                                        </div>
-                                    </div>
-                                    ${doneBadge}
-                                </div>
-                            </div>
-                        </div>`;
+                        <div class="col-12 col-md-6 col-lg-6">
+  <div class="card border-0 shadow-sm p-3 bg-courses-grey co-card h-100"
+       data-co-id="${item.co_id}" data-url="${item.material_url}">
+    <div class="d-flex justify-content-between align-items-center flex-wrap">
+      <div class="d-flex align-items-start w-100">
+        <div class="me-3 flex-shrink-0">
+          <div class="p-3 rounded-circle d-flex justify-content-center align-items-center bg-white">
+            <i class="bi bi-book text-primary fs-6"></i>
+          </div>
+        </div>
+        <div class="text-container flex-grow-1">
+          <h6 class="fw-medium text-dark mb-1 text-wrap">${limitWords(item.co_level, 4)}</h6>
+          <small class="text-muted text-wrap">${limitWords(item.course_description, 10)}</small>
+        </div>
+      </div>
+      <div class="mt-2 w-100 text-end">${doneBadge}</div>
+    </div>
+  </div>
+</div>
+`;
                             });
                         }
 
@@ -1103,7 +1342,7 @@ $launch_id = $_GET['launch_id'];
                             if (window.ytPlayer) {
                                 try {
                                     window.ytPlayer.destroy();
-                                } catch {}
+                                } catch { }
                                 window.ytPlayer = null;
                             }
 
@@ -1131,7 +1370,7 @@ $launch_id = $_GET['launch_id'];
                                                             clearInterval(window._ytInterval);
                                                             window._ytInterval = null;
                                                         }
-                                                    } catch {}
+                                                    } catch { }
                                                 }, 1000);
                                             }
                                         }
@@ -1212,7 +1451,7 @@ $launch_id = $_GET['launch_id'];
 
                             html += `
                         <div class="mb-3 question-block" data-pqid="${q.pq_id}">
-                            <label class="form-label fw-semibold">${i + 1}. ${q.question}</label>
+                            <label class="form-label fw-medium">${i + 1}. ${q.question}</label>
                             ${optionsHTML}
                         </div>`;
                         });
@@ -1250,14 +1489,14 @@ $launch_id = $_GET['launch_id'];
                 }
 
                 fetch("api/submit_practice_answers.php", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            answers
-                        })
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        answers
                     })
+                })
                     .then(res => res.json())
                     .then(data => {
                         if (data.status === 200) {
@@ -1318,41 +1557,41 @@ $launch_id = $_GET['launch_id'];
         function markMaterialComplete(topicId, coId, type) {
 
             fetch("api/update_material_progress.php", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        launch_id: launchId,
-                        topic_id: topicId,
-                        material_id: coId, // ✅ correct key name
-                        type: type // ✅ match PHP
-                    })
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    launch_id: launchId,
+                    topic_id: topicId,
+                    material_id: coId, // ✅ correct key name
+                    type: type // ✅ match PHP
                 })
+            })
                 .then(r => r.json())
                 .then(res => {
                     console.log("✅ Material saved:", res);
 
                     //✅ Update Topic Progress
                     fetch("api/update_topic_progress.php", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/x-www-form-urlencoded"
-                            },
-                            body: `topic_id=${topicId}&launch_id=${launchId}`
-                        })
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        body: `topic_id=${topicId}&launch_id=${launchId}`
+                    })
                         .then(r => r.json())
                         .then(tp => {
                             console.log("📘 Topic Progress:", tp.progress + "%");
 
                             // ✅ Update Course Progress
                             fetch("api/update_course_progress.php", {
-                                    method: "POST",
-                                    headers: {
-                                        "Content-Type": "application/x-www-form-urlencoded"
-                                    },
-                                    body: `launch_id=${launchId}`
-                                })
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/x-www-form-urlencoded"
+                                },
+                                body: `launch_id=${launchId}`
+                            })
                                 .then(r => r.json())
                                 .then(cp => {
                                     // console.log("🎓 Course Progress:", cp.progress + "%");
@@ -1389,12 +1628,12 @@ $launch_id = $_GET['launch_id'];
 
         function loadInitialProgress() {
             fetch("api/progress_utils.php", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded"
-                    },
-                    body: `launch_id=${launchId}`
-                })
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: `launch_id=${launchId}`
+            })
                 .then(r => r.json())
                 .then(data => {
                     if (data.status === 200) {
@@ -1442,7 +1681,6 @@ $launch_id = $_GET['launch_id'];
             }, "json");
         });
     </script> -->
-
 </body>
 
 </html>
