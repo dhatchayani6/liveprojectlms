@@ -93,7 +93,7 @@
 
         #content-scroll {
             height: 100%;
-            max-height: 710px;
+            max-height: 721px;
             overflow-y: scroll;
         }
 

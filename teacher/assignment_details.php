@@ -1,24 +1,129 @@
+<?php include "../includes/auth_faculty.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
-<?php include "../includes/auth_faculty.php"; ?>
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Viana Study - Dashboard</title>
-    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <title>Faculty Dashboard</title>
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../responsive.css">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 
     <style>
-        body {
-            background: repeating-linear-gradient(to right, rgba(138, 198, 242, 0.3) 0px, rgba(138, 198, 242, 0.3) 1px, rgba(164, 216, 245, 0.4) 1px, rgba(164, 216, 245, 0.4) 2px, rgba(180, 226, 247, 0.45) 2px, rgba(180, 226, 247, 0.45) 3px, rgba(164, 216, 245, 0.4) 3px, rgba(164, 216, 245, 0.4) 4px) 0% 0% / 8px 100%;
+        a {
+            text-decoration: none !important;
         }
 
+        body {
+            background-color: #f9fafb;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .sidebar {
+            width: 260px;
+            min-height: 100vh;
+            background-color: #fff;
+            border-right: 1px solid #dee2e6;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar .nav-link.active {
+            background-color: #e7f1ff;
+            color: #0d6efd;
+            font-weight: 600;
+        }
+
+        .sidebar .nav-link {
+            color: #495057;
+            border-radius: 0.5rem;
+        }
+
+        .sidebar .nav-link:hover {
+            background-color: #f1f3f5;
+        }
+
+        .avatar {
+            height: 80px;
+            width: 80px;
+            background-color: #cfe2ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .menu-btn {
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .menu-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-blue {
+            background: linear-gradient(rgb(168, 213, 255), rgb(126, 182, 247));
+            border: 1px solid rgba(59, 130, 246, 0.5);
+        }
+
+        .btn-green {
+            background: linear-gradient(rgb(182, 240, 200), rgb(139, 224, 166));
+            border: 1px solid rgba(16, 185, 129, 0.5);
+        }
+
+        .btn-purple {
+            background: linear-gradient(rgb(224, 200, 249), rgb(201, 167, 242));
+            border: 1px solid rgba(139, 92, 246, 0.5);
+        }
+
+        .btn-orange {
+            background: linear-gradient(rgb(255, 213, 184), rgb(255, 186, 139));
+            border: 1px solid rgba(249, 115, 22, 0.5);
+        }
+
+        .menu-icon {
+            border-radius: 50%;
+            padding: 6px;
+            margin-right: 8px;
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .sidebar .nav-link {
+            padding: 15px !important;
+        }
+
+        .slot-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #2196f3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 16px;
+            color: white;
+        }
+    </style>
+    <style>
         .header {
             background-color: #1a73e8;
             color: white;
@@ -186,55 +291,123 @@
             border-color: rgb(147 197 253 / var(--tw-border-opacity, 1));
         }
 
-        .content-scroll {
+        #content-scroll {
+
             height: 100%;
-            max-height: 734px;
+            max-height: 720px !important;
             overflow-y: scroll;
         }
     </style>
 </head>
 
 <body>
-
-    <!-- Faculty Profile -->
-    <div class="container bg-light p-0 ">
-        <!-- Header -->
-        <div
-            class="header d-flex justify-content-between align-items-center position-relative px-3 py-2 bg-secondary text-dark">
-            <h5 class="mb-0 assignment-titles">
-                <a href="dashboard.php"><i class="bi bi-chevron-left rounded-circle"></i></a> Assignment Approval
-            </h5>
-
-            <!-- Profile / Menu Dropdown (Desktop & Mobile) -->
-            <a href="../index.php"><button class="btn d-flex align-items-center logout-btn gap-2">
-                    <i class="bi bi-box-arrow-right"></i>
-                    <span>Logout</span> </button></a>
-        </div>
-
-
-        <div class="content-scroll">
-            <div class="d-flex justify-content-between align-items-center p-3">
-                <h6 class="mb-0 pending"><a href="dashboard.php"><i class="bi bi-arrow-left me-2"></i>Back to
-                        Dashboard</a>
-                </h6>
-
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <aside class="sidebar d-none d-md-flex flex-column">
+            <div class="text-center border-bottom p-4">
+                <div class="avatar mx-auto mb-3">
+                    <i class="bi bi-person-fill fs-1 text-primary"></i>
+                </div>
+                <h5 class="mb-1 fw-semibold text-dark"><?php echo $_SESSION['name']; ?></h5>
+                <p class="text-muted small">Student ID: <?php echo $_SESSION['regno']; ?></p>
             </div>
 
-            <div class="assignmnent p-3" id="assignments-slider">
+            <nav class="flex-grow-1 pt-3 px-3">
+                <ul class="nav flex-column gap-3">
+                    <li><a href="dashboard.php" class="nav-link active d-flex align-items-center px-3 py-2"><i
+                                class="bi bi-grid-fill me-2"></i>Dashboard</a></li>
+                    <li><a href="courses.php" class="nav-link d-flex align-items-center px-3 py-2"><i
+                                class="bi bi-book me-2"></i>Courses</a></li>
+                    <li><a href="assignments.php" class="nav-link d-flex align-items-center px-3 py-2"><i
+                                class="bi bi-file-earmark-text me-2"></i>Assignments</a></li>
 
+                </ul>
+            </nav>
+        </aside>
 
+        <!-- Main Content -->
+        <div class="main-content d-flex flex-column flex-grow-1">
+            <!-- Header -->
+            <header class="bg-white border-bottom shadow-sm">
+                <div class="d-flex justify-content-between align-items-center px-4 py-3">
+
+                    <div class="d-flex align-items-center">
+                        <!-- 🔹 Offcanvas Toggle (Visible on Mobile Only) -->
+                        <button class="btn btn-light btn-sm me-2 d-md-none" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+                            <i class="bi bi-list"></i>
+                        </button>
+
+                        <!-- 🔹 Back Button (Visible on Desktop) -->
+                        <button onclick="window.history.back()"
+                            class="btn btn-light btn-sm me-2 d-none d-md-inline-flex">
+                            <i class="bi bi-chevron-left"></i>
+                        </button>
+
+                        <h5 class="fw-semibold mb-0">Viana Study</h5>
+                    </div>
+
+                    <a href="../index.php" class="btn btn-light d-flex align-items-center">
+                        <i class="bi bi-box-arrow-right me-2"></i> Logout
+                    </a>
+                </div>
+            </header>
+            <!-- Offcanvas Sidebar -->
+            <div class="offcanvas offcanvas-start offcanvas-full" tabindex="-1" id="offcanvasSidebar"
+                aria-labelledby="offcanvasSidebarLabel">
+                <div class="offcanvas-header border-bottom">
+                    <h5 class="offcanvas-title fw-semibold" id="offcanvasSidebarLabel">Faculty Menu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+
+                <div class="offcanvas-body p-0">
+                    <aside class="sidebar flex-column h-100 w-100">
+                        <div class="text-center border-bottom p-4">
+                            <div class="avatar mx-auto mb-3">
+                                <i class="bi bi-person-fill fs-1 text-primary"></i>
+                            </div>
+                            <h5 class="mb-1 fw-semibold text-dark"><?php echo $_SESSION['name']; ?></h5>
+                            <p class="text-muted small">Student ID: <?php echo $_SESSION['regno']; ?></p>
+                        </div>
+
+                        <nav class="flex-grow-1 pt-3 px-4">
+                            <ul class="nav flex-column gap-3">
+                                <li><a href="dashboard.php" class="nav-link d-flex align-items-center px-3 py-2">
+                                        <i class="bi bi-grid-fill me-2"></i>Dashboard</a></li>
+                                <li><a href="courses.php" class="nav-link d-flex align-items-center px-3 py-2">
+                                        <i class="bi bi-book me-2"></i>Courses</a></li>
+                                <li><a href="assignments.php"
+                                        class="nav-link active d-flex align-items-center px-3 py-2">
+                                        <i class="bi bi-file-earmark-text me-2"></i>Assignments</a></li>
+                            </ul>
+                        </nav>
+                    </aside>
+                </div>
             </div>
-        </div>
 
+            <!-- Dashboard Content -->
+            <main class="p-4" id="content-scroll">
+                <div class="d-flex justify-content-between align-items-center p-3">
+                    <h6 class="mb-0 pending"><a href="dashboard.php"><i class="bi bi-arrow-left me-2"></i>Back to
+                            Dashboard</a>
+                    </h6>
+
+                </div>
+
+                <div class="assignmnent p-3" id="assignments-slider">
+
+
+                </div>
+            </main>
+        </div>
     </div>
-
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             const urlParams = new URLSearchParams(window.location.search);
             const sub_id = urlParams.get("sub_id");
             let assignments = [];
@@ -247,7 +420,7 @@
 
                 $.getJSON("api/faculty_assignment_details.php", {
                     sub_id
-                }, function(res) {
+                }, function (res) {
                     if (res.status !== 200 || !res.data.length) {
                         $("#assignments-slider").html('<div class="text-center text-muted p-4">No assignments found.</div>');
                         return;
@@ -401,7 +574,7 @@
                     marks,
                     feedback,
                     status
-                }, function(res) {
+                }, function (res) {
                     if (res.status === 200) {
                         alert("✅ " + res.message);
                         $("#next-btn").trigger("click");

@@ -1,42 +1,217 @@
+<?php include "../includes/auth_faculty.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
-<?php include "../includes/auth_faculty.php"; ?>
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Viana Study - Dashboard</title>
-    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <title>Faculty Dashboard</title>
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../responsive.css">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 
-    <link rel="stylesheet" href="stylesheet/courses.css">
-    <!-- vidoplayer.js library -->
-    <!-- Include Plyr CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.css" />
     <style>
-        .rounded-circle {
-            width: 30px !important;
-            height: 30px !important;
-            background: linear-gradient(#c4e0f9, #96c6f3);
-            border: 1px solid #ddd;
-            padding: 11px;
+        a {
+            text-decoration: none !important;
         }
 
-        .rounded-circle i {
-            font-size: 10px !important;
-
+        body {
+            background-color: #f9fafb;
+            font-family: 'Roboto', sans-serif;
         }
 
-        #video .ratio::before {
-            padding-top: 0;
+        .sidebar {
+            width: 260px;
+            min-height: 100vh;
+            background-color: #fff;
+            border-right: 1px solid #dee2e6;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
         }
 
-        .btn-gradient-glossy {
-            position: relative;
+        .sidebar .nav-link.active {
+            background-color: #e7f1ff;
+            color: #0d6efd;
+            font-weight: 600;
+        }
+
+        .sidebar .nav-link {
+            color: #495057;
+            border-radius: 0.5rem;
+        }
+
+        .sidebar .nav-link:hover {
+            background-color: #f1f3f5;
+        }
+
+        .avatar {
+            height: 80px;
+            width: 80px;
+            background-color: #cfe2ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .menu-btn {
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .menu-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-blue {
+            background: linear-gradient(rgb(168, 213, 255), rgb(126, 182, 247));
+            border: 1px solid rgba(59, 130, 246, 0.5);
+        }
+
+        .btn-green {
+            background: linear-gradient(rgb(182, 240, 200), rgb(139, 224, 166));
+            border: 1px solid rgba(16, 185, 129, 0.5);
+        }
+
+        .btn-purple {
+            background: linear-gradient(rgb(224, 200, 249), rgb(201, 167, 242));
+            border: 1px solid rgba(139, 92, 246, 0.5);
+        }
+
+        .btn-orange {
+            background: linear-gradient(rgb(255, 213, 184), rgb(255, 186, 139));
+            border: 1px solid rgba(249, 115, 22, 0.5);
+        }
+
+        .menu-icon {
+            border-radius: 50%;
+            padding: 6px;
+            margin-right: 8px;
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .sidebar .nav-link {
+            padding: 15px !important;
+        }
+
+        .slot-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #2196f3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 16px;
+            color: white;
+        }
+
+        /* Equal width nav tabs */
+        #assignmentTabs .nav-item {
+            text-align: center;
+        }
+
+        #assignmentTabs .nav-link {
+            border: none;
+            border-radius: 0;
+            font-weight: 500;
+            color: #333;
+            transition: all 0.2s ease-in-out;
+            padding: 0.75rem 0;
+        }
+
+        #assignmentTabs .nav-link:hover {
+            background: rgba(0, 0, 0, 0.05);
+            color: #0d6efd;
+        }
+
+        #assignmentTabs .nav-link.active {
+            background: #fff;
+            color: #0d6efd;
+            border-bottom: 3px solid #0d6efd;
+            font-weight: 600;
+        }
+
+        /* Make sure it looks good on small screens */
+        @media (max-width: 767.98px) {
+            #assignmentTabs .nav-item {
+                flex: 1 1 50%;
+            }
+        }
+
+        /* Prevent sidebar from shrinking when form expands */
+        .sidebar {
+            flex-shrink: 0;
+        }
+
+        /* Ensure main content never overflows horizontally */
+        .main-content {
+            min-width: 0;
+            overflow-x: hidden;
+        }
+
+        /* Fix for forms and inputs overflowing the container */
+        #settings input,
+        #settings textarea,
+        #settings select {
+            max-width: 100%;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Keep rows from stretching layout */
+        #settings .row {
+            margin-right: 0;
+            margin-left: 0;
+        }
+
+        /* Prevent long text from pushing layout */
+        #settings {
+            overflow-x: hidden;
+        }
+
+        /* Responsive file input fixes */
+        #settings input[type="file"] {
+            white-space: normal;
+            text-overflow: ellipsis;
+        }
+
+        /* Padding and background consistency */
+        #settings .p-3,
+        #settings .p-4 {
+            background-color: #fff;
+        }
+
+        .bg-secondary {
+            background: linear-gradient(rgb(249, 249, 249) 0%, rgb(232, 232, 232) 100%);
+        }
+
+        .card-title {
+            font-size: 13px;
+        }
+
+        .topic-title-text {
+            font-size: 15px;
+        }
+
+        .add-topic-btn {
             background: linear-gradient(rgb(75, 147, 213) 0%, rgb(21, 103, 186) 100%);
             color: white;
             border: 1px solid rgba(0, 0, 0, 0.2);
@@ -47,138 +222,335 @@
             overflow: hidden;
             border-radius: 8px;
             padding: 6px 25px;
+
+        }
+
+        @media (max-width: 767.98px) {
+            #practiceSection .row {
+                flex-direction: column;
+            }
+
+            #practiceSection .form-label {
+                margin-bottom: 0.5rem;
+            }
+
+            #practiceSection input[type="number"] {
+                width: 100%;
+            }
+
+            #practiceSection button {
+                width: 100%;
+            }
+
+            #practiceButtons button {
+                flex: 1 1 100%;
+            }
+        }
+
+        @media (min-width: 768px) {
+            #practiceButtons button {
+                min-width: 100px;
+            }
+        }
+
+        /* Default look for desktop */
+        #assignmentTabs {
+            border: none;
+        }
+
+        #assignmentTabs .nav-item {
+            text-align: center;
+        }
+
+        #assignmentTabs .nav-link {
+            border: none;
+            border-radius: 0;
             font-weight: 500;
+            color: #333;
+            padding: 0.75rem 0.5rem;
             transition: all 0.2s ease-in-out;
+        }
+
+        #assignmentTabs .nav-link:hover {
+            background: rgba(0, 0, 0, 0.05);
+            color: #0d6efd;
+        }
+
+        #assignmentTabs .nav-link.active {
+            background: #fff;
+            color: #0d6efd;
+            border-bottom: 3px solid #0d6efd;
+            font-weight: 600;
+        }
+
+        /* 🧭 Mobile & Tablet Responsiveness */
+        @media (max-width: 768px) {
+            #assignmentTabs {
+                display: flex;
+                overflow-x: auto;
+                white-space: nowrap;
+                scrollbar-width: thin;
+            }
+
+            #assignmentTabs::-webkit-scrollbar {
+                height: 6px;
+            }
+
+            #assignmentTabs::-webkit-scrollbar-thumb {
+                background: rgba(0, 0, 0, 0.2);
+                border-radius: 3px;
+            }
+
+            #assignmentTabs .nav-item {
+                flex: 0 0 auto;
+                /* don’t shrink */
+                min-width: 120px;
+                /* equal tab width */
+            }
+
+            #assignmentTabs .nav-link {
+                font-size: 0.875rem;
+                padding: 0.6rem 0.8rem;
+            }
+        }
+
+        /* ✅ Ensure table responsiveness */
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: 8px;
+        }
+
+        /* ✅ Improve table readability on small screens */
+        .table th,
+        .table td {
+            white-space: nowrap;
+            vertical-align: middle;
+        }
+
+        /* ✅ On very small screens, allow horizontal scroll without text breaking */
+        @media (max-width: 576px) {
+            .table {
+                font-size: 0.85rem;
+            }
+
+            .table th,
+            .table td {
+                padding: 0.5rem 0.75rem;
+            }
+
+            .table-responsive {
+                margin-bottom: 1rem;
+            }
         }
     </style>
 </head>
 
 <body>
-
-    <!-- Faculty Profile -->
-    <div class="container  p-0 ">
-        <!-- Header -->
-        <div
-            class="header d-flex justify-content-between align-items-center position-relative px-3 py-2 bg-secondary text-dark">
-            <h5 class="mb-0 assignment-titles">
-                <a href="dashboard.php"><i class="bi bi-chevron-left rounded-circle"></i></a>
-            </h5>
-
-            <!-- Profile / Menu Dropdown (Desktop & Mobile) -->
-            <a href="../index.php"><button class="btn d-flex align-items-center logout-btn gap-2">
-                    <i class="bi bi-box-arrow-right"></i>
-                    <span>Logout</span> </button></a>
-        </div>
-
-
-        <div class="content-scroll bg-light">
-            <div class="d-flex justify-content-between align-items-center p-3">
-                <h6 class="mb-0 pending"><a href="dashboard.php"><i class="bi bi-arrow-left me-2"></i>Back to
-                        Dashboard</a>
-                </h6>
-                <!-- Committee Report button (hidden by default) -->
-                <!-- <button id="committeeReportBtn" class="d-none">
-                    <i class="bi bi-file-bar-graph"></i> Committee Report
-                </button> -->
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <aside class="sidebar d-none d-md-flex flex-column">
+            <div class="text-center border-bottom p-4">
+                <div class="avatar mx-auto mb-3">
+                    <i class="bi bi-person-fill fs-1 text-primary"></i>
+                </div>
+                <h5 class="mb-1 fw-semibold text-dark"><?php echo $_SESSION['name']; ?></h5>
+                <p class="text-muted small">Student ID: <?php echo $_SESSION['regno']; ?></p>
             </div>
 
-            <div class="assignmnent p-3" id="assignments-slider">
+            <nav class="flex-grow-1 pt-3 px-3">
+                <ul class="nav flex-column gap-3">
+                    <li><a href="dashboard.php" class="nav-link active d-flex align-items-center px-3 py-2"><i
+                                class="bi bi-grid-fill me-2"></i>Dashboard</a></li>
+                    <li><a href="courses.php" class="nav-link d-flex align-items-center px-3 py-2"><i
+                                class="bi bi-book me-2"></i>Courses</a></li>
+                    <li><a href="assignments.php" class="nav-link d-flex align-items-center px-3 py-2"><i
+                                class="bi bi-file-earmark-text me-2"></i>Assignments</a></li>
 
-                <!-- asiignment1 -->
-                <div class="assignment-detail">
-                    <div class="mb-3">
-                        <div class="p-3 rounded border bg-gray"
-                            style="background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);">
-                            <h4 class="teacher-courses-titile" id="cCodename">CS1234: Introduction to Data Science</h4>
+                </ul>
+            </nav>
+        </aside>
 
-                            <!-- <p class="mb-0">This course introduces the fundamental concepts of data science, including
+        <!-- Main Content -->
+        <div class="main-content d-flex flex-column flex-grow-1">
+            <!-- Header -->
+            <header class="bg-white border-bottom shadow-sm">
+                <div class="d-flex justify-content-between align-items-center px-4 py-3">
+
+                    <div class="d-flex align-items-center">
+                        <!-- 🔹 Offcanvas Toggle (Visible on Mobile Only) -->
+                        <button class="btn btn-light btn-sm me-2 d-md-none" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+                            <i class="bi bi-list"></i>
+                        </button>
+
+                        <!-- 🔹 Back Button (Visible on Desktop) -->
+                        <button onclick="window.history.back()"
+                            class="btn btn-light btn-sm me-2 d-none d-md-inline-flex">
+                            <i class="bi bi-chevron-left"></i>
+                        </button>
+
+                        <h5 class="fw-semibold mb-0">Viana Study</h5>
+                    </div>
+
+                    <a href="../index.php" class="btn btn-light d-flex align-items-center">
+                        <i class="bi bi-box-arrow-right me-2"></i> Logout
+                    </a>
+                </div>
+            </header>
+            <!-- Offcanvas Sidebar -->
+            <div class="offcanvas offcanvas-start offcanvas-full" tabindex="-1" id="offcanvasSidebar"
+                aria-labelledby="offcanvasSidebarLabel">
+                <div class="offcanvas-header border-bottom">
+                    <h5 class="offcanvas-title fw-semibold" id="offcanvasSidebarLabel">Faculty Menu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+
+                <div class="offcanvas-body p-0">
+                    <aside class="sidebar flex-column h-100 w-100">
+                        <div class="text-center border-bottom p-4">
+                            <div class="avatar mx-auto mb-3">
+                                <i class="bi bi-person-fill fs-1 text-primary"></i>
+                            </div>
+                            <h5 class="mb-1 fw-semibold text-dark"><?php echo $_SESSION['name']; ?></h5>
+                            <p class="text-muted small">Student ID: <?php echo $_SESSION['regno']; ?></p>
+                        </div>
+
+                        <nav class="flex-grow-1 pt-3 px-4">
+                            <ul class="nav flex-column gap-3">
+                                <li><a href="dashboard.php" class="nav-link d-flex align-items-center px-3 py-2">
+                                        <i class="bi bi-grid-fill me-2"></i>Dashboard</a></li>
+                                <li><a href="courses.php" class="nav-link d-flex align-items-center px-3 py-2">
+                                        <i class="bi bi-book me-2"></i>Courses</a></li>
+                                <li><a href="assignments.php"
+                                        class="nav-link active d-flex align-items-center px-3 py-2">
+                                        <i class="bi bi-file-earmark-text me-2"></i>Assignments</a></li>
+                            </ul>
+                        </nav>
+                    </aside>
+                </div>
+            </div>
+
+            <!-- Dashboard Content -->
+            <main class="p-4">
+                <div class="d-flex justify-content-between align-items-center p-3">
+                    <h6 class="mb-0 pending"><a href="dashboard.php"><i class="bi bi-arrow-left me-2"></i>Back to
+                            Dashboard</a>
+                    </h6>
+                    <!-- Committee Report button (hidden by default) -->
+                    <!-- <button id="committeeReportBtn" class="d-none">
+                    <i class="bi bi-file-bar-graph"></i> Committee Report
+                </button> -->
+                </div>
+
+                <div class="assignmnent" id="assignments-slider">
+
+                    <!-- asiignment1 -->
+                    <div class="assignment-detail">
+                        <div class="mb-3">
+                            <div class="p-3 rounded border bg-gray"
+                                style="background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);">
+                                <h4 class="teacher-courses-titile" id="cCodename">CS1234: Introduction to Data Science
+                                </h4>
+
+                                <!-- <p class="mb-0">This course introduces the fundamental concepts of data science, including
                                 data collection, analysis, and visualization.
                             </p> -->
-                            <div
-                                class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center pt-3">
-                                <small class="text-muted" id="studentCount">0 Students</small>
-                                <small class="text-muted" id="slt"></small>
+                                <div
+                                    class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center pt-3">
+                                    <small class="text-muted" id="studentCount">0 Students</small>
+                                    <small class="text-muted" id="slt"></small>
+                                </div>
+
                             </div>
-
                         </div>
-                    </div>
-                    <div class="details-ass border rounded">
-                        <!-- bootstrap tab -->
-                        <ul class="nav nav-tabs justify-content-between" id="assignmentTabs" role="tablist"
-                            style="background: linear-gradient(rgb(233, 233, 233) 0%, rgb(196, 196, 196) 100%);">
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="add-tab" data-bs-toggle="tab"
-                                    data-bs-target="#overview" type="button" role="tab" aria-selected="true">
-                                    OverView
-                                </button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="materials-tab" data-bs-toggle="tab"
-                                    data-bs-target="#materials" type="button" role="tab" aria-selected="false">
-                                    Materials
-                                </button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="students-tab" data-bs-toggle="tab"
-                                    data-bs-target="#students" type="button" role="tab" aria-selected="false">
-                                    Students
-                                </button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="settings-tab" data-bs-toggle="tab"
-                                    data-bs-target="#settings" type="button" role="tab" aria-selected="false">
-                                    Settings
-                                </button>
-                            </li>
-                        </ul>
-                        <div class="tab-content mt-3">
-                            <!-- OverView Content -->
-                            <div class="tab-pane fade show active" id="overview" role="tabpanel"
-                                aria-labelledby="add-tab">
-                                <div class="courses-outer p-3">
-                                    <div class="border rounded shadow-sm mb-3">
-                                        <!-- Header -->
-                                        <div class="bg-secondary text-dark p-3 rounded-top">
-                                            <h5 class="mb-0" style="    font-size: 1rem;">Course Information</h5>
-                                        </div>
+                        <div class="details-ass border rounded">
+                            <!-- bootstrap tab -->
+                            <ul class="nav nav-tabs justify-content-between flex-nowrap  w-100 text-center"
+                                id="assignmentTabs" role="tablist" style="background: linear-gradient(rgb(233, 233, 233) 0%, rgb(196, 196, 196) 100%);
+           border-radius: 8px;">
 
-                                        <!-- Body -->
-                                        <div class="p-3">
-                                            <div class="row mb-2">
-                                                <div class="col-md-6">
-                                                    <small class="text-muted">Course Code:</small><br>
-                                                    <strong style="font-weight: 500;" id="CCode">CS1234</strong>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <small class="text-muted">Course Name:</small><br>
-                                                    <strong style="font-weight: 500;" id="cName">Introduction to Data
-                                                        Science</strong>
-                                                </div>
+                                <li class="nav-item flex-fill text-nowrap" role="presentation">
+                                    <button class="nav-link active w-100" id="add-tab" data-bs-toggle="tab"
+                                        data-bs-target="#overview" type="button" role="tab" aria-selected="true">
+                                        Overview
+                                    </button>
+                                </li>
+
+                                <li class="nav-item flex-fill text-nowrap" role="presentation">
+                                    <button class="nav-link w-100" id="materials-tab" data-bs-toggle="tab"
+                                        data-bs-target="#materials" type="button" role="tab" aria-selected="false">
+                                        Materials
+                                    </button>
+                                </li>
+
+                                <li class="nav-item flex-fill text-nowrap" role="presentation">
+                                    <button class="nav-link w-100" id="students-tab" data-bs-toggle="tab"
+                                        data-bs-target="#students" type="button" role="tab" aria-selected="false">
+                                        Students
+                                    </button>
+                                </li>
+
+                                <li class="nav-item flex-fill text-nowrap" role="presentation">
+                                    <button class="nav-link w-100" id="settings-tab" data-bs-toggle="tab"
+                                        data-bs-target="#settings" type="button" role="tab" aria-selected="false">
+                                        Settings
+                                    </button>
+                                </li>
+                            </ul>
+
+
+                            <div class="tab-content mt-3">
+                                <!-- OverView Content -->
+                                <div class="tab-pane fade show active" id="overview" role="tabpanel"
+                                    aria-labelledby="add-tab">
+                                    <div class="courses-outer p-3">
+                                        <div class="border rounded shadow-sm mb-3">
+                                            <!-- Header -->
+                                            <div class="bg-secondary text-dark p-3 rounded-top">
+                                                <h5 class="mb-0" style="    font-size: 1rem;">Course Information</h5>
                                             </div>
 
-                                            <div class="row mb-2">
-                                                <div class="col-md-6">
-                                                    <small class="text-muted">Department:</small><br>
-                                                    <strong style="font-weight: 500;" id="OverviewDepartment">Medical</strong>
+                                            <!-- Body -->
+                                            <div class="p-3">
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6">
+                                                        <small class="text-muted">Course Code:</small><br>
+                                                        <strong style="font-weight: 500;" id="CCode">CS1234</strong>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <small class="text-muted">Course Name:</small><br>
+                                                        <strong style="font-weight: 500;" id="cName">Introduction to
+                                                            Data
+                                                            Science</strong>
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <small class="text-muted">Credit Hours:</small><br>
-                                                    <strong style="font-weight: 500;" id="Chours">3</strong>
-                                                </div>
-                                            </div>
 
-                                            <div class="row mb-2">
-                                                <div class="col-md-6">
-                                                    <small class="text-muted">Schedule:</small><br>
-                                                    <strong style="font-weight: 500;" id="schedule">Mon, Wed 10:00 - 11:30 AM</strong>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6">
+                                                        <small class="text-muted">Department:</small><br>
+                                                        <strong style="font-weight: 500;"
+                                                            id="OverviewDepartment">Medical</strong>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <small class="text-muted">Credit Hours:</small><br>
+                                                        <strong style="font-weight: 500;" id="Chours">3</strong>
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <small class="text-muted">Total Seats:</small><br>
-                                                    <strong style="font-weight: 500;" id="seatallot">-</strong>
-                                                </div>
-                                            </div>
 
-                                            <!-- <div class="row">
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6">
+                                                        <small class="text-muted">Schedule:</small><br>
+                                                        <strong style="font-weight: 500;" id="schedule">Mon, Wed 10:00 -
+                                                            11:30 AM</strong>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <small class="text-muted">Total Seats:</small><br>
+                                                        <strong style="font-weight: 500;" id="seatallot">-</strong>
+                                                    </div>
+                                                </div>
+
+                                                <!-- <div class="row">
                                                 <div class="col-12">
                                                     <small class="text-muted">Description:</small><br>
                                                     <span>
@@ -187,231 +559,265 @@
                                                     </span>
                                                 </div>
                                             </div> -->
+                                            </div>
+
                                         </div>
 
+
+
+
+
+
                                     </div>
-
-
-
-
-
-
                                 </div>
-                            </div>
 
-                            <!-- Materials Content -->
-                            <div class="tab-pane fade" id="materials" role="tabpanel" aria-labelledby="materials-tab">
-                                <div class="p-3">
+                                <!-- Materials Content -->
+                                <div class="tab-pane fade" id="materials" role="tabpanel"
+                                    aria-labelledby="materials-tab">
+                                    <div class="p-3">
 
-                                    <!-- Course Topics Section -->
-                                    <div id="courseTopicsSection">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h6>Course Topics</h6>
-                                            <button class="add-topic-btn"><i class="bi bi-plus"></i> Add Topic</button>
-                                        </div>
-
-                                        <!-- Create New Topic Form -->
-                                        <div id="createTopicForm" class="p-2" style="display: none;">
-                                            <div class="bg-secondary text-dark p-3 rounded-top">
-                                                <h5 class="mb-0" style="font-size: 1rem;">Create New Topic</h5>
+                                        <!-- Course Topics Section -->
+                                        <div id="courseTopicsSection">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h6>Course Topics</h6>
+                                                <button class="add-topic-btn"><i class="bi bi-plus"></i> Add
+                                                    Topic</button>
                                             </div>
 
-                                            <div class="p-3 border rounded">
-                                                <form id="topicForm">
-                                                    <div class="row">
-                                                        <div class="col-12 mb-3">
-                                                            <label for="topicTitle" class="form-label">Topic Title</label>
-                                                            <input type="text" class="form-control" id="topicTitle" name="topic_title"
-                                                                placeholder="Enter the topic title" required>
-                                                        </div>
-
-                                                        <div class="col-12 mb-3">
-                                                            <label for="topicDescription" class="form-label">Topic Description</label>
-                                                            <textarea class="form-control" id="topicDescription" name="topic_description" rows="4"
-                                                                placeholder="Enter the topic description" required></textarea>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="p-2">
-                                                        <div class="d-flex justify-content-end gap-2">
-                                                            <button type="button" class="cancel-btn btn btn-secondary rounded">Cancel</button>
-                                                            <button type="submit" class="create-btn btn btn-primary rounded">Create Topic</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-
-
-
-                                        <!-- Topic Cards -->
-                                        <div class="p-3" id="topicContainer">
-                                            <div class="topic-card rounded border p-4 mb-3"
-                                                style="background:linear-gradient(180deg,#f9f9f9 0%,#f0f0f0 100%); cursor:pointer;">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <h6>No Data</h6>
-                                                    <button class="outcomes-btn"><small></small></button>
+                                            <!-- Create New Topic Form -->
+                                            <div id="createTopicForm" class="p-2" style="display: none;">
+                                                <div class="bg-secondary text-dark p-3 rounded-top">
+                                                    <h5 class="mb-0" style="font-size: 1rem;">Create New Topic</h5>
                                                 </div>
-                                                <small style="color:rgb(75 85 99)"></small>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <!-- Enrolled Students Section (Hidden by default) -->
-                                    <div id="enrolledStudentsSection" style="display:none;">
-                                        <!-- Header -->
-                                        <div class="d-flex align-items-center mb-3" style="gap:30%">
-                                            <button id="backToTopics" class="btn btn-sm text-primary">← Back to
-                                                Topics</button>
-                                            <h6 class="mb-0" id="cTName">-</h6>
-                                        </div>
-
-                                        <!-- Overview -->
-                                        <div class="mb-3">
-                                            <div class="p-3 rounded border"
-                                                style="background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);">
-                                                <small class="text-muted" id="cTDesc">-</small>
-                                            </div>
-                                        </div>
-
-
-
-                                        <!-- Course Outcome Header -->
-                                        <div class="outcome-header">
-                                            <div class="d-flex align-items-center mb-3 justify-content-between p-3">
-                                                <h6 class="mb-0">Course Outcomes</h6>
-                                                <button id="addOutcomeBtn" class="btn add-outcome-btn btn-sm"><i
-                                                        class="bi bi-plus"></i> Add Outcome</button>
-                                            </div>
-                                        </div>
-
-                                        <!-- Create New Outcome Form -->
-
-                                        <div id="createOutcomeForm" class="p-2" style="display: none;">
-                                            <div class="bg-secondary text-dark p-3 rounded-top">
-                                                <h5 class="mb-0" style="font-size: 1rem;">Create New Outcome</h5>
-                                            </div>
-
-                                            <div class="p-3 border rounded">
-                                                <form id="frmCreateOutcome" autocomplete="off" onsubmit="return false;">
-                                                    <div class="row">
-                                                        <div class="col-12 mb-3">
-                                                            <label for="outcomeTitle" class="form-label">Outcome Title</label>
-                                                            <input type="text" class="form-control" id="outcomeTitle" name="outcome_title" placeholder="Enter the outcome title" required>
-                                                        </div>
-
-                                                        <div class="col-12 mb-3">
-                                                            <label for="courseoutcomeDescription" class="form-label">Outcome Description</label>
-                                                            <textarea class="form-control" id="courseoutcomeDescription" name="course_description" rows="4" placeholder="Enter the outcome description" required></textarea>
-                                                        </div>
-
-                                                        <div class="col-6 mb-3">
-                                                            <label for="poLevel" class="form-label">PO Level</label>
-                                                            <select class="form-select" id="poLevel" name="po_level" required>
-                                                                <option value="" disabled selected>Select PO</option>
-                                                                <option value="PO1">PO1</option>
-                                                                <option value="PO2">PO2</option>
-                                                                <option value="PO3">PO3</option>
-                                                                <option value="PO4">PO4</option>
-                                                                <option value="PO5">PO5</option>
-                                                                <option value="PO6">PO6</option>
-                                                                <option value="PO7">PO7</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-6 mb-3">
-                                                            <label for="poMap" class="form-label">PO Mapping</label>
-                                                            <select class="form-select" id="poMap" name="po_Map" required>
-                                                                <option value="" disabled selected>Select PO Mapping</option>
-                                                                <option value="Slight">Slight</option>
-                                                                <option value="Moderate">Moderate</option>
-                                                                <option value="Strong">Strong</option>
-
-                                                            </select>
-                                                        </div>
-
-                                                        <div class="col-12 mb-3">
-                                                            <!-- <label for="poDescription" class="form-label">PO Description</label> -->
-                                                            <input readonly type="hidden" class="form-control" id="poDescription" name="po_description" rows="4" placeholder="PO Description" required>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="p-2">
-                                                        <div class="d-flex justify-content-end gap-2">
-                                                            <button type="button" class="btn btn-secondary rounded" id="btnCancelOutcome">Cancel</button>
-                                                            <button type="button" class="btn btn-primary rounded" id="btnCreateOutcome">Create Outcome</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-
-
-
-                                        <!-- Outcome Cards -->
-                                        <div id="courseOutcomeList">
-                                            <div class="card outcome-card shadow-sm border rounded-3 mb-3"
-                                                style="background: linear-gradient(#f9f9f9, #f0f0f0); cursor:pointer;">
-                                                <div class="card-body p-3">
-                                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                                        <h6 class="card-title mb-0 text-dark">Data Science Basics</h6>
-                                                        <div class="d-flex gap-2">
-                                                            <div class="rounded-circle d-flex align-items-center justify-content-center"
-                                                                style="width: 30px; height: 30px; background: linear-gradient(#c4e0f9, #96c6f3); border:1px solid #ddd;">
-                                                                <i class="bi bi-eye text-primary"></i>
+                                                <div class="p-3 border rounded">
+                                                    <form id="topicForm">
+                                                        <div class="row">
+                                                            <div class="col-12 mb-3">
+                                                                <label for="topicTitle" class="form-label">Topic
+                                                                    Title</label>
+                                                                <input type="text" class="form-control" id="topicTitle"
+                                                                    name="topic_title"
+                                                                    placeholder="Enter the topic title" required>
                                                             </div>
-                                                            <div class="rounded-circle d-flex align-items-center justify-content-center"
-                                                                style="width: 30px; height: 30px; background: linear-gradient(#f9c4c4, #f39696); border:1px solid #ddd;">
-                                                                <i class="bi bi-journal-text text-danger"></i>
-                                                            </div>
-                                                            <div class="rounded-circle d-flex align-items-center justify-content-center"
-                                                                style="width: 30px; height: 30px; background: linear-gradient(#c4f9c4, #96f396); border:1px solid #ddd;">
-                                                                <i class="bi bi-file-earmark-check text-success"></i>
+
+                                                            <div class="col-12 mb-3">
+                                                                <label for="topicDescription" class="form-label">Topic
+                                                                    Description</label>
+                                                                <textarea class="form-control" id="topicDescription"
+                                                                    name="topic_description" rows="4"
+                                                                    placeholder="Enter the topic description"
+                                                                    required></textarea>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <p class="card-text text-muted small mb-0">
-                                                        Overview of data science concepts and methodologies
-                                                    </p>
+
+                                                        <div class="p-2">
+                                                            <div class="d-flex justify-content-end gap-2">
+                                                                <button type="button"
+                                                                    class="cancel-btn btn btn-secondary rounded">Cancel</button>
+                                                                <button type="submit"
+                                                                    class="create-btn btn btn-primary rounded">Create
+                                                                    Topic</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
 
 
+
+                                            <!-- Topic Cards -->
+                                            <div class="p-3" id="topicContainer">
+                                                <div class="topic-card rounded border p-4 mb-3"
+                                                    style="background:linear-gradient(180deg,#f9f9f9 0%,#f0f0f0 100%); cursor:pointer;">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <h6>No Data</h6>
+                                                        <button class="outcomes-btn"><small></small></button>
+                                                    </div>
+                                                    <small style="color:rgb(75 85 99)"></small>
+                                                </div>
+                                            </div>
                                         </div>
 
-                                        <!-- Outcome Detail -->
-                                        <div id="outcomeDetail" style="display:none;">
-                                            <div class="d-flex align-items-center mb-3" style="gap:30%;">
-                                                <button id="backToOutcomes" class="btn btn-sm text-primary">← Back to Outcomes</button>
-                                                <h6 class="mb-0" id="out-come-Title">-</h6>
+                                        <!-- Enrolled Students Section (Hidden by default) -->
+                                        <div id="enrolledStudentsSection" style="display:none;">
+                                            <!-- Header -->
+                                            <div class="d-flex align-items-start flex-column mb-3 " style="gap:30%">
+                                                <button id="backToTopics" class="btn btn-sm text-primary ">← Back to
+                                                    Topics</button>
+                                                <h6 class="mb-0 py-3" id="cTName">-</h6>
                                             </div>
+
+                                            <!-- Overview -->
                                             <div class="mb-3">
-                                                <div class="p-3 rounded border bg-gray">
-                                                    <small class="text-muted" id="outcomeDescription"> - </small>
+                                                <div class="p-3 rounded border"
+                                                    style="background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);">
+                                                    <small class="text-muted" id="cTDesc">-</small>
                                                 </div>
                                             </div>
 
-                                            <!-- Tabs -->
-                                            <ul class="nav nav-tabs bg-secondary" id="outcomeTab" role="tablist">
-                                                <li class="nav-item" role="presentation">
-                                                    <button class="nav-link active" id="notes-tab" data-bs-toggle="tab"
-                                                        data-bs-target="#notes" type="button">Notes</button>
-                                                </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <button class="nav-link" id="video-tab" data-bs-toggle="tab"
-                                                        data-bs-target="#video" type="button">Video</button>
-                                                </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <button class="nav-link" id="practice-tab" data-bs-toggle="tab"
-                                                        data-bs-target="#practice" type="button">Practice</button>
-                                                </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <button class="nav-link" id="assignment-tab" data-bs-toggle="tab"
-                                                        data-bs-target="#assignment" type="button">Assignments</button>
-                                                </li>
-                                            </ul>
 
-                                            <div class="tab-content border p-3">
-                                                <!-- <div class="d-flex align-items-center justify-content-end mb-2 gap-2">
+
+                                            <!-- Course Outcome Header -->
+                                            <div class="outcome-header">
+                                                <div class="d-flex align-items-center mb-3 justify-content-between p-3">
+                                                    <h6 class="mb-0">Course Outcomes</h6>
+                                                    <button id="addOutcomeBtn" class="btn add-outcome-btn btn-sm"><i
+                                                            class="bi bi-plus"></i> Add Outcome</button>
+                                                </div>
+                                            </div>
+
+                                            <!-- Create New Outcome Form -->
+
+                                            <div id="createOutcomeForm" class="p-2" style="display: none;">
+                                                <div class="bg-secondary text-dark p-3 rounded-top">
+                                                    <h5 class="mb-0" style="font-size: 1rem;">Create New Outcome</h5>
+                                                </div>
+
+                                                <div class="p-3 border rounded">
+                                                    <form id="frmCreateOutcome" autocomplete="off"
+                                                        onsubmit="return false;">
+                                                        <div class="row">
+                                                            <div class="col-12 mb-3">
+                                                                <label for="outcomeTitle" class="form-label">Outcome
+                                                                    Title</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="outcomeTitle" name="outcome_title"
+                                                                    placeholder="Enter the outcome title" required>
+                                                            </div>
+
+                                                            <div class="col-12 mb-3">
+                                                                <label for="courseoutcomeDescription"
+                                                                    class="form-label">Outcome Description</label>
+                                                                <textarea class="form-control"
+                                                                    id="courseoutcomeDescription"
+                                                                    name="course_description" rows="4"
+                                                                    placeholder="Enter the outcome description"
+                                                                    required></textarea>
+                                                            </div>
+
+                                                            <div class="col-6 mb-3">
+                                                                <label for="poLevel" class="form-label">PO Level</label>
+                                                                <select class="form-select" id="poLevel" name="po_level"
+                                                                    required>
+                                                                    <option value="" disabled selected>Select PO
+                                                                    </option>
+                                                                    <option value="PO1">PO1</option>
+                                                                    <option value="PO2">PO2</option>
+                                                                    <option value="PO3">PO3</option>
+                                                                    <option value="PO4">PO4</option>
+                                                                    <option value="PO5">PO5</option>
+                                                                    <option value="PO6">PO6</option>
+                                                                    <option value="PO7">PO7</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-6 mb-3">
+                                                                <label for="poMap" class="form-label">PO Mapping</label>
+                                                                <select class="form-select" id="poMap" name="po_Map"
+                                                                    required>
+                                                                    <option value="" disabled selected>Select PO Mapping
+                                                                    </option>
+                                                                    <option value="Slight">Slight</option>
+                                                                    <option value="Moderate">Moderate</option>
+                                                                    <option value="Strong">Strong</option>
+
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="col-12 mb-3">
+                                                                <!-- <label for="poDescription" class="form-label">PO Description</label> -->
+                                                                <input readonly type="hidden" class="form-control"
+                                                                    id="poDescription" name="po_description" rows="4"
+                                                                    placeholder="PO Description" required>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="p-2">
+                                                            <div class="d-flex justify-content-end gap-2">
+                                                                <button type="button" class="btn btn-secondary rounded"
+                                                                    id="btnCancelOutcome">Cancel</button>
+                                                                <button type="button" class="btn btn-primary rounded"
+                                                                    id="btnCreateOutcome">Create Outcome</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+
+
+                                            <!-- Outcome Cards -->
+                                            <div id="courseOutcomeList">
+                                                <div class="card outcome-card shadow-sm border rounded-3 mb-3"
+                                                    style="background: linear-gradient(#f9f9f9, #f0f0f0); cursor:pointer;">
+                                                    <div class="card-body p-3">
+                                                        <div
+                                                            class="d-flex justify-content-between align-items-center mb-2">
+                                                            <h6 class="card-title mb-0 text-dark">Data Science Basics
+                                                            </h6>
+                                                            <div class="d-flex gap-2">
+                                                                <div class="rounded-circle d-flex align-items-center justify-content-center"
+                                                                    style="width: 30px; height: 30px; background: linear-gradient(#c4e0f9, #96c6f3); border:1px solid #ddd;">
+                                                                    <i class="bi bi-eye text-primary"></i>
+                                                                </div>
+                                                                <div class="rounded-circle d-flex align-items-center justify-content-center"
+                                                                    style="width: 30px; height: 30px; background: linear-gradient(#f9c4c4, #f39696); border:1px solid #ddd;">
+                                                                    <i class="bi bi-journal-text text-danger"></i>
+                                                                </div>
+                                                                <div class="rounded-circle d-flex align-items-center justify-content-center"
+                                                                    style="width: 30px; height: 30px; background: linear-gradient(#c4f9c4, #96f396); border:1px solid #ddd;">
+                                                                    <i
+                                                                        class="bi bi-file-earmark-check text-success"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <p class="card-text text-muted small mb-0">
+                                                            Overview of data science concepts and methodologies
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+                                            <!-- Outcome Detail -->
+                                            <div id="outcomeDetail" style="display:none;">
+                                                <div class="d-flex align-items-start flex-column mb-3" style="gap:30%;">
+                                                    <button id="backToOutcomes" class="btn btn-sm text-primary">← Back
+                                                        to
+                                                        Outcomes</button>
+                                                    <h6 class="mb-0 py-3" id="out-come-Title">-</h6>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <div class="p-3 rounded border bg-gray">
+                                                        <small class="text-muted" id="outcomeDescription"> - </small>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Tabs -->
+                                                <ul class="nav nav-tabs bg-secondary" id="outcomeTab" role="tablist">
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link active" id="notes-tab"
+                                                            data-bs-toggle="tab" data-bs-target="#notes"
+                                                            type="button">Notes</button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="video-tab" data-bs-toggle="tab"
+                                                            data-bs-target="#video" type="button">Video</button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="practice-tab" data-bs-toggle="tab"
+                                                            data-bs-target="#practice" type="button">Practice</button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="assignment-tab"
+                                                            data-bs-toggle="tab" data-bs-target="#assignment"
+                                                            type="button">Assignments</button>
+                                                    </li>
+                                                </ul>
+
+                                                <div class="tab-content border p-3">
+                                                    <!-- <div class="d-flex align-items-center justify-content-end mb-2 gap-2">
                                                     <button id="editBtn" class="btn edit-btn btn-sm">
                                                         <i class="bi bi-pencil"></i> Edit
                                                     </button>
@@ -421,414 +827,422 @@
                                                         style="display:none;">Cancel</button>
                                                 </div> -->
 
-                                                <!-- Notes Tab -->
-                                                <div class="tab-pane fade show active pt-2" id="notes">
-                                                    <div class="d-flex align-items-center justify-content-end mb-2 gap-2 notes-actions">
-                                                        <button id="editPdfBtn" class="btn btn-sm btn-secondary"><i class="bi bi-pencil"></i> Edit</button>
-                                                        <button id="savePdfBtn" class="btn btn-sm btn-success" style="display:none;">Save</button>
-                                                        <button id="cancelPdfBtn" class="btn btn-sm btn-danger" style="display:none;">Cancel</button>
-                                                    </div>
-
-                                                    <!-- 🟢 Static Notes (preview when stored PDF exists) -->
-                                                    <div id="staticNotesSection" class="border rounded p-3 mb-4 bg-light shadow-sm" style="display:none;">
-                                                        <h6 class="fw-semibold mb-3">📘 Static Notes</h6>
-                                                        <div class="ratio ratio-16x9 border rounded shadow-sm">
-                                                            <iframe id="staticPdfViewer" src="" width="100%" height="600" style="border:none;" title="Notes PDF Viewer"></iframe>
-                                                        </div>
-                                                    </div>
-
-                                                    <!-- 📂 Upload & Preview Notes Section (shown only when no stored PDF) -->
-                                                    <div id="notesUploadSection" class="border rounded p-3 bg-light shadow-sm" style="display:none;">
-                                                        <h6 class="fw-semibold mb-3">📂 Upload & Preview Your Notes</h6>
-
-                                                        <!-- Drag & Drop Upload -->
-                                                        <div id="dropZone" class="border border-primary rounded p-5 text-center mb-3" style="cursor: pointer; background-color: #f8f9fa;">
-                                                            <p class="mb-0 fw-semibold">📄 Drag & Drop your PDF here or Click to Upload</p>
-                                                            <input type="file" id="fileInput" accept="application/pdf" style="display:none;">
+                                                    <!-- Notes Tab -->
+                                                    <div class="tab-pane fade show active pt-2" id="notes">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end mb-2 gap-2 notes-actions">
+                                                            <button id="editPdfBtn" class="btn btn-sm btn-secondary"><i
+                                                                    class="bi bi-pencil"></i> Edit</button>
+                                                            <button id="savePdfBtn" class="btn btn-sm btn-success"
+                                                                style="display:none;">Save</button>
+                                                            <button id="cancelPdfBtn" class="btn btn-sm btn-danger"
+                                                                style="display:none;">Cancel</button>
                                                         </div>
 
-                                                        <!-- PDF Preview Container (optional after upload) -->
-                                                        <div id="pdfPreviewContainer" class="rounded border p-3" style="height: 600px; display:none;">
-                                                            <iframe id="pdfViewer" width="100%" height="100%" style="border:none;"></iframe>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Video Tab -->
-                                                <div class="tab-pane fade show pt-2" id="video">
-                                                    <div class="d-flex align-items-center justify-content-end mb-2 gap-2 video-actions">
-                                                        <button id="editVideoBtn" class="btn btn-sm btn-secondary"><i class="bi bi-pencil"></i> Edit</button>
-                                                        <button id="saveVideoBtn" class="btn btn-sm btn-success" style="display:none;">Save</button>
-                                                        <button id="cancelVideoBtn" class="btn btn-sm btn-danger" style="display:none;">Cancel</button>
-                                                    </div>
-
-                                                    <!-- View saved video link (optional tiny section) -->
-                                                    <div id="staticVideoSection" class="border rounded p-3 mb-3 bg-light shadow-sm" style="display:none;">
-                                                        <h6 class="fw-semibold mb-2">Saved YouTube Link:</h6>
-                                                        <a id="savedVideoLink" href="#" target="_blank" class="text-primary"></a>
-                                                    </div>
-
-                                                    <!-- Add / Edit YouTube Link -->
-                                                    <div id="videoUploadSection" class="border rounded p-3 bg-light shadow-sm" style="display:none;">
-                                                        <h6 class="fw-semibold mb-3">Add YouTube Video Link</h6>
-                                                        <input type="text" id="youtubeLinkInput" class="form-control mb-2"
-                                                            placeholder="Paste YouTube link here (example: https://youtu.be/xyz123)">
-                                                        <small class="text-muted">* Only YouTube link allowed</small>
-                                                    </div>
-                                                </div>
-
-
-
-                                                <!-- PRACTICE TAB -->
-
-                                                <div class="tab-pane fade" id="practice">
-                                                    <div class="p-3" id="practiceSection">
-                                                        <div class="border rounded shadow-sm overflow-hidden bg-light">
-                                                            <div class="p-2 border-bottom bg-secondary text-dark fw-semibold">
-                                                                Practice Material
+                                                        <!-- 🟢 Static Notes (preview when stored PDF exists) -->
+                                                        <div id="staticNotesSection"
+                                                            class="border rounded p-3 mb-4 bg-light shadow-sm"
+                                                            style="display:none;">
+                                                            <h6 class="fw-semibold mb-3">📘 Static Notes</h6>
+                                                            <div class="ratio ratio-16x9 border rounded shadow-sm">
+                                                                <iframe id="staticPdfViewer" src="" width="100%"
+                                                                    height="600" style="border:none;"
+                                                                    title="Notes PDF Viewer"></iframe>
                                                             </div>
-                                                            <div class="p-3">
+                                                        </div>
 
-                                                                <!-- 🧮 Question Count Input -->
-                                                                <div class="mb-3 d-flex justify-content-end align-items-center gap-3">
-                                                                    <label for="questionCount" class="form-label fw-semibold mb-0">
-                                                                        Number of Questions (max 50)
-                                                                    </label>
-                                                                    <input type="number" id="questionCount" class="form-control w-auto" min="1" max="50"
-                                                                        placeholder="Enter count">
-                                                                    <button id="generateBtn" class="btn btn-sm btn-outline-primary">Generate</button>
+                                                        <!-- 📂 Upload & Preview Notes Section (shown only when no stored PDF) -->
+                                                        <div id="notesUploadSection"
+                                                            class="border rounded p-3 bg-light shadow-sm"
+                                                            style="display:none;">
+                                                            <h6 class="fw-semibold mb-3">📂 Upload & Preview Your Notes
+                                                            </h6>
+
+                                                            <!-- Drag & Drop Upload -->
+                                                            <div id="dropZone"
+                                                                class="border border-primary rounded p-5 text-center mb-3"
+                                                                style="cursor: pointer; background-color: #f8f9fa;">
+                                                                <p class="mb-0 fw-semibold">📄 Drag & Drop your PDF here
+                                                                    or
+                                                                    Click to Upload</p>
+                                                                <input type="file" id="fileInput"
+                                                                    accept="application/pdf" style="display:none;">
+                                                            </div>
+
+                                                            <!-- PDF Preview Container (optional after upload) -->
+                                                            <div id="pdfPreviewContainer" class="rounded border p-3"
+                                                                style="height: 600px; display:none;">
+                                                                <iframe id="pdfViewer" width="100%" height="100%"
+                                                                    style="border:none;"></iframe>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Video Tab -->
+                                                    <div class="tab-pane fade show pt-2" id="video">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end mb-2 gap-2 video-actions">
+                                                            <button id="editVideoBtn"
+                                                                class="btn btn-sm btn-secondary"><i
+                                                                    class="bi bi-pencil"></i> Edit</button>
+                                                            <button id="saveVideoBtn" class="btn btn-sm btn-success"
+                                                                style="display:none;">Save</button>
+                                                            <button id="cancelVideoBtn" class="btn btn-sm btn-danger"
+                                                                style="display:none;">Cancel</button>
+                                                        </div>
+
+                                                        <!-- View saved video link (optional tiny section) -->
+                                                        <div id="staticVideoSection"
+                                                            class="border rounded p-3 mb-3 bg-light shadow-sm"
+                                                            style="display:none;">
+                                                            <h6 class="fw-semibold mb-2">Saved YouTube Link:</h6>
+                                                            <a id="savedVideoLink" href="#" target="_blank"
+                                                                class="text-primary"></a>
+                                                        </div>
+
+                                                        <!-- Add / Edit YouTube Link -->
+                                                        <div id="videoUploadSection"
+                                                            class="border rounded p-3 bg-light shadow-sm"
+                                                            style="display:none;">
+                                                            <h6 class="fw-semibold mb-3">Add YouTube Video Link</h6>
+                                                            <input type="text" id="youtubeLinkInput"
+                                                                class="form-control mb-2"
+                                                                placeholder="Paste YouTube link here (example: https://youtu.be/xyz123)">
+                                                            <small class="text-muted">* Only YouTube link
+                                                                allowed</small>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    <!-- PRACTICE TAB -->
+
+                                                    <div class="tab-pane fade" id="practice">
+                                                        <div class="p-3" id="practiceSection">
+                                                            <div
+                                                                class="border rounded shadow-sm overflow-hidden bg-light">
+                                                                <div
+                                                                    class="p-2 border-bottom bg-secondary text-dark fw-semibold">
+                                                                    Practice Material
                                                                 </div>
+                                                                <div class="p-3">
 
-                                                                <!-- Questions Container -->
-                                                                <div id="questionsContainer"></div>
-
-                                                                <!-- Buttons -->
-                                                                <div class="d-flex justify-content-center mt-3 gap-2" id="practiceButtons" style="display:none;">
-                                                                    <button id="submitPracticeBtn" class="btn btn-gradient-glossy btn-sm">🚀 Submit</button>
-                                                                    <button id="editPracticeBtn" class="btn btn-outline-warning btn-sm" style="display:none;">✏️
-                                                                        Edit</button>
-                                                                    <button id="savePracticeBtn" class="btn btn-gradient-glossy btn-sm"
-                                                                        style="display:none;">💾 Save</button>
-                                                                    <button id="cancelPracticeBtn" class="btn btn-outline-secondary btn-sm"
-                                                                        style="display:none;">❌ Cancel</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Assignment Tab -->
-                                                <div class="tab-pane fade pt-1" id="assignment">
-                                                    <div id="assignmentDisplay" class="rounded border p-3">
-                                                        <div class="border rounded shadow-sm overflow-hidden bg-light">
-                                                            <div class="p-2 border-bottom bg-secondary text-dark">
-                                                                Assignment Material
-                                                            </div>
-                                                            <div class="p-3">
-                                                                <div class="form-div">
-                                                                    <form id="assignment-submit-faculty"
-                                                                        enctype="multipart/form-data">
-                                                                        <!-- ✅ Hidden Inputs -->
-                                                                        <input type="hidden" name="c_id" value="">
-                                                                        <input type="hidden" name="launch_c_id"
-                                                                            value="1">
-
-                                                                        <!-- Title -->
-                                                                        <div class="mb-3">
-                                                                            <label class="form-label">Title</label>
-                                                                            <input type="text" class="form-control"
-                                                                                name="title"
-                                                                                placeholder="Enter assignment title"
-                                                                                required>
-                                                                        </div>
-
-                                                                        <!-- Instructions -->
-                                                                        <div class="mb-3">
-                                                                            <label class="form-label">Instructions
-                                                                                <small
-                                                                                    class="text-muted">(optional)</small></label>
-                                                                            <textarea class="form-control"
-                                                                                name="instruction" rows="3"
-                                                                                placeholder="Enter instructions if any"></textarea>
-                                                                        </div>
-
-                                                                        <div class="row">
-                                                                            <!-- Upload PDF -->
-                                                                            <div class="col-lg-4">
-                                                                                <div class="mb-3">
-                                                                                    <label class="form-label">Upload
-                                                                                        File (PDF only)</label>
-                                                                                    <input type="file"
-                                                                                        class="form-control" name="file"
-                                                                                        accept=".pdf">
-                                                                                </div>
+                                                                    <!-- 🧮 Question Count Input -->
+                                                                    <div class="mb-3">
+                                                                        <div class="row g-2 align-items-center">
+                                                                            <div class="col-12 col-md-auto">
+                                                                                <label for="questionCount"
+                                                                                    class="form-label fw-semibold mb-0">
+                                                                                    Number of Questions (max 50)
+                                                                                </label>
                                                                             </div>
-
-                                                                            <!-- Total Marks -->
-                                                                            <div class="col-lg-4">
-                                                                                <div class="mb-3">
-                                                                                    <label class="form-label">Total
-                                                                                        Marks</label>
-                                                                                    <select class="form-select"
-                                                                                        name="marks" required>
-                                                                                        <option value="" selected
-                                                                                            disabled>Select marks
-                                                                                        </option>
-                                                                                        <option value="10">10</option>
-                                                                                        <option value="20">20</option>
-                                                                                        <option value="25">25</option>
-                                                                                        <option value="50">50</option>
-                                                                                        <option value="100">100</option>
-                                                                                    </select>
-                                                                                </div>
+                                                                            <div class="col-12 col-sm-6 col-md-3">
+                                                                                <input type="number" id="questionCount"
+                                                                                    class="form-control w-100" min="1"
+                                                                                    max="50" placeholder="Enter count">
                                                                             </div>
-
-                                                                            <!-- Due Date -->
-                                                                            <div class="col-lg-4">
-                                                                                <div class="mb-3">
-                                                                                    <label class="form-label">Due
-                                                                                        Date</label>
-                                                                                    <input type="date"
-                                                                                        class="form-control"
-                                                                                        name="due_date" required>
-                                                                                </div>
+                                                                            <div class="col-12 col-sm-auto">
+                                                                                <button id="generateBtn"
+                                                                                    class="btn btn-outline-primary w-100 w-sm-auto mt-2 mt-sm-0">
+                                                                                    Generate
+                                                                                </button>
                                                                             </div>
                                                                         </div>
+                                                                    </div>
 
-                                                                        <!-- Submit Button -->
-                                                                        <div class="d-flex justify-content-center">
-                                                                            <button type="submit"
-                                                                                class="btn btn-gradient-glossy">Submit</button>
-                                                                        </div>
-                                                                    </form>
+                                                                    <!-- Questions Container -->
+                                                                    <div id="questionsContainer"></div>
+
+                                                                    <!-- Buttons -->
+                                                                    <div class="d-flex flex-wrap justify-content-center mt-3 gap-2"
+                                                                        id="practiceButtons" style="display:none;">
+                                                                        <button id="submitPracticeBtn"
+                                                                            class="btn btn-gradient-glossy btn-sm flex-fill flex-sm-grow-0">
+                                                                            🚀 Submit
+                                                                        </button>
+                                                                        <button id="editPracticeBtn"
+                                                                            class="btn btn-outline-warning btn-sm flex-fill flex-sm-grow-0"
+                                                                            style="display:none;">
+                                                                            ✏️ Edit
+                                                                        </button>
+                                                                        <button id="savePracticeBtn"
+                                                                            class="btn btn-gradient-glossy btn-sm flex-fill flex-sm-grow-0"
+                                                                            style="display:none;">
+                                                                            💾 Save
+                                                                        </button>
+                                                                        <button id="cancelPracticeBtn"
+                                                                            class="btn btn-outline-secondary btn-sm flex-fill flex-sm-grow-0"
+                                                                            style="display:none;">
+                                                                            ❌ Cancel
+                                                                        </button>
+                                                                    </div>
+
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>
+
+
+                                                    <!-- Assignment Tab -->
+                                                    <div class="tab-pane fade pt-1" id="assignment">
+                                                        <div id="assignmentDisplay" class="rounded border p-3">
+                                                            <div
+                                                                class="border rounded shadow-sm overflow-hidden bg-light">
+                                                                <div class="p-2 border-bottom bg-secondary text-dark">
+                                                                    Assignment Material
+                                                                </div>
+                                                                <div class="p-3">
+                                                                    <div class="form-div">
+                                                                        <form id="assignment-submit-faculty"
+                                                                            enctype="multipart/form-data">
+                                                                            <!-- ✅ Hidden Inputs -->
+                                                                            <input type="hidden" name="c_id" value="">
+                                                                            <input type="hidden" name="launch_c_id"
+                                                                                value="1">
+
+                                                                            <!-- Title -->
+                                                                            <div class="mb-3">
+                                                                                <label class="form-label">Title</label>
+                                                                                <input type="text" class="form-control"
+                                                                                    name="title"
+                                                                                    placeholder="Enter assignment title"
+                                                                                    required>
+                                                                            </div>
+
+                                                                            <!-- Instructions -->
+                                                                            <div class="mb-3">
+                                                                                <label class="form-label">Instructions
+                                                                                    <small
+                                                                                        class="text-muted">(optional)</small></label>
+                                                                                <textarea class="form-control"
+                                                                                    name="instruction" rows="3"
+                                                                                    placeholder="Enter instructions if any"></textarea>
+                                                                            </div>
+
+                                                                            <div class="row">
+                                                                                <!-- Upload PDF -->
+                                                                                <div class="col-lg-4">
+                                                                                    <div class="mb-3">
+                                                                                        <label class="form-label">Upload
+                                                                                            File (PDF only)</label>
+                                                                                        <input type="file"
+                                                                                            class="form-control"
+                                                                                            name="file" accept=".pdf">
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <!-- Total Marks -->
+                                                                                <div class="col-lg-4">
+                                                                                    <div class="mb-3">
+                                                                                        <label class="form-label">Total
+                                                                                            Marks</label>
+                                                                                        <select class="form-select"
+                                                                                            name="marks" required>
+                                                                                            <option value="" selected
+                                                                                                disabled>Select marks
+                                                                                            </option>
+                                                                                            <option value="10">10
+                                                                                            </option>
+                                                                                            <option value="20">20
+                                                                                            </option>
+                                                                                            <option value="25">25
+                                                                                            </option>
+                                                                                            <option value="50">50
+                                                                                            </option>
+                                                                                            <option value="100">100
+                                                                                            </option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <!-- Due Date -->
+                                                                                <div class="col-lg-4">
+                                                                                    <div class="mb-3">
+                                                                                        <label class="form-label">Due
+                                                                                            Date</label>
+                                                                                        <input type="date"
+                                                                                            class="form-control"
+                                                                                            name="due_date" required>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <!-- Submit Button -->
+                                                                            <div class="d-flex justify-content-center">
+                                                                                <button type="submit"
+                                                                                    class="btn btn-gradient-glossy">Submit</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
 
                                                 </div>
 
                                             </div>
-
                                         </div>
-                                    </div>
 
+                                    </div>
                                 </div>
-                            </div>
 
-                            <!-- Students Content -->
+                                <!-- Students Content -->
 
-                            <div class="tab-pane fade" id="students" role="tabpanel" aria-labelledby="students-tab">
-                                <div class="p-4">
-                                    <h6 class="mb-4"></h6>
-                                    <div class="rounded border">
-                                        <!-- Header -->
-                                        <div class="bg-secondary text-dark p-3 rounded-top">
-                                            <h5 class="mb-0" style="font-size: 1rem;">Enrolled Students</h5>
-                                        </div>
-
-                                        <!-- Body -->
-                                        <div class="p-3">
-                                            <table class="table align-middle mb-0">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Student</th>
-                                                        <th>Registration</th>
-                                                        <th>Progress</th>
-                                                        <!-- <th>Attendance</th> -->
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="studentProgressTable"></tbody>
-                                            </table>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <!-- Settings Content -->
-                            <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-                                <div class="p-4">
-                                    <!-- Header -->
-                                    <div class="bg-secondary text-dark p-3 rounded-top">
-                                        <h5 class="mb-0" style="font-size: 1rem;">Course Settings</h5>
-                                    </div>
-                                    <div class="p-3 border rounded" id="topicFormSection">
-                                        <form id="topicDetailForm">
-                                            <div class="row g-3">
-                                                <!-- Course Code -->
-                                                <div class="col-md-6">
-                                                    <label for="courseCode" class="form-label">Course Code</label>
-                                                    <input type="text" class="form-control" id="courseCode-form">
-                                                </div>
-
-                                                <!-- Course Name -->
-                                                <div class="col-md-6">
-                                                    <label for="courseName" class="form-label">Course Name</label>
-                                                    <input type="text" class="form-control" id="courseName-form">
-                                                </div>
-
-                                                <!-- Department -->
-                                                <div class="col-md-6">
-                                                    <label for="department" class="form-label">Department</label>
-                                                    <input type="text" class="form-control" id="department-form">
-                                                </div>
-
-                                                <!-- Credit Hours -->
-                                                <div class="col-md-6">
-                                                    <label for="creditHours" class="form-label">Credit Hours</label>
-                                                    <input type="text" class="form-control" id="creditHours-form">
-                                                </div>
-
-                                                <!-- Course Description -->
-                                                <div class="col-12">
-                                                    <label for="courseDescription" class="form-label">Course
-                                                        Description</label>
-                                                    <textarea class="form-control" id="courseDescription-form"
-                                                        rows="3">This course introduces the fundamental concepts of data science, including data collection, analysis, and visualization.</textarea>
-                                                </div>
-
-                                                <!-- Schedule -->
-                                                <div class="col-md-6">
-                                                    <label for="schedule" class="form-label">Schedule</label>
-                                                    <input type="text" class="form-control" id="schedule-form">
-                                                </div>
-
-                                                <!-- Location -->
-                                                <div class="col-md-6">
-                                                    <label for="location" class="form-label">Location</label>
-                                                    <input type="text" class="form-control" id="location-form"
-                                                        value="Science Building, Room 301">
-                                                </div>
-
-                                                <!-- Prerequisites -->
-                                                <div class="col-6">
-                                                    <label for="prerequisites" class="form-label">Prerequisites
-                                                        (comma-separated)</label>
-                                                    <input type="text" class="form-control" id="prerequisites-form">
-                                                </div>
+                                <div class="tab-pane fade" id="students" role="tabpanel" aria-labelledby="students-tab">
+                                    <div class="p-4">
+                                        <h6 class="mb-4"></h6>
+                                        <div class="rounded border">
+                                            <!-- Header -->
+                                            <div class="bg-secondary text-dark p-3 rounded-top">
+                                                <h5 class="mb-0" style="font-size: 1rem;">Enrolled Students</h5>
                                             </div>
 
-
-                                            <div class="pt-3">
-                                                <div
-                                                    style="    background: rgba(255, 255, 255, 0.7);border: 1px solid #ecececee;">
-
-                                                </div>
-                                            </div>
+                                            <!-- Body -->
                                             <div class="p-3">
-                                                <!-- Section Title -->
-                                                <h6
-                                                    style="font-size: 0.875rem;line-height: 1.25rem;font-weight: 500;--tw-text-opacity: 1;color: rgb(55 65 81 / var(--tw-text-opacity, 1));">
-                                                    Course Coordinator Information</h6>
-
-                                                <div class="row g-3">
-                                                    <!-- Coordinator Name -->
-                                                    <div class="col-md-6">
-                                                        <label for="coordinatorName" class="form-label">Coordinator
-                                                            Name</label>
-                                                        <input type="text" class="form-control" id="coordinatorName-form">
-                                                    </div>
-
-                                                    <!-- Email -->
-                                                    <div class="col-md-6">
-                                                        <label for="email" class="form-label">Email</label>
-                                                        <input type="email" class="form-control" id="email-form">
-                                                    </div>
-
-                                                    <!-- Phone -->
-                                                    <div class="col-md-6">
-                                                        <label for="phone" class="form-label">Phone</label>
-                                                        <input type="text" class="form-control" id="phone-form">
-                                                    </div>
-
-                                                    <!-- Office Hours -->
-                                                    <div class="col-md-6">
-                                                        <label for="profile" class="form-label">Profile</label>
-                                                        <input type="file" class="form-control" id="profile">
-                                                    </div>
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped table-hover align-middle mb-0">
+                                                        <thead class="table-light">
+                                                            <tr>
+                                                                <th scope="col">Student</th>
+                                                                <th scope="col">Registration</th>
+                                                                <th scope="col">Progress</th>
+                                                                <!-- <th scope="col">Attendance</th> -->
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="studentProgressTable">
+                                                            <!-- Rows populated dynamically -->
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
 
-                                            <div class="p-3">
-                                                <div class="d-flex justify-content-end gap-2">
-                                                    <!-- <button type="button" class="btn btn-secondary" id="btnResetCourse">Reset</button> -->
-                                                    <button type="button" class="btn btn-primary" id="btnSaveCourse">Save Changes</button>
-                                                </div>
-                                            </div>
-                                        </form>
+                                        </div>
+
                                     </div>
-
                                 </div>
 
-                                <!-- <div class="p-4">
-                                
-                                    <div class="bg-secondary text-dark p-3 rounded-top">
-                                        <h5 class="mb-0" style="font-size: 1rem;">Advanced Settings
-                                        </h5>
-                                    </div>
-                                    <div class="p-3 border rounded">
-                                        <h5 class="mb-2" style="font-size: 1rem;">Course Visibility </h5>
-                                        <div class="d-flex gap-2">
-                                            <input type="checkbox" name="" id="" style="width:17px">
-                                            <small>Make course visible to students</small>
-                                        </div>
-                                        <small class="text-muted">When disabled, students won't be able to see or access
-                                            this course.
-
-                                        </small>
-                                    </div>
-                                    <div class="pt-3">
-                                        <div
-                                            style="    background: rgba(255, 255, 255, 0.7);border: 1px solid #ecececee;">
-                                        </div>
-                                    </div>
+                                <!-- Settings Content -->
+                                <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
                                     <div class="p-3">
-                                        <h5 class="mb-2" style="font-size: 1rem;">Enrollment Options
-                                        </h5>
-                                        <div class="d-flex gap-2 mb-2">
-                                            <input type="checkbox" name="" id="" style="width:17px" checked>
-                                            <small>Allow student self-enrollment</small>
-                                        </div>
-                                        <div class="d-flex gap-2">
-                                            <input type="checkbox" name="" id="" style="width:17px">
-                                            <small>Require enrollment key
-                                            </small>
-                                        </div>
-                                    </div>
-                                    <div class="pt-3">
-                                        <div style="background: rgba(255, 255, 255, 0.7);border: 1px solid #ecececee;">
-                                        </div>
-                                    </div>
-
-                                    <div class="p-3">
-                                        <h5 class="mb-2" style="font-size: 0.9rem;">Danger Zone</h5>
-
-                                        <div class="p-3 rounded border border-red-200 bg-red-200">
-                                            <h5 class="mb-2 text-red-setting" style="font-size: 1rem;">Archive Course
-                                            </h5>
-                                            <div class="d-flex gap-2 flex-column">
-                                                <small class="text-red-settings">
-                                                    Archiving will make this course read-only and move it to the
-                                                    archives
-                                                    section.
-                                                </small>
-                                                <button class="archieve-btn rounded w-md-50 w-lg-25">Archieve
-                                                    Course</button>
+                                        <div class="container-fluid">
+                                            <div class="bg-secondary text-dark p-3 rounded-top">
+                                                <h5 class="mb-0" style="font-size: 1rem;">Course Settings</h5>
                                             </div>
+                                            <div class="p-3 border rounded" id="topicFormSection">
+                                                <form id="topicDetailForm">
+                                                    <div class="row g-3">
+                                                        <!-- Course Code -->
+                                                        <div class="col-md-6">
+                                                            <label for="courseCode" class="form-label">Course
+                                                                Code</label>
+                                                            <input type="text" class="form-control"
+                                                                id="courseCode-form">
+                                                        </div>
 
+                                                        <!-- Course Name -->
+                                                        <div class="col-md-6">
+                                                            <label for="courseName" class="form-label">Course
+                                                                Name</label>
+                                                            <input type="text" class="form-control"
+                                                                id="courseName-form">
+                                                        </div>
+
+                                                        <!-- Department -->
+                                                        <div class="col-md-6">
+                                                            <label for="department"
+                                                                class="form-label">Department</label>
+                                                            <input type="text" class="form-control"
+                                                                id="department-form">
+                                                        </div>
+
+                                                        <!-- Credit Hours -->
+                                                        <div class="col-md-6">
+                                                            <label for="creditHours" class="form-label">Credit
+                                                                Hours</label>
+                                                            <input type="text" class="form-control"
+                                                                id="creditHours-form">
+                                                        </div>
+
+                                                        <!-- Course Description -->
+                                                        <div class="col-12">
+                                                            <label for="courseDescription" class="form-label">Course
+                                                                Description</label>
+                                                            <textarea class="form-control" id="courseDescription-form"
+                                                                rows="3"></textarea>
+                                                        </div>
+
+                                                        <!-- Schedule -->
+                                                        <div class="col-md-6">
+                                                            <label for="schedule" class="form-label">Schedule</label>
+                                                            <input type="text" class="form-control" id="schedule-form">
+                                                        </div>
+
+                                                        <!-- Location -->
+                                                        <div class="col-md-6">
+                                                            <label for="location" class="form-label">Location</label>
+                                                            <input type="text" class="form-control" id="location-form"
+                                                                value="Science Building, Room 301">
+                                                        </div>
+
+                                                        <!-- Prerequisites -->
+                                                        <div class="col-md-6">
+                                                            <label for="prerequisites" class="form-label">Prerequisites
+                                                                (comma-separated)</label>
+                                                            <input type="text" class="form-control"
+                                                                id="prerequisites-form">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="pt-3">
+                                                        <div class="bg-light border rounded p-2"></div>
+                                                    </div>
+
+                                                    <div class="p-3">
+                                                        <h6 class="fw-semibold mb-3">Course Coordinator Information</h6>
+                                                        <div class="row g-3">
+                                                            <div class="col-md-6">
+                                                                <label for="coordinatorName"
+                                                                    class="form-label">Coordinator Name</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="coordinatorName-form">
+                                                            </div>
+
+                                                            <div class="col-md-6">
+                                                                <label for="email" class="form-label">Email</label>
+                                                                <input type="email" class="form-control"
+                                                                    id="email-form">
+                                                            </div>
+
+                                                            <div class="col-md-6">
+                                                                <label for="phone" class="form-label">Phone</label>
+                                                                <input type="text" class="form-control" id="phone-form">
+                                                            </div>
+
+                                                            <div class="col-md-6">
+                                                                <label for="profile" class="form-label">Profile</label>
+                                                                <input type="file" class="form-control" id="profile">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="p-3 d-flex justify-content-end">
+                                                        <button type="button" class="btn btn-primary"
+                                                            id="btnSaveCourse">Save Changes</button>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
-
                                     </div>
+                                </div>
 
-
-                                </div> -->
                             </div>
                         </div>
+
                     </div>
                 </div>
-            </div>
+            </main>
         </div>
     </div>
 
@@ -914,7 +1328,7 @@
 
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const poDescriptions = {
                 "PO1": "Demonstrate advanced understanding of educational process and planning.",
                 "PO2": "Design and implement evidence-based teaching-learning strategies based on sound principles and theories.",
@@ -928,7 +1342,7 @@
             const poSelect = document.getElementById("poLevel");
             const poDescription = document.getElementById("poDescription");
 
-            poSelect.addEventListener("change", function() {
+            poSelect.addEventListener("change", function () {
                 const selectedPO = poSelect.value;
                 poDescription.value = poDescriptions[selectedPO] || "";
             });
@@ -1089,12 +1503,12 @@
 
     <!-- for hiding the scroll in students tab -->
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const contentScroll = document.querySelector(".content-scroll");
 
             // Bootstrap tab shown event
             document.querySelectorAll('button[data-bs-toggle="tab"]').forEach(tab => {
-                tab.addEventListener("shown.bs.tab", function(e) {
+                tab.addEventListener("shown.bs.tab", function (e) {
                     const targetId = e.target.getAttribute("data-bs-target");
 
                     if (targetId === "#students") {
@@ -1113,19 +1527,19 @@
 
     <!-- for hiddening the committe report button in other page herer  -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const studentsTab = document.getElementById('students-tab');
             const settingsTab = document.getElementById('settings-tab');
             const committeeBtn = document.getElementById('committeeReportBtn');
 
             // When Students tab is clicked → Show button
-            studentsTab.addEventListener('shown.bs.tab', function() {
+            studentsTab.addEventListener('shown.bs.tab', function () {
                 committeeBtn.classList.remove('d-none');
             });
 
             // When any other tab is clicked → Hide button
             document.querySelectorAll('#myTab button').forEach(tab => {
-                tab.addEventListener('shown.bs.tab', function(e) {
+                tab.addEventListener('shown.bs.tab', function (e) {
                     if (e.target.id !== 'students-tab') {
                         committeeBtn.classList.add('d-none');
                     }
@@ -1138,19 +1552,19 @@
     </script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const addBtn = document.querySelector(".add-topic-btn");
             const formDiv = document.getElementById("createTopicForm");
             const cancelBtn = document.querySelector(".cancel-btn");
 
             // Show form on Add Topic click
-            addBtn.addEventListener("click", function() {
+            addBtn.addEventListener("click", function () {
                 formDiv.style.display = "block";
                 // addBtn.style.display = "none";  <-- removed this line
             });
 
             // Hide form on Cancel click
-            cancelBtn.addEventListener("click", function() {
+            cancelBtn.addEventListener("click", function () {
                 formDiv.style.display = "none";
                 // addBtn.style.display = "inline-block"; <-- no need to show it
             });
@@ -1159,7 +1573,7 @@
 
     <!-- add outocme hrer -->
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const addOutcomeBtn = document.getElementById("addOutcomeBtn");
             const createOutcomeForm = document.getElementById("createOutcomeForm");
             const cancelOutcomeBtn = document.getElementById("cancelOutcomeBtn");
@@ -1346,16 +1760,12 @@
                     let html = '';
                     response.data.forEach(t => {
                         html += `
-          <div class="topic-card rounded border p-4 mb-3"
+          <div class="topic-card rounded border p-3 mb-3"
                data-topic-id="${t.topic_id}"
                data-topic-title="${escapeAttr(t.topic_title)}"
                data-topic-desc="${escapeAttr(t.topic_description)}"
                style="background:linear-gradient(180deg,#f9f9f9 0%,#f0f0f0 100%); cursor:pointer;">
-
-            <div class="d-flex justify-content-between align-items-center">
-              <h6 class="mb-0 topic-title-text">${escapeHtml(t.topic_title)}</h6>
-
-              <div class="d-flex gap-2">
+<div class="d-flex gap-2 justify-content-end mb-3">
                 <button type="button"
                         class="btn btn-sm btn-outline-secondary edit-topic-btn"
                         data-topic-id="${t.topic_id}"
@@ -1370,6 +1780,10 @@
                   ${t.outcome_count ?? 0} outcomes
                 </button>
               </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <h6 class="mb-0 topic-title-text">${escapeHtml(t.topic_title)}</h6>
+
+              
             </div>
 
             <small class="text-secondary topic-desc-text">${escapeHtml(t.topic_description)}</small>
@@ -1451,7 +1865,7 @@
         }
 
         // ===== Save Edited Topic (AJAX) =====
-        document.getElementById('editTopicForm').addEventListener('submit', function(e) {
+        document.getElementById('editTopicForm').addEventListener('submit', function (e) {
             e.preventDefault();
 
             const topic_id = document.getElementById('edit_topic_id').value.trim();
@@ -1459,16 +1873,16 @@
             const topic_desc = document.getElementById('edit_topic_desc').value.trim();
 
             fetch('api/update_topic.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    body: new URLSearchParams({
-                        topic_id,
-                        topic_title,
-                        topic_desc
-                    })
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    topic_id,
+                    topic_title,
+                    topic_desc
                 })
+            })
                 .then(r => r.json())
                 .then(resp => {
                     if (resp.status == 200) {
@@ -1533,7 +1947,7 @@
                 '>': '&gt;',
                 '"': '&quot;',
                 "'": '&#039;'
-            } [m]));
+            }[m]));
         }
 
         function escapeAttr(s = '') {
@@ -1641,7 +2055,7 @@
 
                         // ✅ Handle clicking on a card (to show details)
                         outcomeList.querySelectorAll('.outcome-card').forEach(card => {
-                            card.addEventListener('click', function() {
+                            card.addEventListener('click', function () {
                                 const title = this.dataset.coTitle;
                                 const desc = this.dataset.coDesc;
 
@@ -1677,7 +2091,7 @@
                 });
         }
         // 🖊️ Open Edit Modal
-        $(document).on("click", ".edit-co-btn", function(e) {
+        $(document).on("click", ".edit-co-btn", function (e) {
             e.preventDefault();
             e.stopPropagation(); // avoid card click
 
@@ -1689,17 +2103,17 @@
         });
 
         // 💾 Save Edited Outcome
-        $("#editOutcomeForm").on("submit", function(e) {
+        $("#editOutcomeForm").on("submit", function (e) {
             e.preventDefault();
 
             $.post("api/update_outcome.php", {
                 co_id: $("#edit_co_id").val(),
                 co_level: $("#edit_co_title").val(),
                 course_description: $("#edit_co_desc").val()
-            }, function(resp) {
+            }, function (resp) {
                 try {
                     resp = JSON.parse(resp);
-                } catch {}
+                } catch { }
 
                 if (resp.status == 200) {
                     Swal.fire("Updated!", "Outcome updated successfully.", "success");
@@ -1765,7 +2179,7 @@
             const urlParams = new URLSearchParams(window.location.search);
             const launch_id = urlParams.get("launch_id");
 
-            $btnCreate.off("click").on("click", function() {
+            $btnCreate.off("click").on("click", function () {
                 const outcomeTitle = $("#outcomeTitle").val().trim();
                 const courseDesc = $("#courseoutcomeDescription").val().trim();
                 const poLevel = $("#poLevel").val();
@@ -1794,7 +2208,7 @@
                     data: fd,
                     contentType: false,
                     processData: false,
-                    success: function(res) {
+                    success: function (res) {
                         const data = typeof res === "string" ? JSON.parse(res) : res;
                         if (data.status === "success") {
                             alert("✅ Outcome created successfully!");
@@ -1807,11 +2221,11 @@
                             alert("❌ " + data.message);
                         }
                     },
-                    error: function(xhr, status, err) {
+                    error: function (xhr, status, err) {
                         console.error("AJAX Error:", status, err);
                         alert("⚠️ Server error. Please try again later.");
                     },
-                    complete: function() {
+                    complete: function () {
                         $btnCreate.prop("disabled", false).text("Create Outcome");
                     }
                 });
@@ -1828,7 +2242,7 @@
 
     <!-- Add Course Topic  -->
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const addBtn = document.querySelector(".add-topic-btn");
             const cancelBtn = document.querySelector(".cancel-btn");
             const formDiv = document.getElementById("createTopicForm");
@@ -1839,27 +2253,27 @@
             const launch_id = urlParams.get("launch_id");
 
             // ✅ Show form
-            addBtn.addEventListener("click", function() {
+            addBtn.addEventListener("click", function () {
                 formDiv.style.display = "block";
             });
 
             // ✅ Hide form
-            cancelBtn.addEventListener("click", function() {
+            cancelBtn.addEventListener("click", function () {
                 formDiv.style.display = "none";
                 topicForm.reset();
             });
 
             // ✅ Handle form submit via AJAX
-            topicForm.addEventListener("submit", function(e) {
+            topicForm.addEventListener("submit", function (e) {
                 e.preventDefault(); // stop default form reload
 
                 const formData = new FormData(topicForm);
                 formData.append("launch_id", launch_id);
 
                 fetch("api/add_topic.php", {
-                        method: "POST",
-                        body: formData
-                    })
+                    method: "POST",
+                    body: formData
+                })
                     .then(res => res.json())
                     .then(response => {
                         console.log("Add Topic Response:", response);
@@ -1883,7 +2297,7 @@
 
     <!-- PDF / Video Material -->
     <script>
-        (async function() {
+        (async function () {
             const show = el => el && (el.style.display = 'block');
             const hide = el => el && (el.style.display = 'none');
 
@@ -1928,7 +2342,7 @@
             };
 
             // ✅ Load saved materials
-            window.loadModulesForCurrentContext = async function() {
+            window.loadModulesForCurrentContext = async function () {
                 const ctx = window._materialContext || {};
                 if (!ctx.launch_id || !ctx.topic_id || !ctx.co_id) return;
 
@@ -2083,10 +2497,10 @@
 
     <!-- Add / Upload Assignments -->
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const form = document.getElementById("assignment-submit-faculty");
 
-            form.addEventListener("submit", async function(e) {
+            form.addEventListener("submit", async function (e) {
                 e.preventDefault();
 
                 const ctx = window._materialContext || {};
@@ -2154,8 +2568,8 @@
             // Fetch latest data
             const res = await fetch(
                 `api/get_assignments.php?launch_id=${ctx.launch_id}&topic_id=${ctx.topic_id}&co_id=${ctx.co_id}&_=${Date.now()}`, {
-                    cache: "no-store"
-                }
+                cache: "no-store"
+            }
             );
 
             const json = await res.json();
@@ -2284,7 +2698,7 @@
         </div>
 
         <div class="row g-2">
-            ${['A','B','C','D'].map(opt => `
+            ${['A', 'B', 'C', 'D'].map(opt => `
             <div class="col-md-6 d-flex align-items-center">
                 <div class="form-check me-2">
                     <input class="form-check-input" tabindex="-1" type="radio" name="correct_${index}" value="${opt}" ${correct === opt ? 'checked' : ''}>
@@ -2459,9 +2873,9 @@
                 btnSave.textContent = "Saving...";
 
                 fetch("api/update_faculty_course.php", {
-                        method: "POST",
-                        body: formData
-                    })
+                    method: "POST",
+                    body: formData
+                })
                     .then(res => res.json())
                     .then(response => {
                         if (response.status === "success") {
@@ -2547,12 +2961,10 @@
         }
 
         // 🚀 Auto-load when page opens
-        $(document).ready(function() {
+        $(document).ready(function () {
             loadStudentProgress();
         });
     </script>
-
-
 
 </body>
 

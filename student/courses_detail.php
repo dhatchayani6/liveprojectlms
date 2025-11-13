@@ -1100,7 +1100,7 @@ $launch_id = $_GET['launch_id'];
                                 }
 
                                 html += `
-                        <div class="col-6 col-sm-6">
+                        <div class="col-12 col-md-6 col-lg-6">
                             <div class="card border-0 shadow-sm p-3 bg-courses-grey co-card"
                                 data-co-id="${item.co_id}" data-url="${item.material_url}">
                                 <div class="d-flex justify-content-between align-items-center">
