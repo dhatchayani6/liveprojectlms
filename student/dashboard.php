@@ -44,7 +44,7 @@
         .avatar {
             height: 80px;
             width: 80px;
-            background-color: #cfe2ff;
+        
             border-radius: 50%;
             display: flex;
             align-items: center;

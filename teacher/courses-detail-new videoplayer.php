@@ -2286,7 +2286,7 @@
                 baseUrl = "http://localhost/workingproject/liveprojectlms/uploads/assignments/";
             } else {
                 // 🌐 Live server
-                baseUrl = "http://180.235.121.253/uploads/assignments/";
+                baseUrl = "https://lms.saveetha.com/uploads/assignments/";
             }
 
             // Construct full URL
