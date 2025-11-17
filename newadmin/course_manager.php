@@ -166,7 +166,7 @@
             font-size: 28px;
         }
 
-       
+
         .material-icons {
             color: white;
             font-size: 28px;
@@ -228,53 +228,55 @@
                     </div>
                 </div>
 
-                <div class="mb-3">
-                    <div class="p-3 rounded border" style="background:white;">
+                <div class="mb-3 ">
+                    <div class="p-3 rounded border d-flex justify-content-between" style=" background:white;">
 
-                        <div class="mb-3">
-                            <div class="p-3 rounded border" style="background:white;">
-                                <div class="col-12">
-                                    <label class="mb-2 text-dark fw-semibold" for="CourseGoals">CourseGoals</label>
+                        <div class="row w-100">
+                            <div class="mb-3 col-lg-4">
+                                <div class="p-3 rounded border" style="background:white;">
+                                    <div class="col-12">
+                                        <label class="mb-2 text-dark fw-semibold" for="CourseGoals">CourseGoals</label>
 
-                                    <!-- Hidden file input -->
-                                    <input type="file" id="CourseGoals" class="d-none">
+                                        <!-- Hidden file input -->
+                                        <input type="file" id="CourseGoals" class="d-none">
 
-                                    <!-- Styled button -->
-                                    <button type="button" class="btn btn-primary w-100" id="CourseGoalsuploadBtn">
-                                        Upload File
-                                    </button>
+                                        <!-- Styled button -->
+                                        <button type="button" class="btn btn-primary w-100" id="CourseGoalsuploadBtn">
+                                            Upload File
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="mb-3">
-                            <div class="p-3 rounded border" style="background:white;">
-                                <div class="col-12">
-                                    <label class="mb-2 text-dark fw-semibold" for="CourseSyllabus">Course Syllabus</label>
+                            <div class="mb-3 col-lg-4">
+                                <div class="p-3 rounded border" style="background:white;">
+                                    <div class="col-12">
+                                        <label class="mb-2 text-dark fw-semibold" for="CourseSyllabus">Course Syllabus</label>
 
-                                    <!-- Hidden file input -->
-                                    <input type="file" id="CourseSyllabus" class="d-none">
+                                        <!-- Hidden file input -->
+                                        <input type="file" id="CourseSyllabus" class="d-none">
 
-                                    <!-- Styled button -->
-                                    <button type="button" class="btn btn-primary w-100" id="CourseSyllabusuploadBtn">
-                                        Upload File
-                                    </button>
+                                        <!-- Styled button -->
+                                        <button type="button" class="btn btn-primary w-100" id="CourseSyllabusuploadBtn">
+                                            Upload File
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="mb-3">
-                            <div class="p-3 rounded border" style="background:white;">
-                                <div class="col-12">
-                                    <label class="mb-2 text-dark fw-semibold" for="CommitteeReports">Committee Reports</label>
+                            <div class="mb-3 col-lg-4">
+                                <div class="p-3 rounded border" style="background:white;">
+                                    <div class="col-12">
+                                        <label class="mb-2 text-dark fw-semibold" for="CommitteeReports">Committee Reports</label>
 
-                                    <!-- Hidden file input -->
-                                    <input type="file" id="CommitteeReports" class="d-none">
+                                        <!-- Hidden file input -->
+                                        <input type="file" id="CommitteeReports" class="d-none">
 
-                                    <!-- Styled button -->
-                                    <button type="button" class="btn btn-primary w-100" id="CommitteeReportsuploadBtn">
-                                        Upload File
-                                    </button>
+                                        <!-- Styled button -->
+                                        <button type="button" class="btn btn-primary w-100" id="CommitteeReportsuploadBtn">
+                                            Upload File
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
