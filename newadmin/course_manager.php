@@ -293,7 +293,7 @@
                                 </span>
                             </div>
                             <div class="card-content">
-                                <a href="overall_assignments.php" class="text-decoration-none">
+                                <a href="course_outcome.php" class="text-decoration-none">
                                     <div class="card-title" style="color:black;">Course Outcomes</div>
                                 </a>
                                 <div class="card-subtitle" style="color:black;">Manage outcomes & PO mappings</div>

@@ -375,8 +375,7 @@
                         <div class="mb-3">
                             <div class="p-3 rounded border bg-gray"
                                 style="background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);">
-                                <h4 class="teacher-courses-titile" id="cCodename">CS1234: Introduction to Data Science
-                                </h4>
+                                <h4 class="teacher-courses-titile" id="cCodename"></h4>
 
                                 <!-- <p class="mb-0">This course introduces the fundamental concepts of data science, including
                                 data collection, analysis, and visualization.
@@ -441,13 +440,11 @@
                                                 <div class="row mb-2">
                                                     <div class="col-md-6">
                                                         <small class="text-muted">Course Code:</small><br>
-                                                        <strong style="font-weight: 500;" id="CCode">CS1234</strong>
+                                                        <strong style="font-weight: 500;" id="CCode"></strong>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <small class="text-muted">Course Name:</small><br>
-                                                        <strong style="font-weight: 500;" id="cName">Introduction to
-                                                            Data
-                                                            Science</strong>
+                                                        <strong style="font-weight: 500;" id="cName"></strong>
                                                     </div>
                                                 </div>
 
@@ -455,19 +452,18 @@
                                                     <div class="col-md-6">
                                                         <small class="text-muted">Department:</small><br>
                                                         <strong style="font-weight: 500;"
-                                                            id="OverviewDepartment">Medical</strong>
+                                                            id="OverviewDepartment"></strong>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <small class="text-muted">Credit Hours:</small><br>
-                                                        <strong style="font-weight: 500;" id="Chours">3</strong>
+                                                        <strong style="font-weight: 500;" id="Chours"></strong>
                                                     </div>
                                                 </div>
 
                                                 <div class="row mb-2">
                                                     <div class="col-md-6">
                                                         <small class="text-muted">Schedule:</small><br>
-                                                        <strong style="font-weight: 500;" id="schedule">Mon, Wed 10:00 -
-                                                            11:30 AM</strong>
+                                                        <strong style="font-weight: 500;" id="schedule"></strong>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <small class="text-muted">Total Seats:</small><br>

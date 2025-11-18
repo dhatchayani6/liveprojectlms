@@ -193,7 +193,7 @@
                                     style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
                                 <div class="flex-grow-1 w-100">
                                     <div class="d-flex flex-wrap align-items-center justify-content-between">
-                                        <strong class="title text-truncate">${item.assignment_title}</strong>
+                                        <strong class="title text-truncate">${limitWords(item.assignment_title, 5)}</strong>
                                         <span class="badge ${badgeColor}">${badgeText}</span>
                                     </div>
                                     <p class="text-muted mb-1">Course: ${item.course_name}</p>
@@ -213,6 +213,14 @@
                 });
             }
         });
+    </script>
+
+    <script>
+         function limitWords(text, maxWords = 50) {
+                const words = text.trim().split(/\s+/);
+                if (words.length <= maxWords) return text;
+                return words.slice(0, maxWords).join(" ") + "...";
+            }
     </script>
 
 </body>
