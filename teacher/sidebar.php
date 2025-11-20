@@ -20,7 +20,7 @@ $coursesPages = [
             <img src="../images/<?php echo $profile; ?>" alt="Profile" width="80" height="80">
         </div>
         <h5 class="mb-1 fw-semibold text-dark"><?php echo $_SESSION['name']; ?></h5>
-        <p class="text-muted small">Student ID: <?php echo $_SESSION['regno']; ?></p>
+        <p class="text-muted small">Faculty ID: <?php echo $_SESSION['regno']; ?></p>
     </div>
 
     <nav class="flex-grow-1 pt-3 px-3">

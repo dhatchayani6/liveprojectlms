@@ -44,7 +44,7 @@
             $currentPage = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 
             // Active page groups
-            $dashboardPages     = ['dashboard.php'];
+         
             $institutionsPages  = ['institution.php'];
             $programPages       = ['program.php'];
             $coursePages        = ['courses.php', 'courses-detail.php'];
@@ -57,13 +57,7 @@
                 <ul class="nav flex-column gap-3">
 
                     <!-- Dashboard -->
-                    <li>
-                        <a href="dashboard.php"
-                            class="nav-link d-flex align-items-center px-3 py-2 
-               <?php echo in_array($currentPage, $dashboardPages) ? 'active' : ''; ?>">
-                            <i class="bi bi-grid-fill me-2"></i>Dashboard
-                        </a>
-                    </li>
+                   
 
                     <!-- Institutions -->
                     <li>

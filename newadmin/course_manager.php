@@ -16,6 +16,55 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 
     <style>
+        .assignments-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: #fff;
+            gap: 15px;
+        }
+
+        .card-content {
+            flex: 1;
+            /* TAKE ALL AVAILABLE SPACE */
+            min-width: 0;
+            /* Prevent flex overflow */
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .card-subtitle {
+            font-size: 14px;
+            color: black;
+            white-space: nowrap;
+            /* PREVENT TEXT WRAPPING */
+            overflow: hidden;
+            /* Prevent layout break */
+            text-overflow: ellipsis;
+            /* Show ... if too long */
+        }
+
+        .card-action {
+            display: flex;
+            align-items: center;
+        }
+
+        .co-count {
+            background: #ff5722;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
         a {
             text-decoration: none !important;
         }
@@ -288,20 +337,21 @@
 
                         <div class="assignments-card">
                             <div class="co-count-card-icon card-icon">
-                                <span class="material-symbols-outlined">
-                                    import_contacts
-                                </span>
+                                <span class="material-symbols-outlined">import_contacts</span>
                             </div>
+
                             <div class="card-content">
                                 <a href="course_outcome.php" class="text-decoration-none">
-                                    <div class="card-title" style="color:black;">Course Outcomes</div>
+                                    <div class="card-title">Course Outcomes</div>
                                 </a>
-                                <div class="card-subtitle" style="color:black;">Manage outcomes & PO mappings</div>
+                                <div class="card-subtitle">Manage outcomes & PO mappings</div>
                             </div>
+
                             <div class="card-action">
                                 <span class="co-count">1</span>
                             </div>
                         </div>
+
 
                         <div class="assignments-card">
                             <div class="unit-card-icon card-icon">
@@ -310,7 +360,7 @@
                                 </span>
                             </div>
                             <div class="card-content">
-                                <a href="overall_assignments.php" class="text-decoration-none">
+                                <a href="course_unit.php" class="text-decoration-none">
                                     <div class="card-title" style="color:black;">Units & Topics </div>
                                 </a>
                                 <div class="card-subtitle" style="color:black;">Manage course content</div>
@@ -324,7 +374,7 @@
                                 <span class="material-icons">assignment</span>
                             </div>
                             <div class="card-content">
-                                <a href="overall_assignments.php" class="text-decoration-none">
+                                <a href="assignments.php" class="text-decoration-none">
                                     <div class="card-title" style="color:black;">Assignments</div>
                                 </a>
                                 <div class="card-subtitle" style="color:black;">Manage course assignments</div>
@@ -343,7 +393,7 @@
                             </div>
 
                             <div class="card-content">
-                                <a href="enrollment_request.php" class="text-decoration-none">
+                                <a href="co_analysis.php" class="text-decoration-none">
                                     <div class="card-title" style="color:black;">CO Analysis</div>
                                 </a>
                                 <div class="card-subtitle-enrollment" style="color:black;">View student performance</div>

@@ -68,23 +68,23 @@
     </div>
 
     <div class="offcanvas-body sidebar">
-        <a href="#" class="d-block mb-2">
+        <a href="institution.php" class="d-block mb-2">
             <i class="bi bi-building  me-2"></i> Institutions
         </a>
-        <a href="#" class="d-block mb-2">
+        <a href="program.php" class="d-block mb-2">
             <i class="bi bi-house-door me-2"></i> Programs
         </a>
-        <a href="#" class="d-block mb-2">
+        <a href="courses.php" class="d-block mb-2">
             <i class="bi bi-book me-2"></i> Courses
         </a>
-        <a href="#" class="d-block mb-2">
+        <a href="launcher.php" class="d-block mb-2">
             <i class="bi bi-rocket-takeoff me-2"></i> Launcher
         </a>
-        <a href="#" class="d-block mb-2">
+        <a href="coordinators.php" class="d-block mb-2">
             <i class="bi bi-person-check-fill me-2"></i> Coordinators
         </a>
 
-        <a href="#" class="d-block mb-2">
+        <a href="../index.php" class="d-block mb-2">
             <i class="bi bi-box-arrow-right me-2"></i> Logout
         </a>
     </div>
