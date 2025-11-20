@@ -44,7 +44,6 @@
         .avatar {
             height: 80px;
             width: 80px;
-        
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -100,8 +99,8 @@
         .sidebar .nav-link {
             padding: 15px !important;
         }
-    </style>
-    <style>
+
+        /* Assignment button styles */
         .btn-back-assi {
             background: linear-gradient(rgb(182, 240, 200) 0%, rgb(139, 224, 166) 100%);
             color: rgb(0, 0, 0);
@@ -118,7 +117,6 @@
             max-height: 648px !important;
         }
 
-
         .summary-card {
             background: white;
             border-radius: 10px;
@@ -132,8 +130,6 @@
             max-height: 370px;
         }
 
-
-
         .btn-pending {
             background: linear-gradient(rgb(249, 217, 118) 0%, rgb(243, 159, 89) 100%);
             color: rgb(0, 0, 0);
@@ -141,7 +137,6 @@
             border: 1px solid rgba(0, 0, 0, 0.2);
             text-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px;
             min-width: 100px;
-
         }
 
         .btn-submit {
@@ -178,7 +173,6 @@
             border: 1px solid rgba(0, 0, 0, 0.2);
             text-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px;
             min-width: 100px;
-
         }
 
         .btn-viewfeed {
@@ -192,6 +186,45 @@
 
         small {
             font-size: 0.8rem;
+        }
+
+        /* === FIXES for long titles & flex overflow === */
+        /* Make assignment link behave like a block-level card (fill width) */
+        .assignment-link {
+            display: block;
+            color: inherit;
+        }
+
+        /* Ensure the card itself can shrink inside flex containers */
+        .card {
+            min-width: 0;
+        }
+
+        .assignment-title {
+            font-size: 15px;
+            width: 100%;
+            max-width: clamp(300px, 70vw, 1050px);
+            white-space: normal;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            flex: 1;
+            min-width: 0;
+        }
+
+
+
+        /* If the title sits inside a flex row, ensure that row allows children to shrink */
+        .d-flex .assignment-title {
+            flex-shrink: 1;
+            min-width: 0;
+        }
+
+        /* Small responsive tweak: keep sidebar visible on smaller screens (optional) */
+        @media (max-width: 767px) {
+            .sidebar {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -260,7 +293,6 @@
                 </div>
             </div>
 
-
             <!-- Dashboard Content -->
             <main class="p-4">
                 <!-- Back Button -->
@@ -323,13 +355,13 @@
                         }
 
                         html += `
-                    <a href="${link}" class="text-decoration-none">
+                    <a href="${link}" class="text-decoration-none assignment-link">
                         <div class="card mb-3" style="border-radius:10px;border:none;
                             background:linear-gradient(#f9f9f9 0%, #e8e8e8 100%);
                             box-shadow:rgba(255,255,255,0.8)0px 1px 0px inset,rgba(0,0,0,0.1)0px 1px 2px;">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <h6 class="mb-1 fw-bold">${item.title}</h6>
+                                    <h6 class="mb-1 fw-bold assignment-title">${item.title}</h6>
                                     ${statusBadge}
                                 </div>
                                 <div>
@@ -347,6 +379,8 @@
                     });
 
                     $("#assignmentsContainer").html(html);
+                }).fail(function () {
+                    $("#assignmentsContainer").html('<div class="text-danger p-4 text-center">Unable to load assignments (network error).</div>');
                 });
             }
         });

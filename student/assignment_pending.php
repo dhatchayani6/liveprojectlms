@@ -1,26 +1,140 @@
+<?php include "../includes/auth_student.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
-<?php include "../includes/auth_student.php"; ?>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faculty Dashboard</title>
-    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment Feedback - Student Dashboard</title>
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="../responsive.css">
-    <link rel="stylesheet" href="stylesheet/courses.css">
-
-    <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <style>
-        .bi-book::before {
+        body {
+            background-color: #f9fafb;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .sidebar {
+            width: 260px;
+            min-height: 100vh;
+            background-color: #fff;
+            border-right: 1px solid #dee2e6;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+            flex-shrink: 0;
+        }
+
+        .sidebar .nav-link.active {
+            background-color: #e7f1ff;
+            color: #0d6efd;
+            font-weight: 600;
+        }
+
+        .sidebar .nav-link {
+            color: #495057;
+            border-radius: 0.5rem;
+        }
+
+        .sidebar .nav-link:hover {
+            background-color: #f1f3f5;
+        }
+
+        .avatar {
+            height: 80px;
+            width: 80px;
+
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 0;
+            overflow-x: hidden;
+        }
+
+        .btn-graded {
+            background: linear-gradient(rgb(140, 198, 87) 0%, rgb(111, 173, 59) 100%);
+            color: white;
+            box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.2) 0px 1px 2px;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .student-answer-block {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: pre-wrap;
+            background-color: #f8f9fa;
+        }
+
+        .pdf-viewer {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .pdf-viewer iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            border-radius: 8px;
+        }
+
+        .sidebar .nav-link {
+            padding: 15px !important;
+        }
+
+        #content-scroll {
+            height: 100%;
+            max-height: 721px;
+            overflow-y: scroll;
+        }
+
+        /* Responsive file list styling */
+        .uploaded-file-item {
+            transition: background 0.2s ease, transform 0.1s ease;
+            word-break: break-word;
+            flex-wrap: wrap;
+        }
+
+        .uploaded-file-item:hover {
+            background: #f1f3f5;
+            transform: scale(1.01);
+        }
+
+        .uploaded-file-item a {
+            display: block;
+            overflow-wrap: break-word;
+            white-space: normal;
+        }
+
+        @media (max-width: 991.98px) {
+
+            /* For small and medium screens */
+            .uploaded-file-item {
+                flex-direction: column;
+                align-items: flex-start !important;
+                text-align: left;
+            }
+
+            .uploaded-file-item i {
+                margin-bottom: 6px;
+            }
+
+            .uploaded-file-item a {
+                width: 100%;
+            }
+        }
+    </style>
+    <style>
+        /* .bi-book::before {
             color: #0d6efd !important;
 
         }
@@ -54,35 +168,85 @@
             padding: 7px;
             border-radius: 53%;
             font-size: medium !important;
+        } */
+
+        .card-header {
+            background: linear-gradient(rgb(233, 233, 233) 0%, rgb(196, 196, 196) 100%);
         }
     </style>
 </head>
 
 <body>
-    <main class="dashboard-main">
+    <div class="d-flex">
+        <?php include "sidebar.php"; ?>
 
-        <div class="content-container bg-light ">
-
+        <!-- Main Content -->
+        <div class="main-content d-flex flex-column flex-grow-1">
             <!-- Header -->
-            <div
-                class="header d-flex justify-content-between align-items-center position-relative px-3 py-2 bg-secondary text-dark">
-                <h5 class="mb-0 assignment-titles">
-                    <div class="d-flex gap-2">
-                        <a href="dashboard.php"><i class="bi bi-chevron-left rounded-circle"></i></a>Introduction
-                        to Data Science
+            <header class="bg-white border-bottom shadow-sm">
+                <div class="d-flex justify-content-between align-items-center px-4 py-3">
+
+                    <div class="d-flex align-items-center">
+                        <!-- 🔹 Offcanvas Toggle (Visible on Mobile Only) -->
+                        <button class="btn btn-light btn-sm me-2 d-md-none" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+                            <i class="bi bi-list"></i>
+                        </button>
+
+                        <!-- 🔹 Back Button (Visible on Desktop) -->
+                        <button onclick="window.history.back()"
+                            class="btn btn-light btn-sm me-2 d-none d-md-inline-flex">
+                            <i class="bi bi-chevron-left"></i>
+                        </button>
+
+                        <h5 class="fw-semibold mb-0">Viana Study</h5>
                     </div>
-                </h5>
-                <a href="../index.php">
-                    <button class="btn d-flex align-items-center logout-btn gap-2">
-                        <i class="bi bi-box-arrow-right"></i>
-                        <span>Logout</span>
-                    </button>
-                </a>
+
+                    <a href="../index.php" class="btn btn-light d-flex align-items-center">
+                        <i class="bi bi-box-arrow-right me-2"></i> Logout
+                    </a>
+                </div>
+            </header>
+            <!-- Offcanvas Sidebar -->
+            <div class="offcanvas offcanvas-start offcanvas-full" tabindex="-1" id="offcanvasSidebar"
+                aria-labelledby="offcanvasSidebarLabel">
+                <div class="offcanvas-header border-bottom">
+                    <h5 class="offcanvas-title fw-semibold" id="offcanvasSidebarLabel">Student Menu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+
+                <div class="offcanvas-body p-0">
+                    <aside class="sidebar flex-column h-100 w-100">
+                        <div class="text-center border-bottom p-4">
+                            <div class="avatar mx-auto mb-3">
+                                <i class="bi bi-person-fill fs-1 text-primary"></i>
+                            </div>
+                            <h5 class="mb-1 fw-semibold text-dark"><?php echo $_SESSION['name']; ?></h5>
+                            <p class="text-muted small">Student ID: <?php echo $_SESSION['regno']; ?></p>
+                        </div>
+
+                        <nav class="flex-grow-1 pt-3 px-4">
+                            <ul class="nav flex-column gap-3">
+                                <li><a href="dashboard.php" class="nav-link d-flex align-items-center px-3 py-2">
+                                        <i class="bi bi-grid-fill me-2"></i>Dashboard</a></li>
+                                <li><a href="courses.php" class="nav-link d-flex align-items-center px-3 py-2">
+                                        <i class="bi bi-book me-2"></i>Courses</a></li>
+                                <li><a href="assignments.php"
+                                        class="nav-link active d-flex align-items-center px-3 py-2">
+                                        <i class="bi bi-file-earmark-text me-2"></i>Assignments</a></li>
+                            </ul>
+                        </nav>
+                    </aside>
+                </div>
             </div>
 
-            <div class="content-scroll">
+
+
+            <!-- Dashboard Content -->
+            <main class="p-4" id="content-scroll">
                 <div class="d-flex justify-content-between align-items-center p-3">
-                    <h6 class="mb-0 pending"><a href="dashboard.php"><i class="bi bi-arrow-left me-2"></i>Back to
+                    <h6 class="mb-0 pending"><a href="dashboard.php" class="btn btn-outline-primary btn-sm"><i
+                                class="bi bi-arrow-left me-2"></i>Back to
                             Dashboard</a>
                     </h6>
 
@@ -90,7 +254,6 @@
 
                 <div class="p-3">
                     <!-- Notifications -->
-
 
                     <div class="card rounded border mb-4">
                         <!-- Card Header -->
@@ -182,7 +345,8 @@
                                             files</a>
                                     </p>
 
-                                    <input type="file" id="fileInput" name="files[]" multiple accept="*/*" style="display: none;">
+                                    <input type="file" id="fileInput" name="files[]" multiple accept="*/*"
+                                        style="display: none;">
 
                                 </div>
 
@@ -233,10 +397,13 @@
 
 
                 </div>
-            </div>
-
+            </main>
         </div>
-    </main>
+    </div>
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -320,7 +487,7 @@
     </script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             // Extract ass_id from URL
             const urlParams = new URLSearchParams(window.location.search);
             const ass_id = urlParams.get('ass_id');
@@ -331,7 +498,7 @@
             }
 
             // Fetch assignment data
-            $.getJSON(`api/student_assignment_detail.php?ass_id=${ass_id}`, function(res) {
+            $.getJSON(`api/student_assignment_detail.php?ass_id=${ass_id}`, function (res) {
                 if (res.status !== 200) {
                     alert("Unable to fetch assignment details");
                     return;
@@ -364,10 +531,10 @@
                 // Status badge color
                 const statusColor =
                     a.status === "feedback" ?
-                    "linear-gradient(#81c784, #4caf50)" :
-                    a.status === "submitted" ?
-                    "linear-gradient(#f9d976, #f39f59)" :
-                    "linear-gradient(#f9d976, #f39f59)";
+                        "linear-gradient(#81c784, #4caf50)" :
+                        a.status === "submitted" ?
+                            "linear-gradient(#f9d976, #f39f59)" :
+                            "linear-gradient(#f9d976, #f39f59)";
 
                 $(".card-body .badge")
                     .last()
@@ -432,7 +599,7 @@
 
     <!-- submit assignment -->
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             const dropArea = document.getElementById('drop-area');
             const fileInput = document.getElementById('fileInput');
             const preview = document.getElementById('preview');
@@ -544,7 +711,7 @@
             }
 
             // 🚀 Submit Assignment
-            submitBtn.on('click', function() {
+            submitBtn.on('click', function () {
                 const context = $("#answer").val().trim();
 
                 if (!ass_id) {
@@ -572,29 +739,24 @@
                     processData: false,
                     contentType: false,
                     dataType: "json",
-                    success: function(res) {
+                    success: function (res) {
                         if (res.status === 200) {
                             window.location.href = `assignment_submit.php?ass_id=${ass_id}`;
                         } else {
                             alert("⚠️ " + res.message);
                         }
                     },
-                    error: function(xhr, status, error) {
+                    error: function (xhr, status, error) {
                         console.error(error);
                         alert("❌ Error submitting assignment. Try again.");
                     },
-                    complete: function() {
+                    complete: function () {
                         submitBtn.prop("disabled", false).text("Submit Assignment");
                     }
                 });
             });
         });
     </script>
-
-
-
-
-
 </body>
 
 </html>
