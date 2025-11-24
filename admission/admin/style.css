@@ -1,0 +1,291 @@
+/* ================================
+   GLOBAL
+================================ */
+body {
+    background: #f5f7fa;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+/* ================================
+   FIXED HEADER
+================================ */
+.topbar {
+    background: linear-gradient(to bottom, #1e293b, #0f172a);
+    color: white;
+    padding: 18px 30px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+}
+
+/* ================================
+   FIXED SIDEBAR
+================================ */
+#sidebar {
+    width: 270px;
+    background-color: #111827;
+    position: fixed;
+    top: 80px;
+    /* height of topbar */
+    bottom: 0;
+    left: 0;
+    overflow-y: auto;
+    transition: all 0.3s;
+    z-index: 999;
+}
+
+#sidebar.collapsed {
+    width: 70px;
+}
+
+#sidebar .nav-link {
+    color: #cbd5e1;
+    padding: 12px 18px;
+    border-radius: 8px;
+}
+
+#sidebar .nav-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+#sidebar .nav-link.active {
+    background: #1e40af;
+    color: white;
+}
+
+#sidebar.collapsed .nav-link span,
+#sidebar.collapsed .nav-title {
+    display: none;
+}
+
+#sidebar .toggle-btn {
+    color: #cbd5e1;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* ================================
+   CONTENT AREA SCROLL
+================================ */
+#content-area {
+    margin-top: 95px;
+    margin-left: 270px;
+    height: calc(100vh - 95px);
+    overflow-y: auto;
+    transition: margin-left 0.3s;
+    padding-bottom: 60px;
+}
+
+#sidebar.collapsed~#content-area {
+    margin-left: 70px !important;
+}
+
+
+
+/* ================================
+   SMALL CARDS
+================================ */
+.dashboard-card {
+    background: white;
+    border-radius: 16px;
+    padding: 22px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: 0.2s;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-3px);
+}
+
+.icon-box {
+    height: 45px;
+    width: 45px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 22px;
+}
+
+/* ================================
+   PREMIUM CARDS
+================================ */
+.premium-card {
+    background: #fff;
+    border-radius: 20px;
+    border: 2px solid #e5e7eb;
+    padding: 25px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.premium-card:hover {
+    border-color: #4ade80;
+    box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
+}
+
+.gradient-bg {
+    background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.03), transparent);
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    opacity: 0;
+    transition: 0.3s ease;
+}
+
+.premium-card:hover .gradient-bg {
+    opacity: 1;
+}
+
+.icon-gradient {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
+    transition: 0.3s ease;
+}
+
+.premium-card:hover .icon-gradient {
+    transform: scale(1.1) rotate(3deg);
+}
+
+/* Gradient Colors */
+.g-green {
+    background: linear-gradient(to bottom right, #22c55e, #15803d);
+}
+
+.g-blue {
+    background: linear-gradient(to bottom right, #3b82f6, #1d4ed8);
+}
+
+.g-indigo {
+    background: linear-gradient(to bottom right, #6366f1, #4338ca);
+}
+
+.g-purple {
+    background: linear-gradient(to bottom right, #a855f7, #7e22ce);
+}
+
+.g-amber {
+    background: linear-gradient(to bottom right, #f59e0b, #b45309);
+}
+
+/* Colors */
+.text-indigo {
+    color: #6366f1;
+}
+
+.text-purple {
+    color: #a855f7;
+}
+
+/* CTA */
+.card-link {
+    margin-top: auto;
+    transition: transform 0.3s ease;
+}
+
+.premium-card:hover .card-link {
+    transform: translateX(5px);
+}
+
+/* ================================
+   STATS CARDS (UPDATED WITH 3D ANIMATION)
+================================ */
+.stats-card {
+    border-color: #e5e7eb !important;
+    border-radius: 1rem;
+    transition: all 0.25s ease;
+    overflow: hidden;
+    background: white;
+    position: relative;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    perspective: 800px;
+}
+
+.stats-card:hover {
+    transform: translateY(-6px) rotateX(4deg) rotateY(4deg);
+    border-color: #cbd5e1 !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Overlay Effect */
+.bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.05), transparent);
+    opacity: 0;
+    transition: 0.3s ease;
+    border-radius: 1rem;
+    pointer-events: none;
+}
+
+.stats-card:hover .bg-overlay {
+    opacity: 1;
+}
+
+/* Icon Animation */
+.icon-xl {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.stats-card:hover .icon-xl {
+    transform: scale(1.18) rotate(4deg);
+}
+
+/* Gradients */
+.bg-gradient-blue {
+    background: linear-gradient(to bottom right, #3b82f6, #1d4ed8);
+}
+
+.bg-gradient-purple {
+    background: linear-gradient(to bottom right, #a855f7, #7e22ce);
+}
+
+.bg-gradient-amber {
+    background: linear-gradient(to bottom right, #f59e0b, #b45309);
+}
+
+.bg-gradient-green {
+    background: linear-gradient(to bottom right, #22c55e, #15803d);
+}
+
+/* Flick up trend animation */
+.trend {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.stats-card:hover .trend {
+    transform: translateY(-3px);
+    opacity: 1;
+}
+
+
+
+/* programs page css */
+.hover-shadow:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12) !important;
+}
