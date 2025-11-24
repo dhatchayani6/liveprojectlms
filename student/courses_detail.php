@@ -63,7 +63,7 @@ $launch_id = $_GET['launch_id'];
         .avatar {
             height: 80px;
             width: 80px;
-        
+
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -271,6 +271,17 @@ $launch_id = $_GET['launch_id'];
             .co-card small {
                 white-space: normal;
             }
+        }
+    </style>
+    <style>
+        .option-correct {
+            background: #d1ffd8;
+            border-radius: 6px;
+        }
+
+        .option-wrong {
+            background: #ffd2d2;
+            border-radius: 6px;
         }
     </style>
 </head>
@@ -537,76 +548,37 @@ $launch_id = $_GET['launch_id'];
                                                 </div>
                                                 <div class="p-3">
 
-                                                    <!-- Questions Container -->
                                                     <div id="questionsContainer">
-                                                        <!-- Question 1 -->
+                                                        <!-- Question -->
                                                         <div class="mb-3">
-                                                            <label class="form-label fw-medium">1. What is the capital
-                                                                of
-                                                                France?</label>
+                                                            <label class="form-label fw-medium"></label>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio" name="q1"
                                                                     id="q1a" value="A">
-                                                                <label class="form-check-label" for="q1a">A.
-                                                                    Berlin</label>
+                                                                <label class="form-check-label" for="q1a"></label>
                                                             </div>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio" name="q1"
                                                                     id="q1b" value="B">
-                                                                <label class="form-check-label" for="q1b">B.
-                                                                    Madrid</label>
+                                                                <label class="form-check-label" for="q1b"></label>
                                                             </div>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio" name="q1"
                                                                     id="q1c" value="C">
-                                                                <label class="form-check-label" for="q1c">C.
-                                                                    Paris</label>
+                                                                <label class="form-check-label" for="q1c"></label>
                                                             </div>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio" name="q1"
                                                                     id="q1d" value="D">
-                                                                <label class="form-check-label" for="q1d">D.
-                                                                    Rome</label>
-                                                            </div>
-                                                        </div>
-
-                                                        <!-- Question 2 -->
-                                                        <div class="mb-3">
-                                                            <label class="form-label fw-medium">2. Who wrote
-                                                                'Hamlet'?</label>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio" name="q2"
-                                                                    id="q2a" value="A">
-                                                                <label class="form-check-label" for="q2a">A. Charles
-                                                                    Dickens</label>
-                                                            </div>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio" name="q2"
-                                                                    id="q2b" value="B">
-                                                                <label class="form-check-label" for="q2b">B. William
-                                                                    Shakespeare</label>
-                                                            </div>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio" name="q2"
-                                                                    id="q2c" value="C">
-                                                                <label class="form-check-label" for="q2c">C. Mark
-                                                                    Twain</label>
-                                                            </div>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio" name="q2"
-                                                                    id="q2d" value="D">
-                                                                <label class="form-check-label" for="q2d">D. Leo
-                                                                    Tolstoy</label>
+                                                                <label class="form-check-label" for="q1d"></label>
                                                             </div>
                                                         </div>
                                                     </div>
 
-                                                    <!-- Submit Button -->
-                                                    <div class="d-flex justify-content-end mt-3" id="submitContainer">
-                                                        <button type="submit"
-                                                            class="btn btn-gradient-glossy btn-sm">Submit
-                                                            Answer</button>
+                                                    <div class="d-flex justify-content-end mt-3">
+                                                        <button type="submit" class="btn btn-gradient-glossy btn-sm" id="submitContainer">Submit answer</button>
                                                     </div>
+
 
                                                 </div>
                                             </div>
@@ -976,12 +948,12 @@ $launch_id = $_GET['launch_id'];
 
                     // ✅ Now fetch topic progress
                     fetch("api/progress_utils.php", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/x-www-form-urlencoded"
-                        },
-                        body: `launch_id=${launchId}`
-                    })
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/x-www-form-urlencoded"
+                            },
+                            body: `launch_id=${launchId}`
+                        })
                         .then(r => r.json())
                         .then(progress => {
 
@@ -1111,25 +1083,25 @@ $launch_id = $_GET['launch_id'];
 
                                 html += `
                         <div class="col-12 col-md-6 col-lg-6">
-  <div class="card border-0 shadow-sm p-3 bg-courses-grey co-card h-100"
-       data-co-id="${item.co_id}" data-url="${item.material_url}">
-    <div class="d-flex justify-content-between align-items-center flex-wrap">
-      <div class="d-flex align-items-start w-100">
-        <div class="me-3 flex-shrink-0">
-          <div class="p-3 rounded-circle d-flex justify-content-center align-items-center bg-white">
-            <i class="bi bi-book text-primary fs-6"></i>
-          </div>
-        </div>
-        <div class="text-container flex-grow-1">
-          <h6 class="fw-medium text-dark mb-1 text-wrap">${limitWords(item.co_level, 4)}</h6>
-          <small class="text-muted text-wrap">${limitWords(item.course_description, 10)}</small>
-        </div>
-      </div>
-      <div class="mt-2 w-100 text-end">${doneBadge}</div>
-    </div>
-  </div>
-</div>
-`;
+                            <div class="card border-0 shadow-sm p-3 bg-courses-grey co-card h-100"
+                                data-co-id="${item.co_id}" data-url="${item.material_url}">
+                                <div class="d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="d-flex align-items-start w-100">
+                                    <div class="me-3 flex-shrink-0">
+                                    <div class="p-3 rounded-circle d-flex justify-content-center align-items-center bg-white">
+                                        <i class="bi bi-book text-primary fs-6"></i>
+                                    </div>
+                                    </div>
+                                    <div class="text-container flex-grow-1">
+                                    <h6 class="fw-medium text-dark mb-1 text-wrap">${limitWords(item.co_level, 4)}</h6>
+                                    <small class="text-muted text-wrap">${limitWords(item.course_description, 10)}</small>
+                                    </div>
+                                </div>
+                                <div class="mt-2 w-100 text-end">${doneBadge}</div>
+                                </div>
+                            </div>
+                            </div>
+                            `;
                             });
                         }
 
@@ -1323,7 +1295,7 @@ $launch_id = $_GET['launch_id'];
                             if (window.ytPlayer) {
                                 try {
                                     window.ytPlayer.destroy();
-                                } catch { }
+                                } catch {}
                                 window.ytPlayer = null;
                             }
 
@@ -1351,7 +1323,7 @@ $launch_id = $_GET['launch_id'];
                                                             clearInterval(window._ytInterval);
                                                             window._ytInterval = null;
                                                         }
-                                                    } catch { }
+                                                    } catch {}
                                                 }, 1000);
                                             }
                                         }
@@ -1402,177 +1374,287 @@ $launch_id = $_GET['launch_id'];
                 }
             }
 
-            // --- Load Practice Questions ---
+
+
+            // --- Submit Practice Answers ---
+            document
+                .querySelector("#practiceSection button.btn-gradient-glossy")
+                .addEventListener("click", () => {
+
+                    const questionBlocks = document.querySelectorAll(".question-block");
+                    const answers = [];
+
+                    questionBlocks.forEach(block => {
+                        const pqId = block.dataset.pqid;
+                        const selected = block.querySelector("input[type='radio']:checked")?.value;
+
+                        if (selected) {
+                            answers.push({
+                                pq_id: pqId,
+                                selected_answer: selected
+                            });
+                        }
+                    });
+
+                    // 🔥 Check: answered count = total count?
+                    if (answers.length !== questionBlocks.length) {
+                        Swal.fire({
+                            icon: "warning",
+                            title: "Incomplete Answers!",
+                            text: "Please answer all questions before submitting.",
+                            confirmButtonColor: "#3085d6"
+                        });
+                        return;
+                    }
+
+                    // Continue with submit...
+
+
+                    fetch("api/submit_practice_answers.php", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                answers
+                            })
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.status === 200) {
+
+                                const coId = document.querySelector("#practiceSection #submitContainer").dataset.coId;
+
+                                // ✅ If score >= 50% then mark material complete
+                                if (data.score >= 50) {
+                                    markMaterialComplete(currentTopicId, coId, "practice");
+                                    console.log("✅ Practice passed, progress updated");
+                                } else {
+                                    console.log("❌ Practice failed (below 50%), progress not updated");
+                                }
+
+                                // ✅ Show result alert
+                                Swal.fire({
+                                        icon: data.score >= 50 ? "success" : "warning",
+                                        title: data.score >= 50 ? "Practice Passed!" : "Try Again",
+                                        html: data.score >= 50 ?
+                                            `<p>Your score: <strong>${data.score}%</strong></p>` : `
+                                        <p>Your score: <strong>${data.score}%</strong></p>
+                                        <p style="color:#d9534f; font-weight:600;">You did not meet the passing score.</p>
+                                        <p>You can reattempt the test to improve your score.</p>
+                                    `,
+                                        confirmButtonText: data.score >= 50 ? "OK" : "OK",
+                                        confirmButtonColor: data.score >= 50 ? "#4CAF50" : "#FF9800"
+                                    })
+                                    .then(() => {
+                                        // Refresh materials + badges showing score
+                                        showCourseOutcomeList();
+                                        loadMaterialsForTopic(currentTopicId);
+                                    });
+                            } else {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Submission Failed",
+                                    text: data.message,
+                                    confirmButtonColor: "#d33"
+                                });
+                            }
+                        })
+
+
+                        .catch(err => {
+                            console.error(err);
+                            Swal.fire({
+                                icon: "error",
+                                title: "Error",
+                                text: "An error occurred while submitting the practice test.",
+                                confirmButtonColor: "#d33"
+                            });
+                        });
+                });
+
+            const studentId = "<?php echo $_SESSION['user_id']; ?>";
+
             function loadPracticeQuestions(coId) {
+
                 const topicId = currentTopicId;
                 const container = document.querySelector("#practiceSection #questionsContainer");
-                const submitBtn = document.querySelector("#practiceSection #submitContainer");
+                const submitBtn = document.getElementById("submitContainer");
+
+                container.innerHTML = `<p class="text-center text-muted py-3">Loading...</p>`;
+                submitBtn.style.display = "none";
+
+                fetch(`api/check_practice_attempt.php?launch_id=${launchId}&topic_id=${topicId}&co_id=${coId}&student_id=${studentId}`)
+                    .then(res => res.json())
+                    .then(check => {
+
+                        // ✔ CASE 1: Already passed → show correct answers (final result)
+                        if (check.attempted && check.score >= 50) {
+                            loadPracticeResult(coId);
+                            return;
+                        }
+
+                        // ✔ CASE 2: Attempted but failed → allow retry (no correct answers shown)
+                        if (check.attempted && check.score < 50) {
+                            loadPracticeAttempt(coId);
+                            return;
+                        }
+
+                        // ✔ CASE 3: First attempt → normal questions
+                        loadPracticeAttempt(coId);
+                    });
+            }
+
+            function loadPracticeAttempt(coId) {
+                const container = document.querySelector("#practiceSection #questionsContainer");
+                const submitBtn = document.getElementById("submitContainer");
 
                 container.innerHTML = `<p class="text-center text-muted py-3">Loading questions...</p>`;
                 submitBtn.style.display = "none";
 
-                fetch(`api/get_practice_questions.php?launch_id=${launchId}&topic_id=${topicId}&co_id=${coId}`)
+                fetch(`api/get_practice_questions.php?launch_id=${launchId}&topic_id=${currentTopicId}&co_id=${coId}`)
                     .then(res => res.json())
                     .then(data => {
-                        if (data.status !== 200 || !data.data.length) {
-                            container.innerHTML = `<p class='text-center text-danger py-3'>No practice questions found.</p>`;
+                        if (data.status !== 200) {
+                            container.innerHTML = `<p class="text-center text-danger py-3">No questions found.</p>`;
                             return;
                         }
 
                         let html = "";
                         data.data.forEach((q, i) => {
-                            let optionsHTML = "";
+                            let opts = "";
                             Object.entries(q.options).forEach(([key, value]) => {
-                                optionsHTML += `
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="q${q.pq_id}" value="${key}" id="q${q.pq_id}_${key}">
-                                <label class="form-check-label" for="q${q.pq_id}_${key}">${key}. ${value}</label>
-                            </div>`;
+                                opts += `
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q${q.pq_id}" value="${key}">
+                            <label class="form-check-label">${key}. ${value}</label>
+                        </div>`;
                             });
 
                             html += `
-                        <div class="mb-3 question-block" data-pqid="${q.pq_id}">
-                            <label class="form-label fw-medium">${i + 1}. ${q.question}</label>
-                            ${optionsHTML}
-                        </div>`;
+                    <div class="mb-3 question-block" data-pqid="${q.pq_id}">
+                        <label class="fw-medium">${i + 1}. ${q.question}</label>
+                        ${opts}
+                    </div>`;
                         });
 
                         container.innerHTML = html;
                         submitBtn.style.display = "flex";
                         submitBtn.dataset.coId = coId;
-                    })
-                    .catch(err => {
-                        console.error(err);
-                        container.innerHTML = `<p class='text-center text-danger py-3'>Error loading questions.</p>`;
                     });
             }
 
-            // --- Submit Practice Answers ---
-            document.querySelector("#practiceSection button.btn-gradient-glossy").addEventListener("click", () => {
-                const answers = [];
-                document.querySelectorAll(".question-block").forEach(block => {
-                    const pqId = block.dataset.pqid;
-                    const selected = block.querySelector("input[type='radio']:checked")?.value;
-                    if (selected) answers.push({
-                        pq_id: pqId,
-                        selected_answer: selected
-                    });
-                });
+            function loadPracticeResult(coId) {
+                const container = document.querySelector("#practiceSection #questionsContainer");
+                const submitBtn = document.getElementById("submitContainer");
 
-                if (!answers.length) {
-                    Swal.fire({
-                        icon: "warning",
-                        title: "Incomplete!",
-                        text: "Please answer at least one question before submitting.",
-                        confirmButtonColor: "#3085d6"
-                    });
-                    return;
-                }
+                container.innerHTML = `<p class="text-center text-muted py-3">Loading results...</p>`;
+                submitBtn.style.display = "none";
 
-                fetch("api/submit_practice_answers.php", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        answers
-                    })
-                })
+                fetch(`api/get_practice_result.php?launch_id=${launchId}&topic_id=${currentTopicId}&co_id=${coId}&student_id=${studentId}`)
                     .then(res => res.json())
                     .then(data => {
-                        if (data.status === 200) {
 
-                            const coId = document.querySelector("#practiceSection #submitContainer").dataset.coId;
+                        let score = data.score;
 
-                            // ✅ If score >= 50% then mark material complete
-                            if (data.score >= 50) {
-                                markMaterialComplete(currentTopicId, coId, "practice");
-                                console.log("✅ Practice passed, progress updated");
-                            } else {
-                                console.log("❌ Practice failed (below 50%), progress not updated");
-                            }
-
-                            // ✅ Show result alert
-                            Swal.fire({
-                                icon: data.score >= 50 ? "success" : "warning",
-                                title: data.score >= 50 ? "Practice Passed!" : "Practice Attempted",
-                                text: `Your score: ${data.score}%`,
-                                confirmButtonColor: data.score >= 50 ? "#4CAF50" : "#FF9800"
-                            }).then(() => {
-                                // Refresh materials + badges showing score
-                                showCourseOutcomeList();
-                                loadMaterialsForTopic(currentTopicId);
-                            });
-                        } else {
-                            Swal.fire({
-                                icon: "error",
-                                title: "Submission Failed",
-                                text: data.message,
-                                confirmButtonColor: "#d33"
-                            });
+                        // Safety
+                        if (score < 50) {
+                            loadPracticeAttempt(coId);
+                            return;
                         }
-                    })
 
+                        let html = `
+                                    <div class="alert alert-success">
+                                        <strong>Score: ${score}%</strong> — You passed!
+                                    </div>
+                                `;
 
-                    .catch(err => {
-                        console.error(err);
-                        Swal.fire({
-                            icon: "error",
-                            title: "Error",
-                            text: "An error occurred while submitting the practice test.",
-                            confirmButtonColor: "#d33"
+                        data.data.forEach((q, idx) => {
+
+                            html += `
+                                    <div class="mb-3 p-3 border rounded">
+                                        <label class="fw-medium">${idx + 1}. ${q.question}</label>
+                                `;
+
+                            Object.entries(q.options).forEach(([key, val]) => {
+
+                                let optionClass = "";
+
+                                // GREEN: correct answer
+                                if (key === q.answer) {
+                                    optionClass = "option-correct";
+                                }
+
+                                // RED: wrong selected answer
+                                if (key === q.selected_answer && q.is_correct == 0) {
+                                    optionClass = "option-wrong";
+                                }
+
+                                html += `
+                                    <div class="form-check ${optionClass}">
+                                        <input class="form-check-input"
+                                            type="radio"
+                                            disabled
+                                            ${key === q.selected_answer ? "checked" : ""}>
+
+                                        <label class="form-check-label">${key}. ${val}</label>
+                                    </div>
+                                `;
+                            });
+
+                            html += `</div>`;
                         });
+
+                        container.innerHTML = html;
                     });
-            });
+            }
 
         });
     </script>
 
     <!-- progress -->
     <script>
-        // put this once near your other helpers
-        // global
         let _pdfCompleteFiredFor = new Set();
         const launchId = new URLSearchParams(window.location.search).get("launch_id");
 
         function markMaterialComplete(topicId, coId, type) {
 
             fetch("api/update_material_progress.php", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    launch_id: launchId,
-                    topic_id: topicId,
-                    material_id: coId, // ✅ correct key name
-                    type: type // ✅ match PHP
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        launch_id: launchId,
+                        topic_id: topicId,
+                        material_id: coId, // ✅ correct key name
+                        type: type // ✅ match PHP
+                    })
                 })
-            })
                 .then(r => r.json())
                 .then(res => {
                     console.log("✅ Material saved:", res);
 
                     //✅ Update Topic Progress
                     fetch("api/update_topic_progress.php", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/x-www-form-urlencoded"
-                        },
-                        body: `topic_id=${topicId}&launch_id=${launchId}`
-                    })
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/x-www-form-urlencoded"
+                            },
+                            body: `topic_id=${topicId}&launch_id=${launchId}`
+                        })
                         .then(r => r.json())
                         .then(tp => {
                             console.log("📘 Topic Progress:", tp.progress + "%");
 
                             // ✅ Update Course Progress
                             fetch("api/update_course_progress.php", {
-                                method: "POST",
-                                headers: {
-                                    "Content-Type": "application/x-www-form-urlencoded"
-                                },
-                                body: `launch_id=${launchId}`
-                            })
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type": "application/x-www-form-urlencoded"
+                                    },
+                                    body: `launch_id=${launchId}`
+                                })
                                 .then(r => r.json())
                                 .then(cp => {
                                     // console.log("🎓 Course Progress:", cp.progress + "%");
@@ -1609,12 +1691,12 @@ $launch_id = $_GET['launch_id'];
 
         function loadInitialProgress() {
             fetch("api/progress_utils.php", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                body: `launch_id=${launchId}`
-            })
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: `launch_id=${launchId}`
+                })
                 .then(r => r.json())
                 .then(data => {
                     if (data.status === 200) {

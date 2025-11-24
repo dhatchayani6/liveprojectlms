@@ -343,7 +343,7 @@
                         if (status === "pending") {
                             statusBadge = `<button class="btn btn-pending btn-sm rounded-2" style="width:125px;"><small>Pending</small></button>`;
                             btnLabel = "Submit Now";
-                            link = `assignment_pending.php?ass_id=${item.ass_id}`;
+                            link = `assignment_pending_new.php?ass_id=${item.ass_id}`;
                         } else if (status === "submitted" && !marks) {
                             statusBadge = `<button class="btn btn-warning btn-sm rounded-2" style="width:125px;"><small>Submitted</small></button>`;
                             btnLabel = "Review Submission";

@@ -1,7 +1,6 @@
-<?php 
+<?php  
 header("Content-Type: application/json; charset=UTF-8");
 include "../../includes/config.php";
-
 
 $student_id = $_SESSION['user_id'] ?? 0;
 $launch_id  = $_POST['launch_id'] ?? 0;
@@ -14,7 +13,10 @@ if (!$student_id || !$launch_id || !$topic_id) {
 }
 
 try {
-    // Count required PDF + VIDEO materials
+
+    /*
+     * 1️⃣ Count all PDF + VIDEO modules
+     */
     $sqlMods = "
         SELECT COUNT(*) AS cnt 
         FROM modules 
@@ -27,7 +29,9 @@ try {
     $modsCnt = (int)$stmt->get_result()->fetch_assoc()['cnt'];
     $stmt->close();
 
-    // Count practice (distinct CO → 1 practice each)
+    /*
+     * 2️⃣ Count total practice sets (distinct CO means 1 practice)
+     */
     $sqlPractice = "
         SELECT COUNT(DISTINCT co_id) AS cnt 
         FROM practise_question
@@ -39,14 +43,35 @@ try {
     $practiceCnt = (int)$stmt->get_result()->fetch_assoc()['cnt'];
     $stmt->close();
 
-    $required = $modsCnt + $practiceCnt;
+    /*
+     * 3️⃣ Count total assignments for this topic
+     */
+    $sqlAssign = "
+        SELECT COUNT(*) AS cnt
+        FROM assignments
+        WHERE launch_id = ? AND topic_id = ?
+    ";
+    $stmt = $conn->prepare($sqlAssign);
+    $stmt->bind_param("ii", $launch_id, $topic_id);
+    $stmt->execute();
+    $assignCnt = (int)$stmt->get_result()->fetch_assoc()['cnt'];
+    $stmt->close();
 
-    // Completed items
+    /*
+     * TOTAL MATERIAL COUNT = pdf + video + practice + assignment
+     */
+    $required = $modsCnt + $practiceCnt + $assignCnt;
+
+    /*
+     * 4️⃣ Completed materials (student_material_complete table)
+     */
     $sqlDone = "
         SELECT COUNT(*) AS cnt 
         FROM student_material_complete
-        WHERE student_id = ? AND launch_id = ? AND topic_id = ?
-          AND type IN ('pdf','video','practice')
+        WHERE student_id = ? 
+          AND launch_id = ? 
+          AND topic_id = ?
+          AND type IN ('pdf','video','practice','assignment')
     ";
     $stmt = $conn->prepare($sqlDone);
     $stmt->bind_param("iii", $student_id, $launch_id, $topic_id);
@@ -54,9 +79,14 @@ try {
     $done = (int)$stmt->get_result()->fetch_assoc()['cnt'];
     $stmt->close();
 
+    /*
+     * Progress = percentage
+     */
     $progress = ($required > 0) ? round(($done / $required) * 100) : 0;
 
-    // ✅ UPSERT into student_chapter_progress
+    /*
+     * 5️⃣ UPSERT topic progress
+     */
     $sqlUpsert = "
         INSERT INTO student_chapter_progress 
         (student_id, launch_id, module_id, chapter_percent, app_id)
