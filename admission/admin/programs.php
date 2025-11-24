@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    <?php include('topbar.php') ?>
+   <?php include('topbar.php') ?>
     <div class="d-flex" style="position: relative;">
 
         <?php include('sidebar.php') ?>
@@ -28,6 +28,25 @@
         <div id="content-area" class="p-4 w-100">
 
             <div class="row g-4">
+
+                <div class="col-12">
+                    <div class="card border-2 rounded-4 p-4 shadow-sm hover-shadow" style="transition: 0.3s;">
+                        <div class="d-flex justify-content-between">
+
+                            <div>
+                                <h4 class="fw-bold mb-0">Program Management</h4>
+                                <span>15 programs • 15 active</span>
+                            </div>
+
+                            <button class="nice-btn" data-bs-toggle="modal" data-bs-target="#addProgramModal">
+                                + Add Program
+                            </button>
+
+
+                        </div>
+                    </div>
+                </div>
+
 
                 <!-- Program Card -->
                 <div class="col-12">
@@ -106,6 +125,109 @@
 
         </div>
     </div>
+
+    <!-- Add Program Modal -->
+    <!-- Add Program Modal -->
+    <div class="modal fade" id="addProgramModal" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content border-0 rounded-5 shadow-lg">
+
+                <!-- Blue Header -->
+                <div class="p-4" style="background: linear-gradient(90deg, #2563eb, #3b82f6);">
+                    <h2 class="text-white fw-bold mb-0">Add New Program</h2>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body p-4">
+
+                    <div class="row g-4">
+
+                        <!-- Program Name -->
+                        <div class="col-12">
+                            <label class="form-label fw-semibold">
+                                Program Name <span class="text-danger">*</span>
+                            </label>
+                            <input type="text"
+                                class="form-control shadow-sm form-control-lg rounded-4"
+                                placeholder="e.g., Computer Science Engineering">
+                        </div>
+
+                        <!-- Duration -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">
+                                Duration <span class="text-danger">*</span>
+                            </label>
+                            <input type="text"
+                                class="form-control shadow-sm form-control-lg rounded-4"
+                                placeholder="e.g., 4 Years">
+                        </div>
+
+                        <!-- Sanctioned Capacity -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">
+                                Sanctioned Capacity <span class="text-danger">*</span>
+                            </label>
+                            <input type="number"
+                                class="form-control shadow-sm form-control-lg rounded-4"
+                                placeholder="50">
+                        </div>
+
+                        <!-- Description -->
+                        <div class="col-12">
+                            <label class="form-label fw-semibold">Description</label>
+                            <textarea class="form-control shadow-sm form-control-lg rounded-4"
+                                rows="3"
+                                placeholder="Brief description of the program"></textarea>
+                        </div>
+
+                        <!-- Active Checkbox -->
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="activeStatus" checked>
+                                <label class="form-check-label fw-semibold" for="activeStatus">
+                                    Active (accepting admissions)
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Footer Buttons -->
+                <div class="modal-footer border-0 px-4 pb-4 d-flex gap-3">
+
+                    <!-- Cancel Button -->
+                    <button class="btn flex-fill py-3 rounded-4 fw-semibold fs-6"
+                        style="
+                            background: #f3f4f6;
+                            color: #374151;
+                            border: none;
+                            box-shadow: inset 0 0 0 1px #e5e7eb;
+                        "
+                        data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+
+                    <!-- Add Program Button -->
+                    <button class="btn flex-fill py-3 rounded-4 fw-semibold fs-6 text-white"
+                        style="
+                            background: #2563eb;
+                            border: none;
+                            box-shadow: 0 6px 18px rgba(37, 99, 235, 0.3);
+                        ">
+                        Add Program
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 

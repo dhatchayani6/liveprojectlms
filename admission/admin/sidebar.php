@@ -22,7 +22,7 @@
 
 
 <!-- Desktop Sidebar -->
-<div id="sidebar" class="d-none d-lg-block collapsed">
+<div id="sidebar" class="d-none d-lg-block">
 
     <div class="text-white fw-bold px-3 mb-3 d-flex justify-content-between align-items-center">
         <span class="nav-title">Navigation</span>
