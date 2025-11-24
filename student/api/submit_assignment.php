@@ -68,9 +68,20 @@ if ($exists) {
     $stmt->bind_param("iiss", $ass_id, $student_id, $context, $file_json);
 }
 
+$q = $conn->prepare("SELECT launch_id, topic_id, co_id FROM assignments WHERE ass_id = ?");
+$q->bind_param("i", $ass_id);
+$q->execute();
+$assignment = $q->get_result()->fetch_assoc();
+
 if ($stmt->execute()) {
-    echo json_encode(["status" => 200, "message" => "Assignment submitted successfully"]);
-} else {
+    echo json_encode([
+        "status" => 200,
+        "message" => "Assignment submitted successfully",
+        "launch_id" => $assignment['launch_id'],
+        "topic_id"  => $assignment['topic_id'],
+        "material_id" => $assignment['co_id'], // this is the CO/Material ID
+        "type" => "assignment"
+    ]);
+}else {
     echo json_encode(["status" => 500, "message" => "Database error: " . $stmt->error]);
 }
-?>

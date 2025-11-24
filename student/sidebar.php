@@ -11,7 +11,7 @@ $studentAssignmentPages = [
     'assignments.php',
     'assignment_details.php',
     'assignment_feedback.php',
-    'assignment_pending.php',
+    'assignment_pending_new.php',
     'assignment_submit.php'
 ];
 ?>

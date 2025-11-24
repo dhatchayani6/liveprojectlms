@@ -10,7 +10,11 @@ $assignmentPages = [
 $coursesPages = [
     'courses-detail.php',
     'courses.php',
-]
+];
+
+$addStudent = [
+    'student_enroll.php'
+];
 ?>
 
 
@@ -45,6 +49,14 @@ $coursesPages = [
                     class="nav-link d-flex align-items-center px-3 py-2 
                     <?php echo in_array($currentPage, $assignmentPages) ? 'active' : ''; ?>">
                     <i class="bi bi-file-earmark-text me-2"></i>Assignments
+                </a>
+            </li>
+
+            <li>
+                <a href="student_enroll.php"
+                    class="nav-link d-flex align-items-center px-3 py-2 
+                    <?php echo in_array($currentPage, $addStudent) ? 'active' : ''; ?>">
+                    <i class="bi bi-person-plus me-2" ></i> Add Student
                 </a>
             </li>
 
