@@ -17,6 +17,57 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css"
         rel="stylesheet">
 
+    <style>
+        /* left card */
+        .selected-card {
+            border: 2px solid #7c3aed !important;
+            /* Purple border */
+            box-shadow: 0 0 10px rgba(124, 58, 237, 0.3) !important;
+        }
+
+        /* right course card */
+        .course-card {
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .course-card:hover {
+            background: #f8f9ff;
+        }
+
+        .course-selected {
+            border: 2px solid #7c3aed !important;
+            /* Purple */
+            box-shadow: 0 0 10px rgba(124, 58, 237, 0.3);
+            background: #faf5ff;
+            position: relative;
+        }
+
+        .course-selected::after {
+            content: "✓";
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #7c3aed;
+        }
+
+        .reject-btn {
+            background-color: rgb(254 226 226);
+            border: 1px solid #f5bcbc !important;
+            transition: 0.2s ease;
+        }
+
+        .reject-btn:hover {
+            background-color: #fca5a5 !important;
+            /* darker soft red */
+            border-color: #f87171 !important;
+            /* border on hover */
+            color: #b91c1c !important;
+            /* deeper red text */
+        }
+    </style>
 
 </head>
 
@@ -32,7 +83,7 @@
             <div class="row g-4">
 
                 <!-- Header -->
-                <div class="col-12">
+                <div class="col-12 ">
                     <div class="card border-2 rounded-4 p-4 shadow-sm hover-shadow">
                         <div class="d-flex justify-content-between">
                             <div>
@@ -54,6 +105,167 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row mt-4">
+                    <h5 class="mb-4">Pending Candidates</h5>
+                    <div class="col-6">
+                        <!-- left column -->
+                        <div class="bg-white border rounded-4 p-4 shadow-sm mb-3 candidateCard"
+                            onclick="showCandidate('Aditya Bal','9269499055','aditya.bal80@email.com',25,'Automobile Engineering', this)">
+
+                            <div class="d-flex gap-3">
+
+                                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center"
+                                    style="width:55px; height:55px;">
+                                    <i class="bi bi-person fs-2 text-secondary"></i>
+                                </div>
+
+                                <div>
+                                    <h5 class="fw-bold mb-1">Aditya Bal</h5>
+                                    <div class="small text-muted">
+                                        <i class="bi bi-telephone me-1"></i> 9269499055 <br>
+                                        <i class="bi bi-envelope me-1"></i> aditya.bal80@email.com
+                                    </div>
+
+                                    <div class="mt-2 small text-muted">
+                                        Interview: 12/15/2025 | 10:00 AM – 10:30 AM
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="bg-white border rounded-4 p-4 shadow-sm mb-3 candidateCard"
+                            onclick="showCandidate('Aakash','9269499055','aditya.bal80@email.com',25,'Automobile Engineering',this)">
+
+                            <div class="d-flex gap-3">
+
+                                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center"
+                                    style="width:55px; height:55px;">
+                                    <i class="bi bi-person fs-2 text-secondary"></i>
+                                </div>
+
+                                <div>
+                                    <h5 class="fw-bold mb-1">Aakash</h5>
+                                    <div class="small text-muted">
+                                        <i class="bi bi-telephone me-1"></i> 8939008355 <br>
+                                        <i class="bi bi-envelope me-1"></i> ak@email.com
+                                    </div>
+
+                                    <div class="mt-2 small text-muted">
+                                        Interview: 12/15/2025 | 10:00 AM – 10:30 AM
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="bg-white border rounded-4 p-4 shadow-sm mb-3 candidateCard"
+                            onclick="showCandidate('Aditya Bal','9269499055','aditya.bal80@email.com',25,'Automobile Engineering',this)">
+
+                            <div class="d-flex gap-3">
+
+                                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center"
+                                    style="width:55px; height:55px;">
+                                    <i class="bi bi-person fs-2 text-secondary"></i>
+                                </div>
+
+                                <div>
+                                    <h5 class="fw-bold mb-1">Aditya Bal</h5>
+                                    <div class="small text-muted">
+                                        <i class="bi bi-telephone me-1"></i> 9269499055 <br>
+                                        <i class="bi bi-envelope me-1"></i> aditya.bal80@email.com
+                                    </div>
+
+                                    <div class="mt-2 small text-muted">
+                                        Interview: 12/15/2025 | 10:00 AM – 10:30 AM
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <!-- Right Panel (Default State) -->
+                        <div id="reviewPanel" class="bg-white border rounded-4 p-5 text-center shadow-sm">
+
+                            <i class="bi bi-person fs-1 text-secondary opacity-50"></i>
+
+                            <h5 class="fw-bold text-secondary mt-3">
+                                Select a candidate to review interview
+                            </h5>
+
+                        </div>
+
+
+                        <!-- Right Panel (Candidate Details) -->
+                        <div id="candidateDetails" class="bg-white border rounded-4 p-4 shadow-sm d-none">
+
+                            <h4 class="fw-bold mb-3">Interview Review</h4>
+
+                            <p class="text-uppercase text-muted small fw-semibold mb-1">Candidate Information</p>
+
+                            <div class="mb-3">
+                                <strong>Name:</strong> <span id="cdName">—</span><br>
+                                <strong>Phone:</strong> <span id="cdPhone">—</span><br>
+                                <strong>Email:</strong> <span id="cdEmail">—</span><br>
+                                <strong>Age:</strong> <span id="cdAge">—</span>
+                            </div>
+
+                            <p class="text-uppercase text-muted small fw-semibold">Select Course for Student</p>
+
+                            <div class="alert alert-primary small rounded-3">
+                                <i class="bi bi-lightbulb text-warning"></i>
+                                <strong> Admin Action:</strong> You will select the final course based on priorities & interview performance.
+                            </div>
+
+                            <div id="courseList">
+
+                                <div class="border rounded-3 p-3 mb-3 course-card"
+                                    onclick="selectCourse(1, 'Automobile Engineering', '4 Years', this)">
+                                    <span class="badge bg-primary-subtle text-primary me-2">#1</span>
+                                    Automobile Engineering
+                                    <br />
+                                    <small class="text-muted">4 Years</small>
+                                </div>
+
+                                <div class="border rounded-3 p-3 mb-3 course-card"
+                                    onclick="selectCourse(2, 'Computer Science', '4 Years', this)">
+                                    <span class="badge bg-primary-subtle text-primary me-2">#2</span>
+                                    Computer Science
+                                    <br />
+                                    <small class="text-muted">4 Years</small>
+                                </div>
+
+                                <div class="border rounded-3 p-3 mb-4 course-card"
+                                    onclick="selectCourse(3, 'Civil Engineering', '4 Years', this)">
+                                    <span class="badge bg-primary-subtle text-primary me-2">#3</span>
+                                    Civil Engineering
+                                    <br />
+                                    <small class="text-muted">4 Years</small>
+                                </div>
+
+                            </div>
+
+
+                            <!-- Buttons -->
+                            <div class="d-flex gap-3">
+                                <button id="rejectBtn" class="btn reject-btn fw-semibold w-50 text-danger">
+                                    <i class="bi bi-x-circle"></i> Reject
+                                </button>
+
+                                <button id="approveBtn" class="btn btn-success w-50 fw-semibold" disabled>
+                                    <i class="bi bi-check2-circle"></i> Approve & Assign Course
+                                </button>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
 
                 <!-- Program Card -->
                 <div class="col-12">
@@ -80,8 +292,6 @@
 
 
                 </div>
-
-
             </div>
 
         </div>
@@ -93,6 +303,67 @@
 
     <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- left card -->
+    <script>
+        function showCandidate(name, phone, email, age, course, element) {
+            // Remove highlight from all cards
+            document.querySelectorAll('.candidateCard').forEach(card => {
+                card.classList.remove('selected-card');
+            });
+
+            // Add highlight to the clicked card
+            element.classList.add('selected-card');
+
+            // hide placeholder
+            document.getElementById("reviewPanel").classList.add("d-none");
+
+            // show details block
+            document.getElementById("candidateDetails").classList.remove("d-none");
+
+            // fill dynamic values
+            document.getElementById("cdName").textContent = name;
+            document.getElementById("cdPhone").textContent = phone;
+            document.getElementById("cdEmail").textContent = email;
+            document.getElementById("cdAge").textContent = age;
+            document.getElementById("cdCourse").textContent = course;
+        }
+    </script>
+
+    <script>
+        let selectedCourse = null;
+
+        function selectCourse(id, name, duration, element) {
+
+            // deselect if clicking again
+            if (selectedCourse === id) {
+                selectedCourse = null;
+                element.classList.remove('course-selected');
+                document.getElementById("approveBtn").disabled = true;
+                return;
+            }
+
+            selectedCourse = id;
+
+            // Remove selection from all cards
+            document.querySelectorAll('.course-card').forEach(card => {
+                card.classList.remove('course-selected');
+            });
+
+            // Apply purple selection highlight
+            element.classList.add('course-selected');
+
+            // Enable approve button
+            document.getElementById("approveBtn").disabled = false;
+
+            // You can store selected course details if needed
+            window.selectedCourseDetails = {
+                id: id,
+                name: name,
+                duration: duration
+            };
+        }
+    </script>
+
 
 
 

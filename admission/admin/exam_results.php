@@ -157,6 +157,83 @@
 
                     </div>
 
+                    <!-- Candidate Card -->
+                    <div class="bg-white border rounded-4 p-4 shadow-sm mb-4 mt-4">
+
+                        <div class="d-flex justify-content-between align-items-start">
+
+                            <!-- Left Section -->
+                            <div class="d-flex align-items-start gap-3">
+
+                                <!-- Avatar -->
+                                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center"
+                                    style="width:60px; height:60px;">
+                                    <i class="bi bi-person fs-2 text-secondary"></i>
+                                </div>
+
+                                <!-- Candidate Info -->
+                                <div>
+                                    <div class="d-flex align-items-center gap-3">
+
+                                        <!-- Name + Contact Info -->
+                                        <div>
+                                            <h5 class="fw-bold mb-1">Manish Shukla</h5>
+                                            <div class="text-muted small">
+                                                9533682309 • manish.shukla97@email.com
+                                            </div>
+                                        </div>
+
+                                        <!-- ONLINE Badge -->
+                                        <span class="badge bg-primary-subtle text-primary fw-semibold px-3 py-2 rounded-pill">
+                                            ONLINE
+                                        </span>
+
+                                    </div>
+
+                                    <!-- Exam Details -->
+                                    <div class="row mt-3">
+                                        <div class="col-md-4">
+                                            <small class="text-uppercase text-muted fw-semibold">Exam Date</small>
+                                            <div class="fw-bold">Tue, Dec 9, 2025</div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <small class="text-uppercase text-muted fw-semibold">Time</small>
+                                            <div class="fw-bold">10:00 AM - 12:00 PM</div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <small class="text-uppercase text-muted fw-semibold">Venue</small>
+                                            <div class="fw-bold">Main Campus - Hall A</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <!-- Status Badge -->
+                            <span class="badge bg-success-subtle text-success fw-semibold px-3 py-2 rounded-pill">
+                                <i class="bi bi-check2"></i> Score Uploaded
+                            </span>
+
+                        </div>
+
+                        <!-- Score Box -->
+                        <div class="border rounded-4 bg-light mt-4 p-3">
+                            <div class="d-flex gap-3 align-items-center">
+                                <i class="bi bi-check2-circle text-success fs-2"></i>
+                                <div>
+                                    <strong class="text-dark d-block">Score: 6/10 (60.00%)</strong>
+                                    <span class="text-success fw-bold">PASSED</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
                     <!-- no exam found -->
                     <div class="bg-white border rounded-4 p-5 text-center shadow-sm mt-3">
 
@@ -185,7 +262,7 @@
     <!-- Tiny Script (Only toggles .active-filter) -->
     <script>
         document.querySelectorAll(".filter-btn").forEach(btn => {
-            btn.addEventListener("click", function () {
+            btn.addEventListener("click", function() {
 
                 // Remove active state from all buttons
                 document.querySelectorAll(".filter-btn").forEach(b => {
