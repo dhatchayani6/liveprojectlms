@@ -19,7 +19,7 @@
 </head>
 
 <body>
-   <?php include('topbar.php') ?>
+    <?php include('topbar.php') ?>
     <div class="d-flex" style="position: relative;">
 
         <?php include('sidebar.php') ?>
@@ -44,6 +44,76 @@
 
 
                         </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="card border-2 rounded-4 p-4 shadow-sm hover-shadow" style="transition: 0.3s;">
+
+                        <div class="row">
+                            <div class="col-8">
+                                <label class="form-label fw-semibold">
+                                    Program Name <span class="text-danger">*</span>
+                                </label>
+                                <input type="text"
+                                    class="form-control shadow-sm form-control-lg rounded-4"
+                                    placeholder="e.g., Computer Science Engineering">
+                            </div>
+
+                            <div class="col-4">
+                                <label class="form-label fw-semibold">
+                                    Program Name <span class="text-danger">*</span>
+                                </label>
+                                <input type="text"
+                                    class="form-control shadow-sm form-control-lg rounded-4"
+                                    placeholder="e.g., Computer Science Engineering">
+                            </div>
+                            <div class="col-8">
+                                <label class="form-label fw-semibold">
+                                    Program Name <span class="text-danger">*</span>
+                                </label>
+                                <input type="text"
+                                    class="form-control shadow-sm form-control-lg rounded-4"
+                                    placeholder="e.g., Computer Science Engineering">
+                            </div>
+
+                            <div class="col-4">
+                                <label class="form-label fw-semibold">
+                                    Program Name <span class="text-danger">*</span>
+                                </label>
+                                <input type="text"
+                                    class="form-control shadow-sm form-control-lg rounded-4"
+                                    placeholder="e.g., Computer Science Engineering">
+                            </div>
+                            <div  class="col-4 mt-4" >
+
+                                <!-- Cancel Button -->
+                                <button class="btn flex-fill py-3 rounded-4 fw-semibold fs-6"
+                                    style="
+                            background: #f3f4f6;
+                            color: #374151;
+                            border: none;
+                            box-shadow: inset 0 0 0 1px #e5e7eb;
+                            
+                        "
+                                    data-bs-dismiss="modal">
+                                    Cancel
+                                </button>
+
+                                <!-- Add Program Button -->
+                                <button class="btn flex-fill py-3 rounded-4 fw-semibold fs-6 text-white"
+                                    style="
+                            background: rgb(22 163 74 / var(--tw-bg-opacity, 1));
+                            border: none;
+                            box-shadow: 0 6px 18px rgba(37, 99, 235, 0.3);
+                        ">
+                                    Save Changes
+                                </button>
+
+                            </div>
+
+                        </div>
+
                     </div>
                 </div>
 
@@ -127,7 +197,6 @@
     </div>
 
     <!-- Add Program Modal -->
-    <!-- Add Program Modal -->
     <div class="modal fade" id="addProgramModal" tabindex="-1">
         <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content border-0 rounded-5 shadow-lg">
@@ -189,6 +258,8 @@
                                 </label>
                             </div>
                         </div>
+
+
 
                     </div>
 
