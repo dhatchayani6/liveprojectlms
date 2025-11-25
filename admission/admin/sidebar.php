@@ -7,10 +7,10 @@
 
     <div class="offcanvas-body">
         <ul class="nav flex-column">
-            <li><a class="nav-link text-white" href="dashboard.php"><i class="bi bi-grid-fill me-2"></i> Dashboard</a>
+            <li><a class="nav-link text-white" href="index.php"><i class="bi bi-grid-fill me-2"></i> Dashboard</a>
             </li>
-            <li><a class="nav-link text-white" href="applications.php"><i class="bi bi-file-earmark-text me-2"></i>
-                    Applications</a></li>
+            <!-- <li><a class="nav-link text-white" href="applications.php"><i class="bi bi-file-earmark-text me-2"></i>
+                    Applications</a></li> -->
             <li><a class="nav-link text-white" href="programs.php"><i class="bi bi-book-half me-2"></i> Programs</a>
             </li>
             <li><a class="nav-link text-white" href="exam_schedule.php"><i class="bi bi-calendar-event me-2"></i> Exam
@@ -37,10 +37,10 @@
     </div>
 
     <ul class="nav flex-column px-2">
-        <li><a class="nav-link active" href="dashboard.php"><i class="bi bi-grid-fill me-2"></i>
+        <li><a class="nav-link active" href="index.php"><i class="bi bi-grid-fill me-2"></i>
                 <span>Dashboard</span></a></li>
-        <li><a class="nav-link" href="applications.php"><i class="bi bi-file-earmark-text me-2"></i>
-                <span>Applications</span></a></li>
+        <!-- <li><a class="nav-link" href="applications.php"><i class="bi bi-file-earmark-text me-2"></i>
+                <span>Applications</span></a></li> -->
         <li><a class="nav-link" href="programs.php"><i class="bi bi-book-half me-2"></i> <span>Programs</span></a></li>
         <li><a class="nav-link" href="exam_schedule.php"><i class="bi bi-calendar-event me-2"></i> <span>Exam
                     Schedule</span></a></li>

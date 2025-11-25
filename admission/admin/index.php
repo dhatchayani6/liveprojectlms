@@ -131,86 +131,96 @@
                 </div>
 
                 <div class="col-12 col-md-6 col-lg-3 d-flex">
-                    <div class="premium-card flex-fill">
-                        <div class="gradient-bg"></div>
-                        <div class="icon-gradient g-blue mb-3">
-                            <i class="bi bi-calendar-plus fs-3 text-white"></i>
+                    <a href="exam_schedule.php">
+                        <div class="premium-card flex-fill">
+                            <div class="gradient-bg"></div>
+                            <div class="icon-gradient g-blue mb-3">
+                                <i class="bi bi-calendar-plus fs-3 text-white"></i>
+                            </div>
+                            <h4 class="fw-bold">Exam Schedule</h4>
+                            <p class="text-muted">Configure exam dates and slots</p>
+                            <a class="text-primary fw-semibold card-link">Manage schedule →</a>
                         </div>
-                        <h4 class="fw-bold">Exam Schedule</h4>
-                        <p class="text-muted">Configure exam dates and slots</p>
-                        <a class="text-primary fw-semibold card-link">Manage schedule →</a>
-                    </div>
+                    </a>
                 </div>
 
                 <div class="col-12 col-md-6 col-lg-3 d-flex">
-                    <div class="premium-card flex-fill">
-                        <div class="gradient-bg"></div>
-                        <div class="icon-gradient g-indigo mb-3">
-                            <i class="bi bi-clipboard2-check fs-3 text-white"></i>
+                    <a href="exam_results.php">
+                        <div class="premium-card flex-fill">
+                            <div class="gradient-bg"></div>
+                            <div class="icon-gradient g-indigo mb-3">
+                                <i class="bi bi-clipboard2-check fs-3 text-white"></i>
+                            </div>
+                            <h4 class="fw-bold">Exam Results</h4>
+                            <p class="text-muted">Upload scores for offline exams</p>
+                            <a class="text-indigo fw-semibold card-link">Manage results →</a>
                         </div>
-                        <h4 class="fw-bold">Exam Results</h4>
-                        <p class="text-muted">Upload scores for offline exams</p>
-                        <a class="text-indigo fw-semibold card-link">Manage results →</a>
-                    </div>
+                    </a>
                 </div>
 
                 <div class="col-12 col-md-6 col-lg-3 d-flex">
-                    <div class="premium-card flex-fill">
-                        <div class="gradient-bg"></div>
-                        <div class="icon-gradient g-purple mb-3">
-                            <i class="bi bi-camera-video fs-3 text-white"></i>
+                    <a href="interviews.php">
+                        <div class="premium-card flex-fill">
+                            <div class="gradient-bg"></div>
+                            <div class="icon-gradient g-purple mb-3">
+                                <i class="bi bi-camera-video fs-3 text-white"></i>
+                            </div>
+                            <h4 class="fw-bold">Interview Management</h4>
+                            <p class="text-muted">Interview & counselling sessions</p>
+                            <a class="text-purple fw-semibold card-link">Open interviews →</a>
                         </div>
-                        <h4 class="fw-bold">Interview Management</h4>
-                        <p class="text-muted">Interview & counselling sessions</p>
-                        <a class="text-purple fw-semibold card-link">Open interviews →</a>
-                    </div>
+                    </a>
                 </div>
 
 
                 <!-- DOCUMENT VERIFICATION -->
                 <div class="col-12 col-md-6">
-                    <div class="premium-card border border-2 rounded-4 p-4 position-relative overflow-hidden">
-                        <div class="gradient-bg"></div>
+                    <a href="">
+                        <div class="premium-card border border-2 rounded-4 p-4 position-relative overflow-hidden">
+                            <div class="gradient-bg"></div>
 
-                        <div class="d-flex justify-content-between align-items-start mb-4">
-                            <div
-                                class="icon-gradient g-amber shadow-lg d-flex align-items-center justify-content-center">
-                                <i class="bi bi-file-earmark-text fs-2 text-white"></i>
+                            <div class="d-flex justify-content-between align-items-start mb-4">
+                                <div
+                                    class="icon-gradient g-amber shadow-lg d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-file-earmark-text fs-2 text-white"></i>
+                                </div>
                             </div>
+
+                            <h3 class="fw-bold text-dark mb-2">Document Verification</h3>
+                            <p class="text-muted mb-3">Review and verify candidate documents for admission</p>
+
+                            <div class="fw-semibold text-warning small card-link">Review documents →</div>
                         </div>
-
-                        <h3 class="fw-bold text-dark mb-2">Document Verification</h3>
-                        <p class="text-muted mb-3">Review and verify candidate documents for admission</p>
-
-                        <div class="fw-semibold text-warning small card-link">Review documents →</div>
-                    </div>
+                    </a>
                 </div>
 
                 <!-- ADMISSION REPORTS -->
                 <div class="col-12 col-md-6">
-                    <div class="premium-card border border-2 rounded-4 p-4 position-relative overflow-hidden">
-                        <div class="gradient-bg"></div>
+                    <a href="">
+                        <div class="premium-card border border-2 rounded-4 p-4 position-relative overflow-hidden">
+                            <div class="gradient-bg"></div>
 
-                        <div class="d-flex justify-content-between align-items-start mb-4">
+                            <div class="d-flex justify-content-between align-items-start mb-4">
 
-                            <!-- Icon -->
-                            <div
-                                class="icon-gradient g-blue shadow-lg d-flex align-items-center justify-content-center">
-                                <i class="bi bi-bar-chart-line fs-2 text-white"></i>
+                                <!-- Icon -->
+                                <div
+                                    class="icon-gradient g-blue shadow-lg d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-bar-chart-line fs-2 text-white"></i>
+                                </div>
+
+                                <!-- Badge -->
+                                <span
+                                    class="badge rounded-pill px-3 py-2 fw-bold small bg-primary-subtle text-primary d-flex align-items-center gap-1">
+                                    <i class="bi bi-activity"></i> 0 students
+                                </span>
                             </div>
 
-                            <!-- Badge -->
-                            <span
-                                class="badge rounded-pill px-3 py-2 fw-bold small bg-primary-subtle text-primary d-flex align-items-center gap-1">
-                                <i class="bi bi-activity"></i> 0 students
-                            </span>
+                            <h3 class="fw-bold text-dark mb-2">Admission Reports</h3>
+                            <p class="text-muted mb-3">View stage-wise student tracking and progress reports</p>
+
+                            <div class="fw-semibold text-primary small card-link">View reports →</div>
                         </div>
-
-                        <h3 class="fw-bold text-dark mb-2">Admission Reports</h3>
-                        <p class="text-muted mb-3">View stage-wise student tracking and progress reports</p>
-
-                        <div class="fw-semibold text-primary small card-link">View reports →</div>
-                    </div>
+                    </a>
                 </div>
 
             </div>
