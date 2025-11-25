@@ -241,17 +241,7 @@
         });
     </script>
 
-    <script>
-        const toggleBtn = document.getElementById("toggle");
-        const sidebar = document.getElementById("sidebar");
 
-        // Desktop collapse toggle
-        toggleBtn.addEventListener("click", () => {
-            sidebar.classList.toggle("collapsed");
-            toggleBtn.classList.toggle("bi-chevron-double-left");
-            toggleBtn.classList.toggle("bi-chevron-double-right");
-        });
-    </script>
 
 </body>
 

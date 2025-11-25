@@ -11,6 +11,58 @@ a {
     color: #000;
 }
 
+
+/* GLOBAL FONT SIZE (entire page) */
+body,
+p,
+span,
+label,
+.form-control,
+button,
+.form-select {
+    font-size: 0.95rem !important;
+    /* minimal clean size */
+}
+
+p {
+    margin-bottom: 0px !important;
+}
+
+/* Titles should still stand out */
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-size: 1.1rem !important;
+    font-weight: 600;
+}
+
+/* Form labels smaller + clean */
+.form-label {
+    font-size: 0.9rem !important;
+    font-weight: 500;
+}
+
+/* Inputs clean and not too big */
+.form-control {
+    padding: 0.55rem 0.75rem !important;
+    border-radius: 0.5rem;
+}
+
+
+/* Buttons small but readable */
+.btn {
+    font-size: 0.9rem !important;
+    padding: 6px 14px !important;
+    border-radius: 0.5rem;
+}
+
+/* Badge text small */
+.badge {
+    font-size: 0.75rem !important;
+}
+
 /* ================================
    FIXED HEADER
 ================================ */
@@ -284,39 +336,52 @@ a {
 
 
 /* programs page css */
-.hover-shadow:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12) !important;
+
+.hover-shadow {
+    border-color: #fff !important;
 }
 
+.hover-shadow:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    transform: none !important;
+
+}
+
+
 .nice-btn {
-    background-color: rgb(37 99 235 / 1); /* your color */
+    background-color: rgb(37 99 235 / 1);
+    /* your color */
     color: #fff;
-    padding: 12px 22px;
+    padding: 12px 13px;
     font-size: 15px;
     font-weight: 600;
     border: none;
-    border-radius: 12px;        /* smooth rounded corners */
+    border-radius: 12px;
+    /* smooth rounded corners */
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
     transition: all 0.25s ease;
 }
 
 .nice-btn:hover {
-    background-color: rgb(29 78 216 / 1); /* slightly darker blue */
+    background-color: rgb(29 78 216 / 1);
+    /* slightly darker blue */
     box-shadow: 0 6px 14px rgba(37, 99, 235, 0.4);
-    transform: translateY(-2px);         /* slight hover lift */
+    transform: translateY(-2px);
+    /* slight hover lift */
 }
 
 .nice-btn:active {
-    transform: translateY(0);            /* pressed effect */
+    transform: translateY(0);
+    /* pressed effect */
     box-shadow: 0 3px 8px rgba(37, 99, 235, 0.3);
 }
 
 /* Blur background behind modal */
 .modal-backdrop.show {
     backdrop-filter: blur(8px);
-    background-color: rgba(0,0,0,0.35) !important; /* soft dark overlay */
+    background-color: rgba(0, 0, 0, 0.35) !important;
+    /* soft dark overlay */
 }
 
 /* Bring modal above everything */
@@ -328,3 +393,43 @@ a {
     z-index: 49900 !important;
 }
 
+
+/* filter css */
+/* Base style for all filter buttons */
+.filter-btn {
+    background: #f1f5f9;
+    color: #334155;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+/* ACTIVE STATE (color depends on type) */
+.filter-btn.active-filter.all-filter {
+    background: #1e293b;
+    color: #fff;
+}
+
+.filter-btn.active-filter.online-filter {
+    background: #2563eb;
+    color: #fff;
+}
+
+.filter-btn.active-filter.offline-filter {
+    background: #7c3aed;
+    color: #fff;
+}
+
+.filter-btn.active-filter.allstatus-filter {
+    background: #1e293b;
+    color: #fff;
+}
+
+.filter-btn.active-filter.pending-filter {
+    background: #f59e0b;
+    color: #fff;
+}
+
+.filter-btn.active-filter.completed-filter {
+    background: #16a34a;
+    color: #fff;
+}

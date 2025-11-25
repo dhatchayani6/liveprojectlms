@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+
+
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css"
+        rel="stylesheet">
+
+
+</head>
+
+<body>
+    <?php include('topbar.php') ?>
+    <div class="d-flex" style="position: relative;">
+
+        <?php include('sidebar.php') ?>
+
+        <!-- Main Content -->
+        <div id="content-area" class="p-4 w-100">
+
+            <div class="row g-4">
+
+                <!-- Header -->
+                <div class="col-12">
+                    <div class="card border-2 rounded-4 p-4 shadow-sm hover-shadow">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h4 class="fw-bold mb-0 fs-5">Exam Results Management
+                                </h4>
+                                <span>0 exam bookings
+
+                                </span>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Program Card -->
+                <!-- Program Card -->
+                <div class="col-12">
+
+                    <div class="bg-white border rounded-4 p-2 text-center shadow-sm mt-3">
+
+                        <div class="row text-center g-4">
+
+                            <!-- Total -->
+                            <div class="col-6 col-md-3 col-lg">
+                                <p class="text-uppercase small fw-semibold text-muted mb-1">Total</p>
+                                <p class="fw-bold text-dark fs-3">0</p>
+                            </div>
+
+                            <!-- Online -->
+                            <div class="col-6 col-md-3 col-lg">
+                                <p class="text-uppercase small fw-semibold text-muted mb-1">Online</p>
+                                <p class="fw-bold fs-3" style="color:#2563eb;">0</p>
+                            </div>
+
+                            <!-- Offline -->
+                            <div class="col-6 col-md-3 col-lg">
+                                <p class="text-uppercase small fw-semibold text-muted mb-1">Offline</p>
+                                <p class="fw-bold fs-3" style="color:#7c3aed;">0</p>
+                            </div>
+
+                            <!-- Pending -->
+                            <div class="col-6 col-md-3 col-lg">
+                                <p class="text-uppercase small fw-semibold text-muted mb-1">Pending</p>
+                                <p class="fw-bold fs-3" style="color:#f59e0b;">0</p>
+                            </div>
+
+                            <!-- Completed -->
+                            <div class="col-6 col-md-3 col-lg">
+                                <p class="text-uppercase small fw-semibold text-muted mb-1">Completed</p>
+                                <p class="fw-bold fs-3 text-secondary">0</p>
+                            </div>
+
+                            <!-- Passed -->
+                            <div class="col-6 col-md-3 col-lg">
+                                <p class="text-uppercase small fw-semibold text-muted mb-1">Passed</p>
+                                <p class="fw-bold fs-3" style="color:#16a34a;">0</p>
+                            </div>
+
+                            <!-- Failed -->
+                            <div class="col-6 col-md-3 col-lg">
+                                <p class="text-uppercase small fw-semibold text-muted mb-1">Failed</p>
+                                <p class="fw-bold fs-3" style="color:#dc2626;">0</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- search and filter -->
+                    <div class="bg-white border rounded-4 p-4 shadow-sm mt-3">
+
+                        <div class="row g-3 align-items-center">
+
+                            <!-- Search Bar -->
+                            <div class="col-12 col-md-6 col-lg-5 position-relative">
+                                <i
+                                    class="bi bi-search position-absolute top-50 translate-middle-y ms-3 text-secondary"></i>
+                                <input type="text" class="form-control ps-5 py-2 rounded"
+                                    placeholder="Search by name, phone, or email...">
+                            </div>
+
+                            <!-- Mode Filters -->
+                            <div class="col-12 col-md-6 col-lg-7">
+                                <div class="d-flex flex-wrap gap-2">
+
+                                    <button id="btnAll"
+                                        class="filter-btn all-filter btn fw-semibold px-4 py-2 active-filter">
+                                        All
+                                    </button>
+
+                                    <button id="btnOnline" class="filter-btn online-filter btn fw-semibold px-4 py-2">
+                                        Online
+                                    </button>
+
+                                    <button id="btnOffline" class="filter-btn offline-filter btn fw-semibold px-4 py-2">
+                                        Offline
+                                    </button>
+
+                                    <button id="btnAllStatus"
+                                        class="filter-btn allstatus-filter btn fw-semibold px-4 py-2">
+                                        All Status
+                                    </button>
+
+                                    <button id="btnPending" class="filter-btn pending-filter btn fw-semibold px-4 py-2">
+                                        Pending
+                                    </button>
+
+                                    <button id="btnCompleted"
+                                        class="filter-btn completed-filter btn fw-semibold px-4 py-2">
+                                        Completed
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+
+
+
+                        </div>
+
+                    </div>
+
+                    <!-- no exam found -->
+                    <div class="bg-white border rounded-4 p-5 text-center shadow-sm mt-3">
+
+                        <i class="bi bi-exclamation-circle text-secondary" style="font-size:4rem;"></i>
+
+                        <h4 class="fw-bold text-dark mt-3">No Exam Bookings Found</h4>
+                        <p class="text-muted">Try adjusting your filters</p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Tiny Script (Only toggles .active-filter) -->
+    <script>
+        document.querySelectorAll(".filter-btn").forEach(btn => {
+            btn.addEventListener("click", function () {
+
+                // Remove active state from all buttons
+                document.querySelectorAll(".filter-btn").forEach(b => {
+                    b.classList.remove("active-filter");
+                });
+
+                // Add active to clicked button
+                this.classList.add("active-filter");
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>
