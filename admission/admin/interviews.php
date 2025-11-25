@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="../../images/logo1.png" type="image/x-icon" />
 
 
     <link rel="stylesheet" href="responsive.css">
@@ -17,57 +17,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css"
         rel="stylesheet">
 
-    <style>
-        /* left card */
-        .selected-card {
-            border: 2px solid #7c3aed !important;
-            /* Purple border */
-            box-shadow: 0 0 10px rgba(124, 58, 237, 0.3) !important;
-        }
-
-        /* right course card */
-        .course-card {
-            cursor: pointer;
-            transition: 0.2s ease;
-        }
-
-        .course-card:hover {
-            background: #f8f9ff;
-        }
-
-        .course-selected {
-            border: 2px solid #7c3aed !important;
-            /* Purple */
-            box-shadow: 0 0 10px rgba(124, 58, 237, 0.3);
-            background: #faf5ff;
-            position: relative;
-        }
-
-        .course-selected::after {
-            content: "✓";
-            position: absolute;
-            top: 10px;
-            right: 12px;
-            font-size: 20px;
-            font-weight: bold;
-            color: #7c3aed;
-        }
-
-        .reject-btn {
-            background-color: rgb(254 226 226);
-            border: 1px solid #f5bcbc !important;
-            transition: 0.2s ease;
-        }
-
-        .reject-btn:hover {
-            background-color: #fca5a5 !important;
-            /* darker soft red */
-            border-color: #f87171 !important;
-            /* border on hover */
-            color: #b91c1c !important;
-            /* deeper red text */
-        }
-    </style>
 
 </head>
 
@@ -87,12 +36,10 @@
                     <div class="card border-2 rounded-4 p-4 shadow-sm hover-shadow">
                         <div class="d-flex justify-content-between">
                             <div>
-                                <h4 class="fw-bold mb-0 fs-5">Interview Management
+                                <h4 class=" mb-0 fs-5">Interview Management
 
                                 </h4>
                                 <span>0 pending interviews
-
-
                                 </span>
                             </div>
                             <div>
@@ -121,7 +68,7 @@
                                 </div>
 
                                 <div>
-                                    <h5 class="fw-bold mb-1">Aditya Bal</h5>
+                                    <h5 class=" mb-1">Aditya Bal</h5>
                                     <div class="small text-muted">
                                         <i class="bi bi-telephone me-1"></i> 9269499055 <br>
                                         <i class="bi bi-envelope me-1"></i> aditya.bal80@email.com
@@ -146,7 +93,7 @@
                                 </div>
 
                                 <div>
-                                    <h5 class="fw-bold mb-1">Aakash</h5>
+                                    <h5 class=" mb-1">Aakash</h5>
                                     <div class="small text-muted">
                                         <i class="bi bi-telephone me-1"></i> 8939008355 <br>
                                         <i class="bi bi-envelope me-1"></i> ak@email.com
@@ -171,7 +118,7 @@
                                 </div>
 
                                 <div>
-                                    <h5 class="fw-bold mb-1">Aditya Bal</h5>
+                                    <h5 class=" mb-1">Aditya Bal</h5>
                                     <div class="small text-muted">
                                         <i class="bi bi-telephone me-1"></i> 9269499055 <br>
                                         <i class="bi bi-envelope me-1"></i> aditya.bal80@email.com
@@ -192,7 +139,7 @@
 
                             <i class="bi bi-person fs-1 text-secondary opacity-50"></i>
 
-                            <h5 class="fw-bold text-secondary mt-3">
+                            <h5 class=" text-secondary mt-3">
                                 Select a candidate to review interview
                             </h5>
 
@@ -202,22 +149,23 @@
                         <!-- Right Panel (Candidate Details) -->
                         <div id="candidateDetails" class="bg-white border rounded-4 p-4 shadow-sm d-none">
 
-                            <h4 class="fw-bold mb-3">Interview Review</h4>
+                            <h4 class=" mb-3">Interview Review</h4>
 
                             <p class="text-uppercase text-muted small fw-semibold mb-1">Candidate Information</p>
 
                             <div class="mb-3">
-                                <strong>Name:</strong> <span id="cdName">—</span><br>
-                                <strong>Phone:</strong> <span id="cdPhone">—</span><br>
-                                <strong>Email:</strong> <span id="cdEmail">—</span><br>
-                                <strong>Age:</strong> <span id="cdAge">—</span>
+                                <div><strong>Name:</strong> <span id="cdName">—</span></div>
+                                <div><strong>Phone:</strong> <span id="cdPhone">—</span></div>
+                                <div><strong>Email:</strong> <span id="cdEmail">—</span></div>
+                                <div><strong>Age:</strong> <span id="cdAge">—</span></div>
                             </div>
 
-                            <p class="text-uppercase text-muted small fw-semibold">Select Course for Student</p>
+                            <p class="text-uppercase text-muted small fw-semibold mb-3">Select Course for Student</p>
 
                             <div class="alert alert-primary small rounded-3">
                                 <i class="bi bi-lightbulb text-warning"></i>
-                                <strong> Admin Action:</strong> You will select the final course based on priorities & interview performance.
+                                <strong> Admin Action:</strong> You will select the final course based on priorities &
+                                interview performance.
                             </div>
 
                             <div id="courseList">
@@ -275,7 +223,7 @@
                         <i class="bi bi-camera-video text-secondary" style="font-size:4rem;"></i>
 
                         <!-- Heading -->
-                        <h3 class="fw-bold text-dark mt-3 mb-2">No Pending Interviews</h3>
+                        <h3 class=" text-dark mt-3 mb-2">No Pending Interviews</h3>
 
                         <!-- Sub Text -->
                         <p class="text-muted mb-4">All interviews have been completed</p>

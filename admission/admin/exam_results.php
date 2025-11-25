@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="../../images/logo1.png" type="image/x-icon" />
 
 
     <link rel="stylesheet" href="responsive.css">
@@ -184,7 +184,8 @@
                                         </div>
 
                                         <!-- ONLINE Badge -->
-                                        <span class="badge bg-primary-subtle text-primary fw-semibold px-3 py-2 rounded-pill">
+                                        <span
+                                            class="badge bg-primary-subtle text-primary fw-semibold px-3 py-2 rounded-pill">
                                             ONLINE
                                         </span>
 
@@ -262,7 +263,7 @@
     <!-- Tiny Script (Only toggles .active-filter) -->
     <script>
         document.querySelectorAll(".filter-btn").forEach(btn => {
-            btn.addEventListener("click", function() {
+            btn.addEventListener("click", function () {
 
                 // Remove active state from all buttons
                 document.querySelectorAll(".filter-btn").forEach(b => {

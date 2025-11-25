@@ -32,9 +32,8 @@ p {
 h1,
 h2,
 h3,
-h4,
-h5 {
-    font-size: 1.1rem !important;
+h4 {
+    font-size: 1.0rem !important;
     font-weight: 600;
 }
 
@@ -84,7 +83,7 @@ h5 {
     width: 270px;
     background-color: #111827;
     position: fixed;
-    top: 80px;
+    top: 78px;
     /* height of topbar */
     bottom: 0;
     left: 0;
@@ -432,4 +431,96 @@ h5 {
 .filter-btn.active-filter.completed-filter {
     background: #16a34a;
     color: #fff;
+}
+
+/* interview css */
+/* left card */
+.selected-card {
+    border: 2px solid #7c3aed !important;
+    /* Purple border */
+    box-shadow: 0 0 10px rgba(124, 58, 237, 0.3) !important;
+}
+
+/* right course card */
+.course-card {
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.course-card:hover {
+    background: #f8f9ff;
+}
+
+.course-selected {
+    border: 2px solid #7c3aed !important;
+    /* Purple */
+    box-shadow: 0 0 10px rgba(124, 58, 237, 0.3);
+    background: #faf5ff;
+    position: relative;
+}
+
+.course-selected::after {
+    content: "✓";
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #7c3aed;
+}
+
+.reject-btn {
+    background-color: rgb(254 226 226);
+    border: 1px solid #f5bcbc !important;
+    transition: 0.2s ease;
+}
+
+.reject-btn:hover {
+    background-color: #fca5a5 !important;
+    /* darker soft red */
+    border-color: #f87171 !important;
+    /* border on hover */
+    color: #b91c1c !important;
+    /* deeper red text */
+}
+
+/* reports  css*/
+.table-row-hover:hover {
+    background: #f8fafc !important;
+}
+
+thead th {
+    position: sticky;
+    top: 74px;
+    z-index: 10;
+}
+
+.page-header-card {
+    border-radius: 18px;
+    border: 2px solid #e2e8f0;
+}
+
+.stat-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+}
+
+.pagination-btn {
+    transition: all 0.2s ease;
+}
+
+.pagination-btn:hover {
+    background: #1e293b !important;
+    /* slate-800 */
+    color: #fff !important;
+    border-color: #1e293b !important;
+    box-shadow: 0 4px 10px rgba(30, 41, 59, 0.25) !important;
+}
+
+.pagination-active {
+    background: #1e293b !important;
+    /* slate dark */
+    border-color: transparent !important;
+    box-shadow: 0 4px 10px rgba(30, 41, 59, 0.25) !important;
 }
