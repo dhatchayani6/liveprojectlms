@@ -175,7 +175,7 @@
 
                 <!-- DOCUMENT VERIFICATION -->
                 <div class="col-12 col-md-6">
-                    <a href="">
+                    <a href="documents-verification.php">
                         <div class="premium-card border border-2 rounded-4 p-4 position-relative overflow-hidden">
                             <div class="gradient-bg"></div>
 
@@ -196,7 +196,7 @@
 
                 <!-- ADMISSION REPORTS -->
                 <div class="col-12 col-md-6">
-                    <a href="">
+                    <a href="reports.php">
                         <div class="premium-card border border-2 rounded-4 p-4 position-relative overflow-hidden">
                             <div class="gradient-bg"></div>
 

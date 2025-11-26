@@ -39,8 +39,18 @@
                 <!-- HEADER SECTION -->
                 <div class="col-12">
                     <div class="card border-2 rounded-4 p-4 shadow-sm page-header-card">
-                        <h4 class="mb-0 fs-5">Admission Progress Reports</h4>
-                        <span class="text-muted small">Comprehensive stage-wise tracking • 200 students</span>
+                        <div class="d-flex align-items-center">
+                            <!-- <a href="index.php">
+                                <button class="btn v-btn rounded-3 p-2">
+                                    <i class="bi bi-arrow-left"></i>
+                                </button>
+                            </a> -->
+
+                            <div>
+                                <h4 class="mb-0 fs-5">Admission Progress Reports</h4>
+                                <span class="text-muted small">Comprehensive stage-wise tracking • 200 students</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -93,6 +103,16 @@
                                 <div class="stat-dot" style="background:#22c55e;"></div>
                                 <span class="text-secondary">Enrolled:</span>
                                 <span class="fw-bold text-dark">10</span>
+                            </div>
+
+                            <div class="vr"></div>
+
+                            <div class="d-flex align-items-center gap-2 flex-grow-1">
+                                <div class="position-relative w-100">
+                                    <i class="bi bi-search position-absolute top-50 translate-middle-y ms-3 text-secondary"></i>
+                                    <input type="text" class="form-control w-100 ps-5 py-2 rounded"
+                                        placeholder="Search by name, phone, or email...">
+                                </div>
                             </div>
                         </div>
 

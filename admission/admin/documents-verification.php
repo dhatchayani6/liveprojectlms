@@ -141,6 +141,22 @@
         .v-sidebar {
             height: 716px;
         }
+
+        /* Make the PDF view FULL PAGE inside the right panel */
+        .pdf-container {
+            height: calc(100vh - 180px);
+            /* Adjust 180px if your header area is bigger/smaller */
+            width: 100%;
+            border: 1px solid #6c757d;
+        
+            background: #f8f9fa;
+        }
+
+        .pdf-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
     </style>
 </head>
 
@@ -154,9 +170,11 @@
             <!-- TOP BAR -->
             <div class="v-topbar px-4 py-3 d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center gap-3">
-                    <button class="btn v-btn rounded-3 p-2">
-                        <i class="bi bi-arrow-left"></i>
-                    </button>
+                    <a href="index.php">
+                        <button class="btn v-btn rounded-3 p-2">
+                            <i class="bi bi-arrow-left"></i>
+                        </button>
+                    </a>
 
                     <div>
                         <h5 class="fw-bold mb-0 text-white">Document Verification</h5>
@@ -211,16 +229,15 @@
                                     <i class="bi bi-zoom-in"></i>
                                 </button>
 
-                                <i class="bi bi-file-text display-4 text-secondary mb-3"></i>
+                                <!-- <i class="bi bi-file-text display-4 text-secondary mb-3"></i>
                                 <h4 class="fw-bold text-dark mb-1">Transfer Certificate</h4>
-                                <p class="text-muted small">tc_Pankaj_Mann.pdf</p>
+                                <p class="text-muted small">tc_Pankaj_Mann.pdf</p> -->
 
-                                <!-- <div class="border border-secondary rounded-3 bg-light py-5 vh-100">
+                                <!-- <div class="border border-secondary rounded-3 bg-light py-5">
                                     <span class="text-muted small">Document Preview</span>
                                 </div> -->
 
-                                <div class="border border-secondary rounded-3 bg-light w-100 vh-100"
-                                    style="height: 100%; overflow: hidden;">
+                                <div class="pdf-container mt-4">
                                     <iframe src="../../pdf/LARAVEL BASICS FOM SCRATCH.pdf" width="100%" height="100%"
                                         style="border: none;">
                                     </iframe>
