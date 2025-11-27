@@ -14,7 +14,7 @@
     <!-- Bootstrap Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css"
         rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pptxjs@2.9.0/dist/pptxjs.css" />
     <style>
         h5 {
             font-size: 11px !important;
@@ -148,7 +148,7 @@
             /* Adjust 180px if your header area is bigger/smaller */
             width: 100%;
             border: 1px solid #6c757d;
-        
+
             background: #f8f9fa;
         }
 
@@ -204,9 +204,9 @@
                             </div>
                             <!-- Tabs -->
                             <div class="d-flex gap-2">
-                                <button class="v-tab">Academic Transcript</button>
+                                <button class="v-tab active">Academic Transcript</button>
                                 <button class="v-tab">HSC Certificate</button>
-                                <button class="v-tab active">Transfer Certificate</button>
+                                <button class="v-tab">Transfer Certificate</button>
                             </div>
                         </div>
                         <div class="d-flex align-items-center gap-2">
@@ -229,19 +229,13 @@
                                     <i class="bi bi-zoom-in"></i>
                                 </button>
 
-                                <!-- <i class="bi bi-file-text display-4 text-secondary mb-3"></i>
-                                <h4 class="fw-bold text-dark mb-1">Transfer Certificate</h4>
-                                <p class="text-muted small">tc_Pankaj_Mann.pdf</p> -->
-
-                                <!-- <div class="border border-secondary rounded-3 bg-light py-5">
-                                    <span class="text-muted small">Document Preview</span>
-                                </div> -->
-
-                                <div class="pdf-container mt-4">
+                                <div class="pdf-container" style="margin-top:50px;">
                                     <iframe src="../../pdf/LARAVEL BASICS FOM SCRATCH.pdf" width="100%" height="100%"
                                         style="border: none;">
                                     </iframe>
                                 </div>
+                                <div id="pptx-viewer" style="display:none; width:100%; height:100%; overflow:auto; background:white;"></div>
+
 
 
                             </div>
@@ -290,11 +284,6 @@
 
             </div>
 
-
-
-
-
-
         </div>
     </div>
 
@@ -305,6 +294,201 @@
     <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
+    <!-- DOC, DOCX, XLS, XLSX, PPT, PPTX Viewer -->
+    <script src="https://cdn.jsdelivr.net/npm/@microsoft/office-js/dist/office.js"></script>
+
+    <!-- Mammoth.js for Word (DOCX) to HTML -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.6/mammoth.browser.min.js"></script>
+
+    <!-- SheetJS for Excel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Christoph-Hambel/pptxjs/dist/pptxjs.css" /> -->
+    <!-- <script src="https://cdn.jsdelivr.net/gh/Christoph-Hambel/pptxjs/dist/jszip.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/gh/Christoph-Hambel/pptxjs/dist/pptxjs.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+    <script src="https://pptx.js.org/dist/pptxjs.min.js"></script>
+
+    <script>
+        const documents = [{
+                title: "Academic Transcript",
+                file: "../../pdf/LARAVEL BASICS FOM SCRATCH.pdf"
+            },
+            {
+                title: "HSC Certificate",
+                file: "../../pdf/gpt.docx"
+            },
+            {
+                title: "Transfer Certificate",
+                file: "../../pdf/Loan Calculation.txt"
+            }
+        ];
+
+        const tabs = document.querySelectorAll(".v-tab");
+        const iframe = document.querySelector(".pdf-container iframe");
+        const pptViewer = document.getElementById("pptx-viewer");
+        const sidebarDocName = document.querySelector(".v-box p");
+        const progressBar = document.querySelector(".v-progress-bar");
+        const progressCount = document.querySelector(".v-box span");
+        const approveBtn = document.querySelector(".v-approve");
+
+        let currentIndex = 0;
+
+        /* -------------------------
+           HELPER: GET FILE EXT
+        ------------------------- */
+        function getExtension(file) {
+            return file.split(".").pop().toLowerCase();
+        }
+
+        /* -------------------------
+           MAIN VIEWER SWITCH LOGIC
+        ------------------------- */
+        function displayDocument(filePath) {
+            const ext = getExtension(filePath);
+
+            if (ext === "pdf") return loadPDF(filePath);
+            if (["jpg", "jpeg", "png", "webp"].includes(ext)) return loadImage(filePath);
+            if (["doc", "docx"].includes(ext)) return loadDocx(filePath);
+            if (["xls", "xlsx", "csv"].includes(ext)) return loadExcel(filePath);
+            if (["ppt", "pptx"].includes(ext)) return loadPpt(filePath);
+            if (ext === "txt") return loadTxt(filePath);
+
+
+
+            iframe.srcdoc = `<h4 style='color:red;padding:20px;'>Unsupported file type: ${ext}</h4>`;
+        }
+
+        /* -------------------------
+           VIEWER FUNCTIONS
+        ------------------------- */
+
+        /* 1. PDF VIEWER */
+        function loadPDF(path) {
+            pptViewer.style.display = "none";
+            iframe.style.display = "block";
+            iframe.src = path;
+        }
+
+        /* 2. IMAGE VIEWER */
+        function loadImage(path) {
+            pptViewer.style.display = "none";
+            iframe.style.display = "block";
+            iframe.srcdoc = `<img src="${path}" style="width:100%;height:100%;object-fit:contain;">`;
+        }
+
+        /* 3. DOCX VIEWER (Mammoth.js) */
+        function loadDocx(path) {
+            pptViewer.style.display = "none";
+            iframe.style.display = "block";
+
+            fetch(path)
+                .then(res => res.arrayBuffer())
+                .then(buffer => mammoth.convertToHtml({
+                    arrayBuffer: buffer
+                }))
+                .then(result => {
+                    iframe.srcdoc = `<div style="padding:20px;">${result.value}</div>`;
+                })
+                .catch(() => {
+                    iframe.srcdoc = "<h4>Error loading DOCX file</h4>";
+                });
+        }
+
+        /* 4. EXCEL VIEWER (SheetJS) */
+        function loadExcel(path) {
+            pptViewer.style.display = "none";
+            iframe.style.display = "block";
+
+            fetch(path)
+                .then(res => res.arrayBuffer())
+                .then(buffer => {
+                    const workbook = XLSX.read(buffer, {
+                        type: "array"
+                    });
+                    const html = XLSX.utils.sheet_to_html(workbook.Sheets[workbook.SheetNames[0]]);
+                    iframe.srcdoc = `<div style="padding:20px;">${html}</div>`;
+                })
+                .catch(() => {
+                    iframe.srcdoc = "<h4>Error loading Excel file</h4>";
+                });
+        }
+
+        /* 5. PPTX VIEWER (PptxJS — OUTSIDE IFRAME) */
+        function loadPpt(path) {
+            iframe.style.display = "none";
+            pptViewer.style.display = "block";
+            pptViewer.innerHTML = "Loading PPTX...";
+
+            PptxJS.load(path)
+                .then(ppt => ppt.render(pptViewer))
+                .catch(err => {
+                    pptViewer.innerHTML = "<h4 style='color:red;'>Error loading PPTX</h4>";
+                    console.error(err);
+                });
+        }
+
+        /* 6. TEXT FILE VIEWER */
+        function loadTxt(path) {
+            // Hide PPT viewer, show iframe
+            pptViewer.style.display = "none";
+            iframe.style.display = "block";
+
+            fetch(path)
+                .then(response => response.text())
+                .then(text => {
+                    const escaped = text
+                        .replace(/&/g, "&amp;")
+                        .replace(/</g, "&lt;")
+                        .replace(/>/g, "&gt;");
+
+                    iframe.srcdoc = `
+                <div style="white-space:pre-wrap; font-family: monospace; padding:20px;">
+                    ${escaped}
+                </div>
+            `;
+                })
+                .catch(() => {
+                    iframe.srcdoc = "<h4 style='color:red;'>Failed to load TXT file</h4>";
+                });
+        }
+
+        /* -------------------------
+        LOAD DOCUMENT BY INDEX
+        ------------------------- */
+        function loadDocument(index) {
+            currentIndex = index;
+            const doc = documents[index];
+
+            displayDocument(doc.file);
+
+            tabs.forEach(t => t.classList.remove("active"));
+            tabs[index].classList.add("active");
+
+            sidebarDocName.innerText = doc.title;
+
+            const percent = ((index + 1) / documents.length) * 100;
+            progressBar.style.width = percent + "%";
+            progressCount.innerText = `${index + 1}/${documents.length}`;
+        }
+
+        /* INIT FIRST DOCUMENT */
+        loadDocument(0);
+
+        /* TAB CLICK */
+        tabs.forEach((tab, i) => {
+            tab.addEventListener("click", () => loadDocument(i));
+        });
+
+        /* APPROVE → NEXT DOCUMENT */
+        approveBtn.addEventListener("click", () => {
+            if (currentIndex < documents.length - 1)
+                loadDocument(currentIndex + 1);
+            else
+                alert("All documents approved.");
+        });
+    </script>
 
 
 
