@@ -177,23 +177,23 @@
                                     </td>
                                     <td class="text-center">Nov 25</td>
 
-                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                            height="15" viewBox="0 0 24 24" fill="none" stroke="#129b71"
+                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                            height="25" viewBox="0 0 24 24" fill="none" stroke="#129b71"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                             class="lucide lucide-circle-check-big w-5 h-5" aria-hidden="true">
                                             <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
                                             <path d="m9 11 3 3L22 4"></path>
                                         </svg>
                                     </td>
-                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                            height="15" viewBox="0 0 24 24" fill="none" stroke="#129b71"
+                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                            height="25" viewBox="0 0 24 24" fill="none" stroke="#129b71"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                             class="lucide lucide-circle-check-big w-5 h-5" aria-hidden="true">
                                             <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
                                             <path d="m9 11 3 3L22 4"></path>
                                         </svg></td>
-                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                            height="15" viewBox="0 0 24 24" fill="none" stroke="#e63946"
+                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                            height="25" viewBox="0 0 24 24" fill="none" stroke="#e63946"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <circle cx="12" cy="12" r="10"></circle>
                                             <path d="m15 9-6 6"></path>
@@ -203,56 +203,56 @@
                                     <td class="text-center">-
                                     </td>
                                     <td class="text-center">-</td>
-                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                            height="15" viewBox="0 0 24 24" fill="none" stroke="#e63946"
+                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                            height="25" viewBox="0 0 24 24" fill="none" stroke="#e63946"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <circle cx="12" cy="12" r="10"></circle>
                                             <path d="m15 9-6 6"></path>
                                             <path d="m9 9 6 6"></path>
                                         </svg>
                                     </td>
-                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                            height="15" viewBox="0 0 24 24" fill="none" stroke="#e63946"
+                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                            height="25" viewBox="0 0 24 24" fill="none" stroke="#e63946"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <circle cx="12" cy="12" r="10"></circle>
                                             <path d="m15 9-6 6"></path>
                                             <path d="m9 9 6 6"></path>
                                         </svg>
                                     </td>
-                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                            height="15" viewBox="0 0 24 24" fill="none" stroke="#e63946"
+                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                            height="25" viewBox="0 0 24 24" fill="none" stroke="#e63946"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <circle cx="12" cy="12" r="10"></circle>
                                             <path d="m15 9-6 6"></path>
                                             <path d="m9 9 6 6"></path>
                                         </svg>
                                     </td>
-                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                            height="15" viewBox="0 0 24 24" fill="none" stroke="#e63946"
+                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                            height="25" viewBox="0 0 24 24" fill="none" stroke="#e63946"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <circle cx="12" cy="12" r="10"></circle>
                                             <path d="m15 9-6 6"></path>
                                             <path d="m9 9 6 6"></path>
                                         </svg>
                                     </td>
-                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                            height="15" viewBox="0 0 24 24" fill="none" stroke="#e63946"
+                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                            height="25" viewBox="0 0 24 24" fill="none" stroke="#e63946"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <circle cx="12" cy="12" r="10"></circle>
                                             <path d="m15 9-6 6"></path>
                                             <path d="m9 9 6 6"></path>
                                         </svg>
                                     </td>
-                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                            height="15" viewBox="0 0 24 24" fill="none" stroke="#e63946"
+                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                            height="25" viewBox="0 0 24 24" fill="none" stroke="#e63946"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <circle cx="12" cy="12" r="10"></circle>
                                             <path d="m15 9-6 6"></path>
                                             <path d="m9 9 6 6"></path>
                                         </svg>
                                     </td>
-                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                            height="15" viewBox="0 0 24 24" fill="none" stroke="#e63946"
+                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                            height="25" viewBox="0 0 24 24" fill="none" stroke="#e63946"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <circle cx="12" cy="12" r="10"></circle>
                                             <path d="m15 9-6 6"></path>
@@ -271,23 +271,23 @@
                                     </td>
                                     <td class="text-center">Nov 26</td>
 
-                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                            height="15" viewBox="0 0 24 24" fill="none" stroke="#129b71"
+                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                            height="25" viewBox="0 0 24 24" fill="none" stroke="#129b71"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                             class="lucide lucide-circle-check-big w-5 h-5" aria-hidden="true">
                                             <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
                                             <path d="m9 11 3 3L22 4"></path>
                                         </svg></td>
-                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                            height="15" viewBox="0 0 24 24" fill="none" stroke="#e63946"
+                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                            height="25" viewBox="0 0 24 24" fill="none" stroke="#e63946"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <circle cx="12" cy="12" r="10"></circle>
                                             <path d="m15 9-6 6"></path>
                                             <path d="m9 9 6 6"></path>
                                         </svg>
                                     </td>
-                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                            height="15" viewBox="0 0 24 24" fill="none" stroke="#e63946"
+                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                            height="25" viewBox="0 0 24 24" fill="none" stroke="#e63946"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <circle cx="12" cy="12" r="10"></circle>
                                             <path d="m15 9-6 6"></path>
@@ -297,53 +297,53 @@
                                     <td class="text-center">-
                                     </td>
                                     <td class="text-center">-</td>
-                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                            height="15" viewBox="0 0 24 24" fill="none" stroke="#129b71"
+                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                            height="25" viewBox="0 0 24 24" fill="none" stroke="#129b71"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                             class="lucide lucide-circle-check-big w-5 h-5" aria-hidden="true">
                                             <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
                                             <path d="m9 11 3 3L22 4"></path>
                                         </svg></td>
-                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                            height="15" viewBox="0 0 24 24" fill="none" stroke="#129b71"
+                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                            height="25" viewBox="0 0 24 24" fill="none" stroke="#129b71"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                             class="lucide lucide-circle-check-big w-5 h-5" aria-hidden="true">
                                             <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
                                             <path d="m9 11 3 3L22 4"></path>
                                         </svg></td>
-                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                            height="15" viewBox="0 0 24 24" fill="none" stroke="#e63946"
+                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                            height="25" viewBox="0 0 24 24" fill="none" stroke="#e63946"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <circle cx="12" cy="12" r="10"></circle>
                                             <path d="m15 9-6 6"></path>
                                             <path d="m9 9 6 6"></path>
                                         </svg>
                                     </td>
-                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                            height="15" viewBox="0 0 24 24" fill="none" stroke="#e63946"
+                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                            height="25" viewBox="0 0 24 24" fill="none" stroke="#e63946"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <circle cx="12" cy="12" r="10"></circle>
                                             <path d="m15 9-6 6"></path>
                                             <path d="m9 9 6 6"></path>
                                         </svg>
                                     </td>
-                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                            height="15" viewBox="0 0 24 24" fill="none" stroke="#e63946"
+                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                            height="25" viewBox="0 0 24 24" fill="none" stroke="#e63946"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <circle cx="12" cy="12" r="10"></circle>
                                             <path d="m15 9-6 6"></path>
                                             <path d="m9 9 6 6"></path>
                                         </svg>
                                     </td>
-                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                            height="15" viewBox="0 0 24 24" fill="none" stroke="#129b71"
+                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                            height="25" viewBox="0 0 24 24" fill="none" stroke="#129b71"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                             class="lucide lucide-circle-check-big w-5 h-5" aria-hidden="true">
                                             <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
                                             <path d="m9 11 3 3L22 4"></path>
                                         </svg></td>
-                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                            height="15" viewBox="0 0 24 24" fill="none" stroke="#129b71"
+                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                            height="25" viewBox="0 0 24 24" fill="none" stroke="#129b71"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                             class="lucide lucide-circle-check-big w-5 h-5" aria-hidden="true">
                                             <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
@@ -361,23 +361,23 @@
                                     </td>
                                     <td class="text-center">Nov 28</td>
 
-                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                            height="15" viewBox="0 0 24 24" fill="none" stroke="#e63946"
+                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                            height="25" viewBox="0 0 24 24" fill="none" stroke="#e63946"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <circle cx="12" cy="12" r="10"></circle>
                                             <path d="m15 9-6 6"></path>
                                             <path d="m9 9 6 6"></path>
                                         </svg>
                                     </td>
-                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                            height="15" viewBox="0 0 24 24" fill="none" stroke="#129b71"
+                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                            height="25" viewBox="0 0 24 24" fill="none" stroke="#129b71"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                             class="lucide lucide-circle-check-big w-5 h-5" aria-hidden="true">
                                             <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
                                             <path d="m9 11 3 3L22 4"></path>
                                         </svg></td>
-                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                            height="15" viewBox="0 0 24 24" fill="none" stroke="#129b71"
+                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                            height="25" viewBox="0 0 24 24" fill="none" stroke="#129b71"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                             class="lucide lucide-circle-check-big w-5 h-5" aria-hidden="true">
                                             <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
@@ -387,38 +387,38 @@
                                     <td class=" text-center " style=" font-size:12px">6/10 (60.00%)
 
                                     </td>
-                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                            height="15" viewBox="0 0 24 24" fill="none" stroke="#129b71"
+                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                            height="25" viewBox="0 0 24 24" fill="none" stroke="#129b71"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                             class="lucide lucide-circle-check-big w-5 h-5" aria-hidden="true">
                                             <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
                                             <path d="m9 11 3 3L22 4"></path>
                                         </svg></td>
-                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                            height="15" viewBox="0 0 24 24" fill="none" stroke="#e63946"
+                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                            height="25" viewBox="0 0 24 24" fill="none" stroke="#e63946"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <circle cx="12" cy="12" r="10"></circle>
                                             <path d="m15 9-6 6"></path>
                                             <path d="m9 9 6 6"></path>
                                         </svg>
                                     </td>
-                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                            height="15" viewBox="0 0 24 24" fill="none" stroke="#e63946"
+                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                            height="25" viewBox="0 0 24 24" fill="none" stroke="#e63946"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <circle cx="12" cy="12" r="10"></circle>
                                             <path d="m15 9-6 6"></path>
                                             <path d="m9 9 6 6"></path>
                                         </svg>
                                     </td>
-                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                            height="15" viewBox="0 0 24 24" fill="none" stroke="#129b71"
+                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                            height="25" viewBox="0 0 24 24" fill="none" stroke="#129b71"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                             class="lucide lucide-circle-check-big w-5 h-5" aria-hidden="true">
                                             <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
                                             <path d="m9 11 3 3L22 4"></path>
                                         </svg></td>
-                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                            height="15" viewBox="0 0 24 24" fill="none" stroke="#129b71"
+                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                            height="25" viewBox="0 0 24 24" fill="none" stroke="#129b71"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                             class="lucide lucide-circle-check-big w-5 h-5" aria-hidden="true">
                                             <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
@@ -426,8 +426,8 @@
                                         </svg></td>
                                     <td class="text-center">-
                                     </td>
-                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                            height="15" viewBox="0 0 24 24" fill="none" stroke="#129b71"
+                                    <td class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="25"
+                                            height="25" viewBox="0 0 24 24" fill="none" stroke="#129b71"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                             class="lucide lucide-circle-check-big w-5 h-5" aria-hidden="true">
                                             <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>

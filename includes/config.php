@@ -26,10 +26,10 @@ define("PROFILE", UPLOAD_URL . "/profiles/");
 define("COURSES", UPLOAD_URL . "/courses/");
 
 // Database configuration
-$host = "localhost";     // Database host (use your DB host)
+$host = "localhost";     // Database host (use your DB host)   
 $username = "root";          // Database username
-// $password = "12345";               // Database password
-$password = "";
+$password = "12345";               // Database password
+// $password = "";
 $database = "auditlms";    // Database name
 
 // Create connection
