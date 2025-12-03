@@ -23,9 +23,10 @@
             font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
             font-size: var(--fs-base);
         }
-        a{
+
+        a {
             text-decoration: none;
-            
+
         }
 
         .grid-bg {
@@ -157,12 +158,150 @@
             font-size: var(--fs-sm);
             border-radius: 8px;
         }
+
+        .action-btn-primary svg,
+        .action-btn-disabled svg {
+            width: 27px;
+            height: 27px;
+            flex-shrink: 0;
+        }
+
+        .action-btn-primary h6,
+        .action-btn-disabled h6 {
+            line-height: 1.2;
+        }
+
+        /* Exam Success Banner */
+        .exam-success-card {
+            background: linear-gradient(to right, #4ade80, #16a34a);
+            border-radius: 20px;
+            border: 4px solid #166534;
+            padding: 18px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .exam-icon-box {
+            width: 55px;
+            height: 55px;
+            background: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+        }
+
+        .exam-icon-box svg {
+            width: 23px;
+            height: 40px;
+            display: block;
+            /* Removes extra whitespace */
+            margin: 0;
+            /* Ensures proper centering */
+            padding: 0;
+        }
+
+        .exam-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .exam-subtitle {
+            color: #d1fae5;
+            font-size: 13px;
+        }
+
+        .exam-mode {
+            color: white;
+            font-weight: 600;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        /* Buttons */
+        .exam-btn-purple {
+            background: linear-gradient(to bottom, #c084fc, #7e22ce);
+            border: 2px solid #6b21a8;
+            color: white;
+            font-weight: 700;
+            padding: 10px 18px;
+            font-size: 13px;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .exam-btn-purple:hover {
+            transform: scale(1.05);
+        }
+
+        .exam-btn-green {
+            background: white;
+            border: 2px solid #166534;
+            color: #166534;
+            font-weight: 700;
+            padding: 10px 18px;
+            font-size: 13px;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .exam-btn-green:hover {
+            background: #f0fdf4;
+        }
+
+        .exam-btn-blue {
+            background: linear-gradient(to bottom, #60a5fa, #2563eb);
+            border: 2px solid #1e40af;
+            color: white;
+            font-weight: 700;
+            padding: 10px 18px;
+            font-size: 13px;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .exam-btn-blue:hover {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 
 <body>
 
     <div class="container py-4 page-wrap">
+        <!-- EXAM SUCCESS CARD -->
+        <div class="exam-success-card mb-3 d-flex align-items-center justify-content-between">
+
+            <div class="d-flex align-items-center gap-4">
+
+                <div class="exam-icon-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#16A34A" stroke-width="2"
+                        viewBox="0 0 24 24">
+                        <path
+                            d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" />
+                        <path d="M13 5v2"></path>
+                        <path d="M13 17v2"></path>
+                        <path d="M13 11v2"></path>
+                    </svg>
+                </div>
+
+
+                <div>
+                    <h2 class="exam-title">Your Exam is Scheduled!</h2>
+                    <p class="exam-subtitle">Exam Date: Tuesday, December 2, 2025 | 13:00 PM - 14:00 PM</p>
+                    <p class="exam-mode">Mode: Online Exam</p>
+                </div>
+
+            </div>
+
+            <div class="d-flex gap-2">
+                <button class="exam-btn-purple">Enter Exam</button>
+                <button class="exam-btn-green">View Hall Ticket</button>
+                <button class="exam-btn-blue">Print</button>
+            </div>
+
+        </div>
 
         <!-- Profile -->
         <div class="profile-card mb-3">
@@ -184,7 +323,7 @@
                     <p class="mb-0 text-secondary" style="font-size: var(--fs-sm);">Age: 2 | Male</p>
                 </div>
 
-                <div class="d-flex flex-column gap-2">
+                <div class="d-flex flex-row gap-2">
                     <button class="wallet-btn" data-bs-toggle="modal" data-bs-target="#walletModal">
                         Wallet • ₹0
                     </button>
@@ -234,21 +373,22 @@
 
             <!-- Schedule Entrance -->
             <div class="col-md-4">
-                <button class="action-btn-disabled w-100 h-100 d-flex flex-column justify-content-between py-3"
-                    disabled>
-                    <div>
-                        <div class="d-flex align-items-center gap-2">
-                            <svg width="18" height="18" stroke="#6b7280" fill="none" stroke-width="2">
-                                <rect x="3" y="4" width="18" height="18" rx="2"></rect>
-                                <line x1="3" y1="10" x2="21" y2="10"></line>
-                                <line x1="8" y1="2" x2="8" y2="6"></line>
-                                <line x1="16" y1="2" x2="16" y2="6"></line>
-                            </svg>
-                            <h6 class="fw-bold m-0">Schedule Entrance</h6>
+                <a href="schedule_enterance.php">
+                    <button class="action-btn-disabled w-100 h-100 d-flex flex-column justify-content-between py-3">
+                        <div>
+                            <div class="d-flex align-items-center gap-2">
+                                <svg width="18" height="18" stroke="#6b7280" fill="none" stroke-width="2">
+                                    <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                </svg>
+                                <h6 class="fw-bold m-0">Schedule Entrance</h6>
+                            </div>
+                            <p class="m-0 mt-1">Exam already scheduled</p>
                         </div>
-                        <p class="m-0 mt-1">Exam already scheduled</p>
-                    </div>
-                </button>
+                    </button>
+                </a>
             </div>
 
             <!-- Upload Documents -->
