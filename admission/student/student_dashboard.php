@@ -296,8 +296,8 @@
             </div>
 
             <div class="d-flex gap-2">
-                <button class="exam-btn-purple">Enter Exam</button>
-                <button class="exam-btn-green">View Hall Ticket</button>
+                <a href="exam_entrance.php"> <button class="exam-btn-purple">Enter Exam</button>
+                </a> <button class="exam-btn-green">View Hall Ticket</button>
                 <button class="exam-btn-blue">Print</button>
             </div>
 
